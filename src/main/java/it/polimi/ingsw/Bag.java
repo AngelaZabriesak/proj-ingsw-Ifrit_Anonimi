@@ -20,4 +20,11 @@ public class Bag {
     public void setNumItem(int[] numItem) {
         this.numItem = numItem;
     }
+
+    /**
+     *  Remove the item caught
+     */
+    public void removeItem(){
+
+    }
 }
