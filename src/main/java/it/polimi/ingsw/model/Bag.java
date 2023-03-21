@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ public class Bag {
     //metodi
 
     public Bag() {
-
+        
     }
 
     public int[] getNumItem() {
