@@ -15,7 +15,17 @@ public class Board {
 
     }
 
+    /**
+     *   indicate which item can be chosen
+     */
     public void setPositionAvailable() {
 
+    }
+
+    /**
+     *  select item to remove
+     */
+    public int getItem (int row, int col){
+        return myBoard[row][col];
     }
 }
