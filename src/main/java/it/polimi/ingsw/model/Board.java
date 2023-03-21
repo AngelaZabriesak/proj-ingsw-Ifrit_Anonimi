@@ -1,15 +1,9 @@
 package it.polimi.ingsw.model;
 
 public class Board {
-
-    //attributi
-
     private static final int ROW = 9;
     private static final int COL = 9;
     int myBoard[][] = new int[ROW][COL];
-
-    //metodi
-
 
     public Board() {
 
@@ -18,9 +12,7 @@ public class Board {
     /**
      *   indicate which item can be chosen
      */
-    public void setPositionAvailable() {
-
-    }
+    public void setPositionAvailable() {}
 
     /**
      *  select item to remove
