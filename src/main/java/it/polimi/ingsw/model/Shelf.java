@@ -11,7 +11,7 @@ public class Shelf {
 
     public void setItemInShelf(int col){
         for(int r = 0;r<ROW;r++){
-            
+
         }
     }
 

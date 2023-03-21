@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Bag;
+
 import java.util.ArrayList;
 
 public class Game {

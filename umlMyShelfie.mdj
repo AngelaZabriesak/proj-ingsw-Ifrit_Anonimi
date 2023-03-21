@@ -600,30 +600,13 @@
 											"height": 13,
 											"text": "-type: ColorItem",
 											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGG7sLz8G7gtp4=",
-											"_parent": {
-												"$ref": "AAAAAAGG7qaFxGG/+yY="
-											},
-											"model": {
-												"$ref": "AAAAAAGG7sLz5G7dxss="
-											},
-											"font": "Arial;13;0",
-											"left": 437,
-											"top": 77,
-											"width": 124.642578125,
-											"height": 13,
-											"text": "-adjacency: int",
-											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 432,
 									"top": 57,
 									"width": 134.642578125,
-									"height": 38
+									"height": 23
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -646,7 +629,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 437,
-											"top": 100,
+											"top": 85,
 											"width": 124.642578125,
 											"height": 13,
 											"text": "+setAdjacency(): void",
@@ -655,7 +638,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 432,
-									"top": 95,
+									"top": 80,
 									"width": 134.642578125,
 									"height": 23
 								},
@@ -3068,8 +3051,8 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 352,
-							"top": 360,
+							"left": 344,
+							"top": 168,
 							"width": 74.30810546875,
 							"height": 77,
 							"text": "Black : per completare  la matrice"
@@ -3081,8 +3064,8 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 368,
-							"top": 440,
+							"left": 360,
+							"top": 248,
 							"width": 60,
 							"height": 51,
 							"text": "Null : item tolto"
@@ -3236,7 +3219,7 @@
 											"top": 77,
 											"width": 148.45263671875,
 											"height": 13,
-											"text": "+removeItem(): ColorItem",
+											"text": "+removeItem(): Item",
 											"horizontalAlignment": 0
 										}
 									],
@@ -7911,6 +7894,19 @@
 							"headQualifiersCompartment": {
 								"$ref": "AAAAAAGHBI7ZLWDWbsw="
 							}
+						},
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAGHBN7oyduMVpc=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 1312,
+							"top": 80,
+							"width": 225,
+							"height": 103,
+							"text": " HashMap<String, String> capitalCities = new HashMap<String, String>();"
 						}
 					]
 				},
@@ -8145,16 +8141,6 @@
 							"type": {
 								"$ref": "AAAAAAGG7qtENGL8C7E="
 							}
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAGG7sLz5G7dxss=",
-							"_parent": {
-								"$ref": "AAAAAAGG7qaFxGG3Tbc="
-							},
-							"name": "adjacency",
-							"visibility": "private",
-							"type": "int"
 						}
 					],
 					"operations": [
@@ -9018,7 +9004,7 @@
 										"$ref": "AAAAAAGG7xFDDoHQvu4="
 									},
 									"type": {
-										"$ref": "AAAAAAGG7qtENGL8C7E="
+										"$ref": "AAAAAAGG7qaFxGG3Tbc="
 									},
 									"direction": "return"
 								}
