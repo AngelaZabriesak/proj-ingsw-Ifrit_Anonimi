@@ -14,16 +14,9 @@ public class Bag {
     /**
      * @return number between 0 and 5 that is the index of the array
      */
-    public int getItem() {
+    public it.polimi.ingsw.Item getItem() {
         int pos = (int) Math.random()%SIZE;
-        removeItem(pos);
-        return pos;
-    }
-
-    /**
-     *  Remove the item caught
-     */
-    public void removeItem(int pos){
         numItem[pos]--;
+        return new Item(ColorItem.values()[pos]);
     }
 }

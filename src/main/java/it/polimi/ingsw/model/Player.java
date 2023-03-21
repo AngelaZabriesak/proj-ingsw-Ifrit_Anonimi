@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.Item;
-
 public class Player {
 
     // attributi  (manca goal)
