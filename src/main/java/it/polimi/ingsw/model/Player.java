@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.Bag.Item;
+
 public class Player {
 
     // attributi  (manca goal)

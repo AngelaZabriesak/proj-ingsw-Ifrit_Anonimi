@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.Bag.*;
+import it.polimi.ingsw.model.CommonGoal.*;
+
 import java.util.ArrayList;
 
 public class Game {
@@ -7,7 +10,7 @@ public class Game {
     private ArrayList<Player> players = new ArrayList<>();
     private Board myBoard;
     private Bag myBag;
-    //private CGoal[NGOAL] myGoal;
+    private Cgoal[] myGoal = new Cgoal[NGOAL];
 
     public Game(){
         myBoard = new Board();

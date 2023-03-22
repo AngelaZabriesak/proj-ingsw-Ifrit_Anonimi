@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.Bag;
 
 
 public class Item {
@@ -6,6 +6,10 @@ public class Item {
 
     public Item(ColorItem type) {
         this.type = type;
+    }
+
+    public ColorItem getColor(){
+        return type;
     }
 
 }
