@@ -3,8 +3,6 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.Bag.Item;
 
 public class Player {
-
-
     private Shelf myShelf;
     private String nickname;
     private Goal myGoal;
@@ -12,7 +10,9 @@ public class Player {
     private Item myItem;
     private Goal cGoal;
 
+    public Player(){
 
+    }
 
     // return the player nickname
     public String getNickname() {
@@ -20,13 +20,11 @@ public class Player {
     }
 
     //return the player Shelf
-
     public Shelf getMyShelf() {
         return myShelf;
     }
 
     // return the player pGoal
-
     public Goal getMyGoal() {
         return myGoal;
     }
@@ -37,14 +35,12 @@ public class Player {
 
     // return the cGoal cards : every turn check the cGoals and take the card if is completed
     // the player can have maximum two card at least
-
     public Goal getcGoal() {
         return cGoal;
     }
 
 
-// return the player score
-
+    // return the player score
     public int getMyScore() {
         return myScore;
     }
