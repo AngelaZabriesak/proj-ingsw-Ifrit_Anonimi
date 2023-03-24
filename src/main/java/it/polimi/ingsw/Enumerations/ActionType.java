@@ -2,8 +2,8 @@ package it.polimi.ingsw.Enumerations;
 
 public enum ActionType {
     NULL("NULL"),
-    PLANNING("PLANNING"),
-    MOVEMENT("MOVEMENT"),
+    ADDING("ADDING"), //ADD ITEM IN SHELF
+    CHOSE("CHOSE"),   //CHOOSE ITEM TO ADD
     ENDGAME("ENDGAME");
     private String abbreviation;
 

@@ -26,8 +26,9 @@ public class Game {
         myBoard = new Board();
         myBag = new Bag();
         for(int i = 0; i<N_GOAL; i++) {
-            personalGoal.add(new Pgoal(i++));
-            commonGoal.add(new CgoalFactory(i++));
+            Pgoal pg = new Pgoal();
+            personalGoal.add(pg.CreatePgoal(i));
+            //commonGoal.add(new CgoalFactory(i++));
         }
         for(int i = 0; i<N_COMMON_GOAL; i++)
             myGoal.add(getRandomGoal(commonGoal));
