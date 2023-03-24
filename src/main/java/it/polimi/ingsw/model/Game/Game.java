@@ -67,6 +67,13 @@ public class Game {
      * fills the board with item by drawing them at random from the bag
      */
     public void fillBoard(){
+
+        if(players.size()==3){
+
+        }
+        else if(players.size()==4){
+
+        }
     }
 
     /**
