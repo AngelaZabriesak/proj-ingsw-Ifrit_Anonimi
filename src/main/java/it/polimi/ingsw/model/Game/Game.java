@@ -83,11 +83,11 @@ public class Game {
 
 
         // do check_p_score later and delete the initialization of check_p_score
-        // do the same with c_card_score1 and c_card_score_2 ( the c_card are assigned during the game)
+        // do the same with token_score1 and token_score_2 ( the c_card are assigned during the game)
 
         int check_p_score=0;
-        int c_card_score1=0;
-        int c_card_score2=0;
+        int token_score1=0;
+        int token_score2=0;
          int p_score;
          int myScore;
 
@@ -105,7 +105,7 @@ public class Game {
 
         p_score= p_points[check_p_score];
 
-        myScore= p_score+c_card_score1+c_card_score2;
+        myScore= p_score+token_score1+token_score2;
 
 
     }
