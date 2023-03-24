@@ -42,4 +42,11 @@ public class Board {
     public int getAdjacency(int row, int col){
         return myBoardAdjacency[row][col];
     }
+
+    public Item[][] getMyBoardItem(){
+        return myBoardItem;
+    }
+    public int[][] getMyBoardAdjacency(){
+        return myBoardAdjacency;
+    }
 }
