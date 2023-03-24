@@ -12,7 +12,7 @@ public class Pgoal extends Goal {
     private ColorItem[][] myPgoal = new ColorItem[ROW][COL];
 
     /**
-     * function
+     * function that generates personal goal cards on extracted card number
      */
     public void CreatePgoal(){
 
