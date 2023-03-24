@@ -59,5 +59,41 @@ public class Game {
      */
     public void calcScore(){
 
+
+        // do check_p_score later and delete the initialization of check_p_score
+        // do the same with c_card_score1 and c_card_score_2 ( the c_card are assigned during the game)
+
+        int check_p_score=0;
+        int c_card_score1=0;
+        int c_card_score2=0;
+         int p_score;
+         int myScore;
+
+
+
+
+        int[] p_points = new int[7];
+        p_points[0] = 0;
+        p_points[1] = 1 ;
+        p_points[2] = 2;
+        p_points[3] = 4;
+        p_points[4] = 6;
+        p_points[5] = 9;
+        p_points[6] = 12;
+
+        p_score= p_points[check_p_score];
+
+        myScore= p_score+c_card_score1+c_card_score2;
+
+
+
+
+
+
+
+
+
+
+
     }
 }
