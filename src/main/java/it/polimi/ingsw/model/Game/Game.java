@@ -1,7 +1,9 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.Game;
 
 import it.polimi.ingsw.model.Bag.*;
+import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.CommonGoal.*;
+import it.polimi.ingsw.model.Player;
 
 import java.util.ArrayList;
 

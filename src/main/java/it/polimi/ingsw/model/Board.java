@@ -1,10 +1,14 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.Bag.Item;
+
+import java.util.HashMap;
+
 public class Board {
     // aggiungere adjacency
     private static final int ROW = 9;
     private static final int COL = 9;
-    int myBoard[][] = new int[ROW][COL];
+    HashMap<Item,Integer> myBoard[][] = new HashMap[ROW][COL];
 
     public Board() {
 
@@ -19,7 +23,7 @@ public class Board {
     /**
      *  select item to remove
      */
-    public int getItem (int row, int col){
+    public HashMap getItem (int row, int col){
         return myBoard[row][col];
     }
 }
