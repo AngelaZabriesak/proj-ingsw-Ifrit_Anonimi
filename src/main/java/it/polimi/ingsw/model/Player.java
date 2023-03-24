@@ -10,6 +10,7 @@ public class Player {
     private Goal myGoal;
     private int myScore;
     private Item myItem;
+    private Goal cGoal;
 
 
 
@@ -30,7 +31,19 @@ public class Player {
         return myGoal;
     }
 
-    // return the player score
+    public void setMyGoal(Goal myGoal) {
+        this.myGoal = myGoal;
+    }
+
+    // return the cGoal cards : every turn check the cGoals and take the card if is completed
+    // the player can have maximum two card at least
+
+    public Goal getcGoal() {
+        return cGoal;
+    }
+
+
+// return the player score
 
     public int getMyScore() {
         return myScore;
