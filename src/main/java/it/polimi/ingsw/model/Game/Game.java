@@ -107,15 +107,6 @@ public class Game {
         myScore= p_score+c_card_score1+c_card_score2;
 
 
-
-
-
-
-
-
-
-
-
     }
 
     /**
