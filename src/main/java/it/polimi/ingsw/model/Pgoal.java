@@ -11,12 +11,11 @@ public class Pgoal extends Goal {
     private static final int COL = 5;
     private ColorItem[][] myPgoal = new ColorItem[ROW][COL];
 
+
     /**
      * function that generates personal goal cards on extracted card number
      */
-    public void CreatePgoal(){
-
-        int n=0;        //numero della carta Pgoal
+    public Pgoal CreatePgoal(int n){
         switch (n){
             case 1:
                 myPgoal[0][0] = ColorItem.PINK;
@@ -127,6 +126,7 @@ public class Pgoal extends Goal {
                 break;
 
             }
+        return this;
     }
 }
 
