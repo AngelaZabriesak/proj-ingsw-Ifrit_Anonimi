@@ -4,6 +4,8 @@ import it.polimi.ingsw.Exception.WinException;
 import it.polimi.ingsw.model.Bag.*;
 import it.polimi.ingsw.model.CommonGoal.*;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.PersonalGoal.Pgoal;
+import it.polimi.ingsw.model.PersonalGoal.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -26,12 +28,14 @@ public class Game {
         myBoard = new Board();
         myBag = new Bag();
         for(int i = 0; i<N_GOAL; i++) {
-            Pgoal pg = new Pgoal();
-            personalGoal.add(pg.CreatePgoal(i));
+            Pgoal pg = new Pgoal() {
+            };
+            //personalGoal.add(new PgoalFactory(i++));
             //commonGoal.add(new CgoalFactory(i++));
         }
         for(int i = 0; i<N_COMMON_GOAL; i++)
             myGoal.add(getRandomGoal(commonGoal));
+            myGoal.add(getRandomGoal(personalGoal));
         orderPlayer();
     }
 
