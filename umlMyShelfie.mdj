@@ -7894,19 +7894,6 @@
 							"headQualifiersCompartment": {
 								"$ref": "AAAAAAGHBI7ZLWDWbsw="
 							}
-						},
-						{
-							"_type": "UMLTextView",
-							"_id": "AAAAAAGHBN7oyduMVpc=",
-							"_parent": {
-								"$ref": "AAAAAAFF+qBtyKM79qY="
-							},
-							"font": "Arial;13;0",
-							"left": 1312,
-							"top": 80,
-							"width": 225,
-							"height": 103,
-							"text": " HashMap<String, String> capitalCities = new HashMap<String, String>();"
 						}
 					]
 				},
