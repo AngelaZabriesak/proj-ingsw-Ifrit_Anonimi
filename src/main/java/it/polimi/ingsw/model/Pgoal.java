@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.Bag.ColorItem;
 import it.polimi.ingsw.model.Goal;
 
-
+//this class i about the personal goal cards
 
 public class Pgoal extends Goal {
 
