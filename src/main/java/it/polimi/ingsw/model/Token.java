@@ -4,10 +4,11 @@ package it.polimi.ingsw.model;
 
 public class Token {
 
-    // attributi
     private int score;
 
-    //metodi
+    public Token(int score){
+        this.score = score;
+    }
 
     public int getScore() {
         return score;

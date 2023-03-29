@@ -12,4 +12,9 @@ public class Item {
         return type;
     }
 
+
+    public void setItem(ColorItem c){
+        this.type = c;
+    }
+
 }

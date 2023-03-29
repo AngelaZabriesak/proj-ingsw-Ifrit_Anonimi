@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.Bag.Item;
+import it.polimi.ingsw.model.Goal.Goal;
 
 public class Player {
     private Shelf myShelf;

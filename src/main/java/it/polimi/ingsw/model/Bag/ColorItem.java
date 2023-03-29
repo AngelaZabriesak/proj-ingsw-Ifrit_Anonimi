@@ -6,6 +6,6 @@ public enum ColorItem {
     PINK,
     GREEN,
     YELLOW,
-    TURQUOISE,
+    AZURE,
     BLACK
 }
