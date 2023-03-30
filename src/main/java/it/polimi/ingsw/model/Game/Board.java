@@ -1,9 +1,7 @@
 package it.polimi.ingsw.model.Game;
 
-import it.polimi.ingsw.model.Bag.ColorItem;
-import it.polimi.ingsw.model.Bag.Item;
-
-import java.util.ArrayList;
+import it.polimi.ingsw.model.Bag.*;
+import java.util.*;
 
 public class Board {
     private static final int ROW = 9;
@@ -23,17 +21,17 @@ public class Board {
         for(int r=0; r<ROW; r++){
             for(int c=0; c<COL; c++){
                 if(myBoardItem[r][c].getColor().equals(ColorItem.BLACK))
-                    myBoardAdjacency[r][c]=0;
-                //else {
-                    if (r > 0 && (!myBoardItem[r - 1][c].getColor().equals(ColorItem.BLACK) || myBoardItem[r - 1][c] != null))
+                    myBoardAdjacency[r][c]=9;
+                else {
+                    if (r > 0 && !(myBoardItem[r - 1][c].getColor().equals(ColorItem.BLACK) || myBoardItem[r - 1][c] == null))
                         myBoardAdjacency[r][c] += 1;
-                    if (r < ROW - 1 && (!myBoardItem[r + 1][c].getColor().equals(ColorItem.BLACK) || myBoardItem[r + 1][c] != null))
+                    if (r < ROW-1 && !(myBoardItem[r + 1][c].getColor().equals(ColorItem.BLACK) || myBoardItem[r + 1][c] == null))
                         myBoardAdjacency[r][c] += 1;
-                    if (c > 0 && (!myBoardItem[r][c - 1].getColor().equals(ColorItem.BLACK) || myBoardItem[r][c - 1] != null))
+                    if (c > 0 && !(myBoardItem[r][c - 1].getColor().equals(ColorItem.BLACK) || myBoardItem[r][c - 1] == null))
                         myBoardAdjacency[r][c] += 1;
-                    if (c < COL - 1 && (!myBoardItem[r][c + 1].getColor().equals(ColorItem.BLACK) || myBoardItem[r][c + 1] != null))
+                    if (c < COL-1 && !(myBoardItem[r][c + 1].getColor().equals(ColorItem.BLACK) || myBoardItem[r][c + 1] == null))
                         myBoardAdjacency[r][c] += 1;
-                //}
+                }
             }
         }
     }
@@ -58,6 +56,10 @@ public class Board {
      */
     public Item getItem (int row, int col){
         return myBoardItem[row][col];
+    }
+
+    public void removeItem(int row,int col){
+        myBoardItem[row][col] = null;
     }
 
     /**

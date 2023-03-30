@@ -165,12 +165,32 @@ public class Game {
         return currentPlayer;
     }
 
+    public Board getBoard(){
+        return myBoard;
+    }
+
+    public void setActivePlayer(Player player){
+        this.currentPlayer = player;
+    }
+
+    public ArrayList<Player> getPlayers(){
+        return players;
+    }
+
+    public Bag getBag(){
+        return myBag;
+    }
+
     public static void main(String[] args){
         Player p0 = new Player();
         Player p1 = new Player();
+        Player p2 = new Player();
+        Player p3 = new Player();
         ArrayList<Player> p = new ArrayList<>();
         p.add(p0);
         p.add(p1);
+        p.add(p2);
+        p.add(p3);
         Game g = new Game(p);
         String msg ="";
         g.initialize();

@@ -30,7 +30,7 @@ public class AddItemInShelf implements Action{
 
     @Override
     public void addDescription(String s) {
-
+        description+=s;
     }
 
     /**
