@@ -2,6 +2,9 @@ package it.polimi.ingsw.model.Goal.CommonGoal;
 
 import it.polimi.ingsw.model.Bag.Item;
 
+// common goal 8:
+// two columns each formed by 6 different types of tiles
+
 public class CommonGoal8 extends Cgoal{
 
     private static final int ROW = 6;
