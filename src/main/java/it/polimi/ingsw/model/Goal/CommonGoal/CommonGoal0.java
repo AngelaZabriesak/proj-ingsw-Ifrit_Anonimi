@@ -14,7 +14,7 @@ public class CommonGoal0 extends Cgoal{
 
 
     public CommonGoal0(){
-        setDescription();
+        setDescription("common goal 0");
     }
 
 }
