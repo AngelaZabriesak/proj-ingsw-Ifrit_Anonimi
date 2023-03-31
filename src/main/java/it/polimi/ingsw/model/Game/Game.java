@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.Game;
 
+import it.polimi.ingsw.Action.Action;
 import it.polimi.ingsw.Exception.*;
 import it.polimi.ingsw.model.Bag.*;
 import it.polimi.ingsw.model.*;
@@ -19,6 +20,7 @@ public class Game {
     private final ArrayList<Goal> commonGoal;
     private final Board myBoard;
     private final Bag myBag;
+    private Action action;
     private final ArrayList<Cgoal> myGoal = new ArrayList<>();
     private final ArrayList<Token> myToken = new ArrayList<>();
 
@@ -118,8 +120,18 @@ public class Game {
     /**
      * manage the action of the players
      */
-    public void setAction(){
+    public void setAction(Action myAction) throws ActionException {
+        action = myAction;
+    }
+    /**
+     *
+     */
+    public void doAction() throws ActionException {
+        action.execute();
+    }
 
+    public Action getAction(){
+        return action;
     }
 
     /**
@@ -170,7 +182,7 @@ public class Game {
     }
 
     public void setActivePlayer(Player player){
-        this.currentPlayer = player;
+        currentPlayer = player;
     }
 
     public ArrayList<Player> getPlayers(){
@@ -182,10 +194,10 @@ public class Game {
     }
 
     public static void main(String[] args){
-        Player p0 = new Player();
-        Player p1 = new Player();
-        Player p2 = new Player();
-        Player p3 = new Player();
+        Player p0 = new Player("0");
+        Player p1 = new Player("1");
+        Player p2 = new Player("2");
+        Player p3 = new Player("3");
         ArrayList<Player> p = new ArrayList<>();
         p.add(p0);
         p.add(p1);

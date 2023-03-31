@@ -8,45 +8,24 @@ import it.polimi.ingsw.model.Game.*;
 import java.util.ArrayList;
 
 public class AddItemInShelf implements Action{
-
-    private final Game game;
     private final int chosenColumn;
-    private final ArrayList<Item> chosenItem;
     private final Player player;
     private String description = "";
 
-    public AddItemInShelf(Game game, int chosenColumn, ArrayList<Item> chosenItem, Player player){
-        this.game = game;
+    public AddItemInShelf(int chosenColumn, Player player){
         this.chosenColumn = chosenColumn;
-        this.chosenItem = chosenItem;
         this.player = player;
     }
 
     @Override
     public void execute() throws ActionException {
         checkInput();
-        player.getMyShelf().setItemInShelf(chosenColumn,chosenItem);
+        player.getMyShelf().setItemInShelf(chosenColumn,player.getMyItem());
     }
 
     @Override
     public void addDescription(String s) {
         description+=s;
-    }
-
-    /**
-     * checks if the given column id is valid
-     * @return boolean
-     */
-    private boolean checkColumnValid(){
-        if(chosenColumn<1 || chosenColumn>5)
-            return false;
-        return true;
-    }
-
-    private boolean checkColumnEmpty(){
-        if(player.getMyShelf().getFreeRowByColumn(chosenColumn)<=chosenItem.size())
-            return true;
-        return false;
     }
 
     @Override
@@ -55,5 +34,22 @@ public class AddItemInShelf implements Action{
             throw new ActionException();
         if(!checkColumnEmpty())
             throw new ActionException();
+    }
+
+
+    /**
+     * checks if the given column id is valid
+     * @return boolean
+     */
+    private boolean checkColumnValid(){
+        if(chosenColumn<0 || chosenColumn>4)
+            return false;
+        return true;
+    }
+
+    private boolean checkColumnEmpty(){
+        if(player.getMyShelf().getFreeRowByColumn(chosenColumn)<player.getMyItem().size())
+            return false;
+        return true;
     }
 }

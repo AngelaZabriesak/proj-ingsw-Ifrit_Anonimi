@@ -1,18 +1,17 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.Bag.*;
 import it.polimi.ingsw.model.Game.*;
 import org.junit.jupiter.api.*;
+
 import java.io.*;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+public class TestChooseOrder {
 
-public class TestAddItemInShelf {
     private Game game;
 
     @BeforeAll
-    public void init() throws IOException{
+    public void init() throws IOException {
         ArrayList<Player> players = new ArrayList<>();
         players.add(new Player("0"));
         players.add(new Player("1"));
@@ -26,6 +25,5 @@ public class TestAddItemInShelf {
     public void getItem(){
 
     }
-
 
 }

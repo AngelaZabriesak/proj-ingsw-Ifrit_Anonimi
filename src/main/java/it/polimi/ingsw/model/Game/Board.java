@@ -3,6 +3,16 @@ package it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Bag.*;
 import java.util.*;
 
+/**
+ * 0 = 0 side of the cell are free
+ * 1 = 1 side of the cell is free
+ * 2 = 2 sides of the cell is free
+ * 3 = 3 sides of the cell is free
+ * 4 = all sides of the cell are free
+ * 9 = the item is black
+ * 7 = the box is null
+ */
+
 public class Board {
     private static final int ROW = 9;
     private static final int COL = 9;
@@ -58,8 +68,31 @@ public class Board {
         return myBoardItem[row][col];
     }
 
-    public void removeItem(int row,int col){
+    public void removeItem(int row, int col){
         myBoardItem[row][col] = null;
+        myBoardAdjacency[row][col]=7;
+    }
+
+    public void updateNeighboursAdjacency(int row, int col){
+        if(row>0 && myBoardItem[row-1][col]!=null){
+            if(!(myBoardItem[row-1][col].getColor().equals(ColorItem.BLACK)))
+                myBoardAdjacency[row-1][col]-=1;
+        }
+
+        if(row<ROW-1 && myBoardItem[row+1][col]!=null){
+            if(!(myBoardItem[row+1][col].getColor().equals(ColorItem.BLACK)))
+                myBoardAdjacency[row+1][col]-=1;
+        }
+
+        if(col>0 && myBoardItem[row][col-1]!=null){
+            if(!(myBoardItem[row][col-1].getColor().equals(ColorItem.BLACK)))
+                myBoardAdjacency[row][col-1]-=1;
+        }
+
+        if(col<COL-1 && myBoardItem[row][col+1]!=null){
+            if(!(myBoardItem[row][col+1].getColor().equals(ColorItem.BLACK)))
+                myBoardAdjacency[row][col+1]-=1;
+        }
     }
 
     /**
