@@ -26,12 +26,11 @@ public class CommonGoal1 extends Cgoal{
     }
     else return false;
     }
+
     @Override
     public Token getToken() {
         if (CheckCondition()){}
             return super.getToken();
         }
-
-
 
 }

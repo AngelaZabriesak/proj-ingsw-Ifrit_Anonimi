@@ -18,6 +18,14 @@ public class CommonGoal2 extends Cgoal{
         setDescription("common goal 2: four groups each containing at least 4 tiles of the same type,the tiles of one group can be different from those of another group\n");
         setIndex(2);
     }
+
+    public boolean CheckCondition() {
+        if (numOfCond>3) {
+            return true;
+        }
+        else return false;
+    }
+
     @Override
     public Token getToken() {
         return super.getToken();
