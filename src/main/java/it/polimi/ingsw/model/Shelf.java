@@ -11,9 +11,6 @@ public class Shelf {
     private static final int COL = 5;
     Item myShelf[][] = new Item[ROW][COL];
 
-    public Shelf() {
-       }
-
     public int getFreeRowByColumn(int col){
         int free=0;
         for(int r=0; r<ROW; r++){
