@@ -13,6 +13,7 @@ public class CommonGoal10 extends Cgoal{
 
     public CommonGoal10(){
         setDescription("common goal 10");
+        setIndex(10);
     }
 
 
