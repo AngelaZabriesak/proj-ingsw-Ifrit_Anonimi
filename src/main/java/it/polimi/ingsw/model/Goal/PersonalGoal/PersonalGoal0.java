@@ -5,10 +5,16 @@ import it.polimi.ingsw.model.Bag.*;
 public class PersonalGoal0 extends Pgoal{
     private static final int ROW = 6;
     private static final int COL = 5;
-    private Item[][] myItemGoal = new Item[ROW][COL];
+    private ColorItem[][] myItemGoal = new ColorItem[ROW][COL];
 
     public PersonalGoal0(){
         setDescription("personal goal 0");
+        myItemGoal[0][0] = ColorItem.PINK;
+        myItemGoal[1][0] = ColorItem.BLUE;
+        myItemGoal[1][5] = ColorItem.GREEN;
+        myItemGoal[2][3] = ColorItem.WHITE;
+        myItemGoal[3][1] = ColorItem.YELLOW;
+        myItemGoal[5][2] = ColorItem.AZURE;
     }
 
 }
