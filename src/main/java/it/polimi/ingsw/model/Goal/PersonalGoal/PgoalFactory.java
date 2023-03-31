@@ -16,8 +16,8 @@ public class PgoalFactory {
     /**
      * Generates a personal goal by his id
      * @param id the goal's id
-     * @param game the game to assign the character to
-     * @return the requested character
+     * @param game the game to assign the goal to
+     * @return the requested goal
      */
     public Pgoal getPersonalGoal(int id, Game game){
         Pgoal personalGoal;
