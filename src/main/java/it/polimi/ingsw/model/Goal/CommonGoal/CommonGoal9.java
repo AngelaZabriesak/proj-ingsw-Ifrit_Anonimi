@@ -2,7 +2,10 @@ package it.polimi.ingsw.model.Goal.CommonGoal;
 
 import it.polimi.ingsw.model.Bag.Item;
 
-// common goal 9 
+// common goal 9:
+// two lines each formed by 5 different types of tiles
+// one line can show the same or a different combination of other line
+
 public class CommonGoal9 extends Cgoal{
 
     private static final int ROW = 6;
@@ -11,6 +14,7 @@ public class CommonGoal9 extends Cgoal{
 
     public CommonGoal9(){
         setDescription("common goal 9");
+        setIndex(9);
     }
 
 

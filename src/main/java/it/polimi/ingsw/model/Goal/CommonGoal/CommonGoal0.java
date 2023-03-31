@@ -13,8 +13,10 @@ public class CommonGoal0 extends Cgoal{
     private Item[][] myItemGoal = new Item[ROW][COL];
 
 
+
     public CommonGoal0(){
-        setDescription();
+        setDescription("common goal 0");
+        setIndex(0);
     }
 
 }
