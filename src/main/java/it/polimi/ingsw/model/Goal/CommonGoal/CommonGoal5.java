@@ -18,6 +18,13 @@ public class CommonGoal5 extends Cgoal{
         setIndex(5);
     }
 
+    public boolean CheckCondition() {
+        if (numOfCond>0) {
+            return true;
+        }
+        else return false;
+    }
+
     @Override
     public Token getToken() {
         return super.getToken();

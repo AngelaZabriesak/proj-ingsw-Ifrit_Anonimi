@@ -19,6 +19,13 @@ public class CommonGoal9 extends Cgoal{
         setIndex(9);
     }
 
+    public boolean CheckCondition() {
+        if (numOfCond>1) {
+            return true;
+        }
+        else return false;
+    }
+
     @Override
     public Token getToken() {
         return super.getToken();
