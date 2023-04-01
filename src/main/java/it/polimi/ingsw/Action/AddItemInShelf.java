@@ -26,7 +26,7 @@ public class AddItemInShelf implements Action{
         player.setItemInShelf(chosenColumn);
 
         for(Position p : game.getCurrentPlayer().getPosition())
-            game.getBoard().updateNeighboursAdjacency(p.getRow(), p.getCol());
+            game.getBoard().updateNeighboursAdjacency(p);
     }
 
     @Override

@@ -1,8 +1,7 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.Bag.Item;
-
-import java.util.ArrayList;
+import it.polimi.ingsw.*;
+import it.polimi.ingsw.model.Bag.*;
 
 // the [0][0] element of the matrix is the north-west element
 
@@ -25,13 +24,18 @@ public class Shelf {
         return myShelf;
     }
 
-    public void setMyShelf(int row, int col,Item i){
-        myShelf[row][col] = i;
+    public void setMyShelf(Position p, Item i){
+        myShelf[p.getRow()][p.getCol()] = i;
     }
 
     public int getRow(){
         return ROW;
     }
+
+    public int getCol(){
+        return COL;
+    }
+
 
     /**
      * @return the number of cells empty

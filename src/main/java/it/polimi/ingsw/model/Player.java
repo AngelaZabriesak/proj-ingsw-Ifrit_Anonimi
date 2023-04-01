@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Position;
+import it.polimi.ingsw.model.Bag.ColorItem;
 import it.polimi.ingsw.model.Bag.Item;
 import it.polimi.ingsw.model.Goal.Goal;
 
@@ -79,7 +80,7 @@ public class Player {
             ok = false;
             for(int r=myShelf.getRow()-1; r>-1 && ok!=true; r--){
                 if (myShelf.getMyShelf()[r][col] == null) {
-                    myShelf.setMyShelf(r,col,i);
+                    myShelf.setMyShelf(new Position(r,col),i);
                     ok = true;
                 }
             }
@@ -90,6 +91,45 @@ public class Player {
     public void clearItem(){
         myItem.clear();
         myPosition.clear();
+    }
+
+    public ArrayList<ArrayList<Position>> getAdjacencyGoal(Shelf shelf){
+        ArrayList<ArrayList<Position>> listGroups = new ArrayList<>();
+        ArrayList<Position> groups = new ArrayList<>();
+        for(int r=0; r<myShelf.getRow(); r++){
+            for(int c = 0; c<myShelf.getCol(); c++){
+                if(!myShelf.getMyShelf()[r][c].getColor().equals(ColorItem.BLACK) && myShelf.getMyShelf()!=null){
+                    checkAdjacency(new Position(r,c),groups);
+                }
+                if(groups.size()>0) {
+                    listGroups.add(groups);
+                    groups.clear();
+                }
+            }
+        }
+        return listGroups;
+    }
+
+    public void checkAdjacency(Position p,ArrayList<Position> groups){
+        if(myShelf.getMyShelf()[p.getRow()-1][p.getCol()].equals(myShelf.getMyShelf()[p.getRow()-1][p.getCol()])) {
+            groups.add(p);
+            checkAdjacency(new Position(p.getRow() - 1, p.getCol()),groups);
+        }
+
+        if(myShelf.getMyShelf()[p.getRow()+1][p.getCol()].equals(myShelf.getMyShelf()[p.getRow()+1][p.getCol()])) {
+            groups.add(p);
+            checkAdjacency(new Position(p.getRow() +1, p.getCol()),groups);
+        }
+
+        if(myShelf.getMyShelf()[p.getRow()][p.getCol()-1].equals(myShelf.getMyShelf()[p.getRow()][p.getCol()-1])) {
+            groups.add(p);
+            checkAdjacency(new Position(p.getRow(), p.getCol()-1),groups);
+        }
+
+        if(myShelf.getMyShelf()[p.getRow()][p.getCol()+1].equals(myShelf.getMyShelf()[p.getRow()][p.getCol()+1])) {
+            groups.add(p);
+            checkAdjacency(new Position(p.getRow(), p.getCol()+1),groups);
+        }
     }
 }
 

@@ -23,7 +23,7 @@ public class ChooseOrder implements Action{
     @Override
     public void execute() throws ActionException {
         for(Position p : player.getPosition())
-            game.getBoard().updateNeighboursAdjacency(p.getRow(), p.getCol());
+            game.getBoard().updateNeighboursAdjacency(p);
         checkInput();
         ArrayList<Item> items = new ArrayList<>();
         for(Integer i : orderedPositionItem)

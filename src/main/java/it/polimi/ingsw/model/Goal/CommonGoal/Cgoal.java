@@ -32,15 +32,7 @@ public abstract class Cgoal extends Goal {
     public Game getGame() {
         return game;
     }
-
-    public boolean isUsed() {
-        return used;
-    }
-
-    public void setUsed(boolean used) {
-        this.used = used;
-    }
-
+    
     public void setToken(ArrayList<Token> tokens){
         this.tokens =tokens;
     }

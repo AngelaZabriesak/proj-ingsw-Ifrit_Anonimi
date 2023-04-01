@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.Game;
 
+import it.polimi.ingsw.Position;
 import it.polimi.ingsw.model.Bag.*;
 import java.util.*;
 
@@ -64,42 +65,42 @@ public class Board {
     /**
      *  select item to remove
      */
-    public Item getItem (int row, int col){
-        return myBoardItem[row][col];
+    public Item getItem (Position p){
+        return myBoardItem[p.getRow()][p.getCol()];
     }
 
-    public void removeItem(int row, int col){
-        myBoardItem[row][col] = null;
-        myBoardAdjacency[row][col]=7;
+    public void removeItem(Position p){
+        myBoardItem[p.getRow()][p.getCol()] = null;
+        myBoardAdjacency[p.getRow()][p.getCol()]=7;
     }
 
-    public void updateNeighboursAdjacency(int row, int col){
-        if(row>0 && myBoardItem[row-1][col]!=null){
-            if(!(myBoardItem[row-1][col].getColor().equals(ColorItem.BLACK)))
-                myBoardAdjacency[row-1][col]-=1;
+    public void updateNeighboursAdjacency(Position p){
+        if(p.getRow()>0 && myBoardItem[p.getRow()-1][p.getCol()]!=null){
+            if(!(myBoardItem[p.getRow()-1][p.getCol()].getColor().equals(ColorItem.BLACK)))
+                myBoardAdjacency[p.getRow()-1][p.getCol()]-=1;
         }
 
-        if(row<ROW-1 && myBoardItem[row+1][col]!=null){
-            if(!(myBoardItem[row+1][col].getColor().equals(ColorItem.BLACK)))
-                myBoardAdjacency[row+1][col]-=1;
+        if(p.getRow()<ROW-1 && myBoardItem[p.getRow()+1][p.getCol()]!=null){
+            if(!(myBoardItem[p.getRow()+1][p.getCol()].getColor().equals(ColorItem.BLACK)))
+                myBoardAdjacency[p.getRow()+1][p.getCol()]-=1;
         }
 
-        if(col>0 && myBoardItem[row][col-1]!=null){
-            if(!(myBoardItem[row][col-1].getColor().equals(ColorItem.BLACK)))
-                myBoardAdjacency[row][col-1]-=1;
+        if(p.getCol()>0 && myBoardItem[p.getRow()][p.getCol()-1]!=null){
+            if(!(myBoardItem[p.getRow()][p.getCol()-1].getColor().equals(ColorItem.BLACK)))
+                myBoardAdjacency[p.getRow()][p.getCol()-1]-=1;
         }
 
-        if(col<COL-1 && myBoardItem[row][col+1]!=null){
-            if(!(myBoardItem[row][col+1].getColor().equals(ColorItem.BLACK)))
-                myBoardAdjacency[row][col+1]-=1;
+        if(p.getCol()<COL-1 && myBoardItem[p.getRow()][p.getCol()+1]!=null){
+            if(!(myBoardItem[p.getRow()][p.getCol()+1].getColor().equals(ColorItem.BLACK)))
+                myBoardAdjacency[p.getRow()][p.getCol()+1]-=1;
         }
     }
 
     /**
      *
      */
-    public int getAdjacency(int row, int col){
-        return myBoardAdjacency[row][col];
+    public int getAdjacency(Position p){
+        return myBoardAdjacency[p.getRow()][p.getCol()];
     }
 
     public Item[][] getMyBoardItem(){

@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.Game;
 
 import it.polimi.ingsw.Action.Action;
 import it.polimi.ingsw.Exception.*;
+import it.polimi.ingsw.Position;
 import it.polimi.ingsw.model.Bag.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.Goal.*;
@@ -208,8 +209,8 @@ public class Game {
         g.initialize();
         for(int r=0;r<9;r++){
             for(int c=0;c<9;c++){
-                if(g.myBoard.getItem(r,c)!=null)
-                    msg+="|\t"+g.myBoard.getItem(r,c).getColor()+"" +
+                if(g.myBoard.getItem(new Position(r,c))!=null)
+                    msg+="|\t"+g.myBoard.getItem(new Position(r,c)).getColor()+"" +
                             "\t";
                 else
                     msg+="|\tnull\t";
@@ -218,7 +219,7 @@ public class Game {
         }
         for(int r=0;r<9;r++){
             for(int c=0;c<9;c++){
-                msg+="|\t"+g.myBoard.getAdjacency(r,c)+"" + "\t";
+                msg+="|\t"+g.myBoard.getAdjacency(new Position(r,c))+"" + "\t";
             }
             msg+="|\n";
         }

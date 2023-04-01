@@ -27,8 +27,8 @@ public class ChooseItem implements Action {
         checkInput();
         if(game.getCurrentPlayer().getMyItem().size()>3)
             throw new ActionException();
-        Item item = game.getBoard().getItem(chosenRow,chosenColumn);
-        game.getBoard().removeItem(chosenRow,chosenColumn);
+        Item item = game.getBoard().getItem(new Position(chosenRow,chosenColumn));
+        game.getBoard().removeItem(new Position(chosenRow,chosenColumn));
         player.setPosition(new Position(chosenRow,chosenColumn));
         game.getCurrentPlayer().setMyItem(item);
     }
@@ -60,7 +60,7 @@ public class ChooseItem implements Action {
     }
 
     private boolean checkAdjacency(){
-        if(game.getBoard().getAdjacency(chosenRow,chosenColumn)>0 && game.getBoard().getAdjacency(chosenRow,chosenColumn)<4)
+        if(game.getBoard().getAdjacency(new Position(chosenRow,chosenColumn))>0 && game.getBoard().getAdjacency(new Position(chosenRow,chosenColumn))<4)
             return true;
         return false;
     }

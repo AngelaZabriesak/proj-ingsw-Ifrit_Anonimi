@@ -37,7 +37,7 @@ public class TestChooseItem {
             assertEquals(2,p0.getMyItem().size());
 
             for(Position p : game.getCurrentPlayer().getPosition())
-                game.getBoard().updateNeighboursAdjacency(p.getRow(), p.getCol());
+                game.getBoard().updateNeighboursAdjacency(p);
         }
 
         @Test
