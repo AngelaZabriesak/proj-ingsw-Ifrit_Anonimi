@@ -27,20 +27,21 @@ public class TestChooseItem {
         }
 
         @Test
-        @DisplayName("Testing getting random item")
+        @DisplayName("Testing getting item chose by player 1")
         public void getItem1Player() throws ActionException {
             Player p0 = game.getCurrentPlayer();
             game.setAction(new ChooseItem(game,1,4,p0));
             game.doAction();
             game.setAction(new ChooseItem(game,1,3,p0));
             game.doAction();
-            //assertEquals(0,0);
+            assertEquals(2,p0.getMyItem().size());
 
             for(Position p : game.getCurrentPlayer().getPosition())
                 game.getBoard().updateNeighboursAdjacency(p.getRow(), p.getCol());
         }
 
         @Test
+        @DisplayName("Testing getting item chose by player 2")
         public void getItem2Player() throws ActionException {
             game.setActivePlayer(game.getPlayers().get(1));
             Player p0 = game.getCurrentPlayer();
@@ -48,5 +49,6 @@ public class TestChooseItem {
             game.doAction();
             game.setAction(new ChooseItem(game,2,3,p0));
             game.doAction();
+            assertEquals(2,p0.getMyItem().size());
         }
 }

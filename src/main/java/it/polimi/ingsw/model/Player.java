@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.Bag.Item;
 import it.polimi.ingsw.model.Goal.Goal;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Player {
     private Shelf myShelf;
@@ -18,6 +19,7 @@ public class Player {
     public Player(String nickname){
         this.nickname = nickname;
         myItem = new ArrayList<>();
+        myShelf = new Shelf();
     }
 
     // return the player nickname
@@ -69,6 +71,25 @@ public class Player {
 
     public ArrayList<Position> getPosition(){
         return myPosition;
+    }
+
+    public void setItemInShelf(int col){
+        boolean ok;
+        for(Item i : myItem) {
+            ok = false;
+            for(int r=myShelf.getRow()-1; r>-1 && ok!=true; r--){
+                if (myShelf.getMyShelf()[r][col] == null) {
+                    myShelf.setMyShelf(r,col,i);
+                    ok = true;
+                }
+            }
+        }
+        clearItem();
+    }
+
+    public void clearItem(){
+        myItem.clear();
+        myPosition.clear();
     }
 }
 

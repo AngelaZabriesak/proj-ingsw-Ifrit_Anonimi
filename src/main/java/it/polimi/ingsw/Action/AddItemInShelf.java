@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Action;
 
 import it.polimi.ingsw.Exception.ActionException;
+import it.polimi.ingsw.Position;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.Bag.Item;
 import it.polimi.ingsw.model.Game.*;
@@ -8,11 +9,13 @@ import it.polimi.ingsw.model.Game.*;
 import java.util.ArrayList;
 
 public class AddItemInShelf implements Action{
+    private final Game game;
     private final int chosenColumn;
     private final Player player;
     private String description = "";
 
-    public AddItemInShelf(int chosenColumn, Player player){
+    public AddItemInShelf(Game game,int chosenColumn, Player player){
+        this.game = game;
         this.chosenColumn = chosenColumn;
         this.player = player;
     }
@@ -20,7 +23,10 @@ public class AddItemInShelf implements Action{
     @Override
     public void execute() throws ActionException {
         checkInput();
-        player.getMyShelf().setItemInShelf(chosenColumn,player.getMyItem());
+        player.setItemInShelf(chosenColumn);
+
+        for(Position p : game.getCurrentPlayer().getPosition())
+            game.getBoard().updateNeighboursAdjacency(p.getRow(), p.getCol());
     }
 
     @Override
@@ -30,10 +36,14 @@ public class AddItemInShelf implements Action{
 
     @Override
     public void checkInput() throws ActionException {
-        if(!checkColumnValid())
+        if(!checkColumnValid()) {
+            System.out.println("The id column chose isn't valid");
             throw new ActionException();
-        if(!checkColumnEmpty())
+        }
+        if(!checkColumnEmpty()) {
+            System.out.println("The id column chose doesn't have enough space");
             throw new ActionException();
+        }
     }
 
 
