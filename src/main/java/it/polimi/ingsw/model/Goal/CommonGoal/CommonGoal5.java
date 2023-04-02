@@ -16,6 +16,8 @@ public class CommonGoal5 extends Cgoal{
     public CommonGoal5(){
         setDescription("common goal 5:eight tiles of the same type. There's no restriction about the position of these tiles\n");
         setIndex(5);
+
+
     }
 
 }
