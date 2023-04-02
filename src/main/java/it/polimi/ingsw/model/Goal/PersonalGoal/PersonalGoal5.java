@@ -9,12 +9,12 @@ public class PersonalGoal5 extends Pgoal{
 
     public PersonalGoal5(){
         setDescription("personal goal 5");
-        myItemGoal[4][4] = new Item(ColorItem.PINK);
-        myItemGoal[3][1] = new Item(ColorItem.BLUE);
-        myItemGoal[5][3] = new Item(ColorItem.GREEN);
-        myItemGoal[3][2] = new Item(ColorItem.WHITE);
-        myItemGoal[5][0] = new Item(ColorItem.YELLOW);
-        myItemGoal[3][3] = new Item(ColorItem.AZURE);
+        myItemGoal[5][0] = new Item(ColorItem.PINK);
+        myItemGoal[4][3] = new Item(ColorItem.BLUE);
+        myItemGoal[0][4] = new Item(ColorItem.GREEN);
+        myItemGoal[2][3] = new Item(ColorItem.WHITE);
+        myItemGoal[4][1] = new Item(ColorItem.YELLOW);
+        myItemGoal[0][2] = new Item(ColorItem.AZURE);
     }
 
 }
