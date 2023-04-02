@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.Token;
 // the tiles of one square can be different from those of the other square.
 
 
-public class CommonGoal3 extends Cgoal{
+public class CommonGoal3 extends Cgoal {
 
     private static final int ROW = 6;
     private static final int COL = 5;
@@ -16,21 +16,9 @@ public class CommonGoal3 extends Cgoal{
     private int numOfCond = 0;                 // for this goal >1 at the end
 
 
-    public CommonGoal3(){
+    public CommonGoal3() {
         setDescription("common goal 3:two groups each containing 4 tiles of the same type in a 2x2 square. the tiles of one square can be different from those of the other square\n");
         setIndex(3);
-    }
-
-    public boolean CheckCondition() {
-        if (numOfCond>1) {
-            return true;
-        }
-        else return false;
-    }
-
-    @Override
-    public Token getToken() {
-        return super.getToken();
     }
 
 }

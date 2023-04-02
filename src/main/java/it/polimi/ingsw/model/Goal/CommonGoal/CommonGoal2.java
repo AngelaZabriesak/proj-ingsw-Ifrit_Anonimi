@@ -7,28 +7,17 @@ import it.polimi.ingsw.model.Token;
 // four groups each containing at least 4 tiles of the same type,
 // the tiles of one group can be different from those of another group
 
-public class CommonGoal2 extends Cgoal{
+public class CommonGoal2 extends Cgoal {
     private static final int ROW = 6;
     private static final int COL = 5;
     private Item[][] myItemGoal = new Item[ROW][COL];
     private int numOfCond = 0;                 // for this goal >3 at the end
 
 
-    public CommonGoal2(){
+    public CommonGoal2() {
         setDescription("common goal 2: four groups each containing at least 4 tiles of the same type,the tiles of one group can be different from those of another group\n");
         setIndex(2);
     }
-
-    public boolean CheckCondition() {
-        if (numOfCond>3) {
-            return true;
-        }
-        else return false;
-    }
-
-    @Override
-    public Token getToken() {
-        return super.getToken();
-    }
-
 }
+
+
