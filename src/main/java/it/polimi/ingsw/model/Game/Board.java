@@ -1,7 +1,18 @@
 package it.polimi.ingsw.model.Game;
 
+import it.polimi.ingsw.Position;
 import it.polimi.ingsw.model.Bag.*;
 import java.util.*;
+
+/**
+ * 0 = 0 side of the cell are free
+ * 1 = 1 side of the cell is free
+ * 2 = 2 sides of the cell is free
+ * 3 = 3 sides of the cell is free
+ * 4 = all sides of the cell are free
+ * 9 = the item is black
+ * 7 = the box is null
+ */
 
 public class Board {
     private static final int ROW = 9;
@@ -54,19 +65,42 @@ public class Board {
     /**
      *  select item to remove
      */
-    public Item getItem (int row, int col){
-        return myBoardItem[row][col];
+    public Item getItem (Position p){
+        return myBoardItem[p.getRow()][p.getCol()];
     }
 
-    public void removeItem(int row,int col){
-        myBoardItem[row][col] = null;
+    public void removeItem(Position p){
+        myBoardItem[p.getRow()][p.getCol()] = null;
+        myBoardAdjacency[p.getRow()][p.getCol()]=7;
+    }
+
+    public void updateNeighboursAdjacency(Position p){
+        if(p.getRow()>0 && myBoardItem[p.getRow()-1][p.getCol()]!=null){
+            if(!(myBoardItem[p.getRow()-1][p.getCol()].getColor().equals(ColorItem.BLACK)))
+                myBoardAdjacency[p.getRow()-1][p.getCol()]-=1;
+        }
+
+        if(p.getRow()<ROW-1 && myBoardItem[p.getRow()+1][p.getCol()]!=null){
+            if(!(myBoardItem[p.getRow()+1][p.getCol()].getColor().equals(ColorItem.BLACK)))
+                myBoardAdjacency[p.getRow()+1][p.getCol()]-=1;
+        }
+
+        if(p.getCol()>0 && myBoardItem[p.getRow()][p.getCol()-1]!=null){
+            if(!(myBoardItem[p.getRow()][p.getCol()-1].getColor().equals(ColorItem.BLACK)))
+                myBoardAdjacency[p.getRow()][p.getCol()-1]-=1;
+        }
+
+        if(p.getCol()<COL-1 && myBoardItem[p.getRow()][p.getCol()+1]!=null){
+            if(!(myBoardItem[p.getRow()][p.getCol()+1].getColor().equals(ColorItem.BLACK)))
+                myBoardAdjacency[p.getRow()][p.getCol()+1]-=1;
+        }
     }
 
     /**
      *
      */
-    public int getAdjacency(int row, int col){
-        return myBoardAdjacency[row][col];
+    public int getAdjacency(Position p){
+        return myBoardAdjacency[p.getRow()][p.getCol()];
     }
 
     public Item[][] getMyBoardItem(){

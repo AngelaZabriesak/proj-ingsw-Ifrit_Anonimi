@@ -14,8 +14,8 @@ public class CgoalFactory {
     /**
      * Generates a common goal by his id
      * @param id the goal's id
-     * @param game the game to assign the character to
-     * @return the requested character
+     * @param game the game to assign the goal to
+     * @return the requested goal
      */
     public Cgoal getCommonGoal(int id, Game game){
         Cgoal commonGoal;

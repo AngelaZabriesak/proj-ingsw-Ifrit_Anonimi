@@ -39,4 +39,6 @@ public abstract class Pgoal extends Goal {
         this.used = used;
     }
 
+    private int[] scores = {0,2,4,6,9,12};
+
 }
