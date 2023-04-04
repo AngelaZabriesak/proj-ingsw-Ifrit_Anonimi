@@ -194,7 +194,70 @@ public class Game {
         return myBag;
     }
 
-    public static void main(String[] args){
+    public ArrayList<ArrayList<Position>> raggruppaPerColore(Shelf myShelf){
+        ArrayList<Position> group = null;
+        ArrayList<ArrayList<Position>> groupColor = new ArrayList<>();
+        for(ColorItem ci : ColorItem.values()){// comprende anche il nero quindi la dimensione di groupColor è 7new ArrayList<>();
+            group = new ArrayList<>();
+            for(int r =0;r< myShelf.getRow(); r++){
+                for(int c =0; c < myShelf.getCol(); c++){
+                    if(myShelf.getMyShelf()[r][c].getColor().equals(ci))
+                        group.add(new Position(r,c));
+                }
+            }
+            groupColor.add(group);
+        }
+        return groupColor;
+    }
+    public ArrayList<ArrayList<Position>> raggruppaPerAdiacenza(ArrayList<Position> groupColor){
+        ArrayList<Position> adiacenzaColore= new ArrayList<>();
+        ArrayList<ArrayList<Position>> nuovoListAdiacenza = new ArrayList<>();
+        ArrayList<ArrayList<Position>> nuovoListAdiacenzaMerged = new ArrayList<>();
+        // adiacenzaColore.add(groupColor.get(0));
+        for(int l=0;l<groupColor.size();l++){
+            adiacenzaColore.add(groupColor.get(l));
+            for(int i =l+1;i<groupColor.size();i++){
+                if(distanzaFraPosition(groupColor.get(l),groupColor.get(i))==1) {
+                    adiacenzaColore.add(groupColor.get(i));
+                }
+                //nuovoListAdiacenza.add(adiacenzaColore);
+                /*for(Position position : adiacenzaColore)
+                    adiacenzaColore.remove(position);*/
+            }
+            nuovoListAdiacenza.add(adiacenzaColore);
+
+        }
+        for(ArrayList<Position> daFondere : nuovoListAdiacenza){
+            nuovoListAdiacenzaMerged.add(mergeAdjacency(daFondere));
+        }
+        return nuovoListAdiacenzaMerged;
+        //return adiacenzaColore;
+    }
+
+    private int distanzaFraPosition(Position prima, Position seconda){
+        int dist =0;
+        int distRig = prima.getRow() - seconda.getRow();
+        int distCol = prima.getCol() - seconda.getCol();
+        dist+=Math.sqrt(Math.pow(distRig,2)+Math.pow(distCol,2));
+        return dist;
+    }
+
+    private ArrayList<Position> mergeAdjacency(ArrayList<Position> daFondere){
+        ArrayList<Position> fuso = new ArrayList<>();
+        // elenco di input con duplicati
+        ArrayList<String> listWithDuplicates = new ArrayList<>();
+        for(Position position : daFondere){
+            listWithDuplicates.add(position.getRow()+" "+position.getCol());
+        }
+        // costruisce un set dagli elementi della lista
+        Set<String> set = new LinkedHashSet<>(listWithDuplicates);
+        // costruisce una nuova lista da un set e la stampa
+        ArrayList<String> listWithoutDuplicates = new ArrayList<>(set);
+        for(String string : listWithoutDuplicates)
+            fuso.add(new Position(Integer.valueOf(string.split(" ")[0]),Integer.valueOf(string.split(" ")[1])));
+        return fuso;
+    }
+    public static void main(String[] args) {
         Player p0 = new Player("0");
         Player p1 = new Player("1");
         Player p2 = new Player("2");
@@ -205,9 +268,9 @@ public class Game {
         p.add(p2);
         p.add(p3);
         Game g = new Game(p);
-        String msg ="";
+        String msg = "";
         g.initialize();
-        for(int r=0;r<9;r++){
+        /*for(int r=0;r<9;r++){
             for(int c=0;c<9;c++){
                 if(g.myBoard.getItem(new Position(r,c))!=null)
                     msg+="|\t"+g.myBoard.getItem(new Position(r,c)).getColor()+"" +
@@ -231,8 +294,63 @@ public class Game {
             for(Token t : cg.getMyTokens())
                 msg += t.getScore()+"\t";
             msg+= "\n";
+        }*/
+        for (int c = 0; c < 5; c++) {
+            p0.setMyItem(new Item(ColorItem.GREEN));
+            p0.setMyItem(new Item(ColorItem.YELLOW));
+            p0.setMyItem(new Item(ColorItem.GREEN));
+            p0.setItemInShelf(c);
+            p0.setMyItem(new Item(ColorItem.BLUE));
+            p0.setMyItem(new Item(ColorItem.PINK));
+            p0.setMyItem(new Item(ColorItem.BLUE));
+            p0.setItemInShelf(c);
+        }
+        /**
+         * visualizzazione shelf
+         */
+        for (int r = 0; r < p0.getMyShelf().getRow(); r++) {
+            for (int c = 0; c < p0.getMyShelf().getCol(); c++)
+                msg += "|\t" + p0.getMyShelf().getMyShelf()[r][c].getColor() + "\t";
+            msg += "|\n";
+        }
+        /**
+         * visualizzazione raggruppamento per colore
+         */
+        ArrayList<ArrayList<Position>> coloriRaggruppati = new ArrayList<>(g.raggruppaPerColore(p0.getMyShelf()));
+        for (ArrayList<Position> listeColoriRaggruppati : coloriRaggruppati){
+            for (Position position : listeColoriRaggruppati)
+                msg += "|\t" + position.getRow() + "," + position.getCol() + "\t";
+            msg+="|\n";
+        }
+        /**
+         * visualizzazione array raggruppati
+         */
+        for(ArrayList<Position> listeColoriRaggruppati : coloriRaggruppati){
+            ArrayList<Position> adiacenze;
+            if(listeColoriRaggruppati.size()!=0) {
+                adiacenze = new ArrayList<>();
+                for(ArrayList<Position> merged : g.raggruppaPerAdiacenza(listeColoriRaggruppati)) {
+                    for (Position position : merged)
+                        adiacenze.add(position);
+                }
+                for(Position position : adiacenze){
+                    msg+="|\t"+position.getRow()+", "+position.getCol()+"\t";
+                }
+                msg+="|\n";
+            }
         }
 
+        /** eliminare le posizioni uguali
+        ArrayList<Position> posizioni = new ArrayList<>();
+        posizioni.add(new Position(1,2));
+        posizioni.add(new Position(1,2));
+        posizioni.add(new Position(1,3));
+        posizioni.add(new Position(1,3));
+        posizioni.add(new Position(1,4));
+        ArrayList<Position> posizioniFuse = g.mergeAdjacency(posizioni);
+        for(Position position : posizioniFuse)
+            msg+="|\t"+position.getRow()+", "+position.getCol()+"\t";
+        msg+="|";*/
         System.out.println(msg);
     }
 }

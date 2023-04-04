@@ -16,6 +16,7 @@ public class CommonGoal10 extends Cgoal{
     public CommonGoal10() {
         setDescription("common goal 10:five tiles of the same type forming an X\n");
         setIndex(10);
+        /*
         int i = ; // i che puo' essere (0,1,2)
         int j = i + 2;
         int u = i + 1;
@@ -27,7 +28,7 @@ public class CommonGoal10 extends Cgoal{
 
             myItemGoal[h][i] = myItemGoal[k][i] = myItemGoal[h][j] = myItemGoal[k][j] = myItemGoal[q][u];
 
-        }
+        }*/
     }
 
 }

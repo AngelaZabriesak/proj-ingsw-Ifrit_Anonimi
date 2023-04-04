@@ -53,9 +53,10 @@ public class CgoalFactory {
                 commonGoal.setGame(game);
                 return commonGoal;
             case 8:
-                commonGoal = new CommonGoal8();
-                commonGoal.setGame(game);
-                return commonGoal;
+                //commonGoal = new CommonGoal8();
+                //commonGoal.setGame(game);
+                //return commonGoal;
+                return null;
             case 9:
                 commonGoal = new CommonGoal9();
                 commonGoal.setGame(game);
