@@ -4,11 +4,11 @@ import it.polimi.ingsw.model.Bag.Item;
 import it.polimi.ingsw.model.Shelf;
 import it.polimi.ingsw.model.Token;
 
-// common goal 11:
-// five columns of increasing on decreasing height
-//starting from the first column on the left or the right
-// each next column must be made of exactly one more tile
-//tiles can be of any type
+/* common goal 11:
+                 five columns of increasing on decreasing height
+                 starting from the first column on the left or the right
+                 each next column must be made of exactly one more tile
+                 tiles can be of any type  */
 
 public class CommonGoal11 extends Cgoal{
 

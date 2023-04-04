@@ -4,9 +4,9 @@ import it.polimi.ingsw.model.Bag.Item;
 import it.polimi.ingsw.model.Shelf;
 import it.polimi.ingsw.model.Token;
 
-// common goal 0 :
-// six groups each containing at least 2 tiles of the same type,
-// the tiles pf one group can be different from those of another group
+/* common goal 0 :
+                    six groups each containing at least 2 tiles of the same type,
+                    the tiles pf one group can be different from those of another group */
 
 public class CommonGoal0 extends Cgoal{
 

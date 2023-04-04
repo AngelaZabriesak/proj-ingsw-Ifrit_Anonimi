@@ -5,9 +5,10 @@ import it.polimi.ingsw.model.Bag.Item;
 //import it.polimi.ingsw.model.Token;
 import it.polimi.ingsw.model.Shelf;
 
-//common goal 5:
-//eight tiles of the same type
-// There's no restriction about the position of these tiles
+/*  common goal 5:
+    eight tiles of the same type
+    There's no restriction about the position of these tiles */
+
 public class CommonGoal5 extends Cgoal{
 
     private static final int ROW = 6;

@@ -5,8 +5,8 @@ import it.polimi.ingsw.model.Bag.Item;
 import it.polimi.ingsw.model.Token;
 import it.polimi.ingsw.model.Shelf;
 
-// common goal 1:
-// four tiles of the same type in the four corners of the bookshelf
+/* common goal 1:
+ four tiles of the same type in the four corners of the bookshelf */
 
 public class CommonGoal1 extends Cgoal {
 

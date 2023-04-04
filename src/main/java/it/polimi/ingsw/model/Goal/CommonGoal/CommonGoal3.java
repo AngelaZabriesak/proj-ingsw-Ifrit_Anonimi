@@ -4,9 +4,9 @@ import it.polimi.ingsw.model.Bag.Item;
 import it.polimi.ingsw.model.Shelf;
 import it.polimi.ingsw.model.Token;
 
-// common goal 3:
-// two groups each containing 4 tiles of the same type in a 2x2 square.
-// the tiles of one square can be different from those of the other square.
+/* common goal 3:
+                   two groups each containing 4 tiles of the same type in a 2x2 square.
+                   the tiles of one square can be different from those of the other square. */
 
 
 public class CommonGoal3 extends Cgoal {

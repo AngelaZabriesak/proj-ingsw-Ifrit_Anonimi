@@ -4,8 +4,8 @@ import it.polimi.ingsw.model.Bag.Item;
 import it.polimi.ingsw.model.Shelf;
 import it.polimi.ingsw.model.Token;
 
-//common goal 6:
-//five tiles of the same type forming a diagonal
+/*  common goal 6:
+                     five tiles of the same type forming a diagonal   */
 
 public class CommonGoal6 extends Cgoal{
 

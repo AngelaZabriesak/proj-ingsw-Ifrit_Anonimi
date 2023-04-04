@@ -5,8 +5,8 @@ import it.polimi.ingsw.model.Token;
 import it.polimi.ingsw.model.Shelf;
 
 
-// common goal 8:
-// two columns each formed by 6 different types of tiles
+/* common goal 8:
+                   two columns each formed by 6 different types of tiles  */
 
 public class CommonGoal8 extends Cgoal{
 

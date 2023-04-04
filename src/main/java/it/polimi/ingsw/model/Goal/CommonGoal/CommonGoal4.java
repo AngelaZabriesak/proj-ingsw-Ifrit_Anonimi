@@ -5,9 +5,9 @@ import it.polimi.ingsw.model.Bag.Item;
 //import it.polimi.ingsw.model.Token;
 import it.polimi.ingsw.model.Shelf;
 
-// common goal 4:
-// three columns each formed by 6 tiles maximum three different types.
-// one column can show the same or a different combination of another column
+/* common goal 4:
+                 three columns each formed by 6 tiles maximum three different types.
+                 one column can show the same or a different combination of another column */
 
 public class CommonGoal4 extends Cgoal {
 

@@ -5,9 +5,11 @@ import it.polimi.ingsw.model.Bag.Item;
 import it.polimi.ingsw.model.Token;
 import it.polimi.ingsw.model.Shelf;
 
-// common goal 7:
-// four lines each formed by 5 tiles of maximum three different types
-// one line can show the same or a different combination of other line
+/* common goal 7:
+                  four lines each formed by 5 tiles of maximum three different types
+                  one line can show the same or a different combination of other line  */
+
+
 public class CommonGoal7 extends Cgoal{
 
     private static final int ROW = 6;
