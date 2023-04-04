@@ -17,29 +17,18 @@ public class CommonGoal10 extends Cgoal{
         setDescription("common goal 10:five tiles of the same type forming an X\n");
         setIndex(10);
 
-        /*
-        int i = ; / i che puo' essere (0,1,2)
-        int j = i + 2;
-        int u = i + 1;
-        int h;     // h che puo essere da (0,1,2,3)
-        int k = h + 2;
-        int q = h + 1;
-
-        if ((i = (0 | 1 | 2)) & (h = (0 | 1 | 2 | 3))) {
-
-            myItemGoal[h][i] = myItemGoal[k][i] = myItemGoal[h][j] = myItemGoal[k][j] = myItemGoal[q][u];
-
-        } */
         Item[][] myshelf = CShelf.getMyShelf();
 
-        for (int i=0; i<3; i++) {
-            for (int j = 0; j < 4; j++) {
-                if
-                (myshelf[j][i] == myshelf[j+1][i+1] &&
-                myshelf[j][i] == myshelf[j][i+2] &&
-                myshelf[j][i] == myshelf[j+2][i] &&
-                myshelf[j][i] == myshelf[j+2][i+2]) return true;
+        for (int i=0; i<=3; i++) {
+            for (int j = 0; j<=4; j++) {
+                if(
+                        (myshelf[j][i].getColor() != null) && myshelf[j][i].getColor() == myshelf[j][i+2].getColor()   &&
+                                                              myshelf[j][i].getColor() == myshelf[j+1][i+1].getColor() &&
+                                                              myshelf[j][i].getColor() == myshelf[j+2][i].getColor() &&
+                                                              myshelf[j][i].getColor() == myshelf[j+2][i+2].getColor()   )
+                 return true;
             }
+
         } return false;
 
     }

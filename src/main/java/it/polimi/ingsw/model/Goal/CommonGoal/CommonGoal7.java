@@ -76,9 +76,5 @@ public class CommonGoal7 extends Cgoal{
 
     }
 
-
-
-
-    }
-
 }
+
