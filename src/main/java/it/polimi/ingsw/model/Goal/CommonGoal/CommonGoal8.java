@@ -22,6 +22,8 @@ public class CommonGoal8 extends Cgoal{
         int numOfCond = 0;
         int j=0;
         for  (int i=0; i<COL;i++){
+           // if myshelf[i][j] is null, return false
+               return false;
            if
            (       myshelf[j][i] != myshelf[j+1][i] &&
                    myshelf[j][i] != myshelf[j+2][i] &&
