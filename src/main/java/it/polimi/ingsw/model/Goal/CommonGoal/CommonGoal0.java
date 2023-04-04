@@ -25,23 +25,15 @@ public class CommonGoal0 extends Cgoal{
         for (int i=0; i<ROW; i++){
             for (int j=0; j<COL; j++){
                 if
-                ((myshelf[i][j] != null) &&
-                ((myshelf[i][j] == myshelf[i+1][j]) ||
-                (myshelf[i][j] == myshelf[i][j+1])) &&
-                (myshelf[i][j] == myshelfcpy[i][j]))
+                ((myshelf[i][j].getColor() != null) &&
+                ((myshelf[i][j].getColor() == myshelf[i+1][j].getColor()) ||
+                (myshelf[i][j].getColor() == myshelf[i][j+1].getColor())) &&
+                (myshelf[i][j].getColor() == myshelfcpy[i][j].getColor()))
                 {numOfCond++;
                 myshelfcpy[i][j] = null;}
             }
         }
-        if (numOfCond==6) return true;
-        else return false;
+        return numOfCond == 6;
     }
-
-    /*public boolean CheckCondition() {
-        if (numOfCond>5) {
-            return true;
-        }
-        else return false;
-    }*/
 
 }

@@ -23,26 +23,25 @@ public class CommonGoal8 extends Cgoal{
         int j=0;
         for  (int i=0; i<COL;i++){
            // if myshelf[i][j] is null, return false
-               return false;
            if
-           (       myshelf[j][i] != myshelf[j+1][i] &&
-                   myshelf[j][i] != myshelf[j+2][i] &&
-                   myshelf[j][i] != myshelf[j+3][i] &&
-                   myshelf[j][i] != myshelf[j+4][i] &&
-                   myshelf[j][i] != myshelf[j+5][i] &&
-                   myshelf[j+1][i] != myshelf[j+2][i] &&
-                   myshelf[j+1][i] != myshelf[j+3][i] &&
-                   myshelf[j+1][i] != myshelf[j+4][i] &&
-                   myshelf[j+1][i] != myshelf[j+5][i] &&
-                   myshelf[j+2][i] != myshelf[j+3][i] &&
-                   myshelf[j+2][i] != myshelf[j+4][i] &&
-                   myshelf[j+2][i] != myshelf[j+5][i] &&
-                   myshelf[j+3][i] != myshelf[j+4][i] &&
-                   myshelf[j+3][i] != myshelf[j+5][i] &&
-                   myshelf[j+4][i] != myshelf[j+5][i])
-               numOfCond++;
+           (       myshelf[j][i].getColor() != myshelf[j+1][i].getColor() &&
+                   myshelf[j][i].getColor() != myshelf[j+2][i].getColor() &&
+                   myshelf[j][i].getColor() != myshelf[j+3][i].getColor() &&
+                   myshelf[j][i].getColor() != myshelf[j+4][i].getColor() &&
+                   myshelf[j][i].getColor() != myshelf[j+5][i].getColor() &&
+                   myshelf[j+1][i].getColor() != myshelf[j+2][i].getColor() &&
+                   myshelf[j+1][i].getColor() != myshelf[j+3][i].getColor() &&
+                   myshelf[j+1][i].getColor() != myshelf[j+4][i].getColor() &&
+                   myshelf[j+1][i].getColor() != myshelf[j+5][i].getColor() &&
+                   myshelf[j+2][i].getColor() != myshelf[j+3][i].getColor() &&
+                   myshelf[j+2][i].getColor() != myshelf[j+4][i].getColor() &&
+                   myshelf[j+2][i].getColor() != myshelf[j+5][i].getColor() &&
+                   myshelf[j+3][i].getColor() != myshelf[j+4][i].getColor() &&
+                   myshelf[j+3][i].getColor() != myshelf[j+5][i].getColor() &&
+                   myshelf[j+4][i].getColor() != myshelf[j+5][i].getColor())
+           {numOfCond++;}
         }
-        if (numOfCond>1) {return true;} else return false;
+        return numOfCond > 1;
 
     }
 
