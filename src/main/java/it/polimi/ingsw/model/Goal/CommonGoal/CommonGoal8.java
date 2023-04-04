@@ -15,23 +15,32 @@ public class CommonGoal8 extends Cgoal{
     private Item[][] myItemGoal = new Item[ROW][COL];
                      // for this goal >1 at the end
 
-    public CommonGoal8(Shelf CShelf){
+    public boolean CommonGoal8(Shelf CShelf){
         setDescription("common goal 8:two columns each formed by 6 different types of tiles\n");
         setIndex(8);
         Item[][] myshelf = CShelf.getMyShelf();
         int numOfCond = 0;
-        int i=0;
         int j=0;
-        do {
-            if(myshelf[i][j] == myshelf[i][j+1]) {
-                i++;
-            } else {
-                if(j==ROW)
-                    numOfCond++;
-                    j++;
-                }
-        } while (i<COL);
-
+        for  (int i=0; i<COL;i++){
+           if
+           (       myshelf[j][i] != myshelf[j+1][i] &&
+                   myshelf[j][i] != myshelf[j+2][i] &&
+                   myshelf[j][i] != myshelf[j+3][i] &&
+                   myshelf[j][i] != myshelf[j+4][i] &&
+                   myshelf[j][i] != myshelf[j+5][i] &&
+                   myshelf[j+1][i] != myshelf[j+2][i] &&
+                   myshelf[j+1][i] != myshelf[j+3][i] &&
+                   myshelf[j+1][i] != myshelf[j+4][i] &&
+                   myshelf[j+1][i] != myshelf[j+5][i] &&
+                   myshelf[j+2][i] != myshelf[j+3][i] &&
+                   myshelf[j+2][i] != myshelf[j+4][i] &&
+                   myshelf[j+2][i] != myshelf[j+5][i] &&
+                   myshelf[j+3][i] != myshelf[j+4][i] &&
+                   myshelf[j+3][i] != myshelf[j+5][i] &&
+                   myshelf[j+4][i] != myshelf[j+5][i])
+               numOfCond++;
+        }
+        if (numOfCond>1) {return true;} else return false;
 
     }
 
