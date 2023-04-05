@@ -28,7 +28,7 @@ public class CommonGoal5 extends Cgoal{
         int y = 0;   //n of elements yellow
         int a = 0;   //n of elements azure
 
-        for (int j = ROW-1; j <= 0; j--) {
+        for (int j = ROW-1; j >= 0; j--) {
             for (int i = 0; i < COL; i++) {
                 if (myshelf[j][i].getColor() == ColorItem.BLUE) {
                     b++;

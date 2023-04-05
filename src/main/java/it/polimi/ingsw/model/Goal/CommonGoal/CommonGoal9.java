@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.Goal.CommonGoal;
 
 import it.polimi.ingsw.model.Bag.Item;
-import it.polimi.ingsw.model.Token;
+//import it.polimi.ingsw.model.Token;
 import it.polimi.ingsw.model.Shelf;
 
 /* common goal 9:
@@ -34,7 +34,7 @@ public class CommonGoal9 extends Cgoal{
                     myshelf[j][i+3].getColor() != myshelf[j][i+4].getColor())
                 numOfCond++;
         }
-        if (numOfCond>1) {return true;} else return false;
+        return numOfCond > 1;
     }
 
 }

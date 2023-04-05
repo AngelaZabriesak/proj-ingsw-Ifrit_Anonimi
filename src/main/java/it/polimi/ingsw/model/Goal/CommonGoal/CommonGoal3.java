@@ -32,9 +32,10 @@ public class CommonGoal3 extends Cgoal {
                 (myshelf[i][j].getColor() == myshelfcpy[i][j].getColor()))
                 {numOfCond++;
                  myshelfcpy[i][j] = null;}
+                return numOfCond == 2;
             }
         }
-        return numOfCond == 2;
+        return false;
     }
 
 }

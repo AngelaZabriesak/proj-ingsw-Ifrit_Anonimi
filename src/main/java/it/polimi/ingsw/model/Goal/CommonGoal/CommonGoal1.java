@@ -13,11 +13,7 @@ public class CommonGoal1 extends Cgoal {
     public boolean CommonGoal1(Shelf CShelf) {
 
         Item[][] myshelf = CShelf.getMyShelf();
-        if ((myshelf[0][0].getColor()!= null) && (myshelf[0][0].getColor() == myshelf[0][4].getColor() && myshelf[0][0].getColor() == myshelf[5][4].getColor() && myshelf[0][0].getColor() == myshelf[5][0].getColor()) ){
 
-            return true;
-        } else {
-            return false;
-        }
+        return (myshelf[0][0].getColor() != null) && (myshelf[0][0].getColor() == myshelf[0][4].getColor() && myshelf[0][0].getColor() == myshelf[5][4].getColor() && myshelf[0][0].getColor() == myshelf[5][0].getColor());
     }
 }

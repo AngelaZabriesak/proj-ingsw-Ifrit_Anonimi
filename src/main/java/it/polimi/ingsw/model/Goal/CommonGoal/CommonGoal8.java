@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.Goal.CommonGoal;
 
 import it.polimi.ingsw.model.Bag.Item;
-import it.polimi.ingsw.model.Token;
+//import it.polimi.ingsw.model.Token;
 import it.polimi.ingsw.model.Shelf;
 
 

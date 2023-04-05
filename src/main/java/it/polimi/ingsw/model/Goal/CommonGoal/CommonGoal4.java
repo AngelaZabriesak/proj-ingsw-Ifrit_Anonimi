@@ -13,7 +13,7 @@ public class CommonGoal4 extends Cgoal {
 
     private static final int ROW = 6;
     private static final int COL = 5;
-    private Item[][] myItemGoal = new Item[ROW][COL];
+    private final Item[][] myItemGoal = new Item[ROW][COL];
     private int numOfCond = 0;                 // for this goal >2 at the end
 
     public boolean CommonGoal4(Shelf CShelf) {
@@ -27,7 +27,7 @@ public class CommonGoal4 extends Cgoal {
         int g = 0;   //n of elements green
         int y = 0;   //n of elements yellow
         int a = 0;   //n of elements azure
-        int sum=0;   // sum of the different colors in every col
+        int sum;   // sum of the different colors in every col
 
         for (int i = 0; i < COL; i++) {
             for (int j = 0; j < ROW; j++) {
@@ -65,10 +65,7 @@ public class CommonGoal4 extends Cgoal {
 
                     numOfCond++;}
         }
-           if(numOfCond>2){
-                     return true;}
-
-        return false;
+        return numOfCond > 2;
 
     }
 }
