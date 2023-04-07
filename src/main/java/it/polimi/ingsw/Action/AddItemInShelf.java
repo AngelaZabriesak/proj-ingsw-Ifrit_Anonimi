@@ -1,18 +1,15 @@
 package it.polimi.ingsw.Action;
 
-import it.polimi.ingsw.Exception.ActionException;
-import it.polimi.ingsw.Position;
+import it.polimi.ingsw.Exception.*;
+import it.polimi.ingsw.*;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.Bag.Item;
 import it.polimi.ingsw.model.Game.*;
-
-import java.util.ArrayList;
 
 public class AddItemInShelf implements Action{
     private final Game game;
     private final int chosenColumn;
     private final Player player;
-    private String description = "";
+    private final String description = "";
 
     public AddItemInShelf(Game game,int chosenColumn, Player player){
         this.game = game;
@@ -51,14 +48,10 @@ public class AddItemInShelf implements Action{
      * @return boolean
      */
     private boolean checkColumnValid(){
-        if(chosenColumn<0 || chosenColumn>4)
-            return false;
-        return true;
+        return chosenColumn >= 0 && chosenColumn <= 4;
     }
 
     private boolean checkColumnEmpty(){
-        if(player.getMyShelf().getFreeRowByColumn(chosenColumn)<player.getMyItem().size())
-            return false;
-        return true;
+        return player.getMyShelf().getFreeRowByColumn(chosenColumn) >= player.getMyItem().size();
     }
 }

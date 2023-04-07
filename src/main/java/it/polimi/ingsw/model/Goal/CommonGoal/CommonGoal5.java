@@ -16,6 +16,7 @@ public class CommonGoal5 extends Cgoal{
    // private Item[][] myItemGoal = new Item[ROW][COL];
 
 
+
     public boolean CommonGoal5(Shelf CShelf) {
         setDescription("common goal 5:eight tiles of the same type. There's no restriction about the position of these tiles\n");
         setIndex(5);

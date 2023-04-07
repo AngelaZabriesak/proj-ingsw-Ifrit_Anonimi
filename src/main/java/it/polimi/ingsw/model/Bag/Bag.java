@@ -2,12 +2,12 @@ package it.polimi.ingsw.model.Bag;
 
 public class Bag {
     private static final int SIZE = 6;
-    private static final int NUMITEM = 22;
-    private int[] numItem = new int[SIZE];
+    private static final int NUM_ITEM = 22;
+    private final int[] numItem = new int[SIZE];
 
     public Bag() {
         for(int i = 0; i<SIZE ; i++){
-            numItem[i] = NUMITEM;
+            numItem[i] = NUM_ITEM;
         }
     }
 

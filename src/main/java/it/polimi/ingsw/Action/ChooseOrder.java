@@ -53,9 +53,7 @@ public class ChooseOrder implements Action{
     }
 
     private boolean checkLenght() {
-        if(orderedPositionItem.size()==game.getCurrentPlayer().getMyItem().size())
-            return true;
-        return false;
+        return orderedPositionItem.size() == game.getCurrentPlayer().getMyItem().size();
     }
 
     private boolean checkItem(){
@@ -67,11 +65,10 @@ public class ChooseOrder implements Action{
         if(orderedPositionItem.size()==1)
             return true;
         if(orderedPositionItem.size()>1) {
-            if (orderedPositionItem.get(0) == orderedPositionItem.get(1))
+            if (orderedPositionItem.get(0).equals(orderedPositionItem.get(1)))
                 return false;
             if (orderedPositionItem.size() == 3) {
-                if (orderedPositionItem.get(1) == orderedPositionItem.get(2) && orderedPositionItem.get(0)==orderedPositionItem.get(2))
-                    return false;
+                return !orderedPositionItem.get(1).equals(orderedPositionItem.get(2)) || !orderedPositionItem.get(0).equals(orderedPositionItem.get(2));
             }
         }
         return true;

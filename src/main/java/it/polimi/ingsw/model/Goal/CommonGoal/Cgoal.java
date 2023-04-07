@@ -9,17 +9,10 @@ import java.util.*;
 public abstract class Cgoal extends Goal {
     private int index;
     private Game game;
-    private boolean used;
 
     private ArrayList<Token> tokens = new ArrayList<Token>();
 
-    public Cgoal(){
-        this.used = false;
-    }
-
-    public int getIndex() {
-        return index;
-    }
+    public Cgoal(){}
 
     public void setIndex(int index) {
         this.index = index;

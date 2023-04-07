@@ -1,8 +1,9 @@
 package it.polimi.ingsw;
 
 public class Position {
-    private int row;
-    private int col;
+    private final int row;
+    private final int col;
+    public boolean check = false;
 
     public Position(int row, int col){
         this.row=row;
@@ -14,5 +15,13 @@ public class Position {
     }
     public int getRow(){
         return row;
+    }
+
+    public boolean getCheck() {
+        return check;
+    }
+
+    public void setCheck(){
+        this.check = true;
     }
 }

@@ -2,7 +2,8 @@ package it.polimi.ingsw.model.Bag;
 
 
 public class Item {
-    private ColorItem type;
+    private final ColorItem type;
+    private boolean inGruppo = false;
 
     public Item(ColorItem type) {
         this.type = type;
@@ -12,9 +13,12 @@ public class Item {
         return type;
     }
 
+    public boolean getInGruppo(){
+        return inGruppo;
+    }
 
-    public void setItem(ColorItem c){
-        this.type = c;
+    public void setInGruppo(){
+        this.inGruppo=true;
     }
 
 }

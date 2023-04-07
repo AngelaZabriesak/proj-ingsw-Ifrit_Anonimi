@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model.Game;
 
-import it.polimi.ingsw.Action.Action;
+import it.polimi.ingsw.Action.*;
 import it.polimi.ingsw.Exception.*;
 import it.polimi.ingsw.Position;
 import it.polimi.ingsw.model.Bag.*;
@@ -12,26 +12,27 @@ import it.polimi.ingsw.model.Goal.PersonalGoal.*;
 import java.util.*;
 
 public class Game {
+    private ArrayList<Position>[] gruppo = new ArrayList[30];
+    private ArrayList<Position> nuovoGruppo;
     private static final int[] VALUE_TOKEN = {8,4,6,2};
     private static final int N_COMMON_GOAL = 2;
     private static final int N_PERSONAL_GOAL = 12;
     private final ArrayList<Player> players;
     private Player currentPlayer;
     private final ArrayList<Goal> personalGoal;
-    private final ArrayList<Goal> commonGoal;
     private final Board myBoard;
     private final Bag myBag;
     private Action action;
-    private final ArrayList<Cgoal> myGoal = new ArrayList<>();
-    private final ArrayList<Token> myToken = new ArrayList<>();
+    private final ArrayList<Goal> commonGoal;
+    private final ArrayList<Cgoal> myGoal;
 
     public Game(ArrayList<Player> players){
         this.players = players;
         // order the token scores from lower to higher
         int[] scores = new int[players.size()];
-        for(int i = 0; i< players.size(); i++)
-            scores[i]=VALUE_TOKEN[i];
+        System.arraycopy(VALUE_TOKEN, 0, scores, 0, players.size());
         Arrays.sort(scores);
+        ArrayList<Token> myToken = new ArrayList<>();
         for(int i = 0; i< players.size(); i++)
             myToken.add(new Token(scores[i]));
 
@@ -39,6 +40,7 @@ public class Game {
         myBag = new Bag();
         personalGoal = new ArrayList<>();
         commonGoal = new ArrayList<>();
+        myGoal = new ArrayList<>();
         for(int i = 0; i< N_PERSONAL_GOAL; i++) {
             personalGoal.add(PgoalFactory.getInstance().getPersonalGoal(i,this));
             commonGoal.add(CgoalFactory.getInstance().getCommonGoal(i,this));
@@ -72,10 +74,10 @@ public class Game {
     /**
      * manages the endgame by calculating each player's points
      */
-    public void endGame(){
+    public void endGame() throws WinException {
         for(Player p : players){
             if(p.getMyShelf().getNEmpty()==0){
-                new WinException(p.getNickname());
+                throw new WinException(p.getNickname());
             }
         }
     }
@@ -121,12 +123,10 @@ public class Game {
     /**
      * manage the action of the players
      */
-    public void setAction(Action myAction) throws ActionException {
+    public void setAction(Action myAction) {
         action = myAction;
     }
-    /**
-     *
-     */
+
     public void doAction() throws ActionException {
         action.execute();
     }
@@ -138,7 +138,9 @@ public class Game {
     /**
      * calculate the score of each player for every turn
      */
-    public void calcScore(){
+    public void calcScore(Player player){
+        ArrayList<Position>[] gruppi;
+        gruppi = creaGruppi(player);
         // do check_p_score later and delete the initialization of check_p_score
         // do the same with token_score1 and token_score_2 ( the c_card are assigned during the game)
 
@@ -194,6 +196,80 @@ public class Game {
         return myBag;
     }
 
+    public ArrayList<Position>[] creaGruppi(Player player){
+        Position primo;
+        int i=0;
+        for(int r =0; r<player.getMyShelf().getRow();r++){
+            for(int c=0; c<player.getMyShelf().getCol();c++) {
+                this.nuovoGruppo = new ArrayList<>();
+                if(player.getMyShelf().getMyShelf()[r][c]!=null){
+                    if (player.getMyShelf().getMyShelf()[r][c].getColor() != ColorItem.BLACK && !player.getMyShelf().getMyShelf()[r][c].getInGruppo()) {
+                        this.gruppo[i] = new ArrayList<>();
+                        primo = new Position(r, c);
+                        this.gruppo[i].add(primo);
+                        player.getMyShelf().getMyShelf()[r][c].setInGruppo();
+                        controllaVicini(player, primo);
+                        this.gruppo[i].addAll(this.nuovoGruppo);
+                        for (Position p : this.gruppo[i]) {
+                            player.getMyShelf().getMyShelf()[r][c] = new Item(ColorItem.BLACK);
+                        }
+                        i++;
+                    }
+                }
+            }
+        }
+        return this.gruppo;
+    }
+
+    private int controllaVicini(Player player,Position primo){
+        ArrayList<Position> gruppo = new ArrayList<>();
+        primo.setCheck();
+        int adiacenze =0;
+        if(primo.getRow()<5 && player.getMyShelf().getMyShelf()[primo.getRow()+1][primo.getCol()]!=null) {
+            if(player.getMyShelf().getMyShelf()[primo.getRow()][primo.getCol()].getColor()==player.getMyShelf().getMyShelf()[primo.getRow()+1][primo.getCol()].getColor()){
+                if (!player.getMyShelf().getMyShelf()[primo.getRow() + 1][primo.getCol()].getInGruppo()) {
+                    gruppo.add(new Position(primo.getRow() + 1, primo.getCol()));
+                    adiacenze++;
+                    player.getMyShelf().getMyShelf()[primo.getRow() + 1][primo.getCol()].setInGruppo();
+                    controllaVicini(player, new Position(primo.getRow() + 1, primo.getCol()));
+                }
+            }
+        }
+        if(primo.getRow()>0 && player.getMyShelf().getMyShelf()[primo.getRow()-1][primo.getCol()]!=null) {
+            if(player.getMyShelf().getMyShelf()[primo.getRow()][primo.getCol()].getColor()==player.getMyShelf().getMyShelf()[primo.getRow()-1][primo.getCol()].getColor()){
+                if (!player.getMyShelf().getMyShelf()[primo.getRow() - 1][primo.getCol()].getInGruppo()) {
+                    gruppo.add(new Position(primo.getRow() - 1, primo.getCol()));
+                    adiacenze++;
+                    player.getMyShelf().getMyShelf()[primo.getRow() - 1][primo.getCol()].setInGruppo();
+                    controllaVicini(player, new Position(primo.getRow() - 1, primo.getCol()));
+                }
+            }
+        }
+        if(primo.getCol()<4 && player.getMyShelf().getMyShelf()[primo.getRow()][primo.getCol()+1]!=null){
+            if(player.getMyShelf().getMyShelf()[primo.getRow()][primo.getCol()].getColor()==player.getMyShelf().getMyShelf()[primo.getRow()][primo.getCol()+1].getColor()){
+                if(!player.getMyShelf().getMyShelf()[primo.getRow()][primo.getCol()+1].getInGruppo()){
+                    gruppo.add(new Position(primo.getRow(), primo.getCol()+1));
+                    adiacenze++;
+                    player.getMyShelf().getMyShelf()[primo.getRow()][primo.getCol()+1].setInGruppo();
+                    controllaVicini(player,new Position(primo.getRow(), primo.getCol() + 1));
+                }
+            }
+        }
+        if(primo.getCol()>0 && player.getMyShelf().getMyShelf()[primo.getRow()][primo.getCol()-1]!=null){
+            if(player.getMyShelf().getMyShelf()[primo.getRow()][primo.getCol()].getColor()==player.getMyShelf().getMyShelf()[primo.getRow()][primo.getCol()-1].getColor()) {
+                if (!player.getMyShelf().getMyShelf()[primo.getRow()][primo.getCol() - 1].getInGruppo()) {
+                    gruppo.add(new Position(primo.getRow(), primo.getCol() - 1));
+                    adiacenze++;
+                    player.getMyShelf().getMyShelf()[primo.getRow()][primo.getCol() - 1].setInGruppo();
+                    controllaVicini(player, new Position(primo.getRow(), primo.getCol() - 1));
+                }
+            }
+        }
+        this.nuovoGruppo.addAll(gruppo);
+        return adiacenze;
+    }
+
+/**
     public ArrayList<ArrayList<Position>> raggruppaPerColore(Shelf myShelf){
         ArrayList<Position> group = null;
         ArrayList<ArrayList<Position>> groupColor = new ArrayList<>();
@@ -209,54 +285,9 @@ public class Game {
         }
         return groupColor;
     }
-    public ArrayList<ArrayList<Position>> raggruppaPerAdiacenza(ArrayList<Position> groupColor){
-        ArrayList<Position> adiacenzaColore= new ArrayList<>();
-        ArrayList<ArrayList<Position>> nuovoListAdiacenza = new ArrayList<>();
-        ArrayList<ArrayList<Position>> nuovoListAdiacenzaMerged = new ArrayList<>();
-        // adiacenzaColore.add(groupColor.get(0));
-        for(int l=0;l<groupColor.size();l++){
-            adiacenzaColore.add(groupColor.get(l));
-            for(int i =l+1;i<groupColor.size();i++){
-                if(distanzaFraPosition(groupColor.get(l),groupColor.get(i))==1) {
-                    adiacenzaColore.add(groupColor.get(i));
-                }
-                //nuovoListAdiacenza.add(adiacenzaColore);
-                /*for(Position position : adiacenzaColore)
-                    adiacenzaColore.remove(position);*/
-            }
-            nuovoListAdiacenza.add(adiacenzaColore);
+   */
 
-        }
-        for(ArrayList<Position> daFondere : nuovoListAdiacenza){
-            nuovoListAdiacenzaMerged.add(mergeAdjacency(daFondere));
-        }
-        return nuovoListAdiacenzaMerged;
-        //return adiacenzaColore;
-    }
 
-    private int distanzaFraPosition(Position prima, Position seconda){
-        int dist =0;
-        int distRig = prima.getRow() - seconda.getRow();
-        int distCol = prima.getCol() - seconda.getCol();
-        dist+=Math.sqrt(Math.pow(distRig,2)+Math.pow(distCol,2));
-        return dist;
-    }
-
-    private ArrayList<Position> mergeAdjacency(ArrayList<Position> daFondere){
-        ArrayList<Position> fuso = new ArrayList<>();
-        // elenco di input con duplicati
-        ArrayList<String> listWithDuplicates = new ArrayList<>();
-        for(Position position : daFondere){
-            listWithDuplicates.add(position.getRow()+" "+position.getCol());
-        }
-        // costruisce un set dagli elementi della lista
-        Set<String> set = new LinkedHashSet<>(listWithDuplicates);
-        // costruisce una nuova lista da un set e la stampa
-        ArrayList<String> listWithoutDuplicates = new ArrayList<>(set);
-        for(String string : listWithoutDuplicates)
-            fuso.add(new Position(Integer.valueOf(string.split(" ")[0]),Integer.valueOf(string.split(" ")[1])));
-        return fuso;
-    }
     public static void main(String[] args) {
         Player p0 = new Player("0");
         Player p1 = new Player("1");
@@ -270,7 +301,7 @@ public class Game {
         Game g = new Game(p);
         String msg = "";
         g.initialize();
-        /*for(int r=0;r<9;r++){
+        for(int r=0;r<9;r++){
             for(int c=0;c<9;c++){
                 if(g.myBoard.getItem(new Position(r,c))!=null)
                     msg+="|\t"+g.myBoard.getItem(new Position(r,c)).getColor()+"" +
@@ -294,63 +325,41 @@ public class Game {
             for(Token t : cg.getMyTokens())
                 msg += t.getScore()+"\t";
             msg+= "\n";
-        }*/
-        for (int c = 0; c < 5; c++) {
+        }
+        /**
+         * Riempimento shelf
+         */
+        for (int c = 0; c < p0.getMyShelf().getCol(); c++) {
             p0.setMyItem(new Item(ColorItem.GREEN));
             p0.setMyItem(new Item(ColorItem.YELLOW));
-            p0.setMyItem(new Item(ColorItem.GREEN));
+            p0.setMyItem(new Item(ColorItem.AZURE));
             p0.setItemInShelf(c);
             p0.setMyItem(new Item(ColorItem.BLUE));
             p0.setMyItem(new Item(ColorItem.PINK));
-            p0.setMyItem(new Item(ColorItem.BLUE));
+            p0.setMyItem(new Item(ColorItem.WHITE));
             p0.setItemInShelf(c);
         }
         /**
          * visualizzazione shelf
          */
         for (int r = 0; r < p0.getMyShelf().getRow(); r++) {
-            for (int c = 0; c < p0.getMyShelf().getCol(); c++)
-                msg += "|\t" + p0.getMyShelf().getMyShelf()[r][c].getColor() + "\t";
+            for (int c = 0; c < p0.getMyShelf().getCol(); c++) {
+                if(p0.getMyShelf().getMyShelf()[r][c]!=null)
+                    msg += "|\t" + p0.getMyShelf().getMyShelf()[r][c].getColor() + "\t";
+                else
+                    msg+="|\tnull\t";
+            }
             msg += "|\n";
         }
-        /**
-         * visualizzazione raggruppamento per colore
-         */
-        ArrayList<ArrayList<Position>> coloriRaggruppati = new ArrayList<>(g.raggruppaPerColore(p0.getMyShelf()));
-        for (ArrayList<Position> listeColoriRaggruppati : coloriRaggruppati){
-            for (Position position : listeColoriRaggruppati)
-                msg += "|\t" + position.getRow() + "," + position.getCol() + "\t";
-            msg+="|\n";
-        }
-        /**
-         * visualizzazione array raggruppati
-         */
-        for(ArrayList<Position> listeColoriRaggruppati : coloriRaggruppati){
-            ArrayList<Position> adiacenze;
-            if(listeColoriRaggruppati.size()!=0) {
-                adiacenze = new ArrayList<>();
-                for(ArrayList<Position> merged : g.raggruppaPerAdiacenza(listeColoriRaggruppati)) {
-                    for (Position position : merged)
-                        adiacenze.add(position);
-                }
-                for(Position position : adiacenze){
-                    msg+="|\t"+position.getRow()+", "+position.getCol()+"\t";
-                }
+        for(ArrayList<Position> position : g.creaGruppi(p0)){
+            if(position!=null) {
+                msg+="dim: "+position.size()+"\t";
+                for (Position pos : position)
+                    msg += "|\t" + pos.getRow() + ", " + pos.getCol() + "\t";
                 msg+="|\n";
             }
         }
 
-        /** eliminare le posizioni uguali
-        ArrayList<Position> posizioni = new ArrayList<>();
-        posizioni.add(new Position(1,2));
-        posizioni.add(new Position(1,2));
-        posizioni.add(new Position(1,3));
-        posizioni.add(new Position(1,3));
-        posizioni.add(new Position(1,4));
-        ArrayList<Position> posizioniFuse = g.mergeAdjacency(posizioni);
-        for(Position position : posizioniFuse)
-            msg+="|\t"+position.getRow()+", "+position.getCol()+"\t";
-        msg+="|";*/
         System.out.println(msg);
     }
 }

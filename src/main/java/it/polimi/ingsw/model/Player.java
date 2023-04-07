@@ -1,21 +1,19 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.Position;
-import it.polimi.ingsw.model.Bag.ColorItem;
-import it.polimi.ingsw.model.Bag.Item;
-import it.polimi.ingsw.model.Goal.Goal;
+import it.polimi.ingsw.*;
+import it.polimi.ingsw.model.Bag.*;
+import it.polimi.ingsw.model.Goal.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class Player {
-    private Shelf myShelf;
-    private String nickname;
+    private final Shelf myShelf;
+    private final String nickname;
     private Goal myGoal;
     private int myScore;
-    private ArrayList<Item> myItem;
+    private final ArrayList<Item> myItem;
     private Goal cGoal;
-    private ArrayList<Position> myPosition = new ArrayList<>();
+    private final ArrayList<Position> myPosition = new ArrayList<>();
 
     public Player(String nickname){
         this.nickname = nickname;
@@ -56,7 +54,6 @@ public class Player {
 
     /**
      * set the item chose
-     * @param chosenItem
      */
     public void setMyItem(Item chosenItem) {
         myItem.add(chosenItem);
@@ -78,7 +75,7 @@ public class Player {
         boolean ok;
         for(Item i : myItem) {
             ok = false;
-            for(int r=myShelf.getRow()-1; r>-1 && ok!=true; r--){
+            for(int r = myShelf.getRow()-1; r>-1 && !ok; r--){
                 if (myShelf.getMyShelf()[r][col] == null) {
                     myShelf.setMyShelf(new Position(r,col),i);
                     ok = true;

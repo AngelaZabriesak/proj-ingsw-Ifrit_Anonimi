@@ -1,12 +1,10 @@
 package it.polimi.ingsw.Action;
 
 import it.polimi.ingsw.Exception.*;
-import it.polimi.ingsw.Position;
+import it.polimi.ingsw.*;
 import it.polimi.ingsw.model.Bag.*;
 import it.polimi.ingsw.model.Game.*;
 import it.polimi.ingsw.model.*;
-
-import java.util.*;
 
 public class ChooseItem implements Action {
     private final Game game;
@@ -54,14 +52,10 @@ public class ChooseItem implements Action {
     }
 
     private boolean checkRowCol(){
-        if(chosenRow>0 && chosenRow<game.getBoard().getRow() && chosenColumn>0 && chosenColumn<game.getBoard().getCol())
-            return true;
-        return false;
+        return chosenRow > 0 && chosenRow < game.getBoard().getRow() && chosenColumn > 0 && chosenColumn < game.getBoard().getCol();
     }
 
     private boolean checkAdjacency(){
-        if(game.getBoard().getAdjacency(new Position(chosenRow,chosenColumn))>0 && game.getBoard().getAdjacency(new Position(chosenRow,chosenColumn))<4)
-            return true;
-        return false;
+        return game.getBoard().getAdjacency(new Position(chosenRow, chosenColumn)) > 0 && game.getBoard().getAdjacency(new Position(chosenRow, chosenColumn)) < 4;
     }
 }

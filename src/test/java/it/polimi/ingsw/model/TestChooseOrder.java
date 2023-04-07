@@ -7,7 +7,6 @@ import it.polimi.ingsw.Position;
 import it.polimi.ingsw.model.Game.*;
 import org.junit.jupiter.api.*;
 
-import java.io.*;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +16,7 @@ public class TestChooseOrder {
     private static Game game;
 
     @BeforeAll
-    public static void init() throws IOException {
+    public static void init(){
         ArrayList<Player> players = new ArrayList<>();
         players.add(new Player("0"));
         players.add(new Player("1"));

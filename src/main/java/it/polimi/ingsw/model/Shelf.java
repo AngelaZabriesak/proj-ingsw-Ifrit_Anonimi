@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.Bag.*;
 public class Shelf {
     private static final int ROW = 6;
     private static final int COL = 5;
-    private Item myShelf[][] = new Item[ROW][COL];
+    private final Item[][] myShelf = new Item[ROW][COL];
 
     public int getFreeRowByColumn(int col){
         int free=0;

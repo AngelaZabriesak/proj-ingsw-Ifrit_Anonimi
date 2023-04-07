@@ -1,8 +1,7 @@
 package it.polimi.ingsw.model.Game;
 
-import it.polimi.ingsw.Position;
+import it.polimi.ingsw.*;
 import it.polimi.ingsw.model.Bag.*;
-import java.util.*;
 
 /**
  * 0 = 0 side of the cell are free
@@ -17,8 +16,8 @@ import java.util.*;
 public class Board {
     private static final int ROW = 9;
     private static final int COL = 9;
-    private int myBoardAdjacency[][];
-    private Item myBoardItem[][];
+    private final int[][] myBoardAdjacency;
+    private final Item[][] myBoardItem;
 
     public Board() {
         myBoardAdjacency = new int[ROW][COL];

@@ -5,7 +5,7 @@ public enum ActionType {
     ADDING("ADDING"), //ADD ITEM IN SHELF
     CHOSE("CHOSE"),   //CHOOSE ITEM TO ADD
     ENDGAME("ENDGAME");
-    private String abbreviation;
+    private final String abbreviation;
 
     ActionType(String abbreviation){
         this.abbreviation=abbreviation;

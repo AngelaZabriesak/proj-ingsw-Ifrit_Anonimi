@@ -4,7 +4,7 @@ package it.polimi.ingsw.model;
 
 public class Token {
 
-    private int score;
+    private final int score;
 
     public Token(int score){
         this.score = score;

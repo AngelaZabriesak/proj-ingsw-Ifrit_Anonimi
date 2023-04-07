@@ -7,21 +7,9 @@ import it.polimi.ingsw.model.Goal.*;
 import java.util.*;
 
 public abstract class Pgoal extends Goal {
-    private int index;
     private Game game;
-    private boolean used;
 
-    public Pgoal(){
-        this.used = false;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
+    public Pgoal(){}
 
     public void setGame(Game game) {
         this.game = game;
@@ -29,14 +17,6 @@ public abstract class Pgoal extends Goal {
 
     public Game getGame() {
         return game;
-    }
-
-    public boolean isUsed() {
-        return used;
-    }
-
-    public void setUsed(boolean used) {
-        this.used = used;
     }
 
     private int[] scores = {0,2,4,6,9,12};
