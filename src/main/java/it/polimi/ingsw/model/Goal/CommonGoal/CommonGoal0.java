@@ -47,7 +47,7 @@ eventualmente quella giusta, aggiustare il return, assicurarsi che si possano ve
     }
 
     @Override
-    boolean isTaken(Shelf myShelf) {
+    public boolean isTaken(Shelf myShelf) {
         return false;
     }
 }
