@@ -15,33 +15,31 @@ public class CommonGoal5 extends Cgoal {
     private static final int COL = 5;
 
 
-    public  CommonGoal5() {
+    public CommonGoal5() {
         setDescription("common goal 5:eight tiles of the same type. There's no restriction about the position of these tiles\n");
         setIndex(5);
     }
 
 
+    @Override
+    public boolean isTaken(Shelf myShelf) {
+        Item[][] myshelf = myShelf.getMyShelf();
+        ArrayList<Position> group = null;
+        ArrayList<ArrayList<Position>> groupColor = new ArrayList<>();
 
-        @Override
-        public boolean isTaken(Shelf myShelf) {
-            Item[][] myshelf = myShelf.getMyShelf();
-            ArrayList<Position> group = null;
-            ArrayList<ArrayList<Position>> groupColor = new ArrayList<>();
-
-            for (ColorItem ci : ColorItem.values()) {   // comprende anche il nero quindi la dimensione di groupColor è 7new ArrayList<>();
-                group = new ArrayList<>();
-                for (int r = 0; r < myShelf.getRow(); r++) {
-                    for (int c = 0; c < myShelf.getCol(); c++) {
-                        if (myShelf.getMyShelf()[r][c].getColor().equals(ci))
-                            group.add(new Position(r, c));
+        for (ColorItem ci : ColorItem.values()) {   // comprende anche il nero quindi la dimensione di groupColor è 7new ArrayList<>();
+            group = new ArrayList<>();
+            for (int r = 0; r < myShelf.getRow(); r++) {
+                for (int c = 0; c < myShelf.getCol(); c++) {
+                    if (myShelf.getMyShelf()[r][c].getColor().equals(ci)) {
+                        group.add(new Position(r, c));
                     }
                 }
-                group.size();
             }
 
-            return group.size() == 8;
         }
-
+        return group.size() == 8;
+    }
 }
 
 
