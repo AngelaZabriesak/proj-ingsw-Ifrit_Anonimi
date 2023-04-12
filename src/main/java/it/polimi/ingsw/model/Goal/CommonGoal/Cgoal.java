@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.Goal.CommonGoal;
 
+import it.polimi.ingsw.model.Bag.Item;
 import it.polimi.ingsw.model.Game.*;
 import it.polimi.ingsw.model.Goal.*;
 import it.polimi.ingsw.model.*;
@@ -10,7 +11,7 @@ public abstract class Cgoal extends Goal {
     private int index;
     private Game game;
 
-    private ArrayList<Token> tokens = new ArrayList<Token>();
+    private ArrayList<Token> tokens = new ArrayList<>();
 
     public Cgoal(){}
 
@@ -42,5 +43,11 @@ public abstract class Cgoal extends Goal {
         }
         return t;
     }
+
+    public Item[][] getGoal(){
+        return null;
+    }
+
+    public abstract boolean isTaken(Shelf myShelf);
 
 }

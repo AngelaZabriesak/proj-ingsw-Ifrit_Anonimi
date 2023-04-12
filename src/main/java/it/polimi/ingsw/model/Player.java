@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.*;
 import it.polimi.ingsw.model.Bag.*;
 import it.polimi.ingsw.model.Goal.*;
 
@@ -10,7 +9,7 @@ public class Player {
     private final Shelf myShelf;
     private final String nickname;
     private Goal myGoal;
-    private int myScore;
+    private int myScore = 0;
     private final ArrayList<Item> myItem;
     private Goal cGoal;
     private final ArrayList<Position> myPosition = new ArrayList<>();
@@ -45,7 +44,6 @@ public class Player {
     public Goal getcGoal() {
         return cGoal;
     }
-
 
     // return the player score
     public int getMyScore() {
@@ -90,6 +88,13 @@ public class Player {
         myPosition.clear();
     }
 
+    public void setMyScore(int myScore){
+        this.myScore = myScore;
+    }
+
+    public void addMyScore(int score){
+        this.myScore+=score;
+    }
 
 }
 

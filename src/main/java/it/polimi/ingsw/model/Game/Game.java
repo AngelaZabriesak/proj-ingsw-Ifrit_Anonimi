@@ -2,28 +2,27 @@ package it.polimi.ingsw.model.Game;
 
 import it.polimi.ingsw.Action.*;
 import it.polimi.ingsw.Exception.*;
-import it.polimi.ingsw.Position;
+import it.polimi.ingsw.model.Position;
 import it.polimi.ingsw.model.Bag.*;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.Goal.*;
 import it.polimi.ingsw.model.Goal.CommonGoal.*;
 import it.polimi.ingsw.model.Goal.PersonalGoal.*;
 
 import java.util.*;
 
 public class Game {
-    private ArrayList<Position>[] gruppo = new ArrayList[30];
+    private final ArrayList<Position>[] gruppo = new ArrayList[30];
     private ArrayList<Position> nuovoGruppo;
     private static final int[] VALUE_TOKEN = {8,4,6,2};
     private static final int N_COMMON_GOAL = 2;
     private static final int N_PERSONAL_GOAL = 12;
     private final ArrayList<Player> players;
     private Player currentPlayer;
-    private final ArrayList<Goal> personalGoal;
+    private final ArrayList<Pgoal> personalGoal;
     private final Board myBoard;
     private final Bag myBag;
     private Action action;
-    private final ArrayList<Goal> commonGoal;
+    private final ArrayList<Cgoal> commonGoal;
     private final ArrayList<Cgoal> myGoal;
 
     public Game(ArrayList<Player> players){
@@ -35,7 +34,6 @@ public class Game {
         ArrayList<Token> myToken = new ArrayList<>();
         for(int i = 0; i< players.size(); i++)
             myToken.add(new Token(scores[i]));
-
         myBoard = new Board();
         myBag = new Bag();
         personalGoal = new ArrayList<>();
@@ -46,9 +44,8 @@ public class Game {
             commonGoal.add(CgoalFactory.getInstance().getCommonGoal(i,this));
         }
         for(int i = 0; i<N_COMMON_GOAL; i++) {
-            myGoal.add((Cgoal) getRandomGoal(commonGoal));
+            myGoal.add(getRandomCGoal(commonGoal));
             myGoal.get(i).setToken(myToken);
-            //myGoal.add(getRandomGoal(personalGoal));
         }
         orderPlayer();
     }
@@ -60,7 +57,7 @@ public class Game {
         fillBoard();
         myBoard.setMyBoardAdjacency();
         for(Player p : players){
-            p.setMyGoal(getRandomGoal(personalGoal));
+            p.setMyGoal(getRandomPGoal(personalGoal));
         }
     }
 
@@ -74,12 +71,36 @@ public class Game {
     /**
      * manages the endgame by calculating each player's points
      */
-    public void endGame() throws WinException {
+    public void endGame(){
+        // add 1 to score of the first player who have fill the shelf for first
+        currentPlayer.addMyScore(1);
+        while(!currentPlayer.equals(players.get(0))) {
+            nextPlayer();
+            // scegli item, se c'è da riempire plancia riempi, posiziona item in shelf
+        }
         for(Player p : players){
-            if(p.getMyShelf().getNEmpty()==0){
-                throw new WinException(p.getNickname());
+            calcScore(p);
+        }
+    }
+
+    private void nextPlayer(){
+        int pos = players.indexOf(currentPlayer);
+        if(pos== players.size()-1)
+            pos=0;
+        else
+            pos++;
+        currentPlayer = players.get(pos);
+    }
+
+    public void refillBoard() {
+        for (int r = 0; r < myBoard.getRow(); r++) {
+            for (int c = 0; c < myBoard.getCol(); c++) {
+                if (myBoard.getMyBoardItem()[r][c] == null) {
+                    myBoard.getMyBoardItem()[r][c] = new Item(myBag.getItem().getColor());
+                }
             }
         }
+        myBoard.setMyBoardAdjacency();
     }
 
     /**
@@ -88,14 +109,16 @@ public class Game {
     public void fillBoard(){
         for(int r=0; r< myBoard.getRow(); r++){
             for(int c=0; c< myBoard.getCol(); c++){
-                if(r==0 || r==myBoard.getRow()-1 || c==0 || c==myBoard.getCol()-1)
-                    myBoard.getMyBoardItem()[r][c] = new Item(ColorItem.BLACK);
-                if(((r==1 || r==2) && (c==1 || c==2 || c==myBoard.getCol()-3 || c==myBoard.getCol()-2 )) || ((r==myBoard.getRow()-2 || r==myBoard.getRow()-3) && (c==1 || c==2 || c==myBoard.getCol()-3 || c==myBoard.getCol()-2 )))
-                    myBoard.getMyBoardItem()[r][c] = new Item(ColorItem.BLACK);
-                if((r==3 && c==1) ||(r==1 && c==5) ||(r==5 && c==myBoard.getCol()-2) ||(r==myBoard.getRow()-2 && c==3))
-                    myBoard.getMyBoardItem()[r][c] = new Item(ColorItem.BLACK);
-                else if(myBoard.getMyBoardItem()[r][c]==null /*||myBoard.getMyBoardItem()[r][c].getColor()==ColorItem.BLACK*/)
-                    myBoard.getMyBoardItem()[r][c] = new Item(myBag.getItem().getColor());
+                if(myBoard.getMyBoardItem()[r][c] == null) {
+                    if (r == 0 || r == myBoard.getRow() - 1 || c == 0 || c == myBoard.getCol() - 1)
+                        myBoard.getMyBoardItem()[r][c] = new Item(ColorItem.BLACK);
+                    if (((r == 1 || r == 2) && (c == 1 || c == 2 || c == myBoard.getCol() - 3 || c == myBoard.getCol() - 2)) || ((r == myBoard.getRow() - 2 || r == myBoard.getRow() - 3) && (c == 1 || c == 2 || c == myBoard.getCol() - 3 || c == myBoard.getCol() - 2)))
+                        myBoard.getMyBoardItem()[r][c] = new Item(ColorItem.BLACK);
+                    if ((r == 3 && c == 1) || (r == 1 && c == 5) || (r == 5 && c == myBoard.getCol() - 2) || (r == myBoard.getRow() - 2 && c == 3))
+                        myBoard.getMyBoardItem()[r][c] = new Item(ColorItem.BLACK);
+                    else if (myBoard.getMyBoardItem()[r][c] == null /*||myBoard.getMyBoardItem()[r][c].getColor()==ColorItem.BLACK*/)
+                        myBoard.getMyBoardItem()[r][c] = new Item(myBag.getItem().getColor());
+                }
             }
         }
         if(players.size()>2){
@@ -139,8 +162,7 @@ public class Game {
      * calculate the score of each player for every turn
      */
     public void calcScore(Player player){
-        ArrayList<Position>[] gruppi;
-        gruppi = creaGruppi(player);
+        ArrayList<Position>[] gruppi = creaGruppi(player);
         // do check_p_score later and delete the initialization of check_p_score
         // do the same with token_score1 and token_score_2 ( the c_card are assigned during the game)
 
@@ -148,30 +170,63 @@ public class Game {
         int token_score1=0;
         int token_score2=0;
         int p_score;
-        int myScore;
+        int myScore = player.getMyScore();
 
         int[] p_points = new int[7];
         p_points[0] = 0;
-        p_points[1] = 1 ;
+        p_points[1] = 1;
         p_points[2] = 2;
         p_points[3] = 4;
         p_points[4] = 6;
         p_points[5] = 9;
         p_points[6] = 12;
 
+        for(ArrayList<Position> gruppo : gruppi){
+            if(gruppo.size()==3)
+                myScore+=2;
+            if(gruppo.size()==4)
+                myScore+=3;
+            if(gruppo.size()==5)
+                myScore+=5;
+            if (gruppo.size()>=6)
+                myScore+=8;
+        }
+
+        for(int r =0; r<player.getMyShelf().getRow(); r++){
+            for(int c=0; c<player.getMyShelf().getCol(); c++){
+                if(player.getMyShelf().getMyShelf()[r][c]!=null){
+                    if(player.getMyShelf().getMyShelf()[r][c].getColor().equals((player.getMyGoal().getGoal()[r][c].getColor())))
+                        check_p_score+=1;
+                }
+            }
+        }
+
         p_score= p_points[check_p_score];
 
-        myScore= p_score+token_score1+token_score2;
+        myScore+= p_score+token_score1+token_score2;
+        player.setMyScore(myScore);
     }
 
     /**
-     * @param myGoals is the array of goals enables (personal/common)
+     * @param myGoals is the array of personal goals enables
      * @return the random goal
      */
-    public Goal getRandomGoal(ArrayList<Goal> myGoals){
+    public Pgoal getRandomPGoal(ArrayList<Pgoal> myGoals){
         double doublepos = Math.random()* myGoals.size();
         int pos = (int) doublepos;
-        Goal myGoal = myGoals.get(pos);
+        Pgoal myGoal = myGoals.get(pos);
+        myGoals.remove(pos);
+        return myGoal;
+    }
+
+    /**
+     * @param myGoals is the array of common goals enables
+     * @return the random goal
+     */
+    public Cgoal getRandomCGoal(ArrayList<Cgoal> myGoals){
+        double doublepos = Math.random()* myGoals.size();
+        int pos = (int) doublepos;
+        Cgoal myGoal = myGoals.get(pos);
         myGoals.remove(pos);
         return myGoal;
     }
@@ -192,10 +247,19 @@ public class Game {
         return players;
     }
 
+    public ArrayList<Cgoal> getCGoal(){
+        return commonGoal;
+    }
+
     public Bag getBag(){
         return myBag;
     }
 
+    /**
+     * metodo che raggruppa gli item inseriti nella shelf in base al colore
+     * @param player il player la cui libreria è da controllare
+     * @return un array in cui vengono memorizzate le liste di posizioni
+     */
     public ArrayList<Position>[] creaGruppi(Player player){
         Position primo;
         int i=0;
@@ -221,6 +285,12 @@ public class Game {
         return this.gruppo;
     }
 
+    /**
+     * metodo che controlla i vicini di un item nella libreria
+     * @param player il player la cui libreria è da controllare
+     * @param primo il primo item che si trova scorrendo la shelf
+     * @return un intero che serve per controllare il numero di vicini che ha un item
+     */
     private int controllaVicini(Player player,Position primo){
         ArrayList<Position> gruppo = new ArrayList<>();
         primo.setCheck();
@@ -286,7 +356,6 @@ public class Game {
         return groupColor;
     }
    */
-
 
     public static void main(String[] args) {
         Player p0 = new Player("0");

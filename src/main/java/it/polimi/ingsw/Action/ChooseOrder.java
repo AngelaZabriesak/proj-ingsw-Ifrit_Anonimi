@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Action;
 
 import it.polimi.ingsw.Exception.*;
-import it.polimi.ingsw.Position;
+import it.polimi.ingsw.model.Position;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.Bag.*;
 import it.polimi.ingsw.model.Game.Game;

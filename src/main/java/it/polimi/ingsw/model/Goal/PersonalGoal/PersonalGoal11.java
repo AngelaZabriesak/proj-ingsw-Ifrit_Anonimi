@@ -5,9 +5,10 @@ import it.polimi.ingsw.model.Bag.*;
 public class PersonalGoal11 extends Pgoal{
     private static final int ROW = 6;
     private static final int COL = 5;
-    private Item[][] myItemGoal = new Item[ROW][COL];
 
+    private Item[][] myItemGoal = new Item[ROW][COL];
     public PersonalGoal11(){
+        super();
         setDescription("personal goal 11");
         myItemGoal[1][1] = new Item(ColorItem.PINK);
         myItemGoal[2][2] = new Item(ColorItem.BLUE);

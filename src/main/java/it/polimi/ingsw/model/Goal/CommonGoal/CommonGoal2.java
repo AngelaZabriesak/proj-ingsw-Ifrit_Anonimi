@@ -35,7 +35,12 @@ public class CommonGoal2 extends Cgoal {
 
         return numOfCond == 6;
     }
+
+    @Override
+    boolean isTaken(Shelf myShelf) {
+        return false;
     }
+}
 
 
 

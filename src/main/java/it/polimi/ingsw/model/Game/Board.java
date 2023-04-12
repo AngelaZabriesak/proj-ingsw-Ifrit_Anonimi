@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.Game;
 
-import it.polimi.ingsw.*;
 import it.polimi.ingsw.model.Bag.*;
+import it.polimi.ingsw.model.Position;
 
 /**
  * 0 = 0 side of the cell are free
@@ -10,7 +10,7 @@ import it.polimi.ingsw.model.Bag.*;
  * 3 = 3 sides of the cell is free
  * 4 = all sides of the cell are free
  * 9 = the item is black
- * 7 = the box is null
+ * 7 = the cell is null
  */
 
 public class Board {

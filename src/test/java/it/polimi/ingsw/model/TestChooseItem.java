@@ -2,7 +2,6 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Action.ChooseItem;
 import it.polimi.ingsw.Exception.ActionException;
-import it.polimi.ingsw.Position;
 import it.polimi.ingsw.model.Game.*;
 import org.junit.jupiter.api.*;
 

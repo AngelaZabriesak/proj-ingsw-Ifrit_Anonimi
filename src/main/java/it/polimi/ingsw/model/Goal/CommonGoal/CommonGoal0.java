@@ -45,4 +45,9 @@ eventualmente quella giusta, aggiustare il return, assicurarsi che si possano ve
 
         return true;
     }
+
+    @Override
+    boolean isTaken(Shelf myShelf) {
+        return false;
+    }
 }
