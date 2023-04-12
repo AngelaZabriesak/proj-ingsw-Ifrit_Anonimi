@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.Goal.CommonGoal;
 import it.polimi.ingsw.model.Bag.ColorItem;
-import it.polimi.ingsw.model.Bag.Item;
 import it.polimi.ingsw.model.Shelf;
 import it.polimi.ingsw.model.Position;
 import java.util.ArrayList;
@@ -11,9 +10,6 @@ import java.util.ArrayList;
 
 public class CommonGoal5 extends Cgoal {
 
-    private static final int ROW = 6;
-    private static final int COL = 5;
-
 
     public CommonGoal5() {
         setDescription("common goal 5:eight tiles of the same type. There's no restriction about the position of these tiles\n");
@@ -23,9 +19,8 @@ public class CommonGoal5 extends Cgoal {
 
     @Override
     public boolean isTaken(Shelf myShelf) {
-        Item[][] myshelf = myShelf.getMyShelf();
+
         ArrayList<Position> group = null;
-        ArrayList<ArrayList<Position>> groupColor = new ArrayList<>();
 
         for (ColorItem ci : ColorItem.values()) {   // comprende anche il nero quindi la dimensione di groupColor è 7new ArrayList<>();
             group = new ArrayList<>();
@@ -38,6 +33,7 @@ public class CommonGoal5 extends Cgoal {
             }
 
         }
+        assert group != null;
         return group.size() == 8;
     }
 }
