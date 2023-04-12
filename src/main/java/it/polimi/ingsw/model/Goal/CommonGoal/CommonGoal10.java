@@ -32,4 +32,8 @@ public class CommonGoal10 extends Cgoal{
 
     }
 
+    @Override
+    boolean isTaken(Shelf myShelf) {
+        return false;
+    }
 }

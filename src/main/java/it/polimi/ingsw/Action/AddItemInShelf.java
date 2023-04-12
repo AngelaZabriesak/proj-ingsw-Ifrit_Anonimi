@@ -1,15 +1,18 @@
 package it.polimi.ingsw.Action;
 
 import it.polimi.ingsw.Exception.*;
-import it.polimi.ingsw.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.Game.*;
+import it.polimi.ingsw.model.Goal.CommonGoal.Cgoal;
+import it.polimi.ingsw.model.Goal.Goal;
+
+import java.util.ArrayList;
 
 public class AddItemInShelf implements Action{
     private final Game game;
     private final int chosenColumn;
     private final Player player;
-    private final String description = "";
+    private String description = "";
 
     public AddItemInShelf(Game game,int chosenColumn, Player player){
         this.game = game;
@@ -22,12 +25,32 @@ public class AddItemInShelf implements Action{
         checkInput();
         player.setItemInShelf(chosenColumn);
 
+        if (player.getMyShelf().getNEmpty()==0)
+            game.endGame();
+
+        for(Cgoal goal : game.getCGoal()){
+            if(goal.isTaken(player.getMyShelf()))
+                player.addMyScore(goal.getToken().getScore());
+        }
+
         for(Position p : game.getCurrentPlayer().getPosition())
             game.getBoard().updateNeighboursAdjacency(p);
+
+        boolean ok = true;
+        for(int r =0;r<game.getBoard().getRow() && ok == true;r++){
+            for(int c=0; c<game.getBoard().getCol() && ok == true; c++){
+                if(game.getBoard().getMyBoardAdjacency()[r][c]!=0)
+                    ok = false;
+            }
+        }
+        if(ok){
+            game.refillBoard();
+        }
     }
 
     @Override
     public void addDescription(String s) {
+        description+=s;
     }
 
     @Override
@@ -51,6 +74,10 @@ public class AddItemInShelf implements Action{
         return chosenColumn >= 0 && chosenColumn <= 4;
     }
 
+    /**
+     * check if the column have enough spaces
+     * @return boolean
+     */
     private boolean checkColumnEmpty(){
         return player.getMyShelf().getFreeRowByColumn(chosenColumn) >= player.getMyItem().size();
     }
