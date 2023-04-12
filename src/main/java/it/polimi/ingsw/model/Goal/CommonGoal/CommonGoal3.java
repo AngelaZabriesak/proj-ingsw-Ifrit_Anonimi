@@ -1,7 +1,10 @@
 package it.polimi.ingsw.model.Goal.CommonGoal;
 
+import it.polimi.ingsw.model.Bag.ColorItem;
 import it.polimi.ingsw.model.Bag.Item;
 import it.polimi.ingsw.model.Shelf;
+import java.util.ArrayList;
+import java.util.Collections;
 
 
 /* common goal 3:
@@ -24,21 +27,29 @@ public class CommonGoal3 extends Cgoal {
     public boolean isTaken(Shelf myShelf) {
         Item[][] myshelf = myShelf.getMyShelf();
         Item[][] myshelfcpy = myShelf.getMyShelf();
-        int numOfCond = 0;
-
+       ArrayList<ColorItem> squares= new ArrayList<>();
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
                 if
-                (       (myshelf[i][j].getColor() != null) &&
-                        (myshelf[i][j].getColor() == myshelf[i + 1][j].getColor()) &&
-                        (myshelf[i][j].getColor() == myshelf[i][j + 1].getColor()) &&
-                        (myshelf[i][j].getColor() == myshelf[i + 1][j + 1].getColor()) &&
-                        (myshelf[i][j].getColor() == myshelfcpy[i][j].getColor())) {
-                    numOfCond++;
+                (       myshelf[i][j].getColor() != null &&
+                        myshelf[i][j].getColor() == myshelf[i + 1][j].getColor() &&
+                        myshelf[i][j].getColor() == myshelf[i][j + 1].getColor() &&
+                        myshelf[i][j].getColor() == myshelf[i + 1][j + 1].getColor() &&
+                        myshelf[i][j].getColor() == myshelfcpy[i][j].getColor()) {
+                    squares.add (myshelf[i][j].getColor());
                     myshelfcpy[i][j] = null;
+                    myshelfcpy[i+1][j] = null;
+                    myshelfcpy[i][j+1] = null;
+                    myshelfcpy[i+1][j+1] = null;
                 }
-                return numOfCond >= 2;
             }
+            if (Collections.frequency(squares,ColorItem.AZURE)>1) {return true;}
+            if (Collections.frequency(squares,ColorItem.BLUE)>1) {return true;}
+            if (Collections.frequency(squares,ColorItem.GREEN)>1) {return true;}
+            if (Collections.frequency(squares,ColorItem.PINK)>1) {return true;}
+            if (Collections.frequency(squares,ColorItem.WHITE)>1) {return true;}
+            if (Collections.frequency(squares,ColorItem.YELLOW)>1) {return true;}
+
         } return false;
     }
 }
