@@ -2,27 +2,55 @@ package it.polimi.ingsw.model.Goal.CommonGoal;
 
 import it.polimi.ingsw.model.Bag.ColorItem;
 import it.polimi.ingsw.model.Bag.Item;
-//import it.polimi.ingsw.model.Token;
 import it.polimi.ingsw.model.Shelf;
+import it.polimi.ingsw.model.Position;
+import java.util.ArrayList;
 
 /*  common goal 5:
     eight tiles of the same type
     There's no restriction about the position of these tiles */
 
-public class CommonGoal5 extends Cgoal{
+public class CommonGoal5 extends Cgoal {
 
     private static final int ROW = 6;
     private static final int COL = 5;
-   // private Item[][] myItemGoal = new Item[ROW][COL];
-
 
 
     public boolean CommonGoal5(Shelf CShelf) {
         setDescription("common goal 5:eight tiles of the same type. There's no restriction about the position of these tiles\n");
         setIndex(5);
         Item[][] myshelf = CShelf.getMyShelf();
+        ArrayList<Position> group = null;
+        ArrayList<ArrayList<Position>> groupColor = new ArrayList<>();
 
+        for (ColorItem ci : ColorItem.values()) {   // comprende anche il nero quindi la dimensione di groupColor è 7new ArrayList<>();
+            group = new ArrayList<>();
+            for (int r = 0; r < CShelf.getRow(); r++) {
+                for (int c = 0; c < CShelf.getCol(); c++) {
+                    if (CShelf.getMyShelf()[r][c].getColor().equals(ci))
+                        group.add(new Position(r, c));
+                }
+            }
+            group.size();
+        }
+
+            return group.size() == 8;
+        }
+
+
+        @Override
+        public boolean isTaken(Shelf myShelf) {
+            return false;
+        }
+    }
+
+
+
+
+
+/*     another way to do this
         int b = 0;   //n of elements blue
+
         int w = 0;   //n of element white
         int p = 0;  // n of elements pink
         int g = 0;   //n of elements green
@@ -76,8 +104,4 @@ public class CommonGoal5 extends Cgoal{
 
         }
 
-    @Override
-    public boolean isTaken(Shelf myShelf) {
-        return false;
-    }
-}
+        */
