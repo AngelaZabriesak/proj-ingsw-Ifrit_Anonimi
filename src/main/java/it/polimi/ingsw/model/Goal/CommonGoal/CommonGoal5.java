@@ -22,7 +22,7 @@ public class CommonGoal5 extends Cgoal {
 
         ArrayList<Position> group = null;
 
-        for (ColorItem ci : ColorItem.values()) {   // comprende anche il nero quindi la dimensione di groupColor è 7new ArrayList<>();
+        for (ColorItem ci : ColorItem.values()) {   // there is even black : groupColor size is 7
             group = new ArrayList<>();
             for (int r = 0; r < myShelf.getRow(); r++) {
                 for (int c = 0; c < myShelf.getCol(); c++) {
@@ -31,7 +31,6 @@ public class CommonGoal5 extends Cgoal {
                     }
                 }
             }
-
         }
         assert group != null;
         return group.size() == 8;
