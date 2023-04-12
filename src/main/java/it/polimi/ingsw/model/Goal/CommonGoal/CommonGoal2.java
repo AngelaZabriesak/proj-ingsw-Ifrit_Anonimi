@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.Goal.CommonGoal;
 
 import it.polimi.ingsw.model.Shelf;
 import it.polimi.ingsw.model.Bag.Item;
-import it.polimi.ingsw.model.Token;
+
 
 /* common goal 2:
                     four groups each containing at least 4 tiles of the same type,

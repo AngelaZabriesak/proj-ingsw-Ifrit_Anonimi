@@ -2,23 +2,19 @@ package it.polimi.ingsw.model.Goal.CommonGoal;
 
 import it.polimi.ingsw.model.Bag.Item;
 import it.polimi.ingsw.model.Shelf;
-//  import it.polimi.ingsw.model.Token;
+
 
 /*   common goal 10:
-               five tiles of the same type forming an X   */
+                     five tiles of the same type forming an X   */
 
 public class CommonGoal10 extends Cgoal{
 
 
-    //private Item[][] myItemGoal = new Item[ROW][COL];         may be useless
-
     public CommonGoal10() {
         setDescription("common goal 10:five tiles of the same type forming an X\n");
         setIndex(10);
-
-
-
     }
+
 
     @Override
     public boolean isTaken(Shelf myShelf) {
