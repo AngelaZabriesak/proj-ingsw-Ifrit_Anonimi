@@ -14,10 +14,15 @@ public class CommonGoal9 extends Cgoal{
     private static final int COL = 5;
     //private Item[][] myItemGoal = new Item[ROW][COL];      may be useless
 
-    public boolean CommonGoal9(Shelf CShelf){
+    public CommonGoal9(){
         setDescription("common goal 9: two lines each formed by 5 different types of tiles. One line can show the same or a different combination of other line\n");
         setIndex(9);
-        Item[][] myshelf = CShelf.getMyShelf();
+
+    }
+
+    @Override
+    public boolean isTaken(Shelf myShelf) {
+        Item[][] myshelf = myShelf.getMyShelf();
         int numOfCond=0;
         int i=0;
         for  (int j=0; j<ROW;j++){
@@ -35,10 +40,5 @@ public class CommonGoal9 extends Cgoal{
                 numOfCond++;
         }
         return numOfCond > 1;
-    }
-
-    @Override
-    public boolean isTaken(Shelf myShelf) {
-        return false;
     }
 }

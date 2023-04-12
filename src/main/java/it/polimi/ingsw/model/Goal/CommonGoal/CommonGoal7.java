@@ -17,11 +17,14 @@ public class CommonGoal7 extends Cgoal{
     private final Item[][] myItemGoal = new Item[ROW][COL];
     private int numOfCond = 0;                 // for this goal >3 at the end
 
-    public boolean CommonGoal7(Shelf CShelf){
+    public CommonGoal7(){
         setDescription("common goal 7: four lines each formed by 5 tiles of maximum three different types. One line can show the same or a different combination of other line\n ");
         setIndex(7);
+    }
 
-        Item[][] myshelf = CShelf.getMyShelf();
+    @Override
+    public boolean isTaken(Shelf myShelf) {
+        Item[][] myshelf = myShelf.getMyShelf();
 
         int b = 0;   //n of elements blue
         int w = 0;   //n of element white
@@ -72,12 +75,6 @@ public class CommonGoal7 extends Cgoal{
         }
 
         return numOfCond > 3;
-
-    }
-
-    @Override
-    public boolean isTaken(Shelf myShelf) {
-        return false;
     }
 }
 

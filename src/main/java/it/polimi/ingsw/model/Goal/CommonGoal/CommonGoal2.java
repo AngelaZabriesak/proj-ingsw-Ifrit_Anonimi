@@ -15,30 +15,30 @@ public class CommonGoal2 extends Cgoal {
 
 
 
-    public boolean CommonGoal2(Shelf CShelf) {
+    public CommonGoal2() {
         setDescription("common goal 2: four groups each containing at least 4 tiles of the same type,the tiles of one group can be different from those of another group\n");
         setIndex(2);
-        int numOfCond=0;  // for this goal >3 at the end
-        /* Item[][] myshelf = CShelf.getMyShelf();
-        Item[][] myshelfcpy = CShelf.getMyShelf();
-
-        for (int i=0; i<ROW; i++){
-            for (int j=0; j<COL; j++){
-                if
-                ((myshelf[i][j].getColor() != null) &&
-                        ((myshelf[i][j].getColor() == myshelf[i+1][j].getColor()) ||
-                                (myshelf[i][j].getColor() == myshelf[i][j+1].getColor())) &&
-                        (myshelf[i][j].getColor() == myshelfcpy[i][j].getColor()))
-                {numOfCond++;
-                    myshelfcpy[i][j] = null;}
-            } */
-
-        return numOfCond == 6;
     }
 
     @Override
     public boolean isTaken(Shelf myShelf) {
-        return false;
+        int numOfCond = 0;  // for this goal >3 at the end
+        Item[][] myshelf = myShelf.getMyShelf();
+        Item[][] myshelfcpy = myShelf.getMyShelf();
+
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
+                if
+                ((myshelf[i][j].getColor() != null) &&
+                ((myshelf[i][j].getColor() == myshelf[i + 1][j].getColor()) ||
+                (myshelf[i][j].getColor() == myshelf[i][j + 1].getColor())) &&
+                (myshelf[i][j].getColor() == myshelfcpy[i][j].getColor())) {
+                numOfCond++;
+                myshelfcpy[i][j] = null;
+                } return numOfCond >= 3;
+            }
+
+        } return false;
     }
 }
 
