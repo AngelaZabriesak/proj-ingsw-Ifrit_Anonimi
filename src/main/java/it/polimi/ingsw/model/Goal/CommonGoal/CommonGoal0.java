@@ -48,3 +48,5 @@ public class CommonGoal0 extends Cgoal {
         return false;
     }
 }
+
+
