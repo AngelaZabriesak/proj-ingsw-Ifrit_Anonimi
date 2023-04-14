@@ -7,13 +7,13 @@ import it.polimi.ingsw.model.Shelf;
 /* common goal 8:
                    two columns each formed by 6 different types of tiles  */
 
-public class CommonGoal8 extends Cgoal{
+public class CommonGoal8 extends Cgoal {
 
     private static final int ROW = 6;
     private static final int COL = 5;
 
 
-    public CommonGoal8(){
+    public CommonGoal8() {
         setDescription("common goal 8:two columns each formed by 6 different types of tiles\n");
         setIndex(8);
 
@@ -22,28 +22,18 @@ public class CommonGoal8 extends Cgoal{
 
     @Override
     public boolean isTaken(Shelf myShelf) {
+
         Item[][] myshelf = myShelf.getMyShelf();
+
         int numOfCond = 0;
-        int j=0;
-        for  (int i=0; i<COL;i++){
-            // if myshelf[i][j] is null, return false
-            if
-            (       myshelf[j][i].getColor() != myshelf[j+1][i].getColor() &&
-                    myshelf[j][i].getColor() != myshelf[j+2][i].getColor() &&
-                    myshelf[j][i].getColor() != myshelf[j+3][i].getColor() &&
-                    myshelf[j][i].getColor() != myshelf[j+4][i].getColor() &&
-                    myshelf[j][i].getColor() != myshelf[j+5][i].getColor() &&
-                    myshelf[j+1][i].getColor() != myshelf[j+2][i].getColor() &&
-                    myshelf[j+1][i].getColor() != myshelf[j+3][i].getColor() &&
-                    myshelf[j+1][i].getColor() != myshelf[j+4][i].getColor() &&
-                    myshelf[j+1][i].getColor() != myshelf[j+5][i].getColor() &&
-                    myshelf[j+2][i].getColor() != myshelf[j+3][i].getColor() &&
-                    myshelf[j+2][i].getColor() != myshelf[j+4][i].getColor() &&
-                    myshelf[j+2][i].getColor() != myshelf[j+5][i].getColor() &&
-                    myshelf[j+3][i].getColor() != myshelf[j+4][i].getColor() &&
-                    myshelf[j+3][i].getColor() != myshelf[j+5][i].getColor() &&
-                    myshelf[j+4][i].getColor() != myshelf[j+5][i].getColor())
-            {numOfCond++;}
+        for (int i = 0; i < COL; i++) {
+
+            for (int j = 0; j < ROW; j++) {
+                if (myshelf[j][i].getColor() == null || myshelf[j][i].getColor() == myshelf[j + 1][i].getColor()){
+                    break;
+                } else numOfCond++;
+            }
+
         }
         return numOfCond > 1;
     }
