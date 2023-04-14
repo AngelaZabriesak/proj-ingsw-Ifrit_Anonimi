@@ -12,7 +12,6 @@ public class CommonGoal4 extends Cgoal {
 
     private static final int ROW = 6;
     private static final int COL = 5;
-    private final Item[][] myItemGoal = new Item[ROW][COL];
     private int numOfCond = 0;                 // for this goal >2 at the end
 
     public CommonGoal4() {
