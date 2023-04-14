@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.Bag;
+package it.polimi.ingsw.Model.Bag;
 
 public class Bag {
     private static final int SIZE = 6;

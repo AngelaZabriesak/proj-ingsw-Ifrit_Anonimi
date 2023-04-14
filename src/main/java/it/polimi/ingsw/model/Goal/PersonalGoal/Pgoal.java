@@ -1,8 +1,8 @@
-package it.polimi.ingsw.model.Goal.PersonalGoal;
+package it.polimi.ingsw.Model.Goal.PersonalGoal;
 
-import it.polimi.ingsw.model.Bag.Item;
-import it.polimi.ingsw.model.Game.*;
-import it.polimi.ingsw.model.Goal.*;
+import it.polimi.ingsw.Model.Bag.Item;
+import it.polimi.ingsw.Model.Game.*;
+import it.polimi.ingsw.Model.Goal.*;
 
 public abstract class Pgoal extends Goal {
     private Game game;
