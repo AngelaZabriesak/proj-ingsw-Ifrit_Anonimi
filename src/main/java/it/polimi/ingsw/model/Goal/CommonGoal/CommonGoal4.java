@@ -1,8 +1,8 @@
-package it.polimi.ingsw.model.Goal.CommonGoal;
+package it.polimi.ingsw.Model.Goal.CommonGoal;
 
-import it.polimi.ingsw.model.Bag.ColorItem;
-import it.polimi.ingsw.model.Bag.Item;
-import it.polimi.ingsw.model.Shelf;
+import it.polimi.ingsw.Model.Bag.ColorItem;
+import it.polimi.ingsw.Model.Bag.Item;
+import it.polimi.ingsw.Model.Shelf;
 
 /* common goal 4:
                  three columns each formed by 6 tiles maximum three different types.

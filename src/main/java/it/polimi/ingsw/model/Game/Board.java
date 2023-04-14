@@ -1,7 +1,7 @@
-package it.polimi.ingsw.model.Game;
+package it.polimi.ingsw.Model.Game;
 
-import it.polimi.ingsw.model.Bag.*;
-import it.polimi.ingsw.model.Position;
+import it.polimi.ingsw.Model.Bag.*;
+import it.polimi.ingsw.Model.Position;
 
 /**
  * 0 = 0 side of the cell are free

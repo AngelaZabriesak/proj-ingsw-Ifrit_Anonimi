@@ -1,6 +1,6 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.model.Bag.*;
+import it.polimi.ingsw.Model.Bag.*;
 
 // the [0][0] element of the matrix is the north-west element
 

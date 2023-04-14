@@ -1,12 +1,9 @@
 package it.polimi.ingsw.Action;
 
 import it.polimi.ingsw.Exception.*;
-import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.Game.*;
-import it.polimi.ingsw.model.Goal.CommonGoal.Cgoal;
-import it.polimi.ingsw.model.Goal.Goal;
-
-import java.util.ArrayList;
+import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Model.Game.*;
+import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
 
 public class AddItemInShelf implements Action{
     private final Game game;

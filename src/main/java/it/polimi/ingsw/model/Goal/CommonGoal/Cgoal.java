@@ -1,9 +1,9 @@
-package it.polimi.ingsw.model.Goal.CommonGoal;
+package it.polimi.ingsw.Model.Goal.CommonGoal;
 
-import it.polimi.ingsw.model.Bag.Item;
-import it.polimi.ingsw.model.Game.*;
-import it.polimi.ingsw.model.Goal.*;
-import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.Model.Bag.Item;
+import it.polimi.ingsw.Model.Game.*;
+import it.polimi.ingsw.Model.Goal.*;
+import it.polimi.ingsw.Model.*;
 
 import java.util.*;
 

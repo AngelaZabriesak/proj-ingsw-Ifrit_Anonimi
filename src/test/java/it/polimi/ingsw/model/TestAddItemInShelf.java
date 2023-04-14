@@ -1,8 +1,8 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Action.*;
 import it.polimi.ingsw.Exception.*;
-import it.polimi.ingsw.model.Game.*;
+import it.polimi.ingsw.Model.Game.*;
 import org.junit.jupiter.api.*;
 import java.util.*;
 

@@ -1,12 +1,12 @@
-package it.polimi.ingsw.model.Game;
+package it.polimi.ingsw.Model.Game;
 
 import it.polimi.ingsw.Action.*;
 import it.polimi.ingsw.Exception.*;
-import it.polimi.ingsw.model.Position;
-import it.polimi.ingsw.model.Bag.*;
-import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.Goal.CommonGoal.*;
-import it.polimi.ingsw.model.Goal.PersonalGoal.*;
+import it.polimi.ingsw.Model.Position;
+import it.polimi.ingsw.Model.Bag.*;
+import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Model.Goal.CommonGoal.*;
+import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
 
 import java.util.*;
 

@@ -1,6 +1,6 @@
-package it.polimi.ingsw.model.Goal.PersonalGoal;
+package it.polimi.ingsw.Model.Goal.PersonalGoal;
 
-import it.polimi.ingsw.model.Bag.*;
+import it.polimi.ingsw.Model.Bag.*;
 
 public class PersonalGoal1 extends Pgoal{
     private static final int ROW = 6;

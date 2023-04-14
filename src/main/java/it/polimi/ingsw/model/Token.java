@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.Model;
 
 // this class is about the token that gives different point after doing a common goal
 

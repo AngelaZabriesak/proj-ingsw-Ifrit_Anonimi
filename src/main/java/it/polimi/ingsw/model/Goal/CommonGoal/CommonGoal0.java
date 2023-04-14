@@ -1,9 +1,8 @@
-package it.polimi.ingsw.model.Goal.CommonGoal;
+package it.polimi.ingsw.Model.Goal.CommonGoal;
 
-import it.polimi.ingsw.model.Bag.Item;
-import it.polimi.ingsw.model.Game.CreateItemGroup;
-import it.polimi.ingsw.model.Position;
-import it.polimi.ingsw.model.Shelf;
+import it.polimi.ingsw.Model.Game.CreateItemGroup;
+import it.polimi.ingsw.Model.Position;
+import it.polimi.ingsw.Model.Shelf;
 
 import java.util.ArrayList;
 

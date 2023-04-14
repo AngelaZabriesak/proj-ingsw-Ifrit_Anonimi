@@ -1,6 +1,6 @@
-package it.polimi.ingsw.model.Goal.PersonalGoal;
+package it.polimi.ingsw.Model.Goal.PersonalGoal;
 
-import it.polimi.ingsw.model.Game.Game;
+import it.polimi.ingsw.Model.Game.Game;
 
 public class PgoalFactory {
 

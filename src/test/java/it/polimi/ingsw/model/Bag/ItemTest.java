@@ -1,6 +1,5 @@
-package it.polimi.ingsw.model.Bag;
+package it.polimi.ingsw.Model.Bag;
 
-import it.polimi.ingsw.model.Bag.*;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;

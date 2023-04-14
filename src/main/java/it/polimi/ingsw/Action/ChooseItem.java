@@ -1,9 +1,9 @@
 package it.polimi.ingsw.Action;
 
 import it.polimi.ingsw.Exception.*;
-import it.polimi.ingsw.model.Bag.*;
-import it.polimi.ingsw.model.Game.*;
-import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.Model.Bag.*;
+import it.polimi.ingsw.Model.Game.*;
+import it.polimi.ingsw.Model.*;
 
 public class ChooseItem implements Action {
     private final Game game;

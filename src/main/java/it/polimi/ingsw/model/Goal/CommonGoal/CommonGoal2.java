@@ -1,7 +1,7 @@
-package it.polimi.ingsw.model.Goal.CommonGoal;
+package it.polimi.ingsw.Model.Goal.CommonGoal;
 
-import it.polimi.ingsw.model.Shelf;
-import it.polimi.ingsw.model.Bag.Item;
+import it.polimi.ingsw.Model.Shelf;
+import it.polimi.ingsw.Model.Bag.Item;
 
 
 /* common goal 2:

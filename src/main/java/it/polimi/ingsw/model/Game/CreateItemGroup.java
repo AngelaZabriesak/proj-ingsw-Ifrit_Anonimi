@@ -1,9 +1,9 @@
-package it.polimi.ingsw.model.Game;
+package it.polimi.ingsw.Model.Game;
 
-import it.polimi.ingsw.model.Bag.ColorItem;
-import it.polimi.ingsw.model.Bag.Item;
-import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.Position;
+import it.polimi.ingsw.Model.Bag.ColorItem;
+import it.polimi.ingsw.Model.Bag.Item;
+import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.Position;
 
 import java.util.ArrayList;
 

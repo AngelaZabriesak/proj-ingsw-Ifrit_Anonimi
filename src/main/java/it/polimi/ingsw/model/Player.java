@@ -1,7 +1,7 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.model.Bag.*;
-import it.polimi.ingsw.model.Goal.*;
+import it.polimi.ingsw.Model.Bag.*;
+import it.polimi.ingsw.Model.Goal.*;
 
 import java.util.*;
 

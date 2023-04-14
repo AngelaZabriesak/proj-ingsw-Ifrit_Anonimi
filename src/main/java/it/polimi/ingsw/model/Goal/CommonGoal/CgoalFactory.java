@@ -1,6 +1,6 @@
-package it.polimi.ingsw.model.Goal.CommonGoal;
+package it.polimi.ingsw.Model.Goal.CommonGoal;
 
-import it.polimi.ingsw.model.Game.*;
+import it.polimi.ingsw.Model.Game.*;
 
 public class CgoalFactory {
     private static CgoalFactory instance;

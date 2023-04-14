@@ -1,6 +1,6 @@
-package it.polimi.ingsw.model.Goal;
+package it.polimi.ingsw.Model.Goal;
 
-import it.polimi.ingsw.model.Bag.Item;
+import it.polimi.ingsw.Model.Bag.Item;
 
 public abstract class Goal{
 
