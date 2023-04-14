@@ -20,5 +20,5 @@ public abstract class Pgoal extends Goal {
         return scores;
     }
 
-    public abstract Item[][] getGoal();
+    public Item[][] getGoal(){return null;}
 }

@@ -46,7 +46,8 @@ public class CommonGoal11 extends Cgoal{
                             myshelf[j+1].length ==3 &&
                             myshelf[j+2].length ==4 &&
                             myshelf[j+3].length ==5 &&
-                            myshelf[j+4].length ==6 )) return true;
+                            myshelf[j+4].length ==6 ))
+                return true;
 
         } return false;
     }
