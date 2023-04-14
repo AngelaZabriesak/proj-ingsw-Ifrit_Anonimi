@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-public class Main {
+public class ClientApp {
     public static void main(String[] args) {
 
     }
