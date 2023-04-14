@@ -7,7 +7,7 @@ import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.*;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
-
+import it.polimi.ingsw.Model.Shelf;
 import java.util.*;
 
 public class Game {
@@ -162,7 +162,7 @@ public class Game {
      * calculate the score of each player for every turn
      */
     public void calcScore(Player player){
-        ArrayList<Position>[] gruppi = createGroup.creaGruppi(player);
+        ArrayList<Position>[] gruppi = createGroup.creaGruppi(player.getMyShelf());
         // do check_p_score later and delete the initialization of check_p_score
         // do the same with token_score1 and token_score_2 ( the c_card are assigned during the game)
 
@@ -289,30 +289,30 @@ public class Game {
         Game g = new Game(p);
         String msg = "";
         g.initialize();
-        for(int r=0;r<9;r++){
-            for(int c=0;c<9;c++){
-                if(g.myBoard.getItem(new Position(r,c))!=null)
-                    msg+="|\t"+g.myBoard.getItem(new Position(r,c)).getColor()+"" +
+        for (int r = 0; r < 9; r++) {
+            for (int c = 0; c < 9; c++) {
+                if (g.myBoard.getItem(new Position(r, c)) != null)
+                    msg += "|\t" + g.myBoard.getItem(new Position(r, c)).getColor() + "" +
                             "\t";
                 else
-                    msg+="|\tnull\t";
+                    msg += "|\tnull\t";
             }
-            msg+="|\n";
+            msg += "|\n";
         }
-        for(int r=0;r<9;r++){
-            for(int c=0;c<9;c++){
-                msg+="|\t"+g.myBoard.getAdjacency(new Position(r,c))+"" + "\t";
+        for (int r = 0; r < 9; r++) {
+            for (int c = 0; c < 9; c++) {
+                msg += "|\t" + g.myBoard.getAdjacency(new Position(r, c)) + "" + "\t";
             }
-            msg+="|\n";
+            msg += "|\n";
         }
-        msg+="N personal goal "+ g.personalGoal.size()+"\n";
-        msg+="N common goal "+ g.commonGoal.size()+"\n";
-        msg+="N my common goal "+ g.myGoal.size()+"\n";
-        for(Cgoal cg : g.myGoal) {
-            msg += cg.getDescription()+"\ttoken: ";
-            for(Token t : cg.getMyTokens())
-                msg += t.getScore()+"\t";
-            msg+= "\n";
+        msg += "N personal goal " + g.personalGoal.size() + "\n";
+        msg += "N common goal " + g.commonGoal.size() + "\n";
+        msg += "N my common goal " + g.myGoal.size() + "\n";
+        for (Cgoal cg : g.myGoal) {
+            msg += cg.getDescription() + "\ttoken: ";
+            for (Token t : cg.getMyTokens())
+                msg += t.getScore() + "\t";
+            msg += "\n";
         }
         /**
          * Riempimento shelf
@@ -332,22 +332,30 @@ public class Game {
          */
         for (int r = 0; r < p0.getMyShelf().getRow(); r++) {
             for (int c = 0; c < p0.getMyShelf().getCol(); c++) {
-                if(p0.getMyShelf().getMyShelf()[r][c]!=null)
+                if (p0.getMyShelf().getMyShelf()[r][c] != null)
                     msg += "|\t" + p0.getMyShelf().getMyShelf()[r][c].getColor() + "\t";
                 else
-                    msg+="|\tnull\t";
+                    msg += "|\tnull\t";
             }
             msg += "|\n";
         }
-        for(ArrayList<Position> position : g.createGroup.creaGruppi(p0)){
-            if(position!=null) {
-                msg+="dim: "+position.size()+"\t";
+        for (ArrayList<Position> position : g.createGroup.creaGruppi(p0.getMyShelf())) {
+            if (position != null) {
+                msg += "dim: " + position.size() + "\t";
                 for (Position pos : position)
                     msg += "|\t" + pos.getRow() + ", " + pos.getCol() + "\t";
-                msg+="|\n";
+                msg += "|\n";
             }
+
         }
+        Cgoal myGoal =  new CommonGoal0();
+        if(myGoal.isTaken(p0.getMyShelf() ) == true )
+        {
+            msg+= "| token preso\n";
+        } else msg += "| token non preso\n";
 
         System.out.println(msg);
     }
+
+
 }

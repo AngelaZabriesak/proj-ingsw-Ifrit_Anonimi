@@ -24,7 +24,7 @@ public class CommonGoal0 extends Cgoal {
     @Override
     public boolean isTaken(Shelf myShelf) {
 
-        ArrayList<Position>[] groups = new CreateItemGroup().creaGruppi(getGame().getCurrentPlayer());
+        ArrayList<Position>[] groups = new CreateItemGroup().creaGruppi(myShelf);
         int numOfCond=0;
 
         for (int i=0; i<= groups.length; i++)
