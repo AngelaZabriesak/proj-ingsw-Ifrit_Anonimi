@@ -12,7 +12,6 @@ import it.polimi.ingsw.model.Shelf;
 
 public class CommonGoal11 extends Cgoal{
 
-    private static final int ROW = 6;
     private static final int COL = 5;
 
     public CommonGoal11(){

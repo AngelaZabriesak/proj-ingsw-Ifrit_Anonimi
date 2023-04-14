@@ -22,21 +22,16 @@ public class CommonGoal9 extends Cgoal{
     @Override
     public boolean isTaken(Shelf myShelf) {
         Item[][] myshelf = myShelf.getMyShelf();
-        int numOfCond=0;
-        int i=0;
-        for  (int j=0; j<ROW;j++){
-            if
-            (       myshelf[j][i].getColor() != myshelf[j][i+1].getColor() &&
-                    myshelf[j][i].getColor() != myshelf[j][i+2].getColor() &&
-                    myshelf[j][i].getColor() != myshelf[j][i+3].getColor() &&
-                    myshelf[j][i].getColor() != myshelf[j][i+4].getColor() &&
-                    myshelf[j][i+1].getColor() != myshelf[j][i+2].getColor() &&
-                    myshelf[j][i+1].getColor() != myshelf[j][i+3].getColor() &&
-                    myshelf[j][i+1].getColor() != myshelf[j][i+4].getColor() &&
-                    myshelf[j][i+2].getColor() != myshelf[j][i+3].getColor() &&
-                    myshelf[j][i+2].getColor() != myshelf[j][i+4].getColor() &&
-                    myshelf[j][i+3].getColor() != myshelf[j][i+4].getColor())
-                numOfCond++;
+        int numOfCond = 0;
+
+        for (int j= 0; j < ROW; j++) {
+
+            for (int i = 0; i<COL; i++) {
+                if (myshelf[j][i].getColor() == null || myshelf[j][i].getColor() == myshelf[j][i+1].getColor()){
+                    break;
+                } else numOfCond++;
+            }
+
         }
         return numOfCond > 1;
     }
