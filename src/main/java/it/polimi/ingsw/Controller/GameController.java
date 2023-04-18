@@ -2,13 +2,13 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Model.Game.*;
-import it.polimi.ingsw.View.VirtualView;
+import it.polimi.ingsw.View.*;
 
 public class GameController {
     private TurnController turnController;
     private Game game;
     public GameController(){
-
+        turnController = new TurnController(this);
     }
     public void broadcastDisconnectionMessage(String nickname, String s) {
 

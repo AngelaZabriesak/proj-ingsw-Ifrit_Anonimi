@@ -70,6 +70,6 @@ public class ClientController implements ViewObserver, Observer {
 
     @Override
     public void update(Message message) {
-
+        // switch sul tipo di messaggio
     }
 }
