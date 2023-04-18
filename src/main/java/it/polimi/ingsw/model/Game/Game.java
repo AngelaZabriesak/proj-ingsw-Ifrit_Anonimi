@@ -206,7 +206,6 @@ public class Game {
         myScore+= p_score+token_score1+token_score2;
         player.setMyScore(myScore);
     }
-
     /**
      * @param myGoals is the array of personal goals enables
      * @return the random goal
