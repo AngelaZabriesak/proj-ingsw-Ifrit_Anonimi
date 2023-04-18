@@ -1,13 +1,11 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.Controller.ClientController;
-import it.polimi.ingsw.Observer.ViewObservable;
+import it.polimi.ingsw.Controller.*;
+import it.polimi.ingsw.Observer.*;
 
-import java.io.PrintStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
+import java.io.*;
+import java.util.*;
+import java.util.concurrent.*;
 
 public class Cli extends ViewObservable implements View{
 
@@ -102,6 +100,51 @@ public class Cli extends ViewObservable implements View{
         } catch (ExecutionException e) {
             out.println("Error askNickname");
         }
+    }
+
+    @Override
+    public void askNPlayer() {
+
+    }
+
+    @Override
+    public void askItem() {
+
+    }
+
+    @Override
+    public void askColumn() {
+
+    }
+
+    @Override
+    public void askOrder() {
+
+    }
+
+    @Override
+    public void showBoard() {
+
+    }
+
+    @Override
+    public void showShelf() {
+
+    }
+
+    @Override
+    public void showPGoal() {
+
+    }
+
+    @Override
+    public void showCGoal() {
+
+    }
+
+    @Override
+    public void showScore() {
+
     }
 
     @Override
