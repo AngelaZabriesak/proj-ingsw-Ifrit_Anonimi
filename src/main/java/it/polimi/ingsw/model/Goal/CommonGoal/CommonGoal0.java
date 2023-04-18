@@ -12,9 +12,6 @@ import java.util.ArrayList;
 
 public class CommonGoal0 extends Cgoal {
 
-    private static final int ROW = 6;
-    private static final int COL = 5;
-
 
     public CommonGoal0() {
         setDescription("common goal 0: six groups each containing at least 2 tiles of the same type,the tiles pf one group can be different from those of another group\n");
