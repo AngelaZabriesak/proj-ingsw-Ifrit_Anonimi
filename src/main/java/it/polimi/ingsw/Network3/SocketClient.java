@@ -1,30 +1,35 @@
-package it.polimi.ingsw.Networking.Client;
+package it.polimi.ingsw.Network3;
 
-import it.polimi.ingsw.Message.*;
+import it.polimi.ingsw.Message.Message;
+import it.polimi.ingsw.Message.MessageError;
+import it.polimi.ingsw.Networking.Client.Client;
 
 import java.io.*;
 import java.net.*;
-import java.util.concurrent.*;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 // Client class
-public class SocketClient extends Client {
-    private final Socket socket;
+class SocketClient extends Client {
+    private Socket socket;
 
-    private ObjectOutputStream writeToServer;
-    private ObjectInputStream readFromServer;
-
+    private final ObjectOutputStream writeToServer;
+    private final ObjectInputStream readFromServer;
+    //private final Scanner readFromTastiera;
     private String line = null;
 
     private final ExecutorService readExecution;
 
     public SocketClient(String address, int port){
-        this.socket = new Socket();
         try {
-            this.socket.connect(new InetSocketAddress(address,port));
-            this.writeToServer = new ObjectOutputStream(socket.getOutputStream());
-            this.readFromServer = new ObjectInputStream(socket.getInputStream());// object of scanner class
+            socket = new Socket();
+            socket.connect(new InetSocketAddress(address,port));
+            writeToServer = new ObjectOutputStream(socket.getOutputStream());
+            readFromServer = new ObjectInputStream(socket.getInputStream());// object of scanner class
+            //readFromTastiera = new Scanner(System.in);
         } catch (IOException e) {
-            System.out.println("Error in creating socket\n");
+            throw new RuntimeException(e);
         }
         this.readExecution = Executors.newSingleThreadExecutor();
     }
@@ -48,13 +53,12 @@ public class SocketClient extends Client {
         readExecution.execute(
                 ()->{
                     while (!readExecution.isShutdown()){
-                        Message message;
                         try{
-                            message = (Message) readFromServer.readObject();
+                            Message message =(Message) readFromServer.readObject();
+                            notifyObserver(message);
                         } catch (Exception e) {
-                            message = new MessageError(null,"Connection lost");
+                            throw new RuntimeException(e);
                         }
-                        notifyObserver(message);
                     }
                 }
         );
@@ -64,7 +68,7 @@ public class SocketClient extends Client {
     public void disconnect() {
         try{
             if(!socket.isClosed()){
-                readExecution.shutdown();
+                readExecution.shutdownNow();
                 socket.close();
             }
         } catch (IOException e ){

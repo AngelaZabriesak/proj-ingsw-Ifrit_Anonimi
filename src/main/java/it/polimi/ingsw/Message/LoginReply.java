@@ -10,7 +10,7 @@ public class LoginReply extends Message {
     private final boolean connectionSuccessful;
 
     public LoginReply(boolean nicknameAccepted, boolean connectionSuccessful) {
-        super("server", MessageType.LOGIN_REPLY);
+        super("server", MessageType.LOGIN_REPLY, "");
         this.nicknameAccepted = nicknameAccepted;
         this.connectionSuccessful = connectionSuccessful;
     }

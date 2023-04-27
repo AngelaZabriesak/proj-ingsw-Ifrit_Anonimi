@@ -37,7 +37,7 @@ public class GameController {
     public void removeVirtualView(String nickname, boolean notifyEnabled) {
     }
 
-    public boolean checkLoginNickname(String nickname, VirtualView vv) {
+    public boolean nicknameIsUsed(String nickname, VirtualView vv) {
 
         return false;
     }

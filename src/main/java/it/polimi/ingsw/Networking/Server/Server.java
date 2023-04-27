@@ -5,38 +5,67 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Message.Message;
 import it.polimi.ingsw.View.VirtualView;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.*;
-import java.util.logging.Logger;
 
 /**
  * Main server class that starts a socket server.
- * It can handle different types of connections.
  */
-public class Server {
+public class Server implements Runnable{
 
     private GameController gameController;
 
+    private ServerSocket serverSocket;
+    private Socket socket;
     private final Map<String, ClientHandler> clientHandlerMap;
     private final Object lock;
+    private int port,id=0;
 
-
-    public Server(GameController gameController) {
+    public Server(GameController gameController,int port) {
         this.gameController = gameController;
         this.clientHandlerMap = Collections.synchronizedMap(new HashMap<>());
+        this.port = port;
         this.lock = new Object();
     }
 
-    /**
-     * Adds a client to be managed by the server instance.
-     *
-     * @param nickname      the nickname associated with the client.
-     * @param clientHandler the ClientHandler associated with the client.
-     */
+    @Override
+    public void run() {
+        try {
+            serverSocket = new ServerSocket(port);
+            System.out.println("Socket server started on port " + port + ".");
+        } catch (IOException e) {
+            System.out.println(
+                    "Server could not start!");
+            return;
+        }
+
+        try{
+            while(!Thread.currentThread().isInterrupted()){
+                //blocking until a connection is made
+                socket = serverSocket.accept();
+                SocketClientHandler clientHandler = new SocketClientHandler(this,socket);
+                Thread thread = new Thread(clientHandler);
+                thread.start();
+            }
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
+        try{
+            serverSocket.close();
+        }catch (IOException e){
+            System.exit(1);
+        }
+    }
+
+
     public void addClient(String nickname, ClientHandler clientHandler) {
         VirtualView vv = new VirtualView(clientHandler);
 
         if (!gameController.isGameStarted()) {
-            if (gameController.checkLoginNickname(nickname, vv)) {
+            if (gameController.nicknameIsUsed(nickname, vv)) {
                 clientHandlerMap.put(nickname, clientHandler);
                 gameController.loginHandler(nickname, vv);
             }
@@ -47,22 +76,14 @@ public class Server {
 
     }
 
-    /**
-     * Removes a client given his nickname.
-     *
-     * @param nickname      the VirtualView to be removed.
-     * @param notifyEnabled set to {@code true} to enable a lobby disconnection message, {@code false} otherwise.
-     */
-    public void removeClient(String nickname, boolean notifyEnabled) {
+    public void removeClient(String nickname, boolean enable) {
         clientHandlerMap.remove(nickname);
-        gameController.removeVirtualView(nickname, notifyEnabled);
+        gameController.removeVirtualView(nickname, enable);
         System.out.println("Removed " + nickname + " from the client list.");
     }
 
     /**
      * Forwards a received message from the client to the GameController.
-     *
-     * @param message the message to be forwarded.
      */
     public void onMessageReceived(Message message) {
         gameController.onMessageReceived(message);
@@ -75,7 +96,7 @@ public class Server {
      */
     public void onDisconnect(ClientHandler clientHandler) {
         synchronized (lock) {
-            String nickname = getNicknameFromClientHandler(clientHandler);
+            String nickname = clientHandlerMap.entrySet().stream().filter(entry -> clientHandler.equals(entry.getValue())).map(Map.Entry::getKey).findFirst().orElse(null);
 
             if (nickname != null) {
 
@@ -97,21 +118,5 @@ public class Server {
                 }
             }
         }
-    }
-
-
-    /**
-     * Returns the corresponding nickname of a ClientHandler.
-     *
-     * @param clientHandler the client handler.
-     * @return the corresponding nickname of a ClientHandler.
-     */
-    private String getNicknameFromClientHandler(ClientHandler clientHandler) {
-        return clientHandlerMap.entrySet()
-                .stream()
-                .filter(entry -> clientHandler.equals(entry.getValue()))
-                .map(Map.Entry::getKey)
-                .findFirst()
-                .orElse(null);
     }
 }

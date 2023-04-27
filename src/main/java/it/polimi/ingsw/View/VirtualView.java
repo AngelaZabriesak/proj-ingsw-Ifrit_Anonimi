@@ -26,7 +26,7 @@ public class VirtualView implements View{
 
     @Override
     public void askNickname() {
-        clientHandler.sendMessage(new LoginReply(false, true));
+        clientHandler.sendMessageToClient(new LoginReply(false, true));
     }
 
     @Override
@@ -76,12 +76,12 @@ public class VirtualView implements View{
 
     @Override
     public void showLoginResult(boolean nicknameAccepted, boolean connectionSuccessful, String nickname) {
-        clientHandler.sendMessage(new LoginReply(nicknameAccepted, connectionSuccessful));
+        clientHandler.sendMessageToClient(new LoginReply(nicknameAccepted, connectionSuccessful));
     }
 
     @Override
     public void showErrorAndExit(String error) {
-        clientHandler.sendMessage(new MessageError("server", error));
+        clientHandler.sendMessageToClient(new MessageError("server", error));
     }
 
 }

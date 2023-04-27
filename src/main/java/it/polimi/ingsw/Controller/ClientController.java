@@ -45,15 +45,11 @@ public class ClientController implements ViewObserver, Observer {
      */
     @Override
     public void onUpdateServerInfo(Map<String, String> serverInfo) {
-        try {
-            client = new SocketClient(serverInfo.get("address"), Integer.parseInt(serverInfo.get("port")));
-            client.addObserver(this);
-            client.readMessage(); // Starts an asynchronous reading from the server.
-            client.enablePinger(true);
-            taskQueue.execute(view::askNickname);
-        } catch (IOException e) {
-            taskQueue.execute(() -> view.showLoginResult(false, false, this.nickname));
-        }
+        client = new SocketClient(serverInfo.get("address"), Integer.parseInt(serverInfo.get("port")));
+        client.addObserver(this);
+        client.readMessageFromServer(); // Starts an asynchronous reading from the server.
+        //client.enablePinger(true);
+        taskQueue.execute(view::askNickname);
     }
 
     /**
@@ -65,7 +61,7 @@ public class ClientController implements ViewObserver, Observer {
     @Override
     public void onUpdateNickname(String nickname) {
         this.nickname = nickname;
-        client.sendMessage(new LoginRequest(this.nickname));
+        client.sendMessageToServer(new LoginRequest(this.nickname,"login"));
     }
 
     @Override

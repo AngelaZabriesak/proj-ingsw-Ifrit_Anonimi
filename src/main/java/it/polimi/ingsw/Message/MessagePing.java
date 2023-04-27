@@ -5,7 +5,7 @@ import it.polimi.ingsw.Enumerations.MessageType;
 public class MessagePing  extends Message {
 
 
-    public MessagePing() {
-        super(null, MessageType.PING);
+    public MessagePing(String message) {
+        super(null, MessageType.PING, message);
     }
 }

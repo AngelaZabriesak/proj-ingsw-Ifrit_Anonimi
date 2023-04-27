@@ -8,33 +8,24 @@ import java.net.*;
 
 public class SocketClientHandler implements ClientHandler, Runnable {
     private final Socket client;
-    private final SocketServer socketServer;
-
     private boolean connected;
-
     private final Object inputLock;
     private final Object outputLock;
+    private final Server server;
+    private ObjectOutputStream toClient;
+    private ObjectInputStream fromClient;
 
-    private ObjectOutputStream output;
-    private ObjectInputStream input;
-
-    /**
-     * Default constructor.
-     *
-     * @param socketServer the socket of the server.
-     * @param client       the client connecting.
-     */
-    public SocketClientHandler(SocketServer socketServer, Socket client) {
-        this.socketServer = socketServer;
-        this.client = client;
+    public SocketClientHandler(Server server, Socket socket) {
+        this.server = server;
+        this.client = socket;
         this.connected = true;
 
         this.inputLock = new Object();
         this.outputLock = new Object();
 
         try {
-            this.output = new ObjectOutputStream(client.getOutputStream());
-            this.input = new ObjectInputStream(client.getInputStream());
+            this.toClient = new ObjectOutputStream(socket.getOutputStream());
+            this.fromClient = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -43,41 +34,18 @@ public class SocketClientHandler implements ClientHandler, Runnable {
     @Override
     public void run() {
         try {
-            handleClientConnection();
-        } catch (IOException e) {
-            System.out.println("Client " + client.getInetAddress() + " connection dropped.");
-            disconnect();
-        }
-    }
-
-    /**
-     * Handles the connection of a new client and keep listening to the socket for new messages.
-     */
-    private void handleClientConnection() throws IOException {
-        System.out.println("Client connected from " + client.getInetAddress());
-
-        try {
+            System.out.println("Client connected from " + client.getInetAddress());
             while (!Thread.currentThread().isInterrupted()) {
                 System.out.println("1 qui socketclienthandler");
                 synchronized (inputLock) {
-                    Message message = (Message) input.readObject();
-                    System.out.println("2 qui socketclienthandler");
-
-                    if (message != null && message.getMessageType() != MessageType.PING) {
-                        if (message.getMessageType() == MessageType.LOGIN_REQUEST) {
-                            socketServer.addClient(message.getNickname(), this);
-                        } else {
-                            System.out.println("Received: " + message);
-                            socketServer.onMessageReceived(message);
-                        }
-                    }
-                    System.out.println("3 qui socketclienthandler");
+                    readMessageFromClient();
                 }
             }
-        } catch (ClassCastException | ClassNotFoundException e) {
-            System.out.println("Invalid stream from client");
+            client.close();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Client " + client.getInetAddress() + " connection dropped.");
+            disconnect();
         }
-        client.close();
     }
 
     /**
@@ -104,25 +72,52 @@ public class SocketClientHandler implements ClientHandler, Runnable {
             connected = false;
             Thread.currentThread().interrupt();
 
-            socketServer.onDisconnect(this);
+            server.onDisconnect(this);
         }
     }
 
     /**
      * Sends a message to the client via socket.
-     *
      */
     @Override
-    public void sendMessage(Message message) {
-        try {
-            synchronized (outputLock) {
-                output.writeObject(message);
-                output.reset();
-                System.out.println("Sent: " + message);
+    public void sendMessageToClient(Message message) {
+        synchronized (outputLock) {
+            try {
+                toClient.writeObject(message);
+                toClient.reset();
+                System.out.println("Sent: " + message.getMessage());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+                disconnect();
             }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            disconnect();
         }
+    }
+
+    @Override
+    public void readMessageFromClient() throws IOException, ClassNotFoundException {
+
+
+
+        Message message = (Message) fromClient.readObject();
+        System.out.println("Ricevuto: "+message.getMessage());
+        System.out.println("2 qui socketclienthandler");
+        if (message.getMessage().equalsIgnoreCase("end")) disconnect();
+        if (message.getMessage() != null) {
+            if (message.getMessageType().equals(MessageType.NICKNAME)) {
+                server.addClient(message.getMessage(), this);
+            }
+            server.onMessageReceived(message);
+        }
+
+/**        if (message != null/* && message.getMessageType() != MessageType.PING) {
+            if (message.getMessageType() == MessageType.LOGIN_REQUEST) {
+                server.addClient(message.getNickname(), this);
+            } else {
+                System.out.println("Received: " + message);
+                server.onMessageReceived(message);
+            }
+        }
+        System.out.println("3 qui socketclienthandler");*/
+
     }
 }

@@ -7,7 +7,7 @@ public class MessageGeneric extends Message{
 
 
     public MessageGeneric(String message) {
-        super("server", MessageType.GENERIC_MESSAGE);
+        super("server", MessageType.GENERIC_MESSAGE, message);
         this.message = message;
     }
 

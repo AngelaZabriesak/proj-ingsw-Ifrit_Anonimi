@@ -7,8 +7,8 @@ import it.polimi.ingsw.Enumerations.*;
  */
 public class LoginRequest extends Message {
 
-    public LoginRequest(String nickname) {
-        super(nickname, MessageType.LOGIN_REQUEST);
+    public LoginRequest(String nickname, String message) {
+        super(nickname, MessageType.LOGIN_REQUEST, message);
     }
 
 }
