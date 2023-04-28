@@ -37,7 +37,18 @@ public interface ViewObserver {
 
     void onUpdateColumn(String column);
 
+
+  /**
+ * Create a new connection to the server with the updated Items picked from Board.
+ */
+
     void onUpdateItem( );
+
+    /**
+            * Create a new connection to the server with the updated the order of the Items in Shelf.
+ */
+
+    void onUpdateOrder();
 
 
 }
