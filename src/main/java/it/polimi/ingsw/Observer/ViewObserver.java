@@ -28,4 +28,16 @@ public interface ViewObserver {
      */
 
     void onUpdateNPlayers(String nPlayers);
+
+    /**
+     * Create a new connection to the server with the updated column.
+     *
+     * @param column the number of the column to be sent.
+     */
+
+    void onUpdateColumn(String column);
+
+    void onUpdateItem( );
+
+
 }

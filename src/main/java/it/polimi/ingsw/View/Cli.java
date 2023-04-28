@@ -93,6 +93,8 @@ public class Cli extends ViewObservable implements View{
         notifyObserver(obs -> obs.onUpdateServerInfo(serverInfo));
     }
 
+    // method that asks for the nickname
+
     @Override
     public void askNickname() {
         out.print("Enter your nickname: ");
@@ -103,6 +105,8 @@ public class Cli extends ViewObservable implements View{
             out.println("Error askNickname");
         }
     }
+
+     // method that asks for number of players
 
     @Override
     public void askNPlayers() {
@@ -115,40 +119,44 @@ public class Cli extends ViewObservable implements View{
             out.println("Error askNPlayers");
         }
 
-
-
     }
+
+    // method that asks you to choose Items from Board
 
     @Override
     public void askItem() {
         out.print("Choose the Items you want to pick from Board");
-        int fstItem;
-        int scdItem;
-        int trdItem;
+        notifyObserver(obs -> obs.onUpdateItem());
+
+
         }
 
 
+    // method that asks you to choose the column of the Shelf in which you want to put your Items
 
-    }
 
     @Override
     public void askColumn() {
-<<<<<<< Updated upstream
-=======
         out.print("Choose the column in your Shelf");
+        try{
+            String column = readLine();
+            notifyObserver(obs -> obs.onUpdateColumn(column));
+        } catch (ExecutionException e){
+            out.println("Error askColumn");
+        }
 
-
->>>>>>> Stashed changes
     }
+
+
+
+    // method that asks you to choose the order of Items in Shelf
 
     @Override
     public void askOrder() {
-<<<<<<< Updated upstream
-=======
         out.print("Choose the insertion order of Items in your Shelf");
 
->>>>>>> Stashed changes
     }
+    
 
     @Override
     public void showBoard() {
