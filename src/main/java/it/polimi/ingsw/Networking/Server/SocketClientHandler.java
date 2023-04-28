@@ -43,7 +43,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
             }
             client.close();
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Client " + client.getInetAddress() + " connection dropped.");
+            System.out.println("Client " + client.getInetAddress() + " connection dropped."+e.getMessage());
             disconnect();
         }
     }
@@ -80,7 +80,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
      * Sends a message to the client via socket.
      */
     @Override
-    public void sendMessageToClient(Message message) {
+    public void sendMessageToClient(MessageToClient message) {
         synchronized (outputLock) {
             try {
                 toClient.writeObject(message);
@@ -95,29 +95,16 @@ public class SocketClientHandler implements ClientHandler, Runnable {
 
     @Override
     public void readMessageFromClient() throws IOException, ClassNotFoundException {
-
-
-
-        Message message = (Message) fromClient.readObject();
+        MessageToServer message = (MessageToServer) fromClient.readObject();
         System.out.println("Ricevuto: "+message.getMessage());
         System.out.println("2 qui socketclienthandler");
         if (message.getMessage().equalsIgnoreCase("end")) disconnect();
         if (message.getMessage() != null) {
-            if (message.getMessageType().equals(MessageType.NICKNAME)) {
+            if (message.getMessageType().equals(MessageType.LOGIN_REPLY)) {
                 server.addClient(message.getMessage(), this);
             }
             server.onMessageReceived(message);
         }
-
-/**        if (message != null/* && message.getMessageType() != MessageType.PING) {
-            if (message.getMessageType() == MessageType.LOGIN_REQUEST) {
-                server.addClient(message.getNickname(), this);
-            } else {
-                System.out.println("Received: " + message);
-                server.onMessageReceived(message);
-            }
-        }
-        System.out.println("3 qui socketclienthandler");*/
-
+        //System.out.println("3 qui socketclienthandler");
     }
 }

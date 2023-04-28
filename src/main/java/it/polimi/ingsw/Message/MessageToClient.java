@@ -1,14 +1,17 @@
 package it.polimi.ingsw.Message;
 
-import it.polimi.ingsw.Enumerations.*;
+import it.polimi.ingsw.Enumerations.MessageType;
+import it.polimi.ingsw.Model.Game.Game;
 
-public abstract class Message {
+import java.io.*;
+
+public class MessageToClient implements Serializable {
     private final String nickname;
     private final MessageType messageType;
-
     private final String message;
+    private Game game;
 
-    public Message(String nickname, MessageType messageType, String message) {
+    public MessageToClient(String nickname, MessageType messageType, String message) {
         this.nickname = nickname;
         this.messageType = messageType;
         this.message = message;
@@ -25,5 +28,6 @@ public abstract class Message {
     public MessageType getMessageType() {
         return messageType;
     }
+
 
 }

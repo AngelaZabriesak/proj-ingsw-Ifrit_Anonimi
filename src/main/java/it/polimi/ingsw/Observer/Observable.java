@@ -30,7 +30,7 @@ public class Observable {
      *
      * @param message the message to be passed to the observers.
      */
-    protected void notifyObserver(Message message) {
+    protected void notifyObserver(MessageToClient message) {
         for (Observer observer : observers) {
             observer.update(message);
         }

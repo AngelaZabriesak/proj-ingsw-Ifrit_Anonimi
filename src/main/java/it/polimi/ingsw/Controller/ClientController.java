@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Controller;
 
+import it.polimi.ingsw.Enumerations.MessageType;
 import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Networking.Client.*;
 import it.polimi.ingsw.Observer.*;
@@ -61,11 +62,11 @@ public class ClientController implements ViewObserver, Observer {
     @Override
     public void onUpdateNickname(String nickname) {
         this.nickname = nickname;
-        client.sendMessageToServer(new LoginRequest(this.nickname,"login"));
+        client.sendMessageToServer(new MessageToServer(this.nickname, MessageType.LOGIN_REPLY,"login"));
     }
 
     @Override
-    public void update(Message message) {
+    public void update(MessageToClient message) {
         // switch sul tipo di messaggio
     }
 }

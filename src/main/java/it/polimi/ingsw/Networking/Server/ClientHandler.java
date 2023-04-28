@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Networking.Server;
 
 
-import it.polimi.ingsw.Message.Message;
+import it.polimi.ingsw.Message.MessageToClient;
 
 import java.io.IOException;
 
@@ -11,6 +11,6 @@ import java.io.IOException;
 public interface ClientHandler {
     boolean isConnected();
     void disconnect();
-    void sendMessageToClient(Message message);
+    void sendMessageToClient(MessageToClient message);
     void readMessageFromClient() throws IOException, ClassNotFoundException;
 }

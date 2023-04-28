@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Networking.Client;
 
+import it.polimi.ingsw.Enumerations.MessageType;
 import it.polimi.ingsw.Message.*;
 
 import java.io.*;
@@ -30,14 +31,14 @@ public class SocketClient extends Client {
     }
 
     @Override
-    public void sendMessageToServer(Message message) {
+    public void sendMessageToServer(MessageToServer message) {
         while(!message.getMessage().equalsIgnoreCase("exit")) {
             try {
                 writeToServer.writeObject(message);
                 writeToServer.reset();
             } catch (IOException e) {
                 disconnect();
-                notifyObserver(new MessageError(null, "Not send message."));
+                notifyObserver(new MessageToClient(null, MessageType.ERROR, "Not send message."));
             }
         }
         disconnect();
@@ -48,11 +49,11 @@ public class SocketClient extends Client {
         readExecution.execute(
                 ()->{
                     while (!readExecution.isShutdown()){
-                        Message message;
+                        MessageToClient message;
                         try{
-                            message = (Message) readFromServer.readObject();
+                            message = (MessageToClient) readFromServer.readObject();
                         } catch (Exception e) {
-                            message = new MessageError(null,"Connection lost");
+                            message = new MessageToClient(null,MessageType.ERROR,"Connection lost");
                         }
                         notifyObserver(message);
                     }
@@ -68,7 +69,7 @@ public class SocketClient extends Client {
                 socket.close();
             }
         } catch (IOException e ){
-            notifyObserver(new MessageError(null, "Could not disconnect."));
+            notifyObserver(new MessageToClient(null,MessageType.ERROR, "Could not disconnect."));
         }
     }
 }
