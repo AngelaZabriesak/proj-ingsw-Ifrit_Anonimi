@@ -105,21 +105,49 @@ public class Cli extends ViewObservable implements View{
     }
 
     @Override
-    public void askNPlayer() {
+    public void askNPlayers() {
+        out.print("How many players are in this match?");
+        try{
+
+            String nPlayers = readLine();
+            notifyObserver(obs -> obs.onUpdateNPlayers(nPlayers));
+        } catch (ExecutionException e){
+            out.println("Error askNPlayers");
+        }
+
+
 
     }
 
     @Override
     public void askItem() {
+        out.print("Choose the Items you want to pick from Board");
+        int fstItem;
+        int scdItem;
+        int trdItem;
+        }
+
+
 
     }
 
     @Override
     public void askColumn() {
+<<<<<<< Updated upstream
+=======
+        out.print("Choose the column in your Shelf");
+
+
+>>>>>>> Stashed changes
     }
 
     @Override
     public void askOrder() {
+<<<<<<< Updated upstream
+=======
+        out.print("Choose the insertion order of Items in your Shelf");
+
+>>>>>>> Stashed changes
     }
 
     @Override

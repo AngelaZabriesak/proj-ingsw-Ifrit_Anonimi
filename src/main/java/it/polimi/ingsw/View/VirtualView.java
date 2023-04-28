@@ -30,7 +30,7 @@ public class VirtualView implements View{
     }
 
     @Override
-    public void askNPlayer() {
+    public void askNPlayers() {
 
     }
 
