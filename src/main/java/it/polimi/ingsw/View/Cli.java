@@ -156,9 +156,10 @@ public class Cli extends ViewObservable implements View{
     @Override
     public void askOrder() {
         out.print("Choose the insertion order of Items in your Shelf");
+        notifyObserver(obs -> obs.onUpdateOrder());
 
     }
-    
+
 
     @Override
     public void showBoard() {
