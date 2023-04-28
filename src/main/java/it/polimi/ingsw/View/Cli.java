@@ -2,6 +2,8 @@ package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Controller.*;
 import it.polimi.ingsw.Model.Game.Game;
+import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
+import it.polimi.ingsw.Model.Goal.Goal;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observer.*;
 
@@ -130,29 +132,51 @@ public class Cli extends ViewObservable implements View{
 
     @Override
     public void showShelf() {
-        out.println("This is your Shelf\n" + new Player(inputThread.getName()).getMyShelf());
+
     }
 
     @Override
     public void showPGoal() {
-        out.println("This is your Personal Goal\n" + new Player(inputThread.getName()).getMyGoal());
+
     }
 
     @Override
     public void showCGoal() {
-        out.println("These are the Common Goals\n" + new Player(inputThread.getName()).getcGoal());
+
     }
 
     @Override
     public void showScore() {
-        out.println("Yuor current score is " + new Player(inputThread.getName()).getMyScore());
+
+    }
+/*
+    @Override
+    public void showShelf(Player p) {
+        out.println("This is your Shelf\n" + p.getMyShelf());
     }
 
     @Override
+    public void showPGoal(Goal p) {
+        out.println("This is your Personal Goal\n" + p.getDescription());
+    }
+
+    @Override
+    public void showCGoal(Goal c) {
+        out.println("These are the Common Goals\n" + c.getDescription());
+    }
+
+    @Override
+    public void showScore(Player p) {
+        out.println("Your current score is " + p.getMyScore());
+    }
+
+ */
+    
     /**
      * Shows the login result on the terminal.
-     * On login fail, the program is terminated immediatly.
+     * On login fail, the program is terminated immediately.
      */
+    @Override
     public void showLoginResult(boolean nicknameAccepted, boolean connectionSuccessful, String nickname) {
 
         if (nicknameAccepted && connectionSuccessful) {
