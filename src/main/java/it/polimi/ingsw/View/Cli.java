@@ -1,6 +1,8 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Controller.*;
+import it.polimi.ingsw.Model.Game.Game;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observer.*;
 
 import java.io.*;
@@ -103,48 +105,75 @@ public class Cli extends ViewObservable implements View{
     }
 
     @Override
-    public void askNPlayer() {
+    public void askNPlayers() {
+        out.print("How many players are in this match?");
+        try{
+
+            String nPlayers = readLine();
+            notifyObserver(obs -> obs.onUpdateNPlayers(nPlayers));
+        } catch (ExecutionException e){
+            out.println("Error askNPlayers");
+        }
+
+
 
     }
 
     @Override
     public void askItem() {
+        out.print("Choose the Items you want to pick from Board");
+        int fstItem;
+        int scdItem;
+        int trdItem;
+        }
+
+
 
     }
 
     @Override
     public void askColumn() {
+<<<<<<< Updated upstream
+=======
+        out.print("Choose the column in your Shelf");
 
+
+>>>>>>> Stashed changes
     }
 
     @Override
     public void askOrder() {
+<<<<<<< Updated upstream
+=======
+        out.print("Choose the insertion order of Items in your Shelf");
 
+>>>>>>> Stashed changes
     }
 
     @Override
     public void showBoard() {
+        out.println("This is the current Board\n");
 
     }
 
     @Override
     public void showShelf() {
-
+        out.println("This is your Shelf\n" + new Player(inputThread.getName()).getMyShelf());
     }
 
     @Override
     public void showPGoal() {
-
+        out.println("This is your Personal Goal\n" + new Player(inputThread.getName()).getMyGoal());
     }
 
     @Override
     public void showCGoal() {
-
+        out.println("These are the Common Goals\n" + new Player(inputThread.getName()).getcGoal());
     }
 
     @Override
     public void showScore() {
-
+        out.println("Yuor current score is " + new Player(inputThread.getName()).getMyScore());
     }
 
     @Override

@@ -9,7 +9,7 @@ public class Gui extends ViewObservable implements View{
     }
 
     @Override
-    public void askNPlayer() {
+    public void askNPlayers() {
 
     }
 
