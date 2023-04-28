@@ -160,6 +160,7 @@ public class Cli extends ViewObservable implements View{
 
     }
 
+    // method that shows the Board
 
     @Override
     public void showBoard() {
@@ -167,20 +168,28 @@ public class Cli extends ViewObservable implements View{
 
     }
 
+    //method that shows the personal Shelf
+
     @Override
     public void showShelf() {
 
     }
+
+    //method that shows the PGoal
 
     @Override
     public void showPGoal() {
 
     }
 
+    // mthod that shows the CGoal
+
     @Override
     public void showCGoal() {
 
     }
+
+    //method that shows the personal score
 
     @Override
     public void showScore() {
