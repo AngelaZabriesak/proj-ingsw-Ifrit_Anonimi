@@ -1,5 +1,6 @@
 package it.polimi.ingsw.View;
 
+import it.polimi.ingsw.Enumerations.MessageType;
 import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Networking.Server.*;
 
@@ -26,11 +27,11 @@ public class VirtualView implements View{
 
     @Override
     public void askNickname() {
-        clientHandler.sendMessageToClient(new LoginReply(false, true));
+        clientHandler.sendMessageToClient(new MessageToClient("", MessageType.LOGIN_REPLY, "true"));
     }
 
     @Override
-    public void askNPlayer() {
+    public void askNPlayers() {
 
     }
 
@@ -76,12 +77,12 @@ public class VirtualView implements View{
 
     @Override
     public void showLoginResult(boolean nicknameAccepted, boolean connectionSuccessful, String nickname) {
-        clientHandler.sendMessageToClient(new LoginReply(nicknameAccepted, connectionSuccessful));
+        clientHandler.sendMessageToClient(new MessageToClient(nickname, MessageType.LOGIN_REPLY, "connectionSuccessful"));
     }
 
     @Override
     public void showErrorAndExit(String error) {
-        clientHandler.sendMessageToClient(new MessageError("server", error));
+        clientHandler.sendMessageToClient(new MessageToClient("server",MessageType.ERROR, error));
     }
 
 }

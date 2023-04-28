@@ -8,7 +8,7 @@ public interface View {
      * Asks the user to choose a Nickname.
      */
     void askNickname();
-    void askNPlayer();
+    void askNPlayers();
     void askItem();
     void askColumn();
     void askOrder();

@@ -9,7 +9,7 @@ public abstract class Client  extends Observable {
      *
      * @param message the message to be sent.
      */
-    public abstract void sendMessageToServer(Message message);
+    public abstract void sendMessageToServer(MessageToServer message);
 
     /**
      * Asynchronously reads a message from the server and notifies the ClientController.

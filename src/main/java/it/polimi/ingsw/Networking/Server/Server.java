@@ -2,7 +2,7 @@ package it.polimi.ingsw.Networking.Server;
 
 
 import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Message.Message;
+import it.polimi.ingsw.Message.MessageToServer;
 import it.polimi.ingsw.View.VirtualView;
 
 import java.io.IOException;
@@ -36,8 +36,7 @@ public class Server implements Runnable{
             serverSocket = new ServerSocket(port);
             System.out.println("Socket server started on port " + port + ".");
         } catch (IOException e) {
-            System.out.println(
-                    "Server could not start!");
+            System.out.println("Server could not start!");
             return;
         }
 
@@ -47,6 +46,7 @@ public class Server implements Runnable{
                 socket = serverSocket.accept();
                 SocketClientHandler clientHandler = new SocketClientHandler(this,socket);
                 Thread thread = new Thread(clientHandler);
+                id++;
                 thread.start();
             }
         }catch (IOException e){
@@ -85,7 +85,7 @@ public class Server implements Runnable{
     /**
      * Forwards a received message from the client to the GameController.
      */
-    public void onMessageReceived(Message message) {
+    public void onMessageReceived(MessageToServer message) {
         gameController.onMessageReceived(message);
     }
 

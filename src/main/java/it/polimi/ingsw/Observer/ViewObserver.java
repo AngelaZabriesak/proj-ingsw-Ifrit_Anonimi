@@ -20,4 +20,24 @@ public interface ViewObserver {
      * @param nickname the nickname to be sent.
      */
     void onUpdateNickname(String nickname);
+
+    /**
+     * Create a new connection to the server with the numbers of players.
+     *
+     * @param nPlayers the number of the players to be sent.
+     */
+
+    void onUpdateNPlayers(String nPlayers);
+
+    /**
+     * Create a new connection to the server with the updated column.
+     *
+     * @param column the number of the column to be sent.
+     */
+
+    void onUpdateColumn(String column);
+
+    void onUpdateItem( );
+
+
 }
