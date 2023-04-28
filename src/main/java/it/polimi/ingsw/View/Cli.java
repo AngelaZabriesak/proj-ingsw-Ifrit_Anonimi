@@ -1,6 +1,8 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Controller.*;
+import it.polimi.ingsw.Model.Game.Game;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observer.*;
 
 import java.io.*;
@@ -114,37 +116,36 @@ public class Cli extends ViewObservable implements View{
 
     @Override
     public void askColumn() {
-
     }
 
     @Override
     public void askOrder() {
-
     }
 
     @Override
     public void showBoard() {
+        out.println("This is the current Board\n");
 
     }
 
     @Override
     public void showShelf() {
-
+        out.println("This is your Shelf\n" + new Player(inputThread.getName()).getMyShelf());
     }
 
     @Override
     public void showPGoal() {
-
+        out.println("This is your Personal Goal\n" + new Player(inputThread.getName()).getMyGoal());
     }
 
     @Override
     public void showCGoal() {
-
+        out.println("These are the Common Goals\n" + new Player(inputThread.getName()).getcGoal());
     }
 
     @Override
     public void showScore() {
-
+        out.println("Yuor current score is " + new Player(inputThread.getName()).getMyScore());
     }
 
     @Override
