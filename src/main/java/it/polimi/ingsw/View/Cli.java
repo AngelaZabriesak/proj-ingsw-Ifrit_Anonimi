@@ -1,17 +1,25 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Controller.*;
-import it.polimi.ingsw.Model.Game.Game;
-import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
-import it.polimi.ingsw.Model.Goal.Goal;
-import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Message.GameState.*;
+import it.polimi.ingsw.Message.ItemPosition;
+import it.polimi.ingsw.Message.Request.NPlayerRequest;
+import it.polimi.ingsw.Message.Response.BoardResponse;
+import it.polimi.ingsw.Message.Response.ShelfResponse;
+import it.polimi.ingsw.Message.TurnAlert;
+import it.polimi.ingsw.Message.Error.Error;
+import it.polimi.ingsw.Model.Game.*;
+import it.polimi.ingsw.Model.Goal.CommonGoal.*;
+import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
+import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Observer.*;
+import it.polimi.ingsw.Observer.ObserverNew.InputObservable;
 
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-public class Cli extends ViewObservable implements View{
+public class Cli extends InputObservable implements View, ViewObserver {
 
     private final PrintStream out;
     private Thread inputThread;
@@ -43,7 +51,7 @@ public class Cli extends ViewObservable implements View{
         return input;
     }
 
-    public void init(){
+    public void init() {
         out.println("My Shelfie");
         try {
             askServerInfo();
@@ -67,11 +75,8 @@ public class Cli extends ViewObservable implements View{
 
         String address = readLine();
 
-        if (address.equals("")) {
-            serverInfo.put("address", defaultAddress);
-        }
-        else{
-            serverInfo.put("address", address);
+        if (!address.equals("")) {
+            defaultAddress = address;
         }
 
         do {
@@ -83,7 +88,7 @@ public class Cli extends ViewObservable implements View{
                 validPort = true;
             } else {
                 if (ClientController.isValidPort(port)) {
-                    serverInfo.put("port", port);
+                    defaultPort = port;
                     validPort = true;
                 } else {
                     out.println("Invalid port!");
@@ -92,7 +97,9 @@ public class Cli extends ViewObservable implements View{
             }
         } while (!validPort);
 
-        notifyObserver(obs -> obs.onUpdateServerInfo(serverInfo));
+        String finalDefaultPort = defaultPort;
+        String finalDefaultAddress = defaultAddress;
+        notifyInObserver(obs -> obs.onUpdateServerInfo(finalDefaultAddress, Integer.parseInt(finalDefaultPort)));
     }
 
     // method that asks for the nickname
@@ -102,25 +109,30 @@ public class Cli extends ViewObservable implements View{
         out.print("Enter your nickname: ");
         try {
             String nickname = readLine();
-            notifyObserver(obs -> obs.onUpdateNickname(nickname));
+            System.out.println("read " + nickname);
+            notifyInObserver(obs -> obs.onUpdateNickname(nickname));
         } catch (ExecutionException e) {
             out.println("Error askNickname");
         }
     }
 
-     // method that asks for number of players
+    // method that asks for number of players
+
+    @Override
+    public void NumOfPlayerHandler(NPlayerRequest message) {
+        askNPlayers();
+    }
+
 
     @Override
     public void askNPlayers() {
         out.print("How many players are in this match?");
-        try{
-
+        try {
             String nPlayers = readLine();
-            notifyObserver(obs -> obs.onUpdateNPlayers(nPlayers));
-        } catch (ExecutionException e){
+            notifyInObserver(obs -> obs.onUpdateNPlayers(Integer.parseInt(nPlayers)));
+        } catch (ExecutionException e) {
             out.println("Error askNPlayers");
         }
-
     }
 
     // method that asks you to choose Items from Board
@@ -128,72 +140,62 @@ public class Cli extends ViewObservable implements View{
     @Override
     public void askItem() {
         out.print("Choose the Items you want to pick from Board");
-        notifyObserver(obs -> obs.onUpdateItem());
-
-
-        }
-
+        Position fstItem = null;
+        Position scdItem;
+        Position trdItem;
+        notifyInObserver(obs -> obs.onUpdateChooseItem(new ItemPosition(fstItem)));
+    }
 
     // method that asks you to choose the column of the Shelf in which you want to put your Items
-
-
     @Override
     public void askColumn() {
         out.print("Choose the column in your Shelf");
         try{
             String column = readLine();
-            notifyObserver(obs -> obs.onUpdateColumn(column));
+            notifyInObserver(obs -> obs.onUpdateColumn(column));
         } catch (ExecutionException e){
             out.println("Error askColumn");
         }
-
     }
 
-
-
     // method that asks you to choose the order of Items in Shelf
-
     @Override
     public void askOrder() {
         out.print("Choose the insertion order of Items in your Shelf");
-        notifyObserver(obs -> obs.onUpdateOrder());
-
+        notifyInObserver(obs -> obs.onUpdateOrder());
     }
 
     // method that shows the Board
 
     @Override
-    public void showBoard() {
-        out.println("This is the current Board\n");
+    public void showBoard(Board board) {
+        out.println("This is the current Board\n"+board);
 
     }
 
     //method that shows the personal Shelf
-
     @Override
-    public void showShelf() {
-
+    public void showShelf(Shelf shelf) {
+        out.println("This is your Shelf\n" + shelf);
     }
 
     //method that shows the PGoal
 
     @Override
-    public void showPGoal() {
-
+    public void showPGoal(Pgoal pgoal) {
+        out.println("This is your Personal Goal\n" + pgoal);
     }
 
-    // mthod that shows the CGoal
+    // method that shows the CGoal
 
     @Override
-    public void showCGoal() {
-
+    public void showCGoal(ArrayList<Cgoal> cgoal) {
+        out.println("These are the Common Goals\n" + cgoal);
     }
 
     //method that shows the personal score
-
-    @Override
-    public void showScore() {
-
+    public void showScore(Player player) {
+        out.println("Yuor current score is " +player.getMyScore());
     }
 /*
     @Override
@@ -210,14 +212,8 @@ public class Cli extends ViewObservable implements View{
     public void showCGoal(Goal c) {
         out.println("These are the Common Goals\n" + c.getDescription());
     }
-
-    @Override
-    public void showScore(Player p) {
-        out.println("Your current score is " + p.getMyScore());
-    }
-
  */
-    
+
     /**
      * Shows the login result on the terminal.
      * On login fail, the program is terminated immediately.
@@ -250,5 +246,59 @@ public class Cli extends ViewObservable implements View{
         out.println("EXIT.");
 
         System.exit(1);
+    }
+
+    @Override
+    public void showError(String error) {
+        out.println("\nERROR: " + error);
+    }
+
+    @Override
+    public void ErrorManager(Error message) {
+        showError(message.getError());
+    }
+
+    @Override
+    public void endTurnHandler(EndTurn message) {
+
+    }
+
+    @Override
+    public void ConnectionSuccessfulHandler(ConnectionOK message) {
+        askNickname();
+    }
+
+    @Override
+    public void CompleteQuestionManager(CompletedQuestion message) {
+
+    }
+
+    @Override
+    public void showShelfHandler(ShelfResponse message) {
+        showShelf(message.getShelf());
+    }
+
+    @Override
+    public void showBoardHandler(BoardResponse message) {
+        showBoard(message.getBoard());
+    }
+
+    @Override
+    public void GameStartedHandler(GameStart message) {
+
+    }
+
+    @Override
+    public void TurnAlert(TurnAlert message) {
+
+    }
+
+    @Override
+    public void winHandler(Win message) {
+    }
+
+    @Override
+    public void GameEndedHandler(EndGame message) {
+
     }
 }

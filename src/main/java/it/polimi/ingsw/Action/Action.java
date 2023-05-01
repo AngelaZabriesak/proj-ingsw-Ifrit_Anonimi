@@ -10,7 +10,7 @@ public interface Action {
      * This method is used to do an action
      * @throws ActionException when is impossible to complete the requested action
      */
-    void execute() throws ActionException;
+    void execute() throws ActionException, WinException;
 
     /**
      * This method is used to send parameters through messages and finally to be printed in cli

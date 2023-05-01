@@ -1,10 +1,10 @@
 package it.polimi.ingsw.Observer;
 
-import it.polimi.ingsw.Message.*;
 
 import java.util.*;
+import java.util.function.Consumer;
 
-public class Observable {
+public abstract class Observable{
     private final List<Observer> observers = new ArrayList<>();
 
     /**
@@ -26,13 +26,7 @@ public class Observable {
     }
 
     /**
-     * Notifies all the current observers through the update method and passes to them a message
-     *
-     * @param message the message to be passed to the observers.
+     * Notifies all the current observers through the lambda argument.
      */
-    protected void notifyObserver(MessageToClient message) {
-        for (Observer observer : observers) {
-            observer.update(message);
-        }
-    }
+    public abstract void notifyObserver(Consumer<Observer> lambda);
 }

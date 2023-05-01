@@ -150,7 +150,7 @@ public class Game {
         action = myAction;
     }
 
-    public void doAction() throws ActionException {
+    public void doAction() throws ActionException, WinException {
         action.execute();
     }
 

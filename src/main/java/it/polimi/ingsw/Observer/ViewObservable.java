@@ -1,10 +1,9 @@
 package it.polimi.ingsw.Observer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
+import java.util.*;
+import java.util.function.*;
 
-public abstract class ViewObservable {
+public abstract class ViewObservable{
     protected final List<ViewObserver> observers = new ArrayList<>();
 
     /**
@@ -38,7 +37,7 @@ public abstract class ViewObservable {
     /**
      * Notifies all the current observers through the lambda argument.
      */
-    protected void notifyObserver(Consumer<ViewObserver> lambda) {
+    public void notifyViewObserver(Consumer<ViewObserver> lambda) {
         for (ViewObserver observer : observers) {
             lambda.accept(observer);
         }

@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Action.ChooseItem;
 import it.polimi.ingsw.Action.ChooseOrder;
 import it.polimi.ingsw.Exception.ActionException;
+import it.polimi.ingsw.Exception.WinException;
 import it.polimi.ingsw.Model.Game.*;
 import org.junit.jupiter.api.*;
 
@@ -28,7 +29,7 @@ public class TestChooseOrder {
 
     @Test
     @DisplayName("Testing putting the items  chose by player 1 in order")
-    public void getItem1Player() throws ActionException {
+    public void getItem1Player() throws ActionException, WinException {
         ArrayList<Integer> position = new ArrayList<>();
         position.add(0);
         position.add(1);
@@ -47,7 +48,7 @@ public class TestChooseOrder {
 
     @Test
     @DisplayName("Testing putting the items  chose by player 2 in order")
-    public void getItem2Player() throws ActionException {
+    public void getItem2Player() throws ActionException, WinException {
         game.setActivePlayer(game.getPlayers().get(1));
         Player p0 = game.getCurrentPlayer();
         ArrayList<Integer> position = new ArrayList<>();

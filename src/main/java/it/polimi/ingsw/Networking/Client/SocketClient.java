@@ -1,14 +1,16 @@
 package it.polimi.ingsw.Networking.Client;
 
-import it.polimi.ingsw.Enumerations.MessageType;
-import it.polimi.ingsw.Message.*;
+import it.polimi.ingsw.Message.Error.Error;
+import it.polimi.ingsw.Message.Message;
+import it.polimi.ingsw.Observer.ObserverNew.ClientObserver;
+import it.polimi.ingsw.Observer.ObserverNew.SocketClientObservable;
 
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
 
 // Client class
-public class SocketClient extends Client {
+public class SocketClient extends SocketClientObservable implements ClientObserver {
     private final Socket socket;
 
     private ObjectOutputStream writeToServer;
@@ -18,7 +20,7 @@ public class SocketClient extends Client {
 
     private final ExecutorService readExecution;
 
-    public SocketClient(String address, int port){
+    public SocketClient(String address, int port, ObsClient client){
         this.socket = new Socket();
         try {
             this.socket.connect(new InetSocketAddress(address,port));
@@ -30,7 +32,15 @@ public class SocketClient extends Client {
         this.readExecution = Executors.newSingleThreadExecutor();
     }
 
-    @Override
+    public void start(){
+        final Thread thread = new Thread(){
+            public void run(){
+                readMessageFromServer();
+            }
+        };
+        thread.start();
+    }
+/*
     public void sendMessageToServer(MessageToServer message) {
         while(!message.getMessage().equalsIgnoreCase("exit")) {
             try {
@@ -38,38 +48,51 @@ public class SocketClient extends Client {
                 writeToServer.reset();
             } catch (IOException e) {
                 disconnect();
-                notifyObserver(new MessageToClient(null, MessageType.ERROR, "Not send message."));
+                notifyObserver(new InputError("Not send message."));
             }
         }
         disconnect();
-    }
+    }*/
 
-    @Override
     public void readMessageFromServer() {
         readExecution.execute(
                 ()->{
                     while (!readExecution.isShutdown()){
-                        MessageToClient message;
                         try{
-                            message = (MessageToClient) readFromServer.readObject();
+                            Message message = (Message) readFromServer.readObject();
+                            notifyObserver(obs->obs.update(message));
                         } catch (Exception e) {
-                            message = new MessageToClient(null,MessageType.ERROR,"Connection lost");
+                            Error message = new Error("Connection lost");
+                            notifyObserver(obs->obs.update(message));
+                            disconnect();
+                            break;
                         }
-                        notifyObserver(message);
                     }
                 }
         );
     }
 
     @Override
+    public void sendMessageToServer(Message message) {
+        try{
+            System.out.println(message.getNickname()+" is sending a "+message.getType());
+            writeToServer.writeObject(message);
+            writeToServer.reset();
+        }catch (IOException e){
+            System.out.println("Not send message");
+        }
+    }
+
+    @Override
     public void disconnect() {
         try{
             if(!socket.isClosed()){
+                removeAllObservers();
                 readExecution.shutdown();
                 socket.close();
             }
         } catch (IOException e ){
-            notifyObserver(new MessageToClient(null,MessageType.ERROR, "Could not disconnect."));
+            notifyObserver(obs->obs.update(new Error("Could not disconnect.")));
         }
     }
 }

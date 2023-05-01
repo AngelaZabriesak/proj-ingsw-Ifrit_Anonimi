@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Action.ChooseItem;
 import it.polimi.ingsw.Exception.ActionException;
+import it.polimi.ingsw.Exception.WinException;
 import it.polimi.ingsw.Model.Game.*;
 import org.junit.jupiter.api.*;
 
@@ -25,7 +26,7 @@ public class TestChooseItem {
 
         @Test
         @DisplayName("Testing getting item chose by player 1")
-        public void getItem1Player() throws ActionException {
+        public void getItem1Player() throws ActionException, WinException {
             Player p0 = game.getCurrentPlayer();
             game.setAction(new ChooseItem(game,1,4,p0));
             game.doAction();
@@ -39,7 +40,7 @@ public class TestChooseItem {
 
         @Test
         @DisplayName("Testing getting item chose by player 2")
-        public void getItem2Player() throws ActionException {
+        public void getItem2Player() throws ActionException, WinException {
             game.setActivePlayer(game.getPlayers().get(1));
             Player p0 = game.getCurrentPlayer();
             game.setAction(new ChooseItem(game,2,4,p0));

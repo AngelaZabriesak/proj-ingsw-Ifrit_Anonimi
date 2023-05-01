@@ -1,7 +1,7 @@
 package it.polimi.ingsw.View;
 
 import java.io.*;
-import java.util.concurrent.Callable;
+import java.util.concurrent.*;
 
 /**
  * This class is used to read the input stream and making the input kind of interruptible.

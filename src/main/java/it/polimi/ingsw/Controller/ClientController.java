@@ -1,31 +1,23 @@
 package it.polimi.ingsw.Controller;
 
-import it.polimi.ingsw.Enumerations.MessageType;
 import it.polimi.ingsw.Message.*;
+import it.polimi.ingsw.Message.Request.*;
+import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Networking.Client.*;
-import it.polimi.ingsw.Observer.*;
-import it.polimi.ingsw.Observer.Observer;
-import it.polimi.ingsw.View.*;
+import it.polimi.ingsw.Observer.ObserverNew.*;
 
-import java.io.*;
-import java.util.*;
-import java.util.concurrent.*;
-
-public class ClientController implements ViewObserver, Observer {
-
-    private final View view;
-    private Client client;
-    private String nickname;
-    private final ExecutorService taskQueue;
+public class ClientController extends ClientObservable implements InputObserver {
+    private MessageManager messageManager;
+    private ObsClient client;
+    //private final ExecutorService taskQueue;
 
     /**
      * Constructs Client Controller.
-     *
-     * @param view the view to be controlled.
      */
-    public ClientController(View view) {
-        this.view = view;
-        taskQueue = Executors.newSingleThreadExecutor();
+    public ClientController(MessageManager messageManager, ObsClient obsClient) {
+        this.messageManager = messageManager;
+        this.client = obsClient;
+        //taskQueue = Executors.newSingleThreadExecutor();
     }
 
     /**
@@ -40,17 +32,19 @@ public class ClientController implements ViewObserver, Observer {
         }
     }
 
-    /**
-     * Create a new Socket Connection to the server with the updated info.
-     * An error view is shown if connection cannot be established.
-     */
     @Override
-    public void onUpdateServerInfo(Map<String, String> serverInfo) {
-        client = new SocketClient(serverInfo.get("address"), Integer.parseInt(serverInfo.get("port")));
-        client.addObserver(this);
-        client.readMessageFromServer(); // Starts an asynchronous reading from the server.
-        //client.enablePinger(true);
-        taskQueue.execute(view::askNickname);
+    public void onUpdateColumn(String column) {
+
+    }
+
+    @Override
+    public void onUpdateItem() {
+
+    }
+
+    @Override
+    public void onUpdateOrder() {
+
     }
 
     /**
@@ -61,12 +55,49 @@ public class ClientController implements ViewObserver, Observer {
      */
     @Override
     public void onUpdateNickname(String nickname) {
-        this.nickname = nickname;
-        client.sendMessageToServer(new MessageToServer(this.nickname, MessageType.LOGIN_REPLY,"login"));
+        notifyObserver(obs->obs.sendMessageToServer(new Login(nickname)));
     }
 
     @Override
-    public void update(MessageToClient message) {
-        // switch sul tipo di messaggio
+    public void onUpdateServerInfo(String address, int port) {
+        removeAllObservers();
+        SocketClient socketClient = new SocketClient(address,port,client);
+        socketClient.start();
+        this.addObserver(socketClient);
+        socketClient.readMessageFromServer(); // Starts an asynchronous reading from the server.
+        update(new ConnectionOK(true));
+    }
+
+    /**
+     * this method is used to bring "Messages to Client" from Server to cli
+     */
+    public void update(Message message){
+        message.manage(messageManager);
+    }
+
+    @Override
+    public void onUpdateNPlayers(int numberOfPlayer) {
+        notifyObserver(obs->obs.sendMessageToServer(new NPlayer(""+numberOfPlayer)));
+    }
+
+    @Override
+    public void onUpdateShelfRequest(ShelfRequest message) {
+        notifyObserver(obs->obs.sendMessageToServer(message));
+    }
+
+    @Override
+    public void onUpdateBoardRequest(BoardRequest message) {
+        notifyObserver(obs->obs.sendMessageToServer(message));
+    }
+
+    @Override
+    public void onUpdateChooseItem(ItemPosition message) {
+        notifyObserver(obs->obs.sendMessageToServer(message));
+    }
+
+    @Override
+    public void onUpdateDisconnection() {
+        notifyObserver(obs->obs.disconnect());
+
     }
 }

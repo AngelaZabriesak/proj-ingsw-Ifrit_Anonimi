@@ -17,10 +17,7 @@ public class ServerApp {
                 }
             }
         }
-
-        GameController gameController = new GameController();
-        Server server = new Server(gameController,serverPort);
-        Thread thread = new Thread(server);
-        thread.start();
+        Server server = new Server(serverPort);
+        server.run();
     }
 }

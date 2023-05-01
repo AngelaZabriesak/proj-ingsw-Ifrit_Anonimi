@@ -24,7 +24,7 @@ public class TestAddItemInShelf {
 
     @Test
     @DisplayName("Testing putting an item in the column chose by player 1")
-    public void setItem1Player() throws ActionException {
+    public void setItem1Player() throws ActionException, WinException {
         ArrayList<Integer> position = new ArrayList<>();
         position.add(0);
         position.add(1);
@@ -81,7 +81,7 @@ public class TestAddItemInShelf {
 
     @Test
     @DisplayName("Testing putting an item in the column chose by player 2")
-    public void setItem2Player() throws ActionException {
+    public void setItem2Player() throws ActionException, WinException {
         game.setActivePlayer(game.getPlayers().get(1));
         Player p0 = game.getCurrentPlayer();
         ArrayList<Integer> position = new ArrayList<>();

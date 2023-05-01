@@ -1,28 +1,21 @@
 package it.polimi.ingsw.Networking.Server;
 
-import it.polimi.ingsw.Enumerations.MessageType;
-import it.polimi.ingsw.Message.*;
+import it.polimi.ingsw.Message.Message;
 
 import java.io.*;
 import java.net.*;
 
 public class SocketClientHandler implements ClientHandler, Runnable {
     private final Socket client;
-    private boolean connected;
-    private final Object inputLock;
-    private final Object outputLock;
+    private String nickname;
     private final Server server;
     private ObjectOutputStream toClient;
     private ObjectInputStream fromClient;
 
-    public SocketClientHandler(Server server, Socket socket) {
+    public SocketClientHandler(Server server, Socket socket,String tempNickname) {
         this.server = server;
         this.client = socket;
-        this.connected = true;
-
-        this.inputLock = new Object();
-        this.outputLock = new Object();
-
+        this.nickname = tempNickname;
         try {
             this.toClient = new ObjectOutputStream(socket.getOutputStream());
             this.fromClient = new ObjectInputStream(socket.getInputStream());
@@ -31,29 +24,39 @@ public class SocketClientHandler implements ClientHandler, Runnable {
         }
     }
 
-    @Override
-    public void run() {
-        try {
-            System.out.println("Client connected from " + client.getInetAddress());
-            while (!Thread.currentThread().isInterrupted()) {
-                System.out.println("1 qui socketclienthandler");
-                synchronized (inputLock) {
-                    readMessageFromClient();
-                }
-            }
-            client.close();
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Client " + client.getInetAddress() + " connection dropped."+e.getMessage());
-            disconnect();
-        }
+    public String getNickname() {
+        return nickname;
     }
 
-    /**
-     * Returns the current status of the connection.
-     */
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     @Override
-    public boolean isConnected() {
-        return connected;
+    public void run() {
+        keepListen();
+    }
+
+    private void keepListen(){
+        while(true){
+            try {
+                Message message = (Message) fromClient.readObject();
+                System.out.println("ClientHandler " + nickname + " received a message: " + message.getClass());
+                message.setNickname(nickname);
+                server.read(message);
+            } catch (IOException e) {
+                if(!client.isClosed()){
+                    System.out.println("Connection ended from clienthandler " + nickname);
+                    server.removeClientHandler(this);
+                    disconnect();
+                    if(!server.isGameEnded())
+                        server.clientDisconnection();
+                }
+                break;
+            } catch (ClassNotFoundException e) {
+                System.out.println("ClientHandler "+ nickname +" Class not found exc");
+            }
+        }
     }
 
     /**
@@ -61,18 +64,15 @@ public class SocketClientHandler implements ClientHandler, Runnable {
      */
     @Override
     public void disconnect() {
-        if (connected) {
-            try {
-                if (!client.isClosed()) {
-                    client.close();
-                }
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
+        try {
+            if(!client.isClosed()) {
+                System.out.println("Closing socket: " + nickname);
+                toClient.close();
+                fromClient.close();
+                client.close();
             }
-            connected = false;
-            Thread.currentThread().interrupt();
-
-            server.onDisconnect(this);
+        } catch (IOException e) {
+            System.out.println("IOException when closing Socket: " + nickname);
         }
     }
 
@@ -80,31 +80,15 @@ public class SocketClientHandler implements ClientHandler, Runnable {
      * Sends a message to the client via socket.
      */
     @Override
-    public void sendMessageToClient(MessageToClient message) {
-        synchronized (outputLock) {
-            try {
-                toClient.writeObject(message);
-                toClient.reset();
-                System.out.println("Sent: " + message.getMessage());
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-                disconnect();
-            }
+    public void sendMessageToClient(Message message) {
+        try {
+            System.out.println("ClientHandler "+ nickname +": Sends message "+ message.toString() +" to " + nickname);
+            toClient.writeObject(message);
+            toClient.reset();
+        } catch (IOException e) {
+            System.out.println("ClientHandler "+ nickname + ": Error in sending message to " + nickname);
         }
     }
 
-    @Override
-    public void readMessageFromClient() throws IOException, ClassNotFoundException {
-        MessageToServer message = (MessageToServer) fromClient.readObject();
-        System.out.println("Ricevuto: "+message.getMessage());
-        System.out.println("2 qui socketclienthandler");
-        if (message.getMessage().equalsIgnoreCase("end")) disconnect();
-        if (message.getMessage() != null) {
-            if (message.getMessageType().equals(MessageType.LOGIN_REPLY)) {
-                server.addClient(message.getMessage(), this);
-            }
-            server.onMessageReceived(message);
-        }
-        //System.out.println("3 qui socketclienthandler");
-    }
+
 }

@@ -1,33 +1,47 @@
 package it.polimi.ingsw.Networking.Server;
 
 
-import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Message.MessageToServer;
-import it.polimi.ingsw.View.VirtualView;
+import it.polimi.ingsw.Controller.*;
+import it.polimi.ingsw.Message.Message;
+import it.polimi.ingsw.Message.MessageManager;
+import it.polimi.ingsw.Observer.ObserverNew.*;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
 import java.util.*;
 
 /**
  * Main server class that starts a socket server.
  */
-public class Server implements Runnable{
+public class Server implements Runnable, LoginObserver, GameControllerObserver {
 
+    private MessageManager messageManager; //observed by gameController
     private GameController gameController;
-
     private ServerSocket serverSocket;
     private Socket socket;
     private final Map<String, ClientHandler> clientHandlerMap;
-    private final Object lock;
-    private int port,id=0;
+    private boolean endGame;
+    private int port;
 
-    public Server(GameController gameController,int port) {
-        this.gameController = gameController;
+    public Server(int port) {
         this.clientHandlerMap = Collections.synchronizedMap(new HashMap<>());
         this.port = port;
-        this.lock = new Object();
+        messageManager = new MessageManager();
+    }
+
+    public void notifyAllPlayers(Message message){
+        for(ClientHandler c : clientHandlerMap.values()){
+            c.sendMessageToClient(message);
+        }
+    }
+
+    public void notifyPlayer(Message message, String nickname){
+        for(String c : clientHandlerMap.keySet()){
+            if(c.equals(nickname)){
+                clientHandlerMap.get(c).sendMessageToClient(message);
+                break;
+            }
+        }
     }
 
     @Override
@@ -40,13 +54,17 @@ public class Server implements Runnable{
             return;
         }
 
+        createNewGame();
+
         try{
             while(!Thread.currentThread().isInterrupted()){
+
                 //blocking until a connection is made
                 socket = serverSocket.accept();
-                SocketClientHandler clientHandler = new SocketClientHandler(this,socket);
+                System.out.println("New client accepted!");
+                SocketClientHandler clientHandler = new SocketClientHandler(this,socket,Integer.toString(clientHandlerMap.size()));
+                clientHandlerMap.put(Integer.toString(clientHandlerMap.size()),clientHandler);
                 Thread thread = new Thread(clientHandler);
-                id++;
                 thread.start();
             }
         }catch (IOException e){
@@ -60,63 +78,61 @@ public class Server implements Runnable{
         }
     }
 
+    private void createNewGame(){
+        gameController = new GameController();
+        gameController.addObserver((GameControllerObserver) this);
+    }
 
-    public void addClient(String nickname, ClientHandler clientHandler) {
-        VirtualView vv = new VirtualView(clientHandler);
+    public boolean isGameEnded() {
+        return endGame;
+    }
 
-        if (!gameController.isGameStarted()) {
-            if (gameController.nicknameIsUsed(nickname, vv)) {
-                clientHandlerMap.put(nickname, clientHandler);
-                gameController.loginHandler(nickname, vv);
+    @Override
+    public void update() {
+        createNewGame();
+    }
+
+    @Override
+    public void sendToOnePlayer(Message message, String nickname) {
+        notifyPlayer(message,nickname);
+    }
+
+    @Override
+    public void sendToAllPlayers(Message message) {
+        notifyAllPlayers(message);
+    }
+
+    @Override
+    public void successfulLogin(Message message,String tmpNickname, String newName) {
+        ClientHandler c = clientHandlerMap.get(tmpNickname);
+        clientHandlerMap.remove(tmpNickname,c);
+        clientHandlerMap.put(newName,c);
+        notifyPlayer(message,newName);
+    }
+
+    @Override
+    public void disconnectAll() {
+        if(!endGame) {
+
+            endGame = true;
+            System.out.println("Closing all sockets");
+            for (ClientHandler clientHandler : clientHandlerMap.values()) {
+                clientHandler.disconnect();
             }
-        } else {
-            vv.showLoginResult(true, false, null);
-            clientHandler.disconnect();
+            System.out.println("All sockets closed");
         }
-
     }
 
-    public void removeClient(String nickname, boolean enable) {
-        clientHandlerMap.remove(nickname);
-        gameController.removeVirtualView(nickname, enable);
-        System.out.println("Removed " + nickname + " from the client list.");
+    public void clientDisconnection(){
+        if(!endGame)
+            messageManager.clientDisconnection();
     }
 
-    /**
-     * Forwards a received message from the client to the GameController.
-     */
-    public void onMessageReceived(MessageToServer message) {
-        gameController.onMessageReceived(message);
+    public void removeClientHandler(SocketClientHandler clientHandler){
+        clientHandlerMap.remove(clientHandler.getNickname(),clientHandler);
     }
 
-    /**
-     * Handles the disconnection of a client.
-     *
-     * @param clientHandler the client disconnecting.
-     */
-    public void onDisconnect(ClientHandler clientHandler) {
-        synchronized (lock) {
-            String nickname = clientHandlerMap.entrySet().stream().filter(entry -> clientHandler.equals(entry.getValue())).map(Map.Entry::getKey).findFirst().orElse(null);
-
-            if (nickname != null) {
-
-                boolean gameStarted = gameController.isGameStarted();
-                removeClient(nickname, !gameStarted); // enable lobby notifications only if the game didn't start yet.
-
-                if(gameController.getTurnController() != null &&
-                        !gameController.getTurnController().getNicknameList().contains(nickname)) {
-                    return;
-                }
-
-                // Resets server status only if the game was already started.
-                // Otherwise the server will wait for a new player to connect.
-                if (gameStarted) {
-                    gameController.broadcastDisconnectionMessage(nickname, " disconnected from the server. GAME ENDED.");
-
-                    gameController.endGame();
-                    clientHandlerMap.clear();
-                }
-            }
-        }
+    public void read(Message message){
+        message.manage(messageManager);
     }
 }
