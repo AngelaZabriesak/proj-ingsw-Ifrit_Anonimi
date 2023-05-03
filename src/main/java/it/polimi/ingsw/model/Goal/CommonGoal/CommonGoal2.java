@@ -27,8 +27,7 @@ public class CommonGoal2 extends Cgoal {
         for (i = 0; i < ROW; i++) {
             for (j = 0; j < COL; j++) {
                 if(myshelf[i][j]!=null){
-                    if ((myshelf[i][j].getColor() != null) &&
-                            (
+                    if (
                                     ((myshelf[i][j].getColor() == myshelf[i + 1][j].getColor()) &&
                                             (myshelf[i][j].getColor() == myshelf[i + 2][j].getColor()) &&
                                             (myshelf[i][j].getColor() == myshelf[i + 3][j].getColor()))
@@ -36,7 +35,7 @@ public class CommonGoal2 extends Cgoal {
                                             ((myshelf[i][j].getColor() == myshelf[i][j + 1].getColor()) &&
                                                     (myshelf[i][j].getColor() == myshelf[i][j + 2].getColor()) &&
                                                     (myshelf[i][j].getColor() == myshelf[i][j + 3].getColor()))
-                            )) {
+                            ) {
                         numOfCond++;
                         myshelfcpy[i][j] = null;
                     }
