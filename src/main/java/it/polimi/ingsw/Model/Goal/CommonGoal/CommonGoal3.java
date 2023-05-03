@@ -3,6 +3,8 @@ package it.polimi.ingsw.Model.Goal.CommonGoal;
 import it.polimi.ingsw.Model.Bag.ColorItem;
 import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Shelf;
+import it.polimi.ingsw.Model.Token;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -53,5 +55,15 @@ public class CommonGoal3 extends Cgoal {
 
         }
             }return false;
+    }
+    @Override
+
+    public Token getToken() {
+        Token t = null;
+        if (tokens.size() > 0) {
+            t = tokens.get(tokens.size() - 1);
+            tokens.remove(tokens.size() - 1);
+        }
+        return t;
     }
 }

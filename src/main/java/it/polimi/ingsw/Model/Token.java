@@ -6,13 +6,14 @@ public class Token {
 
     private final int score;
 
-    public Token(int score){
+    public Token(int score) {
         this.score = score;
     }
 
     public int getScore() {
-        return score;
+        return score ;}
+
     }
-}
+
 
 

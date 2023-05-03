@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model.Goal.CommonGoal;
 
 import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Shelf;
+import it.polimi.ingsw.Model.Token;
 
 
 /*   common goal 10:
@@ -31,5 +32,16 @@ public class CommonGoal10 extends Cgoal{
             }
 
         } return false;
+    }
+
+    @Override
+
+    public Token getToken() {
+        Token t = null;
+        if (tokens.size() > 0) {
+            t = tokens.get(tokens.size() - 1);
+            tokens.remove(tokens.size() - 1);
+        }
+        return t;
     }
 }

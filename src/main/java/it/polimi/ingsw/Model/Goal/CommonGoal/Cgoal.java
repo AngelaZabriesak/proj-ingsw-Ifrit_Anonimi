@@ -11,7 +11,7 @@ public abstract class Cgoal extends Goal {
     private int index;
     private Game game;
 
-    private ArrayList<Token> tokens = new ArrayList<>();
+    public ArrayList<Token> tokens = new ArrayList<>();
 
     public Cgoal(){}
 
@@ -35,14 +35,7 @@ public abstract class Cgoal extends Goal {
         return tokens;
     }
 
-    public Token getToken(){
-        Token t = null;
-        if(tokens.size()>0) {
-            t = tokens.get(tokens.size() - 1);
-            tokens.remove(tokens.size() - 1);
-        }
-        return t;
-    }
+    public abstract Token getToken();
 
     public Item[][] getGoal(){
         return null;

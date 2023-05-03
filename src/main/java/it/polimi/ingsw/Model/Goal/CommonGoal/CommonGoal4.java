@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model.Goal.CommonGoal;
 import it.polimi.ingsw.Model.Bag.ColorItem;
 import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Shelf;
+import it.polimi.ingsw.Model.Token;
 
 /* common goal 4:
                  three columns each formed by 6 tiles maximum three different types.
@@ -68,6 +69,17 @@ public class CommonGoal4 extends Cgoal {
                 numOfCond++;}
         }
         return numOfCond > 2;
+    }
+
+    @Override
+
+    public Token getToken() {
+        Token t = null;
+        if (tokens.size() > 0) {
+            t = tokens.get(tokens.size() - 1);
+            tokens.remove(tokens.size() - 1);
+        }
+        return t;
     }
 }
 
