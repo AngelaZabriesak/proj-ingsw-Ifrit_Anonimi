@@ -38,9 +38,6 @@ public class CommonGoal7 extends Cgoal{
 
             for (int i = 0; i < COL; i++) {
 
-                if (myshelf[j][i].getColor() == null){
-
-                    break; }
 
                 if (myshelf[j][i].getColor() == ColorItem.BLUE) {
                     b = 1;
