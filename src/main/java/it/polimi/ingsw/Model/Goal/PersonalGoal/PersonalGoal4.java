@@ -17,4 +17,9 @@ public class PersonalGoal4 extends Pgoal{
         myItemGoal[3][3] = new Item(ColorItem.AZURE);
     }
 
+
+    @Override
+    public Item[][] getGoal() {
+        return myItemGoal;
+    }
 }

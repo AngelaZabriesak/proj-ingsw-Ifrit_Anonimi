@@ -4,14 +4,9 @@ import it.polimi.ingsw.Action.*;
 import it.polimi.ingsw.Exception.*;
 import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Message.GameState.*;
-import it.polimi.ingsw.Message.Request.BoardRequest;
-import it.polimi.ingsw.Message.Request.ItemOrderRequest;
-import it.polimi.ingsw.Message.Request.NPlayerRequest;
-import it.polimi.ingsw.Message.Request.ShelfRequest;
+import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.Error.Error;
-import it.polimi.ingsw.Message.Response.BoardResponse;
-import it.polimi.ingsw.Message.Response.ItemOrderResponse;
-import it.polimi.ingsw.Message.Response.ShelfResponse;
+import it.polimi.ingsw.Message.Response.*;
 import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.*;
@@ -25,7 +20,6 @@ public class GameController extends GameControllerObservable implements ServerOb
     private final ArrayList<Player> players;
     private int numberOfPlayer;
     private boolean firstPlayerConnected;
-
     private int nItemMoved;
     public GameController(){
         players = new ArrayList<>();

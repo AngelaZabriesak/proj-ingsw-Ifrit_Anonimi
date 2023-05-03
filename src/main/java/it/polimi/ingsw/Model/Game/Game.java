@@ -248,7 +248,7 @@ public class Game {
     }
 
     public ArrayList<Cgoal> getCGoal(){
-        return commonGoal;
+        return myGoal;
     }
 
     public Bag getBag(){
@@ -285,6 +285,15 @@ public class Game {
             msg += "|\n";
         }
         msg += "N personal goal " + g.personalGoal.size() + "\n";
+        for (int r = 0; r < 6; r++) {
+            for (int c = 0; c < 5; c++) {
+                if(p0.getMyGoal().getGoal()[r][c]!=null)
+                    msg += "|\t" + p0.getMyGoal().getGoal()[r][c].getColor() + "\t";
+                else
+                    msg+= "|\t------\t";
+            }
+            msg += "|\n";
+        }
         msg += "N common goal " + g.commonGoal.size() + "\n";
         msg += "N my common goal " + g.myGoal.size() + "\n";
         for (Cgoal cg : g.myGoal) {

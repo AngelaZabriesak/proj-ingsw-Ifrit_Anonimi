@@ -28,7 +28,7 @@ public abstract class Cgoal extends Goal {
     }
     
     public void setToken(ArrayList<Token> tokens){
-        this.tokens =tokens;
+        this.tokens = tokens;
     }
 
     public ArrayList<Token> getMyTokens(){

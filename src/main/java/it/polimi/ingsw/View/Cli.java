@@ -2,19 +2,16 @@ package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Controller.*;
 import it.polimi.ingsw.Message.GameState.*;
-import it.polimi.ingsw.Message.ItemPosition;
-import it.polimi.ingsw.Message.Request.NPlayerRequest;
-import it.polimi.ingsw.Message.Response.BoardResponse;
-import it.polimi.ingsw.Message.Response.ShelfResponse;
-import it.polimi.ingsw.Message.TurnAlert;
+import it.polimi.ingsw.Message.Request.*;
+import it.polimi.ingsw.Message.Response.*;
+import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Message.Error.Error;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.*;
-import it.polimi.ingsw.Model.Goal.Goal;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Observer.*;
-import it.polimi.ingsw.Observer.ObserverNew.InputObservable;
+import it.polimi.ingsw.Observer.ObserverNew.*;
 
 import java.io.*;
 import java.util.*;
@@ -104,7 +101,6 @@ public class Cli extends InputObservable implements View, ViewObserver {
     }
 
     // method that asks for the nickname
-
     @Override
     public void askNickname() {
         out.print("Enter your nickname: ");
