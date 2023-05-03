@@ -166,7 +166,22 @@ public class Cli extends InputObservable implements View, ViewObserver {
 
     @Override
     public void showBoard(Board board) {
-        out.println("This is the current Board\n"+board);
+        String b = "";
+        for (int r = -1; r < 9; r++) {
+            if(r==1)
+                b+="|\tR\134C\t ";
+            else
+                b+="|\t"+r+"|\t";
+            for (int c = 0; c < 9; c++) {
+                if (r==-1)
+                    b+="|\t  "+c+"  \t";
+                else if (board.getItem(new Position(r, c)) != null)
+                    b += "|\t" + board.getItem(new Position(r, c)).getColor() + "" + "\t";
+                else
+                    b += "|\tnull\t";
+            }
+            b += "|\n";
+        }
 
     }
 
@@ -196,6 +211,16 @@ public class Cli extends InputObservable implements View, ViewObserver {
     @Override
     public void showPGoal(Pgoal pgoal) {
         out.println("This is your Personal Goal\n" + pgoal.getDescription());
+        String pg = "";
+        for (int r = 0; r < 6; r++) {
+            for (int c = 0; c < 5; c++) {
+                if(pgoal.getGoal()[r][c]!=null)
+                    pg += "|\t" + pgoal.getGoal()[r][c].getColor() + "\t";
+                else
+                    pg+= "|\t------\t";
+            }
+            pg += "|\n";
+        }
     }
 
     //method that shows the CGoal
