@@ -1,9 +1,6 @@
 package it.polimi.ingsw.Observer.ObserverNew;
 
-import it.polimi.ingsw.Observer.Observable;
-
 import java.util.*;
-import java.util.function.*;
 
 /**
  * Personalized observervable class used by gameController to notify his observers when all players have

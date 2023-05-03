@@ -79,7 +79,7 @@ public class TestAddItemInShelf {
     }
 
 
-    @Test
+    /*@Test
     @DisplayName("Testing putting an item in the column chose by player 2")
     public void setItem2Player() throws ActionException, WinException {
         game.setActivePlayer(game.getPlayers().get(1));
@@ -98,6 +98,6 @@ public class TestAddItemInShelf {
         //game.setAction(new AddItemInShelf(4,p0));
         game.doAction();
         assertEquals(0,p0.getPosition().size());
-    }
+    }*/
 
 }

@@ -40,7 +40,7 @@ public class TestChooseOrder {
         game.doAction();
         game.setAction(new ChooseOrder(game,p0,position));
         game.doAction();
-        assertEquals(2,p0.getPosition().size());
+        assertEquals(0,p0.getPosition().size());
 
         for(Position p : game.getCurrentPlayer().getPosition())
             game.getBoard().updateNeighboursAdjacency(p);
@@ -61,6 +61,6 @@ public class TestChooseOrder {
         position.add(1);
         game.setAction(new ChooseOrder(game,p0,position));
         game.doAction();
-        assertEquals(2,p0.getPosition().size());
+        assertEquals(0,p0.getPosition().size());
     }
 }

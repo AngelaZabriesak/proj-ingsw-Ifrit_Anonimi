@@ -130,7 +130,6 @@ public class GameController extends GameControllerObservable implements ServerOb
 
     @Override
     public void endGameDisconnection() {
-
     }
 
     @Override
