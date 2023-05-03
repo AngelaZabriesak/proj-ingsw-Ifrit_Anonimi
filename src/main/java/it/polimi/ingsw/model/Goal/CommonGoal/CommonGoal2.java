@@ -24,8 +24,8 @@ public class CommonGoal2 extends Cgoal {
         Item[][] myshelfcpy = myShelf.getMyShelf();
         int i, j;
 
-        for (i = 0; i < ROW; i++) {
-            for (j = 0; j < COL; j++) {
+        for (i = 0; i < 3; i++) {
+            for (j = 0; j < 2; j++) {
                 if(myshelf[i][j]!=null){
                     if (
                                     ((myshelf[i][j].getColor() == myshelf[i + 1][j].getColor()) &&
