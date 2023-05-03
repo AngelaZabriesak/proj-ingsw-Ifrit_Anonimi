@@ -25,13 +25,15 @@ public class CommonGoal9 extends Cgoal{
         int numOfCond = 0;
 
         for (int j= 0; j < ROW; j++) {
+            for (int i = 0; i < COL; i++) {
 
-            for (int i = 0; i<COL; i++) {
-                if ( myshelf[j][i].getColor() == myshelf[j][i+1].getColor()){
-                    break;
-                } else numOfCond++;
+                if (myshelf[j][i] != null) {
+                    if (myshelf[j][i].getColor() == myshelf[j][i + 1].getColor()) {
+                        break;
+                    } else numOfCond++;
+                } else break;
+
             }
-
         }
         return numOfCond > 1;
     }

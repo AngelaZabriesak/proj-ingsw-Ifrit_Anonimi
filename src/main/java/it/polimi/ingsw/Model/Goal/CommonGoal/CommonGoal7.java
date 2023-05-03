@@ -38,32 +38,36 @@ public class CommonGoal7 extends Cgoal{
 
             for (int i = 0; i < COL; i++) {
 
+                if (myshelf[j][i] != null){
 
-                if (myshelf[j][i].getColor() == ColorItem.BLUE) {
-                    b = 1;
+
+                    if (myshelf[j][i].getColor() == ColorItem.BLUE) {
+                        b = 1;
+                    }
+
+                    if (myshelf[j][i].getColor() == ColorItem.WHITE) {
+                        w = 1;
+                    }
+
+                    if (myshelf[j][i].getColor() == ColorItem.PINK) {
+                        p = 1;
+                    }
+                    if (myshelf[j][i].getColor() == ColorItem.GREEN) {
+                        g = 1;
+
+                    }
+                    if (myshelf[j][i].getColor() == ColorItem.YELLOW) {
+                        y = 1;
+                    }
+
+                    if (myshelf[j][i].getColor() == ColorItem.AZURE) {
+                        a = 1;
+
+                    }
+
                 }
-
-                if (myshelf[j][i].getColor() == ColorItem.WHITE) {
-                    w = 1;
-                }
-
-                if (myshelf[j][i].getColor() == ColorItem.PINK) {
-                    p = 1;
-                }
-                if (myshelf[j][i].getColor() == ColorItem.GREEN) {
-                    g = 1;
-
-                }
-                if (myshelf[j][i].getColor() == ColorItem.YELLOW) {
-                    y = 1;
-                }
-
-                if (myshelf[j][i].getColor() == ColorItem.AZURE) {
-                    a = 1;
-
-                }
-
-            } sum= (b+w+p+g+y+a);
+            }
+                sum= (b+w+p+g+y+a);
             if (sum<=3){
 
                 numOfCond++;}

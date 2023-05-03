@@ -34,29 +34,32 @@ public class CommonGoal4 extends Cgoal {
         for (int i = 0; i < COL; i++) {
             for (int j = 0; j < ROW; j++) {
 
+                if(myshelf[j][i] != null) {
 
-                if (myshelf[j][i].getColor() == ColorItem.BLUE) {
-                    b = 1;
-                }
 
-                if (myshelf[j][i].getColor() == ColorItem.WHITE) {
-                    w = 1;
-                }
+                    if (myshelf[j][i].getColor() == ColorItem.BLUE) {
+                        b = 1;
+                    }
 
-                if (myshelf[j][i].getColor() == ColorItem.PINK) {
-                    p = 1;
-                }
-                if (myshelf[j][i].getColor() == ColorItem.GREEN) {
-                    g = 1;
+                    if (myshelf[j][i].getColor() == ColorItem.WHITE) {
+                        w = 1;
+                    }
 
-                }
-                if (myshelf[j][i].getColor() == ColorItem.YELLOW) {
-                    y = 1;
-                }
+                    if (myshelf[j][i].getColor() == ColorItem.PINK) {
+                        p = 1;
+                    }
+                    if (myshelf[j][i].getColor() == ColorItem.GREEN) {
+                        g = 1;
 
-                if (myshelf[j][i].getColor() == ColorItem.AZURE) {
-                    a = 1;
+                    }
+                    if (myshelf[j][i].getColor() == ColorItem.YELLOW) {
+                        y = 1;
+                    }
 
+                    if (myshelf[j][i].getColor() == ColorItem.AZURE) {
+                        a = 1;
+
+                    }
                 }
 
             } sum= (b+w+p+g+y+a);
