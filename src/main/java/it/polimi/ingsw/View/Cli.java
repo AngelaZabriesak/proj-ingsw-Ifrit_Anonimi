@@ -177,7 +177,18 @@ public class Cli extends InputObservable implements View, ViewObserver {
     //method that shows the personal Shelf
     @Override
     public void showShelf(Shelf shelf) {
-        out.println("This is your Shelf\n" + shelf);
+        out.println("This is your Shelf\n");
+        String s = "";
+        for (int r = 0; r < shelf.getRow(); r++) {
+            for (int c = 0; c < shelf.getCol(); c++) {
+                if (shelf.getMyShelf()[r][c] != null)
+                    s += "|\t" + shelf.getMyShelf()[r][c].getColor() + "\t";
+                else
+                    s += "|\tnull\t";
+            }
+            s += "|\n";
+        }
+        out.println(s);
     }
 
     //method that shows the personal score
@@ -249,7 +260,7 @@ public class Cli extends InputObservable implements View, ViewObserver {
     @Override
     public void endTurnHandler(EndTurn message) {
         GameController gameController;
-        out.println(message.getNickname() + ", your turn ended! Now is " + gameController.notifyActivePlayer() + "'s turn");
+        out.println(message.getNickname() + ", your turn ended! Now is " + /*gameController.notifyActivePlayer()*/ "'s turn");
     }
 
     @Override
