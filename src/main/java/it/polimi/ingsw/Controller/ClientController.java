@@ -9,7 +9,6 @@ import it.polimi.ingsw.Observer.ObserverNew.*;
 public class ClientController extends ClientObservable implements InputObserver {
     private MessageManager messageManager;
     private ObsClient client;
-    //private final ExecutorService taskQueue;
 
     /**
      * Constructs Client Controller.
@@ -17,7 +16,6 @@ public class ClientController extends ClientObservable implements InputObserver 
     public ClientController(MessageManager messageManager, ObsClient obsClient) {
         this.messageManager = messageManager;
         this.client = obsClient;
-        //taskQueue = Executors.newSingleThreadExecutor();
     }
 
     /**
@@ -56,6 +54,7 @@ public class ClientController extends ClientObservable implements InputObserver 
     @Override
     public void onUpdateNickname(String nickname) {
         notifyObserver(obs->obs.sendMessageToServer(new Login(nickname)));
+        update(new Login(nickname));
     }
 
     @Override

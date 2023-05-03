@@ -61,7 +61,7 @@ public class MessageManager extends ObsMessage {
                 notifySrvObserver(obs->obs.moveToColumn((Column) message));
                 break;
             case ITEM_ORDER:
-                notifySrvObserver(obs->obs.showItemChooseForOrdering((ItemOrderRequest) message));
+                notifyViewObserver(obs->obs.showItemChooseForOrdering((ItemOrderRequest) message));
                 break;
             case ITEM_ORDER_RESPONSE:
                 notifySrvObserver(obs->obs.chooseOrderItem((ItemOrderResponse) message));

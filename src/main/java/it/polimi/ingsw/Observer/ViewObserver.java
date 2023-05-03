@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Observer;
 
 import it.polimi.ingsw.Message.GameState.*;
+import it.polimi.ingsw.Message.Request.ItemOrderRequest;
 import it.polimi.ingsw.Message.Request.NPlayerRequest;
 import it.polimi.ingsw.Message.Response.BoardResponse;
 import it.polimi.ingsw.Message.Response.ShelfResponse;
@@ -22,4 +23,5 @@ public interface ViewObserver {
     void TurnAlert(TurnAlert message);
     void winHandler(Win message);
     void GameEndedHandler(EndGame message);
+    void showItemChooseForOrdering(ItemOrderRequest message);
 }

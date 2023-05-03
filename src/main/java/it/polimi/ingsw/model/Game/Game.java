@@ -248,7 +248,7 @@ public class Game {
     }
 
     public ArrayList<Cgoal> getCGoal(){
-        return commonGoal;
+        return myGoal;
     }
 
     public Bag getBag(){
@@ -268,16 +268,24 @@ public class Game {
         Game g = new Game(p);
         String msg = "";
         g.initialize();
-        for (int r = 0; r < 9; r++) {
+        for (int r = -1; r < 9; r++) {
+            if(r==-1)
+                msg+="|\tR\134C\t|";
+            else
+                msg+="|\t"+r+"\t|";
             for (int c = 0; c < 9; c++) {
-                if (g.myBoard.getItem(new Position(r, c)) != null)
-                    msg += "|\t" + g.myBoard.getItem(new Position(r, c)).getColor() + "" +
-                            "\t";
+
+                if(r==-1){
+                    msg+="|\t  "+c+"  \t";
+                }
+                else if (g.myBoard.getItem(new Position(r, c)) != null)
+                    msg += "|\t" + g.myBoard.getItem(new Position(r, c)).getColor() +"\t";
                 else
                     msg += "|\tnull\t";
             }
             msg += "|\n";
         }
+        /*
         for (int r = 0; r < 9; r++) {
             for (int c = 0; c < 9; c++) {
                 msg += "|\t" + g.myBoard.getAdjacency(new Position(r, c)) + "" + "\t";
@@ -285,6 +293,15 @@ public class Game {
             msg += "|\n";
         }
         msg += "N personal goal " + g.personalGoal.size() + "\n";
+        for (int r = 0; r < 6; r++) {
+            for (int c = 0; c < 5; c++) {
+                if(p0.getMyGoal().getGoal()[r][c]!=null)
+                    msg += "|\t" + p0.getMyGoal().getGoal()[r][c].getColor() + "\t";
+                else
+                    msg+= "|\t------\t";
+            }
+            msg += "|\n";
+        }
         msg += "N common goal " + g.commonGoal.size() + "\n";
         msg += "N my common goal " + g.myGoal.size() + "\n";
         for (Cgoal cg : g.myGoal) {
@@ -293,9 +310,9 @@ public class Game {
                 msg += t.getScore() + "\t";
             msg += "\n";
         }
-        /**
+
          * Riempimento shelf
-         */
+
         for (int c = 0; c < p0.getMyShelf().getCol(); c++) {
             p0.setMyItem(new Item(ColorItem.GREEN));
             p0.setMyItem(new Item(ColorItem.YELLOW));
@@ -308,7 +325,7 @@ public class Game {
         }
         /**
          * visualizzazione shelf
-         */
+
         for (int r = 0; r < p0.getMyShelf().getRow(); r++) {
             for (int c = 0; c < p0.getMyShelf().getCol(); c++) {
                 if (p0.getMyShelf().getMyShelf()[r][c] != null)
@@ -332,7 +349,7 @@ public class Game {
         {
             msg+= "| token preso\n";
         } else msg += "| token non preso\n";
-
+*/
         System.out.println(msg);
     }
 
