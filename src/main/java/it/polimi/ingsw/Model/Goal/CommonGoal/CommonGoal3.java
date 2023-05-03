@@ -28,8 +28,8 @@ public class CommonGoal3 extends Cgoal {
         Item[][] myshelf = myShelf.getMyShelf();
         Item[][] myshelfcpy = myShelf.getMyShelf();
        ArrayList<ColorItem> squares= new ArrayList<>();
-        for (int i = 0; i < ROW; i++) {
-            for (int j = 0; j < COL; j++) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 4; j++) {
                 if
                 (
                         myshelf[i][j].getColor() == myshelf[i + 1][j].getColor() &&
