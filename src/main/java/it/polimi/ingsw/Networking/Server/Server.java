@@ -36,12 +36,12 @@ public class Server implements Runnable, LoginObserver, GameControllerObserver {
     }
 
     public void notifyPlayer(Message message, String nickname){
-        for(String c : clientHandlerMap.keySet()){
-            if(c.equals(nickname)){
-                clientHandlerMap.get(c).sendMessageToClient(message);
-                break;
-            }
-        }
+        //for(String c : clientHandlerMap.keySet()){
+            //if(c.equals(nickname)){
+                clientHandlerMap.get(nickname).sendMessageToClient(message);
+                //break;
+            //}
+        //}
     }
 
     @Override
