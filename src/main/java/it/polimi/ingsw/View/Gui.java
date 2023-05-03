@@ -1,6 +1,7 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Message.GameState.*;
+import it.polimi.ingsw.Message.Request.ItemOrderRequest;
 import it.polimi.ingsw.Message.Request.NPlayerRequest;
 import it.polimi.ingsw.Message.Response.BoardResponse;
 import it.polimi.ingsw.Message.Response.ShelfResponse;
@@ -132,6 +133,11 @@ public class Gui extends ViewObservable implements View, ViewObserver {
 
     @Override
     public void GameEndedHandler(EndGame message) {
+
+    }
+
+    @Override
+    public void showItemChooseForOrdering(ItemOrderRequest message) {
 
     }
 }

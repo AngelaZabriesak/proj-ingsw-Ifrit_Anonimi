@@ -301,4 +301,9 @@ public class Cli extends InputObservable implements View, ViewObserver {
         out.println("THE GAME ENDED, PLAYER " + message.getNickname() + "DISCONNECTED!");
 
     }
+
+    @Override
+    public void showItemChooseForOrdering(ItemOrderRequest message) {
+
+    }
 }
