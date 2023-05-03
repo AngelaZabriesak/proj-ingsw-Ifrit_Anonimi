@@ -255,27 +255,6 @@ public class Game {
         return myBag;
     }
 
-
-
-
-/**
-    public ArrayList<ArrayList<Position>> raggruppaPerColore(Shelf myShelf){
-        ArrayList<Position> group = null;
-        ArrayList<ArrayList<Position>> groupColor = new ArrayList<>();
-        for(ColorItem ci : ColorItem.values()){// comprende anche il nero quindi la dimensione di groupColor è 7new ArrayList<>();
-            group = new ArrayList<>();
-            for(int r =0;r< myShelf.getRow(); r++){
-                for(int c =0; c < myShelf.getCol(); c++){
-                    if(myShelf.getMyShelf()[r][c].getColor().equals(ci))
-                        group.add(new Position(r,c));
-                }
-            }
-            groupColor.add(group);
-        }
-        return groupColor;
-    }
-   */
-
     public static void main(String[] args) {
         Player p0 = new Player("0");
         Player p1 = new Player("1");

@@ -27,12 +27,13 @@ public class CommonGoal0 extends Cgoal {
         ArrayList<Position>[] groups = new CreateItemGroup().creaGruppi(myShelf);
         int numOfCond=0;
 
-        for (int i=0; i<= groups.length; i++)
-        {
+        for (int i=0; i< groups.length; i++) {
             ArrayList<Position> group = groups[i];
-            numOfCond += group.size()/2;
-            if(numOfCond >= 6) {
-                break;
+            if(group!= null) {
+                numOfCond += group.size() / 2;
+                if (numOfCond >= 6) {
+                    break;
+                }
             }
         }
         return numOfCond >= 6;
