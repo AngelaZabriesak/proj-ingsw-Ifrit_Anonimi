@@ -18,8 +18,7 @@ public class CommonGoal1 extends Cgoal {
     public boolean isTaken(Shelf myShelf) {
 
         Item[][] myshelf = myShelf.getMyShelf();
-
-        return (myshelf[0][0].getColor() != null) && (myshelf[0][0].getColor() == myshelf[0][4].getColor() && myshelf[0][0].getColor() == myshelf[5][4].getColor() && myshelf[0][0].getColor() == myshelf[5][0].getColor());
+        return (myshelf[0][0] != null) && (myshelf[0][0].getColor() == myshelf[0][4].getColor() && myshelf[0][0].getColor() == myshelf[5][4].getColor() && myshelf[0][0].getColor() == myshelf[5][0].getColor());
 
     }
 }

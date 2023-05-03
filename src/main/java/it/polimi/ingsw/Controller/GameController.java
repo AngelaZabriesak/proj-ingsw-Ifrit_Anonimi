@@ -31,7 +31,6 @@ public class GameController extends GameControllerObservable implements ServerOb
         players = new ArrayList<>();
         firstPlayerConnected = true;
         this.numberOfPlayer = 2;
-        //turnController = new TurnController(this);
     }
 
     public ArrayList<Player> getPlayers() {
@@ -66,7 +65,6 @@ public class GameController extends GameControllerObservable implements ServerOb
     private boolean checkActivePlayer(String nickname){
         return turnController.getCurrentPlayer().equals(getPlayerByNickname(nickname));
     }
-
 
     public TurnController getTurnController() {
         return turnController;
