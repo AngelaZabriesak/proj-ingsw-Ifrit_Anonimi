@@ -10,6 +10,7 @@ import it.polimi.ingsw.Message.TurnAlert;
 import it.polimi.ingsw.Message.Error.Error;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.*;
+import it.polimi.ingsw.Model.Goal.Goal;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Observer.*;
@@ -179,40 +180,27 @@ public class Cli extends InputObservable implements View, ViewObserver {
         out.println("This is your Shelf\n" + shelf);
     }
 
-    //method that shows the PGoal
-
-    @Override
-    public void showPGoal(Pgoal pgoal) {
-        out.println("This is your Personal Goal\n" + pgoal);
-    }
-
-    // method that shows the CGoal
-
-    @Override
-    public void showCGoal(ArrayList<Cgoal> cgoal) {
-        out.println("These are the Common Goals\n" + cgoal);
-    }
-
     //method that shows the personal score
     public void showScore(Player player) {
-        out.println("Yuor current score is " +player.getMyScore());
-    }
-/*
-    @Override
-    public void showShelf(Player p) {
-        out.println("This is your Shelf\n" + p.getMyShelf());
+        out.println("Your current score is " +player.getMyScore());
     }
 
+    //method that shows the PGoal
     @Override
-    public void showPGoal(Goal p) {
-        out.println("This is your Personal Goal\n" + p.getDescription());
+    public void showPGoal(Pgoal pgoal) {
+        out.println("This is your Personal Goal\n" + pgoal.getDescription());
     }
 
+    //method that shows the CGoal
     @Override
-    public void showCGoal(Goal c) {
-        out.println("These are the Common Goals\n" + c.getDescription());
+    public void showCGoal(ArrayList<Cgoal> cgoal) {
+        out.println("These are the Common Goals\n");
+        for (Cgoal c : cgoal)
+        {
+            out.println(c.getDescription() + "\n");
+        }
     }
- */
+
 
     /**
      * Shows the login result on the terminal.
@@ -260,7 +248,8 @@ public class Cli extends InputObservable implements View, ViewObserver {
 
     @Override
     public void endTurnHandler(EndTurn message) {
-
+        GameController gameController;
+        out.println(message.getNickname() + ", your turn ended! Now is " + gameController.notifyActivePlayer() + "'s turn";);
     }
 
     @Override
@@ -293,12 +282,16 @@ public class Cli extends InputObservable implements View, ViewObserver {
 
     }
 
+    //tells the game winner
     @Override
     public void winHandler(Win message) {
+        out.println("AND THE WINNER IS..... \n" + message.getNickname());
     }
 
+    //tells the game ended because of player disconnection
     @Override
     public void GameEndedHandler(EndGame message) {
+        out.println("THE GAME ENDED, PLAYER " + message.getNickname() + "DISCONNECTED!");
 
     }
 }

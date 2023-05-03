@@ -9,5 +9,6 @@ public class Win extends Message {
     public Win(String nicknameWinner) {
         super(MessageType.WIN);
         this.nicknameWinner=nicknameWinner;
+        setNickname(nicknameWinner);
     }
 }
