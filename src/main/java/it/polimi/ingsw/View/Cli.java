@@ -249,7 +249,7 @@ public class Cli extends InputObservable implements View, ViewObserver {
     @Override
     public void endTurnHandler(EndTurn message) {
         GameController gameController;
-        out.println(message.getNickname() + ", your turn ended! Now is " + gameController.notifyActivePlayer() + "'s turn";);
+        out.println(message.getNickname() + ", your turn ended! Now is " + gameController.notifyActivePlayer() + "'s turn");
     }
 
     @Override
