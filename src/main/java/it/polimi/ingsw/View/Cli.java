@@ -120,7 +120,6 @@ public class Cli extends InputObservable implements View, ViewObserver {
         askNPlayers();
     }
 
-
     @Override
     public void askNPlayers() {
         out.print("How many players are in this match?");

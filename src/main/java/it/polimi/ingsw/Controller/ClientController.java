@@ -53,8 +53,8 @@ public class ClientController extends ClientObservable implements InputObserver 
      */
     @Override
     public void onUpdateNickname(String nickname) {
+        //update(new Login(nickname));
         notifyObserver(obs->obs.sendMessageToServer(new Login(nickname)));
-        update(new Login(nickname));
     }
 
     @Override
