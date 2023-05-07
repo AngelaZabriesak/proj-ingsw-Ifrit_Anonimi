@@ -55,6 +55,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
                     System.out.println("Connection ended from clienthandler " + nickname);
                     server.removeClientHandler(this);
                     disconnect();
+                    server.disconnectAll();
                     if(!server.isGameEnded())
                         server.clientDisconnection();
                 }
