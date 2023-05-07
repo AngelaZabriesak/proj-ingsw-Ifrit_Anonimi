@@ -29,6 +29,8 @@ public class LoginObservable{
      * Notifies all the observers with a message
      */
     public void notifyObserver() {
+        int dim = observers.size();
+        //System.out.println("DIMENSIONE login-OBSERVABLE "+dim);
         for (LoginObserver observer : observers) {
             observer.update();
         }

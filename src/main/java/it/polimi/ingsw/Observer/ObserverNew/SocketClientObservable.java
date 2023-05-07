@@ -36,6 +36,8 @@ public abstract class SocketClientObservable {
      * @param lambda the lambda to be called on the observers.
      */
     public void notifyObserver(Consumer<SocketClientObserver> lambda) {
+        int dim = observers.size();
+        //System.out.println("DIMENSIONE socketclient-OBSERVABLE "+dim);
         for (SocketClientObserver observer : observers) {
             lambda.accept(observer);
         }

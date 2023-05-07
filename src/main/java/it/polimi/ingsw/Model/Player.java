@@ -2,10 +2,12 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Model.Goal.*;
+import it.polimi.ingsw.Model.Goal.PersonalGoal.Pgoal;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Player {
+public class Player implements Serializable {
     private final Shelf myShelf;
     private final String nickname;
     private Goal myGoal;
@@ -31,8 +33,8 @@ public class Player {
     }
 
     // return the player pGoal
-    public Goal getMyGoal() {
-        return myGoal;
+    public Pgoal getMyGoal() {
+        return (Pgoal) myGoal;
     }
 
     public void setMyGoal(Goal myGoal) {

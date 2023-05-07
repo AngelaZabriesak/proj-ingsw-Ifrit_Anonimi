@@ -34,6 +34,8 @@ public abstract class GameControllerObservable extends LoginObservable {
      * @param lambda the function to be called on the observers.
      */
     protected void notifyObserver(Consumer<GameControllerObserver> lambda) {
+        int dim = observers.size();
+        //System.out.println("DIMENSIONE game controller-OBSERVABLE "+dim);
         for (GameControllerObserver observer : observers) {
             lambda.accept(observer);
         }

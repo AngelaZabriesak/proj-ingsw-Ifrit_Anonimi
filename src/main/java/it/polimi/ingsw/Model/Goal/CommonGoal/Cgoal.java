@@ -5,9 +5,10 @@ import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.*;
 import it.polimi.ingsw.Model.*;
 
+import java.io.Serializable;
 import java.util.*;
 
-public abstract class Cgoal extends Goal {
+public abstract class Cgoal extends Goal implements Serializable {
     private int index;
     private Game game;
 

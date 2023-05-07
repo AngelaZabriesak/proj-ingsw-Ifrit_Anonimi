@@ -40,6 +40,8 @@ public abstract class ClientObservable{
      * @param lambda the lambda to be called on the observers.
      */
     public void notifyObserver(Consumer<ClientObserver> lambda) {
+        int dim = observers.size();
+        //System.out.println("DIMENSIONE CLIENT-OBSERVABLE "+dim);
         for (ClientObserver observer : observers) {
             lambda.accept(observer);
         }

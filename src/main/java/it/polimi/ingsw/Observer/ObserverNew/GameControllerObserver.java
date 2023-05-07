@@ -22,7 +22,7 @@ public interface GameControllerObserver {
      */
     void sendToAllPlayers(Message message);
 
-    void successfulLogin(Message message,String tmpNickname, String newName);
+    void successfulLogin(Message message/*,String tmpNickname*/, String newName);
     
     void disconnectAll();
 }

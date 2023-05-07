@@ -8,9 +8,12 @@ import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.*;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
 import it.polimi.ingsw.Model.Shelf;
+import it.polimi.ingsw.Observer.Observable;
+
+import java.io.Serializable;
 import java.util.*;
 
-public class Game {
+public class Game extends Observable implements Serializable {
 
     private static CreateItemGroup createGroup = new CreateItemGroup();
     private static final int[] VALUE_TOKEN = {8,4,6,2};
@@ -152,6 +155,7 @@ public class Game {
 
     public void doAction() throws ActionException, WinException {
         action.execute();
+        notifyObserver(action.getMessage());
     }
 
     public Action getAction(){

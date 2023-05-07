@@ -29,6 +29,8 @@ public abstract class  InputObservable {
      * @param lambda the lambda to be called on the observers.
      */
     public void notifyInObserver(Consumer<InputObserver> lambda) {
+        int dim = observers.size();
+        //System.out.println("DIMENSIONE input-OBSERVABLE "+dim);
         for (InputObserver observer : observers) {
             lambda.accept(observer);
         }

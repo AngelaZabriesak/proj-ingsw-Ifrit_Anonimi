@@ -1,12 +1,17 @@
 package it.polimi.ingsw.View;
 
+import it.polimi.ingsw.Message.Action.AddItemInShelf_OK;
+import it.polimi.ingsw.Message.Action.ChooseItem_OK;
+import it.polimi.ingsw.Message.Action.ChooseOrder_OK;
 import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Message.Request.ItemOrderRequest;
+import it.polimi.ingsw.Message.Request.NItemRequest;
 import it.polimi.ingsw.Message.Request.NPlayerRequest;
 import it.polimi.ingsw.Message.Response.BoardResponse;
 import it.polimi.ingsw.Message.Response.ShelfResponse;
 import it.polimi.ingsw.Message.TurnAlert;
 import it.polimi.ingsw.Message.Error.Error;
+import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.*;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
@@ -15,7 +20,7 @@ import it.polimi.ingsw.Observer.*;
 
 import java.util.ArrayList;
 
-public class Gui extends ViewObservable implements View, ViewObserver {
+public class Gui extends ViewObservable implements View {
     @Override
     public void askNickname() {
 
@@ -27,17 +32,22 @@ public class Gui extends ViewObservable implements View, ViewObserver {
     }
 
     @Override
-    public void askItem() {
+    public void askItem(int nItem) {
 
     }
 
     @Override
-    public void askColumn() {
+    public void askNItem(NItemRequest message) {
 
     }
 
     @Override
-    public void askOrder() {
+    public void askColumn(ArrayList<Item> itemOrdered,Shelf shelf) {
+
+    }
+
+    @Override
+    public void askOrder(ArrayList<Item> itemToOrder) {
 
     }
 
@@ -48,6 +58,11 @@ public class Gui extends ViewObservable implements View, ViewObserver {
 
     @Override
     public void showShelf(Shelf shelf) {
+
+    }
+
+    @Override
+    public void showItemToOrder(ArrayList<Item> itemToOrder) {
 
     }
 
@@ -66,10 +81,10 @@ public class Gui extends ViewObservable implements View, ViewObserver {
 
     }
 
-    @Override
+    /*@Override
     public void showLoginResult(boolean nicknameAccepted, boolean connectionSuccessful, String nickname) {
 
-    }
+    }*/
 
     @Override
     public void showErrorAndExit(String error) {
@@ -82,62 +97,7 @@ public class Gui extends ViewObservable implements View, ViewObserver {
     }
 
     @Override
-    public void ErrorManager(Error message) {
-
-    }
-
-    @Override
-    public void endTurnHandler(EndTurn message) {
-
-    }
-
-    @Override
-    public void ConnectionSuccessfulHandler(ConnectionOK message) {
-
-    }
-
-    @Override
-    public void CompleteQuestionManager(CompletedQuestion message) {
-
-    }
-
-    @Override
-    public void NumOfPlayerHandler(NPlayerRequest message) {
-
-    }
-
-    @Override
-    public void showShelfHandler(ShelfResponse message) {
-
-    }
-
-    @Override
-    public void showBoardHandler(BoardResponse message) {
-
-    }
-
-    @Override
-    public void GameStartedHandler(GameStart message) {
-
-    }
-
-    @Override
-    public void TurnAlert(TurnAlert message) {
-
-    }
-
-    @Override
-    public void winHandler(Win message) {
-
-    }
-
-    @Override
-    public void GameEndedHandler(EndGame message) {
-
-    }
-
-    @Override
-    public void showItemChooseForOrdering(ItemOrderRequest message) {
+    public void showMessage(String message) {
 
     }
 }

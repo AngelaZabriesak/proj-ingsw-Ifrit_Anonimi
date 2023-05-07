@@ -1,13 +1,14 @@
-package it.polimi.ingsw.Message;
+package it.polimi.ingsw.Message.Response;
 
 import it.polimi.ingsw.Enumerations.*;
+import it.polimi.ingsw.Message.Message;
 import it.polimi.ingsw.Model.*;
 
-public class ItemPosition extends Message{
+public class ItemPositionResponse extends Message {
     private int row,col;
     private Position position;
-    public ItemPosition(Position position) {
-        super(MessageType.ITEM_POSITION);
+    public ItemPositionResponse(Position position) {
+        super(MessageType.ITEM_POSITION_RESPONSE);
         this.position = position;
     }
 

@@ -28,7 +28,11 @@ public abstract class Message implements Serializable {
         this.nickname = nickname;
     }
 
-    public void manage(MessageManager messageManager){
+    public void manageServer(ServerMessageManager messageManager){
+        messageManager.manage(this);
+    }
+
+    public void manageView(ViewMessageManager messageManager){
         messageManager.manage(this);
     }
 }

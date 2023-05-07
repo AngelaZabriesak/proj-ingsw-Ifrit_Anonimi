@@ -38,6 +38,8 @@ public abstract class ViewObservable{
      * Notifies all the current observers through the lambda argument.
      */
     public void notifyViewObserver(Consumer<ViewObserver> lambda) {
+        int dim = observers.size();
+        //System.out.println("DIMENSIONE VIEW-OBSERVABLE "+dim);
         for (ViewObserver observer : observers) {
             lambda.accept(observer);
         }

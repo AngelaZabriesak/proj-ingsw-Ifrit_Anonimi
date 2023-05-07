@@ -1,7 +1,9 @@
 package it.polimi.ingsw.Model.Bag;
 
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
     private final ColorItem type;
     private boolean inGruppo = false;
 

@@ -27,7 +27,7 @@ public class CommonGoal3 extends Cgoal {
 
     @Override
     public boolean isTaken(Shelf myShelf) {
-        Item[][] myshelf = myShelf.getMyShelf();
+        /*Item[][] myshelf = myShelf.getMyShelf();
         Item[][] myshelfcpy = myShelf.getMyShelf();
        ArrayList<ColorItem> squares= new ArrayList<>();
         for (int i = 0; i < 5; i++) {
@@ -54,7 +54,7 @@ public class CommonGoal3 extends Cgoal {
             if (Collections.frequency(squares,ColorItem.YELLOW)>1) {return true;}
 
         }
-            }return false;
+            }*/return false;
     }
     @Override
 

@@ -4,7 +4,9 @@ import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.*;
 
-public abstract class Pgoal extends Goal {
+import java.io.Serializable;
+
+public abstract class Pgoal extends Goal implements Serializable {
     private Game game;
     final int[] scores = {1,2,4,6,9,12};
 

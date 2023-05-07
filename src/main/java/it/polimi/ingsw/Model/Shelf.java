@@ -2,9 +2,11 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Bag.*;
 
+import java.io.Serializable;
+
 // the [0][0] element of the matrix is the north-west element
 
-public class Shelf {
+public class Shelf implements Serializable {
     private static final int ROW = 6;
     private static final int COL = 5;
     private final Item[][] myShelf = new Item[ROW][COL];

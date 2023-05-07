@@ -1,11 +1,10 @@
 package it.polimi.ingsw.Observer;
 
+import it.polimi.ingsw.Message.Action.*;
 import it.polimi.ingsw.Message.GameState.*;
-import it.polimi.ingsw.Message.Request.ItemOrderRequest;
-import it.polimi.ingsw.Message.Request.NPlayerRequest;
-import it.polimi.ingsw.Message.Response.BoardResponse;
-import it.polimi.ingsw.Message.Response.ShelfResponse;
-import it.polimi.ingsw.Message.TurnAlert;
+import it.polimi.ingsw.Message.Request.*;
+import it.polimi.ingsw.Message.Response.*;
+import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Message.Error.Error;
 
 /**
@@ -23,5 +22,11 @@ public interface ViewObserver {
     void TurnAlert(TurnAlert message);
     void winHandler(Win message);
     void GameEndedHandler(EndGame message);
-    void showItemChooseForOrdering(ItemOrderRequest message);
+    void chooseItemPosition(ItemPositionRequest message);
+    void chooseOrderItemOK(ChooseOrder_OK message);
+    void addItemInShelf(AddItemInShelf_OK message);
+    void chooseNumberItem(NItemRequest message);
+    void chooseItemOk(ChooseItem_OK message);
+    void chooseOrderItem(ItemOrderRequest message);
+    void chooseColumn(ColumnRequest message);
 }

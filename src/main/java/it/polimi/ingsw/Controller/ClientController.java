@@ -3,17 +3,24 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.GameState.*;
+import it.polimi.ingsw.Message.Response.ColumnResponse;
+import it.polimi.ingsw.Message.Response.ItemOrderResponse;
+import it.polimi.ingsw.Message.Response.ItemPositionResponse;
+import it.polimi.ingsw.Message.Response.NItemResponse;
+import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Networking.Client.*;
 import it.polimi.ingsw.Observer.ObserverNew.*;
 
+import java.util.ArrayList;
+
 public class ClientController extends ClientObservable implements InputObserver {
-    private MessageManager messageManager;
+    private ViewMessageManager messageManager;
     private ObsClient client;
 
     /**
      * Constructs Client Controller.
      */
-    public ClientController(MessageManager messageManager, ObsClient obsClient) {
+    public ClientController(ViewMessageManager messageManager, ObsClient obsClient) {
         this.messageManager = messageManager;
         this.client = obsClient;
     }
@@ -32,17 +39,17 @@ public class ClientController extends ClientObservable implements InputObserver 
 
     @Override
     public void onUpdateColumn(String column) {
-
+        notifyObserver(obs->obs.sendMessageToServer(new ColumnResponse(Integer.parseInt(column))));
     }
 
     @Override
-    public void onUpdateItem() {
-
+    public void onUpdateNItem(int nItem) {
+        notifyObserver(obs->obs.sendMessageToServer(new NItemResponse(nItem)));
     }
 
     @Override
-    public void onUpdateOrder() {
-
+    public void onUpdateOrder(String order, ArrayList<Item> itemToOrder) {
+        notifyObserver(obs->obs.sendMessageToServer(new ItemOrderResponse(order,itemToOrder)));
     }
 
     /**
@@ -71,7 +78,7 @@ public class ClientController extends ClientObservable implements InputObserver 
      * this method is used to bring "Messages to Client" from Server to cli
      */
     public void update(Message message){
-        message.manage(messageManager);
+        message.manageView(messageManager);
     }
 
     @Override
@@ -90,13 +97,12 @@ public class ClientController extends ClientObservable implements InputObserver 
     }
 
     @Override
-    public void onUpdateChooseItem(ItemPosition message) {
+    public void onUpdateChooseItem(ItemPositionResponse message) {
         notifyObserver(obs->obs.sendMessageToServer(message));
     }
 
     @Override
     public void onUpdateDisconnection() {
         notifyObserver(obs->obs.disconnect());
-
     }
 }

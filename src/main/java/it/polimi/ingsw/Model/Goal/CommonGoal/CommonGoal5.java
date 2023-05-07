@@ -28,8 +28,9 @@ public class CommonGoal5 extends Cgoal {
             group = new ArrayList<>();
             for (int r = 0; r < myShelf.getRow(); r++) {
                 for (int c = 0; c < myShelf.getCol(); c++) {
-                    if (myShelf.getMyShelf()[r][c].getColor().equals(ci)) {
-                        group.add(new Position(r, c));
+                    if(myShelf.getMyShelf()[r][c]!=null){
+                        if (myShelf.getMyShelf()[r][c].getColor().equals(ci))
+                            group.add(new Position(r, c));
                     }
                 }
             }

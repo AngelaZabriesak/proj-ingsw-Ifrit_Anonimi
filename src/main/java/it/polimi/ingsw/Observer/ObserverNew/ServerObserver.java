@@ -1,8 +1,8 @@
 package it.polimi.ingsw.Observer.ObserverNew;
 
-import it.polimi.ingsw.Message.Column;
-import it.polimi.ingsw.Message.ItemPosition;
-import it.polimi.ingsw.Message.NItem;
+import it.polimi.ingsw.Message.Response.ColumnResponse;
+import it.polimi.ingsw.Message.Response.ItemPositionResponse;
+import it.polimi.ingsw.Message.Response.NItemResponse;
 import it.polimi.ingsw.Message.Request.BoardRequest;
 import it.polimi.ingsw.Message.Request.ItemOrderRequest;
 import it.polimi.ingsw.Message.Request.ShelfRequest;
@@ -23,8 +23,8 @@ public interface ServerObserver {
     void showShelfRequestHandler(ShelfRequest message);
     void showBoardRequestHandler(BoardRequest message);
     void endGameDisconnection();
-    void moveToColumn(Column message);
-    void chooseItemPosition(ItemPosition message);
-    void chooseNItemToMove(NItem message);
+    void moveToColumn(ColumnResponse message);
+    void chooseItemPosition(ItemPositionResponse message);
+    void chooseNItemToMove(NItemResponse message);
     void chooseOrderItem(ItemOrderResponse message);
 }

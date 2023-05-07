@@ -10,7 +10,7 @@ public class ItemOrderRequest extends Message {
 
     ArrayList<Item> items;
     public ItemOrderRequest(ArrayList<Item> items) {
-        super(MessageType.ITEM_ORDER);
+        super(MessageType.ITEM_ORDER_REQUEST);
         this.items=items;
     }
 

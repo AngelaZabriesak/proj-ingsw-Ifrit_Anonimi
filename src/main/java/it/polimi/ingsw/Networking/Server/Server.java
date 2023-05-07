@@ -3,7 +3,7 @@ package it.polimi.ingsw.Networking.Server;
 
 import it.polimi.ingsw.Controller.*;
 import it.polimi.ingsw.Message.Message;
-import it.polimi.ingsw.Message.MessageManager;
+import it.polimi.ingsw.Message.ServerMessageManager;
 import it.polimi.ingsw.Observer.ObserverNew.*;
 
 import java.io.*;
@@ -15,33 +15,33 @@ import java.util.*;
  */
 public class Server implements Runnable, LoginObserver, GameControllerObserver {
 
-    private MessageManager messageManager; //observed by gameController
+    private ServerMessageManager messageManager; //observed by gameController
     private GameController gameController;
     private ServerSocket serverSocket;
     private Socket socket;
-    private final Map<String, ClientHandler> clientHandlerMap;
+    private final ArrayList<SocketClientHandler> clientHandler;
     private boolean endGame;
     private int port;
 
     public Server(int port) {
-        this.clientHandlerMap = Collections.synchronizedMap(new HashMap<>());
+        this.clientHandler = new ArrayList<>();
         this.port = port;
-        messageManager = new MessageManager();
+        messageManager = new ServerMessageManager();
     }
 
     public void notifyAllPlayers(Message message){
-        for(ClientHandler c : clientHandlerMap.values()){
+        for(ClientHandler c : clientHandler){
             c.sendMessageToClient(message);
         }
     }
 
     public void notifyPlayer(Message message, String nickname){
-        //for(String c : clientHandlerMap.keySet()){
-            //if(c.equals(nickname)){
-                clientHandlerMap.get(nickname).sendMessageToClient(message);
-                //break;
-            //}
-        //}
+        for(SocketClientHandler c : clientHandler){
+            if(c.getNickname().equals(nickname)){
+                c.sendMessageToClient(message);
+                break;
+            }
+        }
     }
 
     @Override
@@ -53,17 +53,14 @@ public class Server implements Runnable, LoginObserver, GameControllerObserver {
             System.out.println("Server could not start!");
             return;
         }
-
         createNewGame();
-
         try{
             while(!Thread.currentThread().isInterrupted()){
-
                 //blocking until a connection is made
                 socket = serverSocket.accept();
                 System.out.println("New client accepted!");
-                SocketClientHandler clientHandler = new SocketClientHandler(this,socket,Integer.toString(clientHandlerMap.size()));
-                clientHandlerMap.put(Integer.toString(clientHandlerMap.size()),clientHandler);
+                SocketClientHandler clientHandler = new SocketClientHandler(this,socket,Integer.toString(this.clientHandler.size()));
+                this.clientHandler.add(clientHandler);
                 Thread thread = new Thread(clientHandler);
                 thread.start();
             }
@@ -81,6 +78,8 @@ public class Server implements Runnable, LoginObserver, GameControllerObserver {
     private void createNewGame(){
         gameController = new GameController();
         gameController.addObserver((GameControllerObserver) this);
+        gameController.addObserver((LoginObserver) this);
+        messageManager.addObserver(gameController);
     }
 
     public boolean isGameEnded() {
@@ -103,10 +102,8 @@ public class Server implements Runnable, LoginObserver, GameControllerObserver {
     }
 
     @Override
-    public void successfulLogin(Message message,String tmpNickname, String newName) {
-        ClientHandler c = clientHandlerMap.get(tmpNickname);
-        clientHandlerMap.remove(tmpNickname,c);
-        clientHandlerMap.put(newName,c);
+    public void successfulLogin(Message message/*,String tmpNickname*/, String newName) {
+        //clientHandler.get(Integer.parseInt(tmpNickname)).setNickname(newName);
         notifyPlayer(message,newName);
     }
 
@@ -116,7 +113,7 @@ public class Server implements Runnable, LoginObserver, GameControllerObserver {
 
             endGame = true;
             System.out.println("Closing all sockets");
-            for (ClientHandler clientHandler : clientHandlerMap.values()) {
+            for (ClientHandler clientHandler : clientHandler) {
                 clientHandler.disconnect();
             }
             System.out.println("All sockets closed");
@@ -129,10 +126,10 @@ public class Server implements Runnable, LoginObserver, GameControllerObserver {
     }
 
     public void removeClientHandler(SocketClientHandler clientHandler){
-        clientHandlerMap.remove(clientHandler.getNickname(),clientHandler);
+        this.clientHandler.remove(clientHandler);
     }
 
     public void read(Message message){
-        message.manage(messageManager);
+        message.manageServer(messageManager);
     }
 }

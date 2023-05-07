@@ -1,8 +1,11 @@
 package it.polimi.ingsw.Observer.ObserverNew;
 
-import it.polimi.ingsw.Message.ItemPosition;
+import it.polimi.ingsw.Message.Response.ItemPositionResponse;
 import it.polimi.ingsw.Message.Request.BoardRequest;
 import it.polimi.ingsw.Message.Request.ShelfRequest;
+import it.polimi.ingsw.Model.Bag.Item;
+
+import java.util.ArrayList;
 
 /**
  * Interface used to implement the Observer-Observable pattern between Cli and ClientController.
@@ -19,13 +22,13 @@ public interface InputObserver {
      * @param column the number of the column to be sent.
      */
     void onUpdateColumn(String column);
-    void onUpdateItem( );
-    void onUpdateOrder();
+    void onUpdateNItem(int nItem);
+    void onUpdateOrder(String order, ArrayList<Item> itemToOrder);
     void onUpdateNickname(String nickname);
     void onUpdateServerInfo(String address,int port);
     void onUpdateNPlayers(int numberOfPlayer);
     void onUpdateShelfRequest(ShelfRequest message);
     void onUpdateBoardRequest(BoardRequest message);
-    void onUpdateChooseItem(ItemPosition message);
+    void onUpdateChooseItem(ItemPositionResponse message);
     void onUpdateDisconnection();
 }

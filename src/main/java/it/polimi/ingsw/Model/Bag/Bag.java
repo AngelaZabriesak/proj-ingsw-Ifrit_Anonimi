@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Model.Bag;
 
-public class Bag {
+import java.io.Serializable;
+
+public class Bag implements Serializable {
     private static final int SIZE = 6;
     private static final int NUM_ITEM = 22;
     private final int[] numItem = new int[SIZE];

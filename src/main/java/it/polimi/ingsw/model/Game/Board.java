@@ -3,6 +3,8 @@ package it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Model.Position;
 
+import java.io.Serializable;
+
 /**
  * 0 = 0 side of the cell are free
  * 1 = 1 side of the cell is free
@@ -13,7 +15,7 @@ import it.polimi.ingsw.Model.Position;
  * 7 = the cell is null
  */
 
-public class Board {
+public class Board implements Serializable {
     private static final int ROW = 9;
     private static final int COL = 9;
     private final int[][] myBoardAdjacency;

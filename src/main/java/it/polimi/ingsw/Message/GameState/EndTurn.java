@@ -4,7 +4,14 @@ import it.polimi.ingsw.Enumerations.MessageType;
 import it.polimi.ingsw.Message.Message;
 
 public class EndTurn extends Message {
-    public EndTurn() {
+
+    private String nextPlayer;
+    public EndTurn(String nextPlayer) {
         super(MessageType.END_TURN);
+        this.nextPlayer = nextPlayer;
+    }
+
+    public String getNextPlayer(){
+        return nextPlayer;
     }
 }

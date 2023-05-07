@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Action;
 
 import it.polimi.ingsw.Exception.*;
+import it.polimi.ingsw.Message.Action.ActionMessage;
+import it.polimi.ingsw.Message.Action.ChooseOrder_OK;
 import it.polimi.ingsw.Model.Position;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Bag.*;
@@ -31,6 +33,12 @@ public class ChooseOrder implements Action{
         player.clearItem();
         for(Item i : items)
             player.setMyItem(i);
+    }
+
+    @Override
+    public ActionMessage getMessage() {
+
+        return new ChooseOrder_OK(this.description,player.getMyItem());
     }
 
     @Override

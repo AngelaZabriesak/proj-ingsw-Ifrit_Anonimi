@@ -2,7 +2,9 @@ package it.polimi.ingsw.Model;
 
 // this class is about the token that gives different point after doing a common goal
 
-public class Token {
+import java.io.Serializable;
+
+public class Token implements Serializable {
 
     private final int score;
 

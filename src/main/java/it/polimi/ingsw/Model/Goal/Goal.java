@@ -2,7 +2,9 @@ package it.polimi.ingsw.Model.Goal;
 
 import it.polimi.ingsw.Model.Bag.Item;
 
-public abstract class Goal{
+import java.io.Serializable;
+
+public abstract class Goal implements Serializable {
 
     private String description;
     public void setDescription(String description){this.description=description;}

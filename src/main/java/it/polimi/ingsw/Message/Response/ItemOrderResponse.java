@@ -9,12 +9,17 @@ import java.util.*;
 public class ItemOrderResponse extends Message {
 
     private ArrayList<Item> items;
+    private String order;
 
-    public ItemOrderResponse(ArrayList<Item> items) {
+    public ItemOrderResponse(String order, ArrayList<Item> items) {
         super(MessageType.ITEM_ORDER_RESPONSE);
+        this.order = order;
         this.items=items;
     }
 
+    public String getOrder() {
+        return order;
+    }
     public ArrayList<Item> getItems() {
         return items;
     }

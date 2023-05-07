@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Networking.Server;
 
+import it.polimi.ingsw.Enumerations.MessageType;
+import it.polimi.ingsw.Message.GameState.Login;
 import it.polimi.ingsw.Message.Message;
 
 import java.io.*;
@@ -38,11 +40,15 @@ public class SocketClientHandler implements ClientHandler, Runnable {
     }
 
     private void keepListen(){
-        while(true){
+        while(!Thread.currentThread().isInterrupted()){
             try {
                 Message message = (Message) fromClient.readObject();
+                if(message.getType().equals(MessageType.LOGIN))
+                    setNickname(message.getNickname());
+                else {
+                    message.setNickname(nickname);
+                }
                 System.out.println("ClientHandler " + nickname + " received a message: " + message.getClass());
-                message.setNickname(nickname);
                 server.read(message);
             } catch (IOException e) {
                 if(!client.isClosed()){
@@ -82,10 +88,11 @@ public class SocketClientHandler implements ClientHandler, Runnable {
     @Override
     public void sendMessageToClient(Message message) {
         try {
-            System.out.println("ClientHandler "+ nickname +": Sends message "+ message.toString() +" to " + nickname);
+            System.out.println("ClientHandler "+ nickname +": Sends message "+ message.getClass() +" to " + nickname);
             toClient.writeObject(message);
             toClient.reset();
         } catch (IOException e) {
+            System.out.println("ECCEZIONE \t"+e);
             System.out.println("ClientHandler "+ nickname + ": Error in sending message to " + nickname);
         }
     }

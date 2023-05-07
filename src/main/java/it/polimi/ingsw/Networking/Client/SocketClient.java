@@ -22,6 +22,7 @@ public class SocketClient extends SocketClientObservable implements ClientObserv
 
     public SocketClient(String address, int port, ObsClient client){
         this.socket = new Socket();
+        this.addObserver(client);
         try {
             this.socket.connect(new InetSocketAddress(address,port));
             this.writeToServer = new ObjectOutputStream(socket.getOutputStream());
@@ -75,7 +76,7 @@ public class SocketClient extends SocketClientObservable implements ClientObserv
     @Override
     public void sendMessageToServer(Message message) {
         try{
-            System.out.println(message.getNickname()+" is sending a "+message.getType());
+            //System.out.println(message.getNickname()+" is sending a "+message.getType());
             writeToServer.writeObject(message);
             writeToServer.reset();
         }catch (IOException e){

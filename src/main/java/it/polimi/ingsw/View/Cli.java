@@ -1,52 +1,40 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Controller.*;
-import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Message.Request.*;
-import it.polimi.ingsw.Message.Response.*;
-import it.polimi.ingsw.Message.*;
-import it.polimi.ingsw.Message.Error.Error;
+import it.polimi.ingsw.Message.Response.ItemPositionResponse;
+import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.*;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Observer.*;
 import it.polimi.ingsw.Observer.ObserverNew.*;
 
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-public class Cli extends InputObservable implements View, ViewObserver {
+public class Cli extends InputObservable implements View {
 
     private final PrintStream out;
-    private Thread inputThread;
+    private final Scanner read;
+    private InputReadTask inputThread;
+    private Thread inputReader;
 
     /**
      * Default constructor.
      */
     public Cli() {
         out = System.out;
+        read = new Scanner(System.in);
     }
 
 
     /**
      * Reads a line from the standard input.
      */
-    public String readLine() throws ExecutionException {
-        FutureTask<String> futureTask = new FutureTask<>(new InputReadTask());
-        inputThread = new Thread(futureTask);
-        inputThread.start();
-
-        String input = null;
-
-        try {
-            input = futureTask.get();
-        } catch (InterruptedException e) {
-            futureTask.cancel(true);
-            Thread.currentThread().interrupt();
-        }
-        return input;
+    public String readLine() {
+        return read.nextLine();
     }
 
     public void init() {
@@ -64,7 +52,6 @@ public class Cli extends InputObservable implements View, ViewObserver {
      * @throws ExecutionException if the input stream thread is interrupted.
      */
     public void askServerInfo() throws ExecutionException {
-        Map<String, String> serverInfo = new HashMap<>();
         String defaultAddress = "localhost";
         String defaultPort = "16847";
         boolean validPort;
@@ -82,7 +69,6 @@ public class Cli extends InputObservable implements View, ViewObserver {
             String port = readLine();
 
             if (port.equals("")) {
-                serverInfo.put("port", defaultPort);
                 validPort = true;
             } else {
                 if (ClientController.isValidPort(port)) {
@@ -104,104 +90,109 @@ public class Cli extends InputObservable implements View, ViewObserver {
     @Override
     public void askNickname() {
         out.print("Enter your nickname: ");
-        try {
-            String nickname = readLine();
-            System.out.println("read " + nickname);
-            notifyInObserver(obs -> obs.onUpdateNickname(nickname));
-        } catch (ExecutionException e) {
-            out.println("Error askNickname");
-        }
-    }
-
-    // method that asks for number of players
-
-    @Override
-    public void NumOfPlayerHandler(NPlayerRequest message) {
-        askNPlayers();
+        String nickname = readLine();
+        notifyInObserver(obs -> obs.onUpdateNickname(nickname));
     }
 
     @Override
     public void askNPlayers() {
-        out.print("How many players are in this match?");
-        try {
-            String nPlayers = readLine();
-            notifyInObserver(obs -> obs.onUpdateNPlayers(Integer.parseInt(nPlayers)));
-        } catch (ExecutionException e) {
-            out.println("Error askNPlayers");
-        }
+        out.print("How many players are in this match? ");
+        String nPlayers = readLine();
+        notifyInObserver(obs -> obs.onUpdateNPlayers(Integer.parseInt(nPlayers)));
     }
 
     // method that asks you to choose Items from Board
 
     @Override
-    public void askItem() {
-        out.print("Choose the Items you want to pick from Board");
-        Position fstItem = null;
-        Position scdItem;
-        Position trdItem;
-        notifyInObserver(obs -> obs.onUpdateChooseItem(new ItemPosition(fstItem)));
+    public void askItem(int nItem) {
+        Position position;
+        out.print("Choose the position of "+nItem+" items you want to pick from Board [row,col]: ");
+        String read = readLine();
+        position = new Position(Integer.parseInt(read.split(",")[0]),Integer.parseInt(read.split(",")[1]));
+        notifyInObserver(obs -> obs.onUpdateChooseItem(new ItemPositionResponse(position)));
+    }
+
+    @Override
+    public void askNItem(NItemRequest message) {
+        showBoard(message.getBoard());
+        showCGoal(message.getCommmonGoals());
+        showPGoal(message.getMyPgoal());
+        String msg="How many item do you want to put in your shelf? ";
+        out.println(msg);
+        String nItem = readLine();
+        notifyInObserver(obs->obs.onUpdateNItem(Integer.parseInt(nItem)));
     }
 
     // method that asks you to choose the column of the Shelf in which you want to put your Items
     @Override
-    public void askColumn() {
+    public void askColumn(ArrayList<Item> itemOrdered,Shelf shelf) {
+        out.println("Your item ordered are: ");
+        showItemToOrder(itemOrdered);
+        showShelf(shelf);
         out.print("Choose the column in your Shelf");
-        try{
-            String column = readLine();
-            notifyInObserver(obs -> obs.onUpdateColumn(column));
-        } catch (ExecutionException e){
-            out.println("Error askColumn");
-        }
+        String column = readLine();
+        notifyInObserver(obs -> obs.onUpdateColumn(column));
     }
 
     // method that asks you to choose the order of Items in Shelf
     @Override
-    public void askOrder() {
-        out.print("Choose the insertion order of Items in your Shelf");
-        notifyInObserver(obs -> obs.onUpdateOrder());
+    public void askOrder(ArrayList<Item> itemToOrder) {
+        showItemToOrder(itemToOrder);
+        out.print("Choose the insertion order of items in your Shelf, separated by virgola");
+        String order = readLine();
+        notifyInObserver(obs -> obs.onUpdateOrder(order,itemToOrder));
     }
 
     // method that shows the Board
-
     @Override
     public void showBoard(Board board) {
-        String b = "";
+        StringBuilder b = new StringBuilder();
         for (int r = -1; r < 9; r++) {
-            if(r==1)
-                b+="|\tR\134C\t ";
+            if(r==-1)
+                b.append("|\tR\134C\t ");
             else
-                b+="|\t"+r+"|\t";
+                b.append("|\t").append(r).append("|\t");
             for (int c = 0; c < 9; c++) {
                 if (r==-1)
-                    b+="|\t  "+c+"  \t";
+                    b.append("|\t  ").append(c).append("  \t");
                 else if (board.getItem(new Position(r, c)) != null)
-                    b += "|\t" + board.getItem(new Position(r, c)).getColor() + "" + "\t";
+                    b.append("|\t").append(board.getItem(new Position(r, c)).getColor()).append("\t");
                 else
-                    b += "|\tnull\t";
+                    b.append("|\tnull\t");
             }
-            b += "|\n";
+            b.append("|\n");
         }
-
+        out.println(b);
     }
 
     //method that shows the personal Shelf
     @Override
     public void showShelf(Shelf shelf) {
         out.println("This is your Shelf\n");
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for (int r = 0; r < shelf.getRow(); r++) {
             for (int c = 0; c < shelf.getCol(); c++) {
                 if (shelf.getMyShelf()[r][c] != null)
-                    s += "|\t" + shelf.getMyShelf()[r][c].getColor() + "\t";
+                    s.append("|\t").append(shelf.getMyShelf()[r][c].getColor()).append("\t");
                 else
-                    s += "|\tnull\t";
+                    s.append("|\tnull\t");
             }
-            s += "|\n";
+            s.append("|\n");
         }
         out.println(s);
     }
 
+    @Override
+    public void showItemToOrder(ArrayList<Item> itemToOrder) {
+        String msg = "";
+        for(Item i : itemToOrder)
+            msg+="|\t"+i.getColor()+"\t";
+        msg+="\n";
+        out.println(msg);
+    }
+
     //method that shows the personal score
+    @Override
     public void showScore(Player player) {
         out.println("Your current score is " +player.getMyScore());
     }
@@ -210,24 +201,24 @@ public class Cli extends InputObservable implements View, ViewObserver {
     @Override
     public void showPGoal(Pgoal pgoal) {
         out.println("This is your Personal Goal\n" + pgoal.getDescription());
-        String pg = "";
+        StringBuilder pg = new StringBuilder();
         for (int r = 0; r < 6; r++) {
             for (int c = 0; c < 5; c++) {
                 if(pgoal.getGoal()[r][c]!=null)
-                    pg += "|\t" + pgoal.getGoal()[r][c].getColor() + "\t";
+                    pg.append("|\t").append(pgoal.getGoal()[r][c].getColor()).append("\t");
                 else
-                    pg+= "|\t------\t";
+                    pg.append("|\t------\t");
             }
-            pg += "|\n";
+            pg.append("|\n");
         }
+        out.println(pg);
     }
 
     //method that shows the CGoal
     @Override
     public void showCGoal(ArrayList<Cgoal> cgoal) {
         out.println("These are the Common Goals\n");
-        for (Cgoal c : cgoal)
-        {
+        for (Cgoal c : cgoal) {
             out.println(c.getDescription() + "\n");
         }
     }
@@ -237,9 +228,8 @@ public class Cli extends InputObservable implements View, ViewObserver {
      * Shows the login result on the terminal.
      * On login fail, the program is terminated immediately.
      */
-    @Override
+   /* @Override
     public void showLoginResult(boolean nicknameAccepted, boolean connectionSuccessful, String nickname) {
-
         if (nicknameAccepted && connectionSuccessful) {
             out.println("Hi, " + nickname + "! You connected to the server.");
         } else if (connectionSuccessful) {
@@ -252,14 +242,14 @@ public class Cli extends InputObservable implements View, ViewObserver {
         } else {
             showErrorAndExit("Could not contact server.");
         }
-    }
+    }*/
 
     /**
      * Shows an error message and exit.
      */
     @Override
     public void showErrorAndExit(String error) {
-        inputThread.interrupt();
+        inputThread.close();
 
         out.println("\nERROR: " + error);
         out.println("EXIT.");
@@ -273,61 +263,8 @@ public class Cli extends InputObservable implements View, ViewObserver {
     }
 
     @Override
-    public void ErrorManager(Error message) {
-        showError(message.getError());
+    public void showMessage(String message) {
+        out.println(message);
     }
 
-    @Override
-    public void endTurnHandler(EndTurn message) {
-        GameController gameController;
-        out.println(message.getNickname() + ", your turn ended! Now is "/* + gameController.notifyActivePlayer() */+ "'s turn");
-    }
-
-    @Override
-    public void ConnectionSuccessfulHandler(ConnectionOK message) {
-        askNickname();
-    }
-
-    @Override
-    public void CompleteQuestionManager(CompletedQuestion message) {
-
-    }
-
-    @Override
-    public void showShelfHandler(ShelfResponse message) {
-        showShelf(message.getShelf());
-    }
-
-    @Override
-    public void showBoardHandler(BoardResponse message) {
-        showBoard(message.getBoard());
-    }
-
-    @Override
-    public void GameStartedHandler(GameStart message) {
-
-    }
-
-    @Override
-    public void TurnAlert(TurnAlert message) {
-
-    }
-
-    //tells the game winner
-    @Override
-    public void winHandler(Win message) {
-        out.println("AND THE WINNER IS..... \n" + message.getNickname());
-    }
-
-    //tells the game ended because of player disconnection
-    @Override
-    public void GameEndedHandler(EndGame message) {
-        out.println("THE GAME ENDED, PLAYER " + message.getNickname() + "DISCONNECTED!");
-
-    }
-
-    @Override
-    public void showItemChooseForOrdering(ItemOrderRequest message) {
-
-    }
 }

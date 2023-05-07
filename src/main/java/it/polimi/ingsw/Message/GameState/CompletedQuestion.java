@@ -10,4 +10,8 @@ public class CompletedQuestion extends Message {
         super(MessageType.OK_QUESTION);
         this.message = message;
     }
+
+    public String getMessage(){
+        return message;
+    }
 }

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Action;
 
 import it.polimi.ingsw.Exception.*;
+import it.polimi.ingsw.Message.Action.ActionMessage;
+import it.polimi.ingsw.Message.Action.AddItemInShelf_OK;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
@@ -43,6 +45,11 @@ public class AddItemInShelf implements Action{
         if(ok){
             game.refillBoard();
         }
+    }
+
+    @Override
+    public ActionMessage getMessage() {
+        return new AddItemInShelf_OK(player.getMyShelf());
     }
 
     @Override

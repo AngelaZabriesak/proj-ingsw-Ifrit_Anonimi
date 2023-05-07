@@ -1,11 +1,14 @@
 package it.polimi.ingsw.Action;
 
 import it.polimi.ingsw.Exception.*;
+import it.polimi.ingsw.Message.Action.ActionMessage;
+
+import java.io.Serializable;
 
 /**
  * This is the interface used to implement game mechanics
  */
-public interface Action {
+public interface Action extends Serializable {
     /**
      * This method is used to do an action
      * @throws ActionException when is impossible to complete the requested action
@@ -15,8 +18,10 @@ public interface Action {
     /**
      * This method is used to send parameters through messages and finally to be printed in cli
      * @return an ActionMessage
-    ActionMessage toMessage();
-     */
+    */
+    ActionMessage getMessage();
+
+
 
     /**
      * this method is used to add a description to the action message

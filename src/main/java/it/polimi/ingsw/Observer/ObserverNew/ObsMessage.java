@@ -34,6 +34,8 @@ public class ObsMessage{
      * @param lambda the lambda to be called on the observers.
      */
     public void notifyViewObserver(Consumer<ViewObserver> lambda) {
+        int dim = viewObservers.size();
+        //System.out.println("DIMENSIONE viewObservers in OBS-MESSAGE "+dim);
         for (ViewObserver observer : viewObservers) {
             lambda.accept(observer);
         }
@@ -43,6 +45,8 @@ public class ObsMessage{
      * @param lambda the function to be called on the observers.
      */
     public void notifySrvObserver(Consumer<ServerObserver> lambda) {
+        int dim = serverObservers.size();
+        //System.out.println("DIMENSIONE serverObservers in OBS-MESSAGE "+dim);
         for (ServerObserver observer : serverObservers) {
             lambda.accept(observer);
         }

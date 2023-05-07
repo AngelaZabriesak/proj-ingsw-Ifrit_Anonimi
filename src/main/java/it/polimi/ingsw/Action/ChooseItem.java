@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Action;
 
 import it.polimi.ingsw.Exception.*;
+import it.polimi.ingsw.Message.Action.ActionMessage;
+import it.polimi.ingsw.Message.Action.ChooseItem_OK;
 import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.*;
@@ -10,6 +12,7 @@ public class ChooseItem implements Action {
     private final int chosenColumn;
     private final int chosenRow;
     private final Player player;
+    private Item item;
     private String description = "";
 
     public ChooseItem(Game game, int chosenRow, int chosenColumn, Player player) {
@@ -24,10 +27,16 @@ public class ChooseItem implements Action {
         checkInput();
         if(game.getCurrentPlayer().getMyItem().size()>3)
             throw new ActionException();
-        Item item = game.getBoard().getItem(new Position(chosenRow,chosenColumn));
+        this.item = game.getBoard().getItem(new Position(chosenRow,chosenColumn));
         game.getBoard().removeItem(new Position(chosenRow,chosenColumn));
         player.setPosition(new Position(chosenRow,chosenColumn));
         game.getCurrentPlayer().setMyItem(item);
+    }
+
+    @Override
+    public ActionMessage getMessage() {
+
+        return new ChooseItem_OK(this.description,item,chosenRow,chosenColumn);
     }
 
     @Override
