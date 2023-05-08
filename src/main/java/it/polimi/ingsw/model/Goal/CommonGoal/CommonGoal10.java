@@ -21,9 +21,9 @@ public class CommonGoal10 extends Cgoal{
     public boolean isTaken(Shelf myShelf) {
         Item[][] myshelf = myShelf.getMyShelf();
 
-        /*for (int i=0; i<=3; i++) {
+        for (int i=0; i<=3; i++) {
             for (int j = 0; j<=4; j++) {
-                if (
+                if (myshelf[i][j] != null &&
                         myshelf[j][i].getColor() == myshelf[j][i + 2].getColor() &&
                                 myshelf[j][i].getColor() == myshelf[j + 1][i + 1].getColor() &&
                                 myshelf[j][i].getColor() == myshelf[j + 2][i].getColor() &&
@@ -32,7 +32,7 @@ public class CommonGoal10 extends Cgoal{
 
             }
 
-        }*/
+        }
         return false;
     }
 
