@@ -29,10 +29,10 @@ public class CommonGoal8 extends Cgoal {
         int numOfCond = 0;
         for (int i = 0; i <COL; i++) {
 
-            for (int j = 0; j <ROW ; j++) {
+            for (int j = 0; j <ROW-1 ; j++) {
 
                 if(myshelf[j][i] != null){
-                    if (myshelf[j][i].getColor() == myshelf[j + 1][i].getColor()) {
+                    if ( myshelf[j + 1][i] != null && myshelf[j][i].getColor() == myshelf[j + 1][i].getColor()) {
                         break;
                     } else numOfCond++;
 
