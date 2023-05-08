@@ -26,10 +26,10 @@ public class CommonGoal10 extends Cgoal{
         for (int i=0; i<=3; i++) {
             for (int j = 0; j<=4; j++) {
                 if (myshelf[i][j] != null &&
-                        myshelf[j][i].getColor() == myshelf[j][i + 2].getColor() &&
-                                myshelf[j][i].getColor() == myshelf[j + 1][i + 1].getColor() &&
-                                myshelf[j][i].getColor() == myshelf[j + 2][i].getColor() &&
-                                myshelf[j][i].getColor() == myshelf[j + 2][i + 2].getColor())
+                        (myshelf[j][i + 2] != null && myshelf[j][i].getColor() == myshelf[j][i + 2].getColor() ) &&
+                        (myshelf[j + 1][i + 1] != null && myshelf[j][i].getColor() == myshelf[j + 1][i + 1].getColor() ) &&
+                        (myshelf[j + 2][i] != null && myshelf[j][i].getColor() == myshelf[j + 2][i].getColor() ) &&
+                        ( myshelf[j + 2][i + 2] != null && myshelf[j][i].getColor() == myshelf[j + 2][i + 2].getColor() ) )
                     return true;
 
             }
