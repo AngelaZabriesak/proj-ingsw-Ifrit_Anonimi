@@ -27,37 +27,50 @@ public class CommonGoal3 extends Cgoal {
 
     @Override
     public boolean isTaken(Shelf myShelf) {
-        /*Item[][] myshelf = myShelf.getMyShelf();
+        Item[][] myshelf = myShelf.getMyShelf();
         Item[][] myshelfcpy = myShelf.getMyShelf();
-       ArrayList<ColorItem> squares= new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 4; j++) {
-                if(myshelf[i][j]!=null){
-                if
-                (
-                        myshelf[i][j].getColor() == myshelf[i + 1][j].getColor() &&
-                        myshelf[i][j].getColor() == myshelf[i][j + 1].getColor() &&
-                        myshelf[i][j].getColor() == myshelf[i + 1][j + 1].getColor() &&
-                        myshelf[i][j].getColor() == myshelfcpy[i][j].getColor()) {
-                    squares.add (myshelf[i][j].getColor());
-                    myshelfcpy[i][j] = null;
-                    myshelfcpy[i+1][j] = null;
-                    myshelfcpy[i][j+1] = null;
-                    myshelfcpy[i+1][j+1] = null;
+        ArrayList<ColorItem> squares = new ArrayList<>();
+        for (int i = 0; i < (ROW-1); i++) {
+            for (int j = 0; j < (COL-1); j++) {
+                if (myshelf[i][j] != null) {
+                    if
+                    (
+                            myshelf[i][j].getColor() == myshelf[i + 1][j].getColor() &&
+                            myshelf[i][j].getColor() == myshelf[i][j + 1].getColor() &&
+                            myshelf[i][j].getColor() == myshelf[i + 1][j + 1].getColor() &&
+                            myshelf[i][j].getColor() == myshelfcpy[i][j].getColor()) {
+                        squares.add(myshelf[i][j].getColor());
+                        myshelfcpy[i][j] = null;
+                        myshelfcpy[i + 1][j] = null;
+                        myshelfcpy[i][j + 1] = null;
+                        myshelfcpy[i + 1][j + 1] = null;
+                    }
                 }
+                if (Collections.frequency(squares, ColorItem.AZURE) > 1) {
+                    return true;
+                }
+                if (Collections.frequency(squares, ColorItem.BLUE) > 1) {
+                    return true;
+                }
+                if (Collections.frequency(squares, ColorItem.GREEN) > 1) {
+                    return true;
+                }
+                if (Collections.frequency(squares, ColorItem.PINK) > 1) {
+                    return true;
+                }
+                if (Collections.frequency(squares, ColorItem.WHITE) > 1) {
+                    return true;
+                }
+                if (Collections.frequency(squares, ColorItem.YELLOW) > 1) {
+                    return true;
+                }
+
             }
-            if (Collections.frequency(squares,ColorItem.AZURE)>1) {return true;}
-            if (Collections.frequency(squares,ColorItem.BLUE)>1) {return true;}
-            if (Collections.frequency(squares,ColorItem.GREEN)>1) {return true;}
-            if (Collections.frequency(squares,ColorItem.PINK)>1) {return true;}
-            if (Collections.frequency(squares,ColorItem.WHITE)>1) {return true;}
-            if (Collections.frequency(squares,ColorItem.YELLOW)>1) {return true;}
 
-        }
-            }*/return false;
+        } return false;
     }
-    @Override
 
+    @Override
     public Token getToken() {
         Token t = null;
         if (tokens.size() > 0) {
