@@ -57,6 +57,9 @@ public class CommonGoal2 extends Cgoal {
             t = tokens.get(tokens.size() - 1);
             tokens.remove(tokens.size() - 1);
         }
+        if (t == null) {
+            t = new Token(0);
+        }
         return t;
     }
 }
