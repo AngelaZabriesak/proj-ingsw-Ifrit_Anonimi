@@ -7,5 +7,5 @@ public enum ColorItem {
     GREEN,
     YELLOW,
     AZURE,
-    BLACK
+    X
 }

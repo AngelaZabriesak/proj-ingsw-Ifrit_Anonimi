@@ -32,16 +32,16 @@ public class Board implements Serializable {
     public void setMyBoardAdjacency(){
         for(int r=0; r<ROW; r++){
             for(int c=0; c<COL; c++){
-                if(myBoardItem[r][c].getColor().equals(ColorItem.BLACK))
+                if(myBoardItem[r][c].getColor().equals(ColorItem.X))
                     myBoardAdjacency[r][c]=9;
                 else {
-                    if (r > 0 && !(myBoardItem[r - 1][c].getColor().equals(ColorItem.BLACK) || myBoardItem[r - 1][c] == null))
+                    if (r > 0 && !(myBoardItem[r - 1][c].getColor().equals(ColorItem.X) || myBoardItem[r - 1][c] == null))
                         myBoardAdjacency[r][c] += 1;
-                    if (r < ROW-1 && !(myBoardItem[r + 1][c].getColor().equals(ColorItem.BLACK) || myBoardItem[r + 1][c] == null))
+                    if (r < ROW-1 && !(myBoardItem[r + 1][c].getColor().equals(ColorItem.X) || myBoardItem[r + 1][c] == null))
                         myBoardAdjacency[r][c] += 1;
-                    if (c > 0 && !(myBoardItem[r][c - 1].getColor().equals(ColorItem.BLACK) || myBoardItem[r][c - 1] == null))
+                    if (c > 0 && !(myBoardItem[r][c - 1].getColor().equals(ColorItem.X) || myBoardItem[r][c - 1] == null))
                         myBoardAdjacency[r][c] += 1;
-                    if (c < COL-1 && !(myBoardItem[r][c + 1].getColor().equals(ColorItem.BLACK) || myBoardItem[r][c + 1] == null))
+                    if (c < COL-1 && !(myBoardItem[r][c + 1].getColor().equals(ColorItem.X) || myBoardItem[r][c + 1] == null))
                         myBoardAdjacency[r][c] += 1;
                 }
             }
@@ -77,22 +77,22 @@ public class Board implements Serializable {
 
     public void updateNeighboursAdjacency(Position p){
         if(p.getRow()>0 && myBoardItem[p.getRow()-1][p.getCol()]!=null){
-            if(!(myBoardItem[p.getRow()-1][p.getCol()].getColor().equals(ColorItem.BLACK)))
+            if(!(myBoardItem[p.getRow()-1][p.getCol()].getColor().equals(ColorItem.X)))
                 myBoardAdjacency[p.getRow()-1][p.getCol()]-=1;
         }
 
         if(p.getRow()<ROW-1 && myBoardItem[p.getRow()+1][p.getCol()]!=null){
-            if(!(myBoardItem[p.getRow()+1][p.getCol()].getColor().equals(ColorItem.BLACK)))
+            if(!(myBoardItem[p.getRow()+1][p.getCol()].getColor().equals(ColorItem.X)))
                 myBoardAdjacency[p.getRow()+1][p.getCol()]-=1;
         }
 
         if(p.getCol()>0 && myBoardItem[p.getRow()][p.getCol()-1]!=null){
-            if(!(myBoardItem[p.getRow()][p.getCol()-1].getColor().equals(ColorItem.BLACK)))
+            if(!(myBoardItem[p.getRow()][p.getCol()-1].getColor().equals(ColorItem.X)))
                 myBoardAdjacency[p.getRow()][p.getCol()-1]-=1;
         }
 
         if(p.getCol()<COL-1 && myBoardItem[p.getRow()][p.getCol()+1]!=null){
-            if(!(myBoardItem[p.getRow()][p.getCol()+1].getColor().equals(ColorItem.BLACK)))
+            if(!(myBoardItem[p.getRow()][p.getCol()+1].getColor().equals(ColorItem.X)))
                 myBoardAdjacency[p.getRow()][p.getCol()+1]-=1;
         }
     }

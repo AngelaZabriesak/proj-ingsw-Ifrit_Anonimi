@@ -7,7 +7,6 @@ import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.*;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
-import it.polimi.ingsw.Model.Shelf;
 import it.polimi.ingsw.Observer.Observable;
 
 import java.io.Serializable;
@@ -114,11 +113,11 @@ public class Game extends Observable implements Serializable {
             for(int c=0; c< myBoard.getCol(); c++){
                 if(myBoard.getMyBoardItem()[r][c] == null) {
                     if (r == 0 || r == myBoard.getRow() - 1 || c == 0 || c == myBoard.getCol() - 1)
-                        myBoard.getMyBoardItem()[r][c] = new Item(ColorItem.BLACK);
+                        myBoard.getMyBoardItem()[r][c] = new Item(ColorItem.X);
                     if (((r == 1 || r == 2) && (c == 1 || c == 2 || c == myBoard.getCol() - 3 || c == myBoard.getCol() - 2)) || ((r == myBoard.getRow() - 2 || r == myBoard.getRow() - 3) && (c == 1 || c == 2 || c == myBoard.getCol() - 3 || c == myBoard.getCol() - 2)))
-                        myBoard.getMyBoardItem()[r][c] = new Item(ColorItem.BLACK);
+                        myBoard.getMyBoardItem()[r][c] = new Item(ColorItem.X);
                     if ((r == 3 && c == 1) || (r == 1 && c == 5) || (r == 5 && c == myBoard.getCol() - 2) || (r == myBoard.getRow() - 2 && c == 3))
-                        myBoard.getMyBoardItem()[r][c] = new Item(ColorItem.BLACK);
+                        myBoard.getMyBoardItem()[r][c] = new Item(ColorItem.X);
                     else if (myBoard.getMyBoardItem()[r][c] == null /*||myBoard.getMyBoardItem()[r][c].getColor()==ColorItem.BLACK*/)
                         myBoard.getMyBoardItem()[r][c] = new Item(myBag.getItem().getColor());
                 }

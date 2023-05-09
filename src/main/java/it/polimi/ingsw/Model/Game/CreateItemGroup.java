@@ -2,7 +2,6 @@ package it.polimi.ingsw.Model.Game;
 
 import it.polimi.ingsw.Model.Bag.ColorItem;
 import it.polimi.ingsw.Model.Bag.Item;
-import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Position;
 import it.polimi.ingsw.Model.Shelf;
 
@@ -25,7 +24,7 @@ public class CreateItemGroup {
             for(int c=0; c<myShelf.getCol();c++) {
                 this.nuovoGruppo = new ArrayList<>();
                 if(myShelf.getMyShelf()[r][c]!=null){
-                    if (myShelf.getMyShelf()[r][c].getColor() != ColorItem.BLACK && !myShelf.getMyShelf()[r][c].getInGruppo()) {
+                    if (myShelf.getMyShelf()[r][c].getColor() != ColorItem.X && !myShelf.getMyShelf()[r][c].getInGruppo()) {
                         this.gruppo[i] = new ArrayList<>();
                         primo = new Position(r, c);
                         this.gruppo[i].add(primo);
@@ -33,7 +32,7 @@ public class CreateItemGroup {
                         controllaVicini(myShelf, primo);
                         this.gruppo[i].addAll(this.nuovoGruppo);
                         for (Position p : this.gruppo[i]) {
-                            myShelf.getMyShelf()[r][c] = new Item(ColorItem.BLACK);
+                            myShelf.getMyShelf()[r][c] = new Item(ColorItem.X);
                         }
                         i++;
                     }
