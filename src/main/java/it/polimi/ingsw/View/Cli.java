@@ -191,9 +191,10 @@ public class Cli extends InputObservable implements View {
 
     @Override
     public void showItemToOrder(ArrayList<Item> itemToOrder) {
-        String msg = "";
+        StringBuilder msgBuilder = new StringBuilder();
         for(Item i : itemToOrder)
-            msg+="|\t"+i.getColor()+"\t";
+            msgBuilder.append("|\t").append(i.getColor()).append("\t");
+        String msg = msgBuilder.toString();
         msg+="\n";
         out.println(msg);
     }
