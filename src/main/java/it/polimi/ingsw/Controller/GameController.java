@@ -21,11 +21,10 @@ public class GameController extends GameControllerObservable implements ServerOb
     private TurnController turnController;
     private final ArrayList<Player> players;
     private int numberOfPlayer;
-    private boolean firstPlayerConnected;
+    private ArrayList<Item> itemsToOrder;
     private int nItemMoved;
     public GameController(){
         players = new ArrayList<>();
-        firstPlayerConnected = false;
         this.numberOfPlayer = 2;
     }
 
@@ -94,15 +93,16 @@ public class GameController extends GameControllerObservable implements ServerOb
         System.out.println("Received login message");
         if(getPlayerByNickname(message.getNickname())==null && players.size() <= numberOfPlayer/* && !firstPlayerConnected*/){
             if(players.size()==0) {
-                firstPlayerConnected = true;
                 notifyObserver(obs->obs.sendToOnePlayer(new NPlayerRequest(),message.getNickname()));
             }
             players.add(new Player(message.getNickname()));
             notifyObserver(obs->obs.successfulLogin(new CompletedQuestion("Login successful"), message.getNewNickname()));
         }
         else {
-            if(getPlayerByNickname(message.getNickname())!=null)
-                notifyObserver(obs->obs.sendToOnePlayer(new Error("Nickname already used ,choose another!"),message.getNickname()));
+            if(getPlayerByNickname(message.getNickname())!=null) {
+                notifyObserver(obs -> obs.sendToOnePlayer(new Error("Nickname already used ,choose another!"), message.getNickname()));
+                //notifyObserver(obs->obs.sendToOnePlayer(new LoginRequest(),));
+            }
         }
         if(players.size() == numberOfPlayer)
             startGame();
@@ -173,10 +173,12 @@ public class GameController extends GameControllerObservable implements ServerOb
             game.setAction(new ChooseItem(game,row,col,getPlayerByNickname(message.getNickname())));
             try {
                 game.doAction();
+                itemsToOrder.add(game.getBoard().getItem(new Position(row,col)));
                 if(turnController.getCurrentPlayer().getMyItem().size()==nItemMoved)
                     notifyObserver(obs->obs.sendToOnePlayer(new ItemOrderRequest(turnController.getCurrentPlayer().getMyItem()), message.getNickname()));
             } catch (ActionException | WinException e) {
                 notifyObserver(obs->obs.sendToOnePlayer(new Error("Invalid input parameters"), message.getNickname()));
+                notifyObserver(obs->obs.sendToOnePlayer(new ItemPositionRequest(nItemMoved), message.getNickname()));
             }
         }
         else{
@@ -191,6 +193,7 @@ public class GameController extends GameControllerObservable implements ServerOb
                 notifyObserver(obs -> obs.sendToOnePlayer(new Error("Invalid number of items"), message.getNickname()));
                 notifyObserver(obs -> obs.sendToOnePlayer(new NItemRequest(game.getBoard(),game.getCGoal(),game.getCurrentPlayer().getMyGoal()), message.getNickname()));
             } else {
+                this.itemsToOrder = new ArrayList<>();
                 this.nItemMoved = message.getnItem();
                 notifyObserver(obs -> obs.sendToOnePlayer(new CompletedQuestion("Choosed " + nItemMoved + " items to move."), message.getNickname()));
                 for(int i = 0; i<nItemMoved; i++) {
@@ -214,6 +217,7 @@ public class GameController extends GameControllerObservable implements ServerOb
                 notifyObserver(obs->obs.sendToOnePlayer(new ColumnRequest(getPlayerByNickname(message.getNickname()).getMyItem(),getPlayerByNickname(message.getNickname()).getMyShelf()),message.getNickname()));
             } catch (ActionException | WinException e) {
                 notifyObserver(obs->obs.sendToOnePlayer(new Error("Invalid input parameters"), message.getNickname()));
+                notifyObserver(obs->obs.sendToOnePlayer(new ItemOrderRequest(itemsToOrder), message.getNickname()));
             }
         }
         else{

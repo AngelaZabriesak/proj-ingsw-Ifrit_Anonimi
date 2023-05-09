@@ -28,6 +28,7 @@ public class SocketClient extends SocketClientObservable implements ClientObserv
             this.writeToServer = new ObjectOutputStream(socket.getOutputStream());
             this.readFromServer = new ObjectInputStream(socket.getInputStream());// object of scanner class
         } catch (IOException e) {
+            System.out.println(e);
             System.out.println("Error in creating socket\n");
         }
         this.readExecution = Executors.newSingleThreadExecutor();
@@ -41,19 +42,6 @@ public class SocketClient extends SocketClientObservable implements ClientObserv
         };
         thread.start();
     }
-/*
-    public void sendMessageToServer(MessageToServer message) {
-        while(!message.getMessage().equalsIgnoreCase("exit")) {
-            try {
-                writeToServer.writeObject(message);
-                writeToServer.reset();
-            } catch (IOException e) {
-                disconnect();
-                notifyObserver(new InputError("Not send message."));
-            }
-        }
-        disconnect();
-    }*/
 
     public void readMessageFromServer() {
         readExecution.execute(

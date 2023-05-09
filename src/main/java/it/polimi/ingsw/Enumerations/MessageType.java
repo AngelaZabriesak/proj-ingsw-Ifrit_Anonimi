@@ -29,5 +29,5 @@ public enum MessageType implements Serializable {
     CHOOSEITEM_OK,
     CHOOSEORDER_OK,
     ADDINSHELF_OK,
-    COLUMN_REQUEST
+    LOGIN_REQUEST, COLUMN_REQUEST
 }
