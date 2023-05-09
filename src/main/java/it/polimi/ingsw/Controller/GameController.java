@@ -208,18 +208,18 @@ public class GameController extends GameControllerObservable implements ServerOb
     public void chooseOrderItem(ItemOrderResponse message) {
         ArrayList<Integer> itemsOrder = new ArrayList<>();
         if(checkActivePlayer(message.getNickname())){
-            if(message.getItems().size()>1) {
-                for (int i = 0; i < message.getItems().size(); i++) {
-                    itemsOrder.add(Integer.parseInt(message.getOrder().split(",")[i]));
-                }
-            } else{
-                itemsOrder.add(Integer.parseInt(message.getOrder()));
-            }
-            game.setAction(new ChooseOrder(game,getPlayerByNickname(message.getNickname()),itemsOrder));
             try {
+                if(message.getItems().size()>1) {
+                    for (int i = 0; i < message.getItems().size(); i++) {
+                        itemsOrder.add(Integer.parseInt(message.getOrder().split(",")[i]));
+                    }
+                } else{
+                    itemsOrder.add(Integer.parseInt(message.getOrder()));
+                }
+                game.setAction(new ChooseOrder(game,getPlayerByNickname(message.getNickname()),itemsOrder));
                 game.doAction();
                 notifyObserver(obs->obs.sendToOnePlayer(new ColumnRequest(getPlayerByNickname(message.getNickname()).getMyItem(),getPlayerByNickname(message.getNickname()).getMyShelf()),message.getNickname()));
-            } catch (ActionException | WinException e) {
+            } catch (Exception e) {
                 notifyObserver(obs->obs.sendToOnePlayer(new Error("Invalid input parameters"), message.getNickname()));
                 notifyObserver(obs->obs.sendToOnePlayer(new ItemOrderRequest(itemsToOrder), message.getNickname()));
             }
