@@ -208,9 +208,12 @@ public class GameController extends GameControllerObservable implements ServerOb
     public void chooseOrderItem(ItemOrderResponse message) {
         ArrayList<Integer> itemsOrder = new ArrayList<>();
         if(checkActivePlayer(message.getNickname())){
-            for(int i = 0; i<message.getItems().size();i++){
-                if(message.getItems().size()>1)
+            if(message.getItems().size()>1) {
+                for (int i = 0; i < message.getItems().size(); i++) {
                     itemsOrder.add(Integer.parseInt(message.getOrder().split(",")[i]));
+                }
+            } else{
+                itemsOrder.add(Integer.parseInt(message.getOrder()));
             }
             game.setAction(new ChooseOrder(game,getPlayerByNickname(message.getNickname()),itemsOrder));
             try {
