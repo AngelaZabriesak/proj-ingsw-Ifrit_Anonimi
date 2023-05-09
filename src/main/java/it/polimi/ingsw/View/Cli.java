@@ -155,8 +155,14 @@ public class Cli extends InputObservable implements View {
             for (int c = 0; c < 9; c++) {
                 if (r==-1)
                     b.append("|\t  ").append(c).append("  \t");
-                else if (board.getItem(new Position(r, c)) != null)
-                    b.append("|\t").append(board.getItem(new Position(r, c)).getColor()).append("\t");
+                else if (board.getItem(new Position(r, c)) != null){
+                    if(!board.getItem(new Position(r,c)).getColor().equals("X")){
+                        b.append("|\t  ").append(board.getItem(new Position(r,c)).getColor()).append("|  \t");
+                    }
+                    else
+                        b.append("|\t").append(board.getItem(new Position(r, c)).getColor()).append("\t");
+                }
+
                 else
                     b.append("|\tnull\t");
             }
