@@ -14,7 +14,7 @@ public class PersonalGoal4 extends Pgoal{
         myItemGoal[5][3] = new Item(ColorItem.GREEN);
         myItemGoal[3][2] = new Item(ColorItem.WHITE);
         myItemGoal[5][0] = new Item(ColorItem.YELLOW);
-        myItemGoal[3][3] = new Item(ColorItem.AZURE);
+        myItemGoal[1][1] = new Item(ColorItem.AZURE);
     }
 
 
