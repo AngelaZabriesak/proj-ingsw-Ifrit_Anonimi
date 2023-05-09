@@ -51,6 +51,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
                 System.out.println("ClientHandler " + nickname + " received a message: " + message.getClass());
                 server.read(message);
             } catch (IOException e) {
+                System.out.println(e);
                 if(!client.isClosed()){
                     System.out.println("Connection ended from clienthandler " + nickname);
                     server.removeClientHandler(this);

@@ -3,6 +3,7 @@ package it.polimi.ingsw.View;
 import it.polimi.ingsw.Controller.*;
 import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.Response.ItemPositionResponse;
+import it.polimi.ingsw.Model.Bag.ColorItem;
 import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.*;
@@ -149,15 +150,15 @@ public class Cli extends InputObservable implements View {
         StringBuilder b = new StringBuilder();
         for (int r = -1; r < 9; r++) {
             if(r==-1)
-                b.append("|\tR\134C\t ");
+                b.append("|\tR\134C\t");
             else
-                b.append("|\t").append(r).append("|\t");
+                b.append("|\t").append(r).append("\t");
             for (int c = 0; c < 9; c++) {
                 if (r==-1)
                     b.append("|\t  ").append(c).append("  \t");
                 else if (board.getItem(new Position(r, c)) != null){
-                    if(!board.getItem(new Position(r,c)).getColor().equals("X")){
-                        b.append("|\t ").append(board.getItem(new Position(r,c)).getColor()).append(" \t|");
+                    if(board.getItem(new Position(r,c)).getColor().equals(ColorItem.X)){
+                        b.append("|\t  ").append(board.getItem(new Position(r,c)).getColor()).append("  \t");
                     }
                     else
                         b.append("|\t").append(board.getItem(new Position(r, c)).getColor()).append("\t");
