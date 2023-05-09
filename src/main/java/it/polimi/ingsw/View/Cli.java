@@ -138,7 +138,7 @@ public class Cli extends InputObservable implements View {
     @Override
     public void askOrder(ArrayList<Item> itemToOrder) {
         showItemToOrder(itemToOrder);
-        out.print("Choose the insertion order of items in your Shelf, separated by virgola");
+        out.print("Choose the insertion order of items in your Shelf, separated by comma: ");
         String order = readLine();
         notifyInObserver(obs -> obs.onUpdateOrder(order,itemToOrder));
     }
@@ -219,7 +219,7 @@ public class Cli extends InputObservable implements View {
     public void showCGoal(ArrayList<Cgoal> cgoal) {
         out.println("These are the Common Goals\n");
         for (Cgoal c : cgoal) {
-            out.println(c.getDescription() + "\n");
+            out.println(c.getDescription());
         }
     }
 

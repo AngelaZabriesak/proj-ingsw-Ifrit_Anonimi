@@ -100,8 +100,8 @@ public class GameController extends GameControllerObservable implements ServerOb
         }
         else {
             if(getPlayerByNickname(message.getNickname())!=null) {
-                notifyObserver(obs -> obs.sendToOnePlayer(new Error("Nickname already used ,choose another!"), message.getNickname()));
-                //notifyObserver(obs->obs.sendToOnePlayer(new LoginRequest(),));
+                //notifyObserver(obs -> obs.sendToOnePlayer(new Error("Nickname already used ,choose another!"),));
+                //notifyObserver(obs->obs.sendToOnePlayer(new LoginRequest(), message.getNickname()));
             }
         }
         if(players.size() == numberOfPlayer)
@@ -209,7 +209,8 @@ public class GameController extends GameControllerObservable implements ServerOb
         ArrayList<Integer> itemsOrder = new ArrayList<>();
         if(checkActivePlayer(message.getNickname())){
             for(int i = 0; i<message.getItems().size();i++){
-                itemsOrder.add(Integer.parseInt(message.getOrder().split(",")[i]));
+                if(message.getItems().size()>1)
+                    itemsOrder.add(Integer.parseInt(message.getOrder().split(",")[i]));
             }
             game.setAction(new ChooseOrder(game,getPlayerByNickname(message.getNickname()),itemsOrder));
             try {

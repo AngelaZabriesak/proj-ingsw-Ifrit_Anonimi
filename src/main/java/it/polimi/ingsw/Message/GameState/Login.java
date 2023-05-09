@@ -7,9 +7,9 @@ public class Login extends Message {
 
     private String newNickname;
 
-    public Login(String nickname){
+    public Login(String newNickname){
         super(MessageType.LOGIN);
-        setNewNickname(nickname);
+        setNewNickname(newNickname);
     }
 
     public void setNewNickname(String newNickname) {
