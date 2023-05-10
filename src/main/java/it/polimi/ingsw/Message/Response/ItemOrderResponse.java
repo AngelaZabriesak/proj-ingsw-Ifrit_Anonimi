@@ -9,15 +9,15 @@ import java.util.*;
 public class ItemOrderResponse extends Message {
 
     private ArrayList<Item> items;
-    private String order;
+    private ArrayList<Integer> order;
 
-    public ItemOrderResponse(String order, ArrayList<Item> items) {
+    public ItemOrderResponse(ArrayList<Integer> order, ArrayList<Item> items) {
         super(MessageType.ITEM_ORDER_RESPONSE);
         this.order = order;
         this.items=items;
     }
 
-    public String getOrder() {
+    public ArrayList<Integer> getOrder() {
         return order;
     }
     public ArrayList<Item> getItems() {

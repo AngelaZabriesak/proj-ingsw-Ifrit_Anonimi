@@ -106,11 +106,17 @@ public class Cli extends InputObservable implements View {
 
     @Override
     public void askItem(int nItem) {
-        Position position;
-        out.print("Choose the position of "+nItem+" items you want to pick from Board [row,col]: ");
+        Position position = null;
+        out.print("Choose the position of "+nItem+" items you want to pick from Board [row-col]: ");
         String read = readLine();
-        position = new Position(Integer.parseInt(read.split(",")[0]),Integer.parseInt(read.split(",")[1]));
-        notifyInObserver(obs -> obs.onUpdateChooseItem(new ItemPositionResponse(position)));
+        try{
+            position = new Position(Integer.parseInt(read.split("-")[0]), Integer.parseInt(read.split("-")[1]));
+            Position finalPosition = position;
+            notifyInObserver(obs -> obs.onUpdateChooseItem(new ItemPositionResponse(finalPosition)));
+        }catch(Exception e){
+            out.println("Error in entering position of item");
+            askItem(nItem);
+        }
     }
 
     @Override
@@ -138,10 +144,25 @@ public class Cli extends InputObservable implements View {
     // method that asks you to choose the order of Items in Shelf
     @Override
     public void askOrder(ArrayList<Item> itemToOrder) {
-        showItemToOrder(itemToOrder);
-        out.print("Choose the insertion order of items in your Shelf, separated by comma: ");
+        ArrayList<Integer> orderInt = new ArrayList<>();
+        //for(Item i : itemToOrder)
+        out.print("Choose the insertion order of items in your Shelf, separated by -: ");
         String order = readLine();
-        notifyInObserver(obs -> obs.onUpdateOrder(order,itemToOrder));
+        try{
+            if(
+                    order.split("-").length!= itemToOrder.size() ||
+                    max(order.split("-"))> itemToOrder.size()-1 ||
+                    areSame(order.split("-"))
+            )
+                throw new Exception();
+            for(int i = 0 ; i<itemToOrder.size(); i++){
+                orderInt.add(Integer.parseInt(order.split("-")[i]));
+            }
+            notifyInObserver(obs -> obs.onUpdateOrder(orderInt, itemToOrder));
+        }catch(Exception e){
+            out.println("Error in entering order of item");
+            askOrder(itemToOrder);
+        }
     }
 
     // method that shows the Board
@@ -275,4 +296,25 @@ public class Cli extends InputObservable implements View {
         out.println(message);
     }
 
+    private int max(String[] order){
+        int max = 0;
+        for(int i=0; i< order.length; i++){
+            if(Integer.parseInt(order[i])>max)
+                max = Integer.parseInt(order[i]);
+        }
+        return max;
+    }
+
+    /**
+     *
+     * @param order is the array of the position choose by  user
+     * @return true if are some that are equals
+     */
+    private boolean areSame(String[] order){
+        for(int i =0; i< order.length-1; i++){
+            if(Integer.parseInt(order[i])==Integer.parseInt(order[i+1]))
+                return true;
+        }
+        return false;
+    }
 }

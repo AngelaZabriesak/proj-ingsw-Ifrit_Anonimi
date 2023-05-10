@@ -23,7 +23,7 @@ public interface InputObserver {
      */
     void onUpdateColumn(String column);
     void onUpdateNItem(String nItem);
-    void onUpdateOrder(String order, ArrayList<Item> itemToOrder);
+    void onUpdateOrder(ArrayList<Integer> order, ArrayList<Item> itemToOrder);
     void onUpdateNickname(String nickname);
     void onUpdateServerInfo(String address,int port);
     void onUpdateNPlayers(String numberOfPlayer);

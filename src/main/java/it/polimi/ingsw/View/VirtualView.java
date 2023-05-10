@@ -101,6 +101,7 @@ public class VirtualView implements ViewObserver {
 
     @Override
     public void chooseOrderItem(ItemOrderRequest message) {
+        view.showItemToOrder(message.getItems());
         view.askOrder(message.getItems());
     }
 

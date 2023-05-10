@@ -48,7 +48,7 @@ public class ClientController extends ClientObservable implements InputObserver 
     }
 
     @Override
-    public void onUpdateOrder(String order, ArrayList<Item> itemToOrder) {
+    public void onUpdateOrder(ArrayList<Integer> order, ArrayList<Item> itemToOrder) {
         notifyObserver(obs->obs.sendMessageToServer(new ItemOrderResponse(order,itemToOrder)));
     }
 

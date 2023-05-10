@@ -110,13 +110,21 @@ public class GameController extends GameControllerObservable implements ServerOb
 
     @Override
     public void numberOfPlayerHandler(NPlayer message) {
-        if(message.getnPlayer()<2 || message.getnPlayer()>4){
-            notifyObserver(obs-> obs.sendToOnePlayer(new Error("Invalid number of players"),message.getNickname()));
+        int nPlayer;
+        if(!isInt(message.getnPlayer())){
+            notifyObserver(obs-> obs.sendToOnePlayer(new Error("Invalid number of players, is not integer "),message.getNickname()));
             notifyObserver(obs->obs.sendToOnePlayer(new NPlayerRequest(), message.getNickname()));
         }
         else{
-            this.numberOfPlayer = message.getnPlayer();
-            notifyObserver(obs -> obs.sendToOnePlayer(new CompletedQuestion("Number of players set to "+ numberOfPlayer ),message.getNickname()));
+            nPlayer = Integer.parseInt(message.getnPlayer());
+            if(nPlayer<2 || nPlayer>4){
+                notifyObserver(obs-> obs.sendToOnePlayer(new Error("Invalid number of players"),message.getNickname()));
+                notifyObserver(obs->obs.sendToOnePlayer(new NPlayerRequest(), message.getNickname()));
+            }
+            else{
+                this.numberOfPlayer = nPlayer;
+                notifyObserver(obs -> obs.sendToOnePlayer(new CompletedQuestion("Number of players set to "+ numberOfPlayer ),message.getNickname()));
+            }
         }
     }
 
@@ -141,42 +149,58 @@ public class GameController extends GameControllerObservable implements ServerOb
 
     @Override
     public void moveToColumn(ColumnResponse message) {
-        if(message.getColumn()<0 || message.getColumn()>4){
-            notifyObserver(obs-> obs.sendToOnePlayer(new Error("Invalid number of column"),message.getNickname()));
+        int nColumn;
+        if(!isInt(message.getColumn())){
+            notifyObserver(obs-> obs.sendToOnePlayer(new Error("Invalid number of column, is not integer "),message.getNickname()));
             notifyObserver(obs->obs.sendToOnePlayer(new ColumnRequest(getPlayerByNickname(message.getNickname()).getMyItem(),getPlayerByNickname(message.getNickname()).getMyShelf()), message.getNickname()));
         }
-        else if(checkActivePlayer(message.getNickname())){
-            game.setAction(new AddItemInShelf(game, message.getColumn(), getPlayerByNickname(message.getNickname())));
-            try {
-                game.doAction();
-                notifyObserver(obs->obs.sendToOnePlayer(new AddItemInShelf_OK(getPlayerByNickname(message.getNickname()).getMyShelf()),message.getNickname()));
-            } catch (ActionException e) {
-                notifyObserver(obs->obs.sendToOnePlayer(new Error("Invalid input parameters"), message.getNickname()));
+        else {
+            if(checkActivePlayer(message.getNickname())) {
+                try {
+                    nColumn = Integer.parseInt(message.getColumn());
+                    if (nColumn < 0 || nColumn > 4) {
+                        notifyObserver(obs -> obs.sendToOnePlayer(new Error("Invalid number of column"), message.getNickname()));
+                        notifyObserver(obs -> obs.sendToOnePlayer(new ColumnRequest(getPlayerByNickname(message.getNickname()).getMyItem(), getPlayerByNickname(message.getNickname()).getMyShelf()), message.getNickname()));
+                    } else if (checkActivePlayer(message.getNickname())) {
+                        game.setAction(new AddItemInShelf(game, nColumn, getPlayerByNickname(message.getNickname())));
+                        game.doAction();
+                        notifyObserver(obs -> obs.sendToOnePlayer(new AddItemInShelf_OK(getPlayerByNickname(message.getNickname()).getMyShelf()), message.getNickname()));
+                    }
+                } catch (Exception e) {
+                    if (e.getClass().equals(WinException.class))
+                        winGame(((WinException) e).getNickname());
+                    notifyObserver(obs -> obs.sendToOnePlayer(new Error("Invalid input parameters"), message.getNickname()));
+                    notifyObserver(obs -> obs.sendToOnePlayer(new ColumnRequest(getPlayerByNickname(message.getNickname()).getMyItem(), getPlayerByNickname(message.getNickname()).getMyShelf()), message.getNickname()));
+                }
+                turnController.setNextPlayer();
+                startTurn();
             }
-            catch(WinException e){
-                winGame(e.getNickname());
+            else {
+                notifyObserver(obs -> obs.sendToOnePlayer(new Error("It's not your turn phase"), message.getNickname()));
             }
         }
-        else{
-            notifyObserver(obs -> obs.sendToOnePlayer(new Error("It's not your turn phase"),message.getNickname()));
-        }
-        turnController.setNextPlayer();
-        startTurn();
     }
 
     @Override
     public void chooseItemPosition(ItemPositionResponse message) {
         int row,col;
         if(checkActivePlayer(message.getNickname())){
-            row = message.getRow();
-            col = message.getCol();
-            game.setAction(new ChooseItem(game,row,col,getPlayerByNickname(message.getNickname())));
             try {
+                row = message.getRow();
+                col = message.getCol();
+                game.setAction(new ChooseItem(game,row,col,getPlayerByNickname(message.getNickname())));
                 game.doAction();
                 itemsToOrder.add(game.getBoard().getItem(new Position(row,col)));
-                if(turnController.getCurrentPlayer().getMyItem().size()==nItemMoved)
-                    notifyObserver(obs->obs.sendToOnePlayer(new ItemOrderRequest(turnController.getCurrentPlayer().getMyItem()), message.getNickname()));
-            } catch (ActionException | WinException e) {
+                if(turnController.getCurrentPlayer().getMyItem().size()==nItemMoved){
+                    if(nItemMoved != 1){
+                        notifyObserver(obs->obs.sendToOnePlayer(new ItemOrderRequest(turnController.getCurrentPlayer().getMyItem()), message.getNickname()));
+                    }
+                    else{
+                        notifyObserver(obs->obs.sendToOnePlayer(new ColumnRequest(turnController.getCurrentPlayer().getMyItem(),turnController.getCurrentPlayer().getMyShelf()), message.getNickname()));
+                    }
+                }
+
+            } catch (Exception e) {
                 notifyObserver(obs->obs.sendToOnePlayer(new Error("Invalid input parameters"), message.getNickname()));
                 notifyObserver(obs->obs.sendToOnePlayer(new ItemPositionRequest(nItemMoved), message.getNickname()));
             }
@@ -188,17 +212,25 @@ public class GameController extends GameControllerObservable implements ServerOb
 
     @Override
     public void chooseNItemToMove(NItemResponse message) {
+        int nItem;
         if(checkActivePlayer(message.getNickname())) {
-            if (message.getnItem() < 1 || message.getnItem() > 3) {
-                notifyObserver(obs -> obs.sendToOnePlayer(new Error("Invalid number of items"), message.getNickname()));
+            if(!isInt(message.getnItem())){
+                notifyObserver(obs -> obs.sendToOnePlayer(new Error("Invalid number of items,, is not integer"), message.getNickname()));
                 notifyObserver(obs -> obs.sendToOnePlayer(new NItemRequest(game.getBoard(),game.getCGoal(),game.getCurrentPlayer().getMyGoal()), message.getNickname()));
-            } else {
-                this.itemsToOrder = new ArrayList<>();
-                this.nItemMoved = message.getnItem();
-                notifyObserver(obs -> obs.sendToOnePlayer(new CompletedQuestion("Choosed " + nItemMoved + " items to move."), message.getNickname()));
-                for(int i = 0; i<nItemMoved; i++) {
-                    int finalI = i;
-                    notifyObserver(obs -> obs.sendToOnePlayer(new ItemPositionRequest(finalI), message.getNickname()));
+            }
+            else {
+                nItem = Integer.parseInt(message.getnItem());
+                if (nItem < 1 || nItem > 3) {
+                    notifyObserver(obs -> obs.sendToOnePlayer(new Error("Invalid number of items"), message.getNickname()));
+                    notifyObserver(obs -> obs.sendToOnePlayer(new NItemRequest(game.getBoard(), game.getCGoal(), game.getCurrentPlayer().getMyGoal()), message.getNickname()));
+                } else {
+                    this.itemsToOrder = new ArrayList<>();
+                    this.nItemMoved = nItem;
+                    notifyObserver(obs -> obs.sendToOnePlayer(new CompletedQuestion("Choosed " + nItemMoved + " items to move."), message.getNickname()));
+                    for (int i = 0; i < nItemMoved; i++) {
+                        int finalI = i;
+                        notifyObserver(obs -> obs.sendToOnePlayer(new ItemPositionRequest(finalI), message.getNickname()));
+                    }
                 }
             }
         }
@@ -206,20 +238,11 @@ public class GameController extends GameControllerObservable implements ServerOb
 
     @Override
     public void chooseOrderItem(ItemOrderResponse message) {
-        ArrayList<Integer> itemsOrder = new ArrayList<>();
         if(checkActivePlayer(message.getNickname())){
-            try {
-                if(message.getItems().size()>1) {
-                    for (int i = 0; i < message.getItems().size(); i++) {
-                        itemsOrder.add(Integer.parseInt(message.getOrder().split(",")[i]));
-                    }
-                } else{
-                    itemsOrder.add(Integer.parseInt(message.getOrder()));
-                }
-                game.setAction(new ChooseOrder(game,getPlayerByNickname(message.getNickname()),itemsOrder));
+            game.setAction(new ChooseOrder(game,getPlayerByNickname(message.getNickname()),message.getOrder()));
+            try{
                 game.doAction();
-                notifyObserver(obs->obs.sendToOnePlayer(new ColumnRequest(getPlayerByNickname(message.getNickname()).getMyItem(),getPlayerByNickname(message.getNickname()).getMyShelf()),message.getNickname()));
-            } catch (Exception e) {
+            }catch(ActionException | WinException e){
                 notifyObserver(obs->obs.sendToOnePlayer(new Error("Invalid input parameters"), message.getNickname()));
                 notifyObserver(obs->obs.sendToOnePlayer(new ItemOrderRequest(itemsToOrder), message.getNickname()));
             }
@@ -234,6 +257,15 @@ public class GameController extends GameControllerObservable implements ServerOb
         for(Player p : players){
             if(!p.equals(currentPlayer))
                 notifyObserver(obs->obs.sendToOnePlayer(new TurnAlert("It's turn of "+currentPlayer.getNickname()),p.getNickname()));
+        }
+    }
+
+    private boolean isInt(String message){
+        try{
+            Integer.parseInt(message);
+            return true;
+        }catch (Exception e){
+            return false;
         }
     }
 }
