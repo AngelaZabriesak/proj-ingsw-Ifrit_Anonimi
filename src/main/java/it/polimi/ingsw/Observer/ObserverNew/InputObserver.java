@@ -22,11 +22,11 @@ public interface InputObserver {
      * @param column the number of the column to be sent.
      */
     void onUpdateColumn(String column);
-    void onUpdateNItem(String nItem);
+    void onUpdateNItem(int nItem);
     void onUpdateOrder(String order, ArrayList<Item> itemToOrder);
     void onUpdateNickname(String nickname);
     void onUpdateServerInfo(String address,int port);
-    void onUpdateNPlayers(String numberOfPlayer);
+    void onUpdateNPlayers(int numberOfPlayer);
     void onUpdateShelfRequest(ShelfRequest message);
     void onUpdateBoardRequest(BoardRequest message);
     void onUpdateChooseItem(ItemPositionResponse message);

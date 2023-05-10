@@ -12,7 +12,7 @@ public class NPlayer extends Message {
         this.nPlayer=nPLayer;
     }
 
-    public String getnPlayer() {
-        return nPlayer;
+    public int getnPlayer() {
+        return Integer.parseInt(nPlayer);
     }
 }
