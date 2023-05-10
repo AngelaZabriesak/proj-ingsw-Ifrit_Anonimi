@@ -5,14 +5,14 @@ import it.polimi.ingsw.Message.Message;
 
 public class ColumnResponse extends Message {
 
-    private String column;
+    private int column;
 
-    public ColumnResponse(String column) {
+    public ColumnResponse(int column) {
         super(MessageType.COLUMN_RESPONSE);
         this.column = column;
     }
 
-    public String getColumn(){
+    public int getColumn(){
         return column;
     }
 }
