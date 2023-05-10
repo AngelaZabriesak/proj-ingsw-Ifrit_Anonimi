@@ -5,14 +5,14 @@ import it.polimi.ingsw.Message.Message;
 
 public class NItemResponse extends Message {
 
-    private int nItem;
+    private String nItem;
 
-    public NItemResponse(int nItem) {
+    public NItemResponse(String nItem) {
         super(MessageType.N_ITEM_RESPONSE);
         this.nItem = nItem;
     }
 
-    public int getnItem() {
+    public String getnItem() {
         return nItem;
     }
 }

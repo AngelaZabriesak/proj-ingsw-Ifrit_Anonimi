@@ -39,11 +39,11 @@ public class ClientController extends ClientObservable implements InputObserver 
 
     @Override
     public void onUpdateColumn(String column) {
-        notifyObserver(obs->obs.sendMessageToServer(new ColumnResponse(Integer.parseInt(column))));
+        notifyObserver(obs->obs.sendMessageToServer(new ColumnResponse(column)));
     }
 
     @Override
-    public void onUpdateNItem(int nItem) {
+    public void onUpdateNItem(String nItem) {
         notifyObserver(obs->obs.sendMessageToServer(new NItemResponse(nItem)));
     }
 
@@ -82,8 +82,8 @@ public class ClientController extends ClientObservable implements InputObserver 
     }
 
     @Override
-    public void onUpdateNPlayers(int numberOfPlayer) {
-        notifyObserver(obs->obs.sendMessageToServer(new NPlayer(""+numberOfPlayer)));
+    public void onUpdateNPlayers(String numberOfPlayer) {
+        notifyObserver(obs->obs.sendMessageToServer(new NPlayer(numberOfPlayer)));
     }
 
     @Override

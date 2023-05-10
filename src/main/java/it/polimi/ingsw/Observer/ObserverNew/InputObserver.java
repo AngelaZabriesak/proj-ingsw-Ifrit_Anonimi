@@ -26,7 +26,7 @@ public interface InputObserver {
     void onUpdateOrder(ArrayList<Integer> order, ArrayList<Item> itemToOrder);
     void onUpdateNickname(String nickname);
     void onUpdateServerInfo(String address,int port);
-    void onUpdateNPlayers(int numberOfPlayer);
+    void onUpdateNPlayers(String numberOfPlayer);
     void onUpdateShelfRequest(ShelfRequest message);
     void onUpdateBoardRequest(BoardRequest message);
     void onUpdateChooseItem(ItemPositionResponse message);

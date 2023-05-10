@@ -99,7 +99,7 @@ public class Cli extends InputObservable implements View {
     public void askNPlayers() {
         out.print("How many players are in this match? ");
         String nPlayers = readLine();
-        notifyInObserver(obs -> obs.onUpdateNPlayers(Integer.parseInt(nPlayers)));
+        notifyInObserver(obs -> obs.onUpdateNPlayers(nPlayers));
     }
 
     // method that asks you to choose Items from Board
@@ -127,7 +127,7 @@ public class Cli extends InputObservable implements View {
         String msg="How many item do you want to put in your shelf? ";
         out.println(msg);
         String nItem = readLine();
-        notifyInObserver(obs->obs.onUpdateNItem(Integer.parseInt(nItem)));
+        notifyInObserver(obs->obs.onUpdateNItem(nItem));
     }
 
     // method that asks you to choose the column of the Shelf in which you want to put your Items

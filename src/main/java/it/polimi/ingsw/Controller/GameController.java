@@ -199,7 +199,6 @@ public class GameController extends GameControllerObservable implements ServerOb
                         notifyObserver(obs->obs.sendToOnePlayer(new ColumnRequest(turnController.getCurrentPlayer().getMyItem(),turnController.getCurrentPlayer().getMyShelf()), message.getNickname()));
                     }
                 }
-
             } catch (Exception e) {
                 notifyObserver(obs->obs.sendToOnePlayer(new Error("Invalid input parameters"), message.getNickname()));
                 notifyObserver(obs->obs.sendToOnePlayer(new ItemPositionRequest(nItemMoved), message.getNickname()));
@@ -229,7 +228,12 @@ public class GameController extends GameControllerObservable implements ServerOb
                     notifyObserver(obs -> obs.sendToOnePlayer(new CompletedQuestion("Choosed " + nItemMoved + " items to move."), message.getNickname()));
                     for (int i = 0; i < nItemMoved; i++) {
                         int finalI = i;
-                        notifyObserver(obs -> obs.sendToOnePlayer(new ItemPositionRequest(finalI), message.getNickname()));
+                        try {
+                            notifyObserver(obs -> obs.sendToOnePlayer(new ItemPositionRequest(finalI), message.getNickname()));
+                        }catch(Exception e){
+                            notifyObserver(obs -> obs.sendToOnePlayer(new Error("Invalid position of items"), message.getNickname()));
+                            notifyObserver(obs -> obs.sendToOnePlayer(new ItemPositionRequest(finalI), message.getNickname()));
+                        }
                     }
                 }
             }
@@ -242,6 +246,7 @@ public class GameController extends GameControllerObservable implements ServerOb
             game.setAction(new ChooseOrder(game,getPlayerByNickname(message.getNickname()),message.getOrder()));
             try{
                 game.doAction();
+                notifyObserver(obs->obs.sendToOnePlayer(new ColumnRequest(getPlayerByNickname(message.getNickname()).getMyItem(),getPlayerByNickname(message.getNickname()).getMyShelf()), message.getNickname()));
             }catch(ActionException | WinException e){
                 notifyObserver(obs->obs.sendToOnePlayer(new Error("Invalid input parameters"), message.getNickname()));
                 notifyObserver(obs->obs.sendToOnePlayer(new ItemOrderRequest(itemsToOrder), message.getNickname()));
