@@ -72,7 +72,7 @@ public class Board implements Serializable {
 
     public void removeItem(Position p){
         myBoardItem[p.getRow()][p.getCol()] = null;
-        myBoardAdjacency[p.getRow()][p.getCol()]=7;
+        myBoardAdjacency[p.getRow()][p.getCol()]=0;
     }
 
     public void updateNeighboursAdjacency(Position p){
