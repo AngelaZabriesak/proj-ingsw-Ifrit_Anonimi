@@ -29,13 +29,13 @@ public class CommonGoal2 extends Cgoal {
             for (j = 0; j < (COL-3); j++) {
                 if(myshelf[i][j]!=null){
                     if (
-                                    ((myshelf[i][j].getColor() == myshelf[i + 1][j].getColor()) &&
-                                            (myshelf[i][j].getColor() == myshelf[i + 2][j].getColor()) &&
-                                            (myshelf[i][j].getColor() == myshelf[i + 3][j].getColor()))
+                            (  (myshelf[i + 1][j] != null && myshelf[i][j].getColor() == myshelf[i + 1][j].getColor()) &&
+                                    (myshelf[i + 2][j] != null && myshelf[i][j].getColor() == myshelf[i + 2][j].getColor()) &&
+                                            (myshelf[i + 3][j] != null && myshelf[i][j].getColor() == myshelf[i + 3][j].getColor()))
                                             ||
-                                            ((myshelf[i][j].getColor() == myshelf[i][j + 1].getColor()) &&
-                                                    (myshelf[i][j].getColor() == myshelf[i][j + 2].getColor()) &&
-                                                    (myshelf[i][j].getColor() == myshelf[i][j + 3].getColor()))
+                                            ((myshelf[i][j + 1] != null && myshelf[i][j].getColor() == myshelf[i][j + 1].getColor()) &&
+                                                    (myshelf[i][j + 2] != null && myshelf[i][j].getColor() == myshelf[i][j + 2].getColor()) &&
+                                                    (myshelf[i][j + 3] != null && myshelf[i][j].getColor() == myshelf[i][j + 3].getColor()))
                             ) {
                         numOfCond++;
                         myshelfcpy[i][j] = null;
