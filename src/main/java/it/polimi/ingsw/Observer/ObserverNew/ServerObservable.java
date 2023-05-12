@@ -36,9 +36,9 @@ public class ServerObservable {
      */
     public void notifySrvObserver(Consumer<ServerObserver> lambda) {
         int dim = observers.size();
-        //System.out.println("DIMENSIONE server-OBSERVABLE "+dim);
-        //for (ServerObserver observer : observers) {
+        System.out.println("DIMENSIONE server-OBSERVABLE "+dim);
+//        for (ServerObserver observer : observers) {
             lambda.accept(observers.get(0));
-        //}
+//        }
     }
 }

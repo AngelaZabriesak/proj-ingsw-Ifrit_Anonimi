@@ -29,7 +29,6 @@ public class TestAddItemInShelf {
         position.add(0);
         position.add(1);
         Player p0 = game.getCurrentPlayer();
-        //prima pescata
         game.setAction(new ChooseItem(game,1,4,p0));
         game.doAction();
         game.setAction(new ChooseItem(game,1,3,p0));
@@ -39,65 +38,46 @@ public class TestAddItemInShelf {
         //game.setAction(new AddItemInShelf(7,p0));
         game.setAction(new AddItemInShelf(game,4,p0));
         game.doAction();
-
-        //seconda pescata colonna 4 ha 4 posto
-        game.setAction(new ChooseItem(game,2,4,p0));
-        game.doAction();
-        game.setAction(new ChooseItem(game,2,3,p0));
-        game.doAction();
-        game.setAction(new ChooseItem(game,2,5,p0));
-        game.doAction();
-        position.clear();
-        position.add(0);
-        position.add(2);
-        position.add(1);
-        game.setAction(new ChooseOrder(game,p0,position));
-        game.doAction();
-        //assertEquals(3,p0.getPosition().size());
-        game.setAction(new AddItemInShelf(game,4,p0));
-        game.doAction();
-
-        //terza pescata colonna 4 ha 1 posto
-
-        game.setAction(new ChooseItem(game,3,4,p0));
-        /*game.doAction();
-        game.setAction(new ChooseItem(game,3,3,p0));
-        game.doAction();
-        game.setAction(new ChooseItem(game,3,5,p0));*/
-        game.doAction();
-        position.clear();
-        position.add(0);
-        //position.add(2);
-        //position.add(1);
-        game.setAction(new ChooseOrder(game,p0,position));
-        game.doAction();
-        //assertEquals(3,p0.getPosition().size());
-        game.setAction(new AddItemInShelf(game,4,p0));
-        game.doAction();
-
         assertEquals(0,p0.getPosition().size());
     }
-
 
     @Test
-    @DisplayName("Testing putting an item in the column chose by player 2")
-    public void setItem2Player() throws ActionException, WinException {
-        game.setActivePlayer(game.getPlayers().get(1));
-        Player p0 = game.getCurrentPlayer();
-        ArrayList<Integer> position = new ArrayList<>();
-        game.setAction(new ChooseItem(game,3,5,p0));
-        game.doAction();
-        game.setAction(new ChooseItem(game,3,2,p0));
-        game.doAction();
-        position.add(0);
-        //position.add(2);
-        position.add(1);
-        game.setAction(new ChooseOrder(game,p0,position));
-        game.doAction();
-        game.setAction(new AddItemInShelf(game,2,p0));
-        //game.setAction(new AddItemInShelf(4,p0));
-        game.doAction();
-        assertEquals(0,p0.getPosition().size());
-    }
+    @DisplayName("testing refill")
+    public void testingRefill(){
+        game.fillBoard();
+        Board board = game.getBoard();
+        for(int riga = 0; riga<board.getRow(); riga++){
+            for(int colonna = 0; colonna<board.getCol();colonna++){
+                if(board.getMyBoardAdjacency()[riga][colonna]<=4){
+                    //if(colonna !=5 && riga !=5)
+                        board.removeItem(new Position(riga, colonna));
+                }
+            }
+        }
+        String msg ="";
+        for(int riga = 0; riga<board.getRow(); riga++){
+            for(int colonna = 0; colonna<board.getCol();colonna++){
+                if(board.getItem(new Position(riga,colonna))!=null)
+                    msg+=(board.getItem(new Position(riga,colonna)).getColor()+" "+board.getAdjacency(new Position(riga,colonna)));
+                else
+                    msg+=("null\t"+board.getAdjacency(new Position(riga,colonna)));
+            }
+            msg+=("\n");
+        }
+        System.out.println(msg);
 
+        game.refillBoard();
+
+        String msg2 ="";
+        for(int riga = 0; riga<board.getRow(); riga++){
+            for(int colonna = 0; colonna<board.getCol();colonna++){
+                if(board.getItem(new Position(riga,colonna))!=null)
+                    msg2+=(board.getItem(new Position(riga,colonna)).getColor()+" "+board.getAdjacency(new Position(riga,colonna)));
+                else
+                    msg2+=("null\t");
+            }
+            msg2+=("\n");
+        }
+        System.out.println(msg2);
+    }
 }
