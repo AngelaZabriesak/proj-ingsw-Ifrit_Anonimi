@@ -4,6 +4,7 @@ import it.polimi.ingsw.Exception.*;
 import it.polimi.ingsw.Message.Action.ActionMessage;
 import it.polimi.ingsw.Message.Action.AddItemInShelf_OK;
 import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Model.Bag.ColorItem;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
 
@@ -38,7 +39,7 @@ public class AddItemInShelf implements Action{
         boolean ok = true;
         for(int r =0;r<game.getBoard().getRow() && ok == true;r++){
             for(int c=0; c<game.getBoard().getCol() && ok == true; c++){
-                if(game.getBoard().getMyBoardAdjacency()[r][c]!=0)
+                if((game.getBoard().getMyBoardAdjacency()[r][c]!=0) && !(game.getBoard().getMyBoardItem()[r][c].getColor().equals(ColorItem.X)))
                     ok = false;
             }
         }
