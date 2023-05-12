@@ -35,10 +35,10 @@ public class CommonGoal3 extends Cgoal {
                 if (myshelf[i][j] != null) {
                     if
                     (
-                            (myshelf[i + 1][j] != null) && myshelf[i][j].getColor() == myshelf[i + 1][j].getColor() &&
-                            (myshelf[i][j + 1] != null) && myshelf[i][j].getColor() == myshelf[i][j + 1].getColor() &&
-                            (myshelf[i + 1][j + 1] != null) && myshelf[i][j].getColor() == myshelf[i + 1][j + 1].getColor() &&
-                            (myshelfcpy[i][j] != null) && myshelf[i][j].getColor() == myshelfcpy[i][j].getColor()) {
+                            ( (myshelf[i + 1][j] != null) && myshelf[i][j].getColor() == myshelf[i + 1][j].getColor() ) &&
+                                    ( (myshelf[i][j + 1] != null) && myshelf[i][j].getColor() == myshelf[i][j + 1].getColor() ) &&
+                                    ( (myshelf[i + 1][j + 1] != null) && myshelf[i][j].getColor() == myshelf[i + 1][j + 1].getColor() ) &&
+                                    ( (myshelfcpy[i][j] != null) && myshelf[i][j].getColor() == myshelfcpy[i][j].getColor() ) ) {
                         squares.add(myshelf[i][j].getColor());
                         myshelfcpy[i][j] = null;
                         myshelfcpy[i + 1][j] = null;
