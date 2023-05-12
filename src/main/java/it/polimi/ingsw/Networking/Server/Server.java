@@ -15,7 +15,7 @@ import java.util.*;
  */
 public class Server implements Runnable, LoginObserver, GameControllerObserver {
 
-    private ServerMessageManager messageManager; //observed by gameController
+    private final ServerMessageManager messageManager; //observed by gameController
     private GameController gameController;
     private ServerSocket serverSocket;
     private Socket socket;

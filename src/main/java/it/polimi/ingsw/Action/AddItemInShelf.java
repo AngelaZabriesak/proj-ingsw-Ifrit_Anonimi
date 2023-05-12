@@ -37,8 +37,8 @@ public class AddItemInShelf implements Action{
             game.getBoard().updateNeighboursAdjacency(p);
 
         boolean ok = true;
-        for(int r =0;r<game.getBoard().getRow();r++){
-            for(int c=0; c<game.getBoard().getCol(); c++){
+        for(int r =0;r<game.getBoard().getRow() && ok;r++){
+            for(int c=0; c<game.getBoard().getCol() && ok; c++){
                 if((game.getBoard().getMyBoardAdjacency()[r][c]>0) && (game.getBoard().getMyBoardAdjacency()[r][c]<5))
                     ok = false;
             }
