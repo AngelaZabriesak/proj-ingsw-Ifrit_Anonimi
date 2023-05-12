@@ -167,6 +167,7 @@ public class GameController extends GameControllerObservable implements ServerOb
                         notifyObserver(obs -> obs.sendToOnePlayer(new AddItemInShelf_OK(getPlayerByNickname(message.getNickname()).getMyShelf()), message.getNickname()));
                     }
                 } catch (Exception e) {
+                    System.out.println(e);
                     if (e.getClass().equals(WinException.class))
                         winGame(((WinException) e).getNickname());
                     notifyObserver(obs -> obs.sendToOnePlayer(new Error("Invalid input parameters"), message.getNickname()));
