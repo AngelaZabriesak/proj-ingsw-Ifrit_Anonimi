@@ -22,11 +22,14 @@ public interface ViewObserver {
     void TurnAlert(TurnAlert message);
     void winHandler(Win message);
     void GameEndedHandler(EndGame message);
-    void chooseItemPosition(ItemPositionRequest message);
+    void chooseItemPosition(Item1PositionRequest message);
+    void chooseOtherItemPosition(Item2PositionRequest message);
+    void chooseOtherItemPosition(Item3PositionRequest message);
+    void chooseItem(ChoosePositionRequest message);
     void chooseOrderItemOK(ChooseOrder_OK message);
     void addItemInShelf(AddItemInShelf_OK message);
-    void chooseNumberItem(NItemRequest message);
     void chooseItemOk(ChooseItem_OK message);
     void chooseOrderItem(ItemOrderRequest message);
     void chooseColumn(ColumnRequest message);
+    void nicknameHandler(LoginRequest message);
 }

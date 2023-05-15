@@ -9,8 +9,6 @@ import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Observer.*;
 
-import java.util.ArrayList;
-
 public class VirtualView implements ViewObserver {
     private View view;
 
@@ -74,8 +72,34 @@ public class VirtualView implements ViewObserver {
     }
 
     @Override
-    public void chooseItemPosition(ItemPositionRequest message) {
-        view.askItem(message.getnItemToMove());
+    public void chooseItemPosition(Item1PositionRequest message) {
+        if(message.getBoard()!=null && message.getCommonGoals()!=null && message.getMyPgoal()!=null) {
+            view.showBoard(message.getBoard());
+            view.showCGoal(message.getCommonGoals());
+            view.showPGoal(message.getMyPgoal());
+        }
+        if (message.getError()!=null)
+            view.showError(message.getError());
+        view.askItem(null,null);
+    }
+
+    @Override
+    public void chooseOtherItemPosition(Item2PositionRequest message) {
+        if (message.getError()!=null)
+            view.showError(message.getError());
+        view.askItem(message.getP1(),null);
+    }
+
+    @Override
+    public void chooseOtherItemPosition(Item3PositionRequest message) {
+        if (message.getError()!=null)
+            view.showError(message.getError());
+        view.askItem(message.getP1(),message.getP2());
+    }
+
+    @Override
+    public void chooseItem(ChoosePositionRequest message) {
+        view.askOther(message);
     }
 
     @Override
@@ -86,12 +110,6 @@ public class VirtualView implements ViewObserver {
     @Override
     public void addItemInShelf(AddItemInShelf_OK message) {
         view.showShelf(message.getShelf());
-    }
-
-    // method that asks for number of items to move
-    @Override
-    public void chooseNumberItem(NItemRequest message) {
-        view.askNItem(message);
     }
 
     @Override
@@ -107,7 +125,15 @@ public class VirtualView implements ViewObserver {
 
     @Override
     public void chooseColumn(ColumnRequest message) {
-        view.askColumn(message.getItemOrdered(), message.getShelf());
+        view.showMessage("Your item ordered are: ");
+        view.showItemToOrder(message.getItemOrdered());
+        view.showShelf(message.getShelf());
+        view.askColumn();
+    }
+
+    @Override
+    public void nicknameHandler(LoginRequest message) {
+        view.askNickname();
     }
 
     // method that asks for number of players

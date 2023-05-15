@@ -102,8 +102,8 @@ public class Server implements Runnable, LoginObserver, GameControllerObserver {
     }
 
     @Override
-    public void successfulLogin(Message message/*,String tmpNickname*/, String newName) {
-        //clientHandler.get(Integer.parseInt(tmpNickname)).setNickname(newName);
+    public void successfulLogin(Message message,String tmpNickname, String newName) {
+        clientHandler.get(Integer.parseInt(tmpNickname)).setNickname(newName);
         notifyPlayer(message,newName);
     }
 

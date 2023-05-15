@@ -4,12 +4,16 @@ import it.polimi.ingsw.Enumerations.*;
 import it.polimi.ingsw.Message.Message;
 import it.polimi.ingsw.Model.*;
 
-public class ItemPositionResponse extends Message {
+public class Item1PositionResponse extends Message {
     private int row,col;
     private Position position;
-    public ItemPositionResponse(Position position) {
-        super(MessageType.ITEM_POSITION_RESPONSE);
+    public Item1PositionResponse(Position position) {
+        super(MessageType.ITEM_1POSITION_RESPONSE);
         this.position = position;
+    }
+
+    public Position getP(){
+        return position;
     }
 
     public int getCol() {

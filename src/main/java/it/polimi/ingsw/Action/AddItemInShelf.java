@@ -61,12 +61,10 @@ public class AddItemInShelf implements Action{
     @Override
     public void checkInput() throws ActionException {
         if(!checkColumnValid()) {
-            System.out.println("The id column chose isn't valid");
-            throw new ActionException();
+            throw new ActionException("The id column chose isn't valid");
         }
         if(!checkColumnEmpty()) {
-            System.out.println("The id column chose doesn't have enough space");
-            throw new ActionException();
+            throw new ActionException("The id column chose doesn't have enough space");
         }
     }
 

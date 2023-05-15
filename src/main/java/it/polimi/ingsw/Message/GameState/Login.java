@@ -14,10 +14,11 @@ public class Login extends Message {
 
     public void setNewNickname(String newNickname) {
         this.newNickname = newNickname;
-        setNickname(newNickname);
+        //setNickname(newNickname);
     }
 
     public String getNewNickname() {
-        return getNickname();
+        //return getNickname();
+        return newNickname;
     }
 }

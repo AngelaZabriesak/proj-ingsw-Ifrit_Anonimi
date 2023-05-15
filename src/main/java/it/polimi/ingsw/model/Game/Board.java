@@ -51,8 +51,10 @@ public class Board implements Serializable {
     /**
      *   indicate which item can be chosen
      */
-    public void setPositionAvailable() {
-
+    public int getPositionAvailable(int r, int c) {
+        if(myBoardAdjacency[r][c]<4 && myBoardAdjacency[r][c]>0)
+            return myBoardAdjacency[r][c];
+        return -9999;
     }
 
     public int getRow(){

@@ -3,10 +3,7 @@ package it.polimi.ingsw.Message;
 import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Message.Request.BoardRequest;
 import it.polimi.ingsw.Message.Request.ShelfRequest;
-import it.polimi.ingsw.Message.Response.ColumnResponse;
-import it.polimi.ingsw.Message.Response.ItemOrderResponse;
-import it.polimi.ingsw.Message.Response.ItemPositionResponse;
-import it.polimi.ingsw.Message.Response.NItemResponse;
+import it.polimi.ingsw.Message.Response.*;
 import it.polimi.ingsw.Observer.ObserverNew.ServerObservable;
 import it.polimi.ingsw.Observer.ObserverNew.ServerObserver;
 
@@ -26,20 +23,29 @@ public class ServerMessageManager extends ServerObservable {
             case LOGIN:
                  notifySrvObserver(obs->obs.loginHandler((Login) message));
                 break;
-            case N_ITEM_RESPONSE:
+            /*case N_ITEM_RESPONSE:
                 notifySrvObserver(obs->obs.chooseNItemToMove((NItemResponse) message));
-                break;
+                break;*/
             case COLUMN_RESPONSE:
                 notifySrvObserver(obs->obs.moveToColumn((ColumnResponse) message));
                 break;
             case ITEM_ORDER_RESPONSE:
                 notifySrvObserver(obs->obs.chooseOrderItem((ItemOrderResponse) message));
                 break;
-            case ITEM_POSITION_RESPONSE:
-                notifySrvObserver(obs->obs.chooseItemPosition((ItemPositionResponse) message));
+            case ITEM_1POSITION_RESPONSE:
+                notifySrvObserver(obs->obs.choose1ItemPosition((Item1PositionResponse) message));
+                break;
+            case ITEM_2POSITION_RESPONSE:
+                notifySrvObserver(obs->obs.choose2ItemPosition((Item2PositionResponse) message));
+                break;
+            case ITEM_3POSITION_RESPONSE:
+                notifySrvObserver(obs->obs.choose3ItemPosition((Item3PositionResponse) message));
+                break;
+            case CHOOSEITEM_RESPONSE:
+                notifySrvObserver(obs->obs.manageChoose((ChoosePositionResponse) message));
                 break;
             default:
-                System.out.println("ERRORE IN MESSAGE server MANAGER");
+                System.out.println("ERRORE IN MESSAGE server MANAGER "+message.getClass());
         }
     }
     public void clientDisconnection() {

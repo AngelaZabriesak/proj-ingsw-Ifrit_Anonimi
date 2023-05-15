@@ -4,6 +4,7 @@ import it.polimi.ingsw.Message.Action.AddItemInShelf_OK;
 import it.polimi.ingsw.Message.Action.ChooseItem_OK;
 import it.polimi.ingsw.Message.Action.ChooseOrder_OK;
 import it.polimi.ingsw.Message.GameState.*;
+import it.polimi.ingsw.Message.Request.ChoosePositionRequest;
 import it.polimi.ingsw.Message.Request.ItemOrderRequest;
 import it.polimi.ingsw.Message.Request.NItemRequest;
 import it.polimi.ingsw.Message.Request.NPlayerRequest;
@@ -32,17 +33,17 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void askItem(int nItem) {
+    public void askItem(Position p1,Position p2) {
 
     }
 
     @Override
-    public void askNItem(NItemRequest message) {
+    public void askOther(ChoosePositionRequest message) {
 
     }
 
     @Override
-    public void askColumn(ArrayList<Item> itemOrdered,Shelf shelf) {
+    public void askColumn() {
 
     }
 

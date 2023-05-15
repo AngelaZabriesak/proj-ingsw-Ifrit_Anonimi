@@ -3,11 +3,8 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.GameState.*;
-import it.polimi.ingsw.Message.Response.ColumnResponse;
-import it.polimi.ingsw.Message.Response.ItemOrderResponse;
-import it.polimi.ingsw.Message.Response.ItemPositionResponse;
-import it.polimi.ingsw.Message.Response.NItemResponse;
-import it.polimi.ingsw.Model.Bag.Item;
+import it.polimi.ingsw.Message.Response.*;
+import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Networking.Client.*;
 import it.polimi.ingsw.Observer.ObserverNew.*;
 
@@ -40,11 +37,6 @@ public class ClientController extends ClientObservable implements InputObserver 
     @Override
     public void onUpdateColumn(String column) {
         notifyObserver(obs->obs.sendMessageToServer(new ColumnResponse(column)));
-    }
-
-    @Override
-    public void onUpdateNItem(String nItem) {
-        notifyObserver(obs->obs.sendMessageToServer(new NItemResponse(nItem)));
     }
 
     @Override
@@ -87,17 +79,12 @@ public class ClientController extends ClientObservable implements InputObserver 
     }
 
     @Override
-    public void onUpdateShelfRequest(ShelfRequest message) {
+    public void onUpdateChooseItem(Message message) {
         notifyObserver(obs->obs.sendMessageToServer(message));
     }
 
     @Override
-    public void onUpdateBoardRequest(BoardRequest message) {
-        notifyObserver(obs->obs.sendMessageToServer(message));
-    }
-
-    @Override
-    public void onUpdateChooseItem(ItemPositionResponse message) {
+    public void onUpdateChoose(ChoosePositionResponse message) {
         notifyObserver(obs->obs.sendMessageToServer(message));
     }
 

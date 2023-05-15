@@ -43,11 +43,12 @@ public class SocketClientHandler implements ClientHandler, Runnable {
         while(!Thread.currentThread().isInterrupted()){
             try {
                 Message message = (Message) fromClient.readObject();
-                if(message.getType().equals(MessageType.LOGIN))
+                System.out.println("Nickname older: "+nickname);
+                /*if(message.getType().equals(MessageType.LOGIN))
                     setNickname(message.getNickname());
-                else {
+                else {*/
                     message.setNickname(nickname);
-                }
+                //}
                 System.out.println("ClientHandler " + nickname + " received a message: " + message.getClass());
                 server.read(message);
             } catch (IOException e) {
