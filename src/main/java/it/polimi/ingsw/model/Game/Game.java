@@ -186,21 +186,25 @@ public class Game extends Observable implements Serializable {
         p_points[6] = 12;
 
         for(ArrayList<Position> gruppo : gruppi){
-            if(gruppo.size()==3)
-                myScore+=2;
-            if(gruppo.size()==4)
-                myScore+=3;
-            if(gruppo.size()==5)
-                myScore+=5;
-            if (gruppo.size()>=6)
-                myScore+=8;
+            if(gruppo!=null) {
+                if (gruppo.size() == 3)
+                    myScore += 2;
+                if (gruppo.size() == 4)
+                    myScore += 3;
+                if (gruppo.size() == 5)
+                    myScore += 5;
+                if (gruppo.size() >= 6)
+                    myScore += 8;
+            }
         }
 
         for(int r =0; r<player.getMyShelf().getRow(); r++){
             for(int c=0; c<player.getMyShelf().getCol(); c++){
                 if(player.getMyShelf().getMyShelf()[r][c]!=null){
-                    if(player.getMyShelf().getMyShelf()[r][c].getColor().equals((player.getMyGoal().getGoal()[r][c].getColor())))
-                        check_p_score+=1;
+                    if(player.getMyGoal().getGoal()[r][c]!=null) {
+                        if (player.getMyShelf().getMyShelf()[r][c].getColor().equals((player.getMyGoal().getGoal()[r][c].getColor())))
+                            check_p_score += 1;
+                    }
                 }
             }
         }

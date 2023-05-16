@@ -4,7 +4,12 @@ import it.polimi.ingsw.Action.ChooseItem;
 import it.polimi.ingsw.Action.ChooseOrder;
 import it.polimi.ingsw.Exception.ActionException;
 import it.polimi.ingsw.Exception.WinException;
+import it.polimi.ingsw.Model.Bag.ColorItem;
+import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Game.Game;
+import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
+import it.polimi.ingsw.Model.Goal.CommonGoal.CgoalFactory;
+import it.polimi.ingsw.Model.Goal.PersonalGoal.PgoalFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,21 +34,27 @@ public class TestGoal {
     }
 
     @Test
-    @DisplayName("Testing putting the items  chose by player 1 in order")
-    public void test() throws ActionException, WinException {
-        ArrayList<Integer> position = new ArrayList<>();
-        position.add(0);
-        position.add(1);
+    @DisplayName("Testing goal")
+    public void testGoal(){
+        StringBuilder s = new StringBuilder();
         Player p0 = game.getCurrentPlayer();
-        game.setAction(new ChooseItem(game,p0,null,null,new Position(1,4)));
-        game.doAction();
-        game.setAction(new ChooseItem(game,p0,new Position(1,4),null,new Position(1,3)));
-        game.doAction();
-        game.setAction(new ChooseOrder(game,p0,position));
-        game.doAction();
-        assertEquals(0,p0.getPosition().size());
-
-        for(Position p : game.getCurrentPlayer().getPosition())
-            game.getBoard().updateNeighboursAdjacency(p);
+        Shelf shelf = p0.getMyShelf();
+        for(int r =0;r<shelf.getRow();r++){
+            for(int c=0;c<shelf.getCol();c++){
+                shelf.setMyShelf(new Position(r,c),new Item(ColorItem.GREEN));
+                s.append("|\t").append(shelf.getMyShelf()[r][c].getColor()).append("\t");
+            }
+            s.append("|\n");
+        }
+        System.out.println(s);
+        ArrayList<Cgoal> cgoals = new ArrayList<>();
+        for(int i = 0; i< 11; i++) {
+            cgoals.add(CgoalFactory.getInstance().getCommonGoal(i,game));
+        }
+        for(Cgoal cg : cgoals){
+            System.out.println(cg.isTaken(shelf));
+        }
+        game.calcScore(p0);
+        System.out.println(p0.getMyScore());
     }
 }
