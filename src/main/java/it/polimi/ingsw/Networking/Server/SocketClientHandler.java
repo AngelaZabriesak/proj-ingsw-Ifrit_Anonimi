@@ -43,7 +43,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
         while(!Thread.currentThread().isInterrupted()){
             try {
                 Message message = (Message) fromClient.readObject();
-                System.out.println("Nickname older: "+nickname);
+                //System.out.println("Nickname older: "+nickname);
                 /*if(message.getType().equals(MessageType.LOGIN))
                     setNickname(message.getNickname());
                 else {*/
@@ -57,7 +57,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
                     System.out.println("Connection ended from clienthandler " + nickname);
                     server.removeClientHandler(this);
                     disconnect();
-                    server.disconnectAll();
+                    //server.disconnectAll();
                     if(!server.isGameEnded())
                         server.clientDisconnection();
                 }

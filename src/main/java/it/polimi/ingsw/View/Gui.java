@@ -82,16 +82,6 @@ public class Gui extends ViewObservable implements View {
 
     }
 
-    /*@Override
-    public void showLoginResult(boolean nicknameAccepted, boolean connectionSuccessful, String nickname) {
-
-    }*/
-
-    @Override
-    public void showErrorAndExit(String error) {
-
-    }
-
     @Override
     public void showError(String error) {
 
@@ -99,6 +89,11 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void showMessage(String message) {
+
+    }
+
+    @Override
+    public void exit() {
 
     }
 }

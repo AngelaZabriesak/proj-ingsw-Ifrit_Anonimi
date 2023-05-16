@@ -29,9 +29,9 @@ public class TestAddItemInShelf {
         position.add(0);
         position.add(1);
         Player p0 = game.getCurrentPlayer();
-        game.setAction(new ChooseItem(game,1,4,p0));
+        game.setAction(new ChooseItem(game,p0,null,null,new Position(1,4)));
         game.doAction();
-        game.setAction(new ChooseItem(game,1,3,p0));
+        game.setAction(new ChooseItem(game,p0,new Position(1,4),null,new Position(1,3)));
         game.doAction();
         game.setAction(new ChooseOrder(game,p0,position));
         game.doAction();

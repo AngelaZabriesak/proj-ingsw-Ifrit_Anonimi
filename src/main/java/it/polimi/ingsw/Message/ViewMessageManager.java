@@ -2,6 +2,7 @@ package it.polimi.ingsw.Message;
 
 import it.polimi.ingsw.Message.Action.*;
 import it.polimi.ingsw.Message.Error.Error;
+import it.polimi.ingsw.Message.Error.ErrorPlayer;
 import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.Response.*;
@@ -31,6 +32,9 @@ public class ViewMessageManager extends ViewObservable {
                 break;
             case N_PLAYER_REQUEST:
                 notifyViewObserver(obs-> obs.NumOfPlayerHandler((NPlayerRequest) message));
+                break;
+            case ERROR_PLAYER:
+                notifyViewObserver(obs->obs.errorPlayerManager((ErrorPlayer) message));
                 break;
             case BOARD_RESPONSE:
                 notifyViewObserver(obs-> obs.showBoardHandler((BoardResponse) message));

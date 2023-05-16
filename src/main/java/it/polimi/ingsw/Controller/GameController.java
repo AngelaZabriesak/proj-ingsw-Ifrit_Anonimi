@@ -4,6 +4,7 @@ import it.polimi.ingsw.Action.*;
 import it.polimi.ingsw.Exception.*;
 import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Message.Action.AddItemInShelf_OK;
+import it.polimi.ingsw.Message.Error.ErrorPlayer;
 import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.Error.Error;
@@ -22,7 +23,7 @@ public class GameController extends GameControllerObservable implements ServerOb
     private final ArrayList<Player> players;
     private int numberOfPlayer;
     private ArrayList<Item> itemsToOrder = new ArrayList<>();
-    //private int nItemMoved;
+    private boolean gameStarted = false;
     public GameController(){
         players = new ArrayList<>();
         this.numberOfPlayer = 9999;
@@ -37,6 +38,7 @@ public class GameController extends GameControllerObservable implements ServerOb
     }
 
     private void startGame(){
+        gameStarted = true;
         System.out.println("Starting game for "+players.size()+" players");
         this.game = new Game(players);
         game.addObserver(this);
@@ -76,7 +78,7 @@ public class GameController extends GameControllerObservable implements ServerOb
     }
 
     public boolean isGameStarted() {
-        return false;
+        return gameStarted;
     }
 
     public void winGame(String winner) {
@@ -93,12 +95,15 @@ public class GameController extends GameControllerObservable implements ServerOb
     @Override
     public void loginHandler(Login message) {
         System.out.println("Received login message");
-        if(getPlayerByNickname(message.getNewNickname())==null && players.size() <= numberOfPlayer){
+        if(getPlayerByNickname(message.getNewNickname())==null && players.size() <= numberOfPlayer && !gameStarted){
             players.add(new Player(message.getNewNickname()));
             notifyObserver(obs->obs.successfulLogin(new CompletedQuestion("Login successful "+message.getNewNickname()),message.getNickname(), message.getNewNickname()));
             if(numberOfPlayer==9999) {
                 notifyObserver(obs->obs.sendToOnePlayer(new NPlayerRequest(),message.getNewNickname()));
             }
+        }
+        else if(gameStarted){
+            notifyObserver(obs->obs.sendToOnePlayer(new ErrorPlayer(), message.getNickname()));
         }
         else {
             if(getPlayerByNickname(message.getNewNickname())!=null) {
@@ -125,7 +130,7 @@ public class GameController extends GameControllerObservable implements ServerOb
             }
             else{
                 this.numberOfPlayer = nPlayer;
-                notifyObserver(obs -> obs.sendToOnePlayer(new CompletedQuestion("Number of players set to "+ numberOfPlayer ),message.getNickname()));
+                notifyObserver(obs -> obs.sendToOnePlayer(new CompletedQuestion("Waiting others  "+ (numberOfPlayer-players.size())+" players" ),message.getNickname()));
             }
         }
     }
@@ -147,6 +152,7 @@ public class GameController extends GameControllerObservable implements ServerOb
 
     @Override
     public void endGameDisconnection() {
+
     }
 
     @Override

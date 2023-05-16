@@ -252,40 +252,6 @@ public class Cli extends InputObservable implements View {
         }
     }
 
-
-    /**
-     * Shows the login result on the terminal.
-     * On login fail, the program is terminated immediately.
-     */
-   /* @Override
-    public void showLoginResult(boolean nicknameAccepted, boolean connectionSuccessful, String nickname) {
-        if (nicknameAccepted && connectionSuccessful) {
-            out.println("Hi, " + nickname + "! You connected to the server.");
-        } else if (connectionSuccessful) {
-            askNickname();
-        } else if (nicknameAccepted) {
-            out.println("Max players reached. Connection refused.");
-            out.println("EXIT.");
-
-            System.exit(1);
-        } else {
-            showErrorAndExit("Could not contact server.");
-        }
-    }*/
-
-    /**
-     * Shows an error message and exit.
-     */
-    @Override
-    public void showErrorAndExit(String error) {
-        inputThread.close();
-
-        out.println("\nERROR: " + error);
-        out.println("EXIT.");
-
-        System.exit(1);
-    }
-
     @Override
     public void showError(String error) {
         out.println("\nERROR: " + error);
@@ -294,6 +260,12 @@ public class Cli extends InputObservable implements View {
     @Override
     public void showMessage(String message) {
         out.println(message);
+    }
+
+    @Override
+    public void exit() {
+        inputThread.close();
+        System.exit(1);
     }
 
     private int max(String[] order){
@@ -317,4 +289,5 @@ public class Cli extends InputObservable implements View {
         }
         return false;
     }
+
 }

@@ -26,8 +26,7 @@ public interface View {
     void showScore(Player player);
     void showCGoal(ArrayList<Cgoal> cgoal);
     void showPGoal(Pgoal pgoal);
-    void showErrorAndExit(String error);
     void showError(String error);
     void showMessage(String message);
-
+    void exit();
 }

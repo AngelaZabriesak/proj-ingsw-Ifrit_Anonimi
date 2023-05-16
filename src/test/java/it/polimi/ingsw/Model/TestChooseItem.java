@@ -28,9 +28,9 @@ public class TestChooseItem {
         @DisplayName("Testing getting item chose by player 1")
         public void getItem1Player() throws ActionException, WinException {
             Player p0 = game.getCurrentPlayer();
-            game.setAction(new ChooseItem(game,1,4,p0));
+            game.setAction(new ChooseItem(game,p0,null,null,new Position(1,4)));
             game.doAction();
-            game.setAction(new ChooseItem(game,1,3,p0));
+            game.setAction(new ChooseItem(game,p0,new Position(1,4),null,new Position(1,3)));
             game.doAction();
             assertEquals(2,p0.getMyItem().size());
 
@@ -43,9 +43,9 @@ public class TestChooseItem {
         public void getItem2Player() throws ActionException, WinException {
             game.setActivePlayer(game.getPlayers().get(1));
             Player p0 = game.getCurrentPlayer();
-            game.setAction(new ChooseItem(game,2,4,p0));
+            game.setAction(new ChooseItem(game,p0,null,null,new Position(2,4)));
             game.doAction();
-            game.setAction(new ChooseItem(game,2,3,p0));
+            game.setAction(new ChooseItem(game,p0,new Position(2,4),null,new Position(2,3)));
             game.doAction();
             assertEquals(2,p0.getMyItem().size());
         }
