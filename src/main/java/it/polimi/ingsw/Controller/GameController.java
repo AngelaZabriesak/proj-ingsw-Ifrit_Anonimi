@@ -224,7 +224,7 @@ public class GameController extends GameControllerObservable implements ServerOb
         if(game.getPositionAvailable(message.getP1(),message.getP2()).size()>0) {
             if (message.getResponse().equalsIgnoreCase("yes")) {
                 if (itemsToOrder.size() == 1)
-                    notifyObserver(obs -> obs.sendToOnePlayer(new Item2PositionRequest(null,message.getP1(),game.getPositionAvailable(message.getP1(),message.getP2())), message.getNickname()));
+                    notifyObserver(obs -> obs.sendToOnePlayer(new Item2PositionRequest(null,message.getP1(),game.getPositionAvailable(message.getP1(),null)), message.getNickname()));
                 else
                     notifyObserver(obs -> obs.sendToOnePlayer(new Item3PositionRequest(null,message.getP1(),message.getP2(),game.getPositionAvailable(message.getP1(),message.getP2())), message.getNickname()));
             } else if (message.getResponse().equalsIgnoreCase("no")) {
@@ -260,7 +260,7 @@ public class GameController extends GameControllerObservable implements ServerOb
                 itemsToOrder.add(game.getBoard().getItem(message.getP2()));
                 checkAvailability(message.getP1(),message.getP2(), message.getNickname());
             } catch (ActionException | WinException e) {
-                notifyObserver(obs->obs.sendToOnePlayer(new Item2PositionRequest(e.getMessage(), message.getP2(),game.getPositionAvailable(message.getP1(),null)), message.getNickname()));
+                notifyObserver(obs->obs.sendToOnePlayer(new Item2PositionRequest(e.getMessage(), message.getP1(),game.getPositionAvailable(message.getP1(),null)), message.getNickname()));
             }
         }
         else{
