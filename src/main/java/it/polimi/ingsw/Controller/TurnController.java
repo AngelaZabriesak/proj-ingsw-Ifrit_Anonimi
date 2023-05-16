@@ -25,7 +25,6 @@ public class TurnController {
     public void setCurrentPlayer(Player p){
         this.currentPlayer = p;
         this.gameController.getGame().setActivePlayer(currentPlayer);
-        this.gameController.notifyActivePlayer(currentPlayer);
     }
 
     public void setNextPlayer(){

@@ -2,9 +2,8 @@ package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Controller.*;
 import it.polimi.ingsw.Message.Request.*;
-import it.polimi.ingsw.Message.Response.ItemPositionResponse;
-import it.polimi.ingsw.Model.Bag.ColorItem;
-import it.polimi.ingsw.Model.Bag.Item;
+import it.polimi.ingsw.Message.Response.*;
+import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.*;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
@@ -20,7 +19,6 @@ public class Cli extends InputObservable implements View {
     private final PrintStream out;
     private final Scanner read;
     private InputReadTask inputThread;
-    private Thread inputReader;
 
     /**
      * Default constructor.
@@ -103,41 +101,43 @@ public class Cli extends InputObservable implements View {
     }
 
     // method that asks you to choose Items from Board
-
     @Override
-    public void askItem(int nItem) {
-        Position position = null;
-        out.print("Choose the position of "+nItem+" items you want to pick from Board [row-col]: ");
+    public void askItem(Position p1, Position p2) {
+        Position position;
+        out.print("Choose the position of the item you want to pick from Board [row-col]: ");
         String read = readLine();
         try{
             position = new Position(Integer.parseInt(read.split("-")[0]), Integer.parseInt(read.split("-")[1]));
             Position finalPosition = position;
-            notifyInObserver(obs -> obs.onUpdateChooseItem(new ItemPositionResponse(finalPosition)));
+            //System.out.println("Read "+finalPosition.getRow()+"-"+finalPosition.getCol());
+            if(p1==null)
+                notifyInObserver(obs -> obs.onUpdateChooseItem(new Item1PositionResponse(finalPosition)));
+            else if (p2==null)
+                notifyInObserver(obs -> obs.onUpdateChooseItem(new Item2PositionResponse(p1,finalPosition)));
+            else
+                notifyInObserver(obs -> obs.onUpdateChooseItem(new Item3PositionResponse(p1,p2,finalPosition)));
         }catch(Exception e){
             out.println("Error in entering position of item");
-            askItem(nItem);
+            askItem(p1,p2);
         }
     }
 
     @Override
-    public void askNItem(NItemRequest message) {
-        showBoard(message.getBoard());
-        showCGoal(message.getCommmonGoals());
-        showPGoal(message.getMyPgoal());
-        String msg="How many item do you want to put in your shelf? ";
-        out.println(msg);
-        String nItem = readLine();
-        notifyInObserver(obs->obs.onUpdateNItem(nItem));
+    public void askOther(ChoosePositionRequest message) {
+        out.println("Do you want to choose another item? (yes or no) ");
+        String response = readLine();
+        notifyInObserver(obs->obs.onUpdateChoose(new ChoosePositionResponse(response,message.getP1(),message.getP2())));
     }
 
     // method that asks you to choose the column of the Shelf in which you want to put your Items
     @Override
-    public void askColumn(ArrayList<Item> itemOrdered,Shelf shelf) {
-        out.println("Your item ordered are: ");
-        showItemToOrder(itemOrdered);
-        showShelf(shelf);
+    public void askColumn() {
         out.print("Choose the column in your Shelf");
         String column = readLine();
+        if(Integer.parseInt(column)<0 || Integer.parseInt(column)>4) {
+            out.println("This id column isn't acceptable");
+            askColumn();
+        }
         notifyInObserver(obs -> obs.onUpdateColumn(column));
     }
 
@@ -252,40 +252,6 @@ public class Cli extends InputObservable implements View {
         }
     }
 
-
-    /**
-     * Shows the login result on the terminal.
-     * On login fail, the program is terminated immediately.
-     */
-   /* @Override
-    public void showLoginResult(boolean nicknameAccepted, boolean connectionSuccessful, String nickname) {
-        if (nicknameAccepted && connectionSuccessful) {
-            out.println("Hi, " + nickname + "! You connected to the server.");
-        } else if (connectionSuccessful) {
-            askNickname();
-        } else if (nicknameAccepted) {
-            out.println("Max players reached. Connection refused.");
-            out.println("EXIT.");
-
-            System.exit(1);
-        } else {
-            showErrorAndExit("Could not contact server.");
-        }
-    }*/
-
-    /**
-     * Shows an error message and exit.
-     */
-    @Override
-    public void showErrorAndExit(String error) {
-        inputThread.close();
-
-        out.println("\nERROR: " + error);
-        out.println("EXIT.");
-
-        System.exit(1);
-    }
-
     @Override
     public void showError(String error) {
         out.println("\nERROR: " + error);
@@ -294,6 +260,12 @@ public class Cli extends InputObservable implements View {
     @Override
     public void showMessage(String message) {
         out.println(message);
+    }
+
+    @Override
+    public void exit() {
+        inputThread.close();
+        System.exit(1);
     }
 
     private int max(String[] order){
@@ -317,4 +289,5 @@ public class Cli extends InputObservable implements View {
         }
         return false;
     }
+
 }

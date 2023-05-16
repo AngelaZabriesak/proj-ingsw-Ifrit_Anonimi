@@ -26,6 +26,7 @@ public class Game extends Observable implements Serializable {
     private Action action;
     private final ArrayList<Cgoal> commonGoal;
     private final ArrayList<Cgoal> myGoal;
+    private ArrayList<Position> itemAvailable;
 
     public Game(ArrayList<Player> players){
         this.players = players;
@@ -185,21 +186,25 @@ public class Game extends Observable implements Serializable {
         p_points[6] = 12;
 
         for(ArrayList<Position> gruppo : gruppi){
-            if(gruppo.size()==3)
-                myScore+=2;
-            if(gruppo.size()==4)
-                myScore+=3;
-            if(gruppo.size()==5)
-                myScore+=5;
-            if (gruppo.size()>=6)
-                myScore+=8;
+            if(gruppo!=null) {
+                if (gruppo.size() == 3)
+                    myScore += 2;
+                if (gruppo.size() == 4)
+                    myScore += 3;
+                if (gruppo.size() == 5)
+                    myScore += 5;
+                if (gruppo.size() >= 6)
+                    myScore += 8;
+            }
         }
 
         for(int r =0; r<player.getMyShelf().getRow(); r++){
             for(int c=0; c<player.getMyShelf().getCol(); c++){
                 if(player.getMyShelf().getMyShelf()[r][c]!=null){
-                    if(player.getMyShelf().getMyShelf()[r][c].getColor().equals((player.getMyGoal().getGoal()[r][c].getColor())))
-                        check_p_score+=1;
+                    if(player.getMyGoal().getGoal()[r][c]!=null) {
+                        if (player.getMyShelf().getMyShelf()[r][c].getColor().equals((player.getMyGoal().getGoal()[r][c].getColor())))
+                            check_p_score += 1;
+                    }
                 }
             }
         }
@@ -256,6 +261,52 @@ public class Game extends Observable implements Serializable {
 
     public Bag getBag(){
         return myBag;
+    }
+
+    private int distance(Position p1, Position p2) {
+        int row=(p1.getRow()-p2.getRow())^2;
+        int col=(p1.getCol()-p2.getCol())^2;
+        return (int) Math.sqrt(row+col);
+    }
+
+    public ArrayList<Position> getPositionAvailable(Position p1,Position p2){
+        int row,col;
+        itemAvailable = new ArrayList<>();
+        if(p1==null) {
+            for (int r = 0; r < myBoard.getRow(); r++) {
+                for (int c = 0; c < myBoard.getCol(); c++) {
+                    if (myBoard.getPositionAvailable(r, c) > 0)
+                        itemAvailable.add(new Position(r, c));
+                }
+            }
+        }
+        else if(p2==null){
+            if(myBoard.getPositionAvailable(p1.getRow(),p1.getCol()+1)>0)
+                itemAvailable.add(new Position(p1.getRow(), p1.getCol()+1));
+            if(myBoard.getPositionAvailable(p1.getRow(),p1.getCol()-1)>0)
+                itemAvailable.add(new Position(p1.getRow(), p1.getCol()-1));
+            if(myBoard.getPositionAvailable(p1.getRow()-1,p1.getCol())>0)
+                itemAvailable.add(new Position(p1.getRow()-1, p1.getCol()));
+            if(myBoard.getPositionAvailable(p1.getRow()+1,p1.getCol())>0)
+                itemAvailable.add(new Position(p1.getRow()+1, p1.getCol()));
+        }
+        else {
+            row = p2.getRow()-p1.getRow();
+            col = p2.getCol()-p1.getCol();
+            if(row !=0 && myBoard.getPositionAvailable(p2.getRow()+row,p2.getCol())>0)
+                itemAvailable.add(new Position(p2.getRow()+row,p2.getCol()));
+            if(col !=0 && myBoard.getPositionAvailable(p2.getRow(),p2.getCol()+col)>0)
+                itemAvailable.add(new Position(p2.getRow(),p2.getCol()+col));
+        }
+        return itemAvailable;
+    }
+
+    public ColorItem getAvailable(int row, int col){
+        for(Position p : itemAvailable){
+            if(p.getRow()==row && p.getCol()==col)
+                return myBoard.getMyBoardItem()[row][col].getColor();
+        }
+        return null;
     }
 
 }

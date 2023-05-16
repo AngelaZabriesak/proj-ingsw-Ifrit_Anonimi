@@ -50,13 +50,11 @@ public class ChooseOrder implements Action{
     public void checkInput() throws ActionException {
         // check that position and myItem have the same length
         if(!checkLenght()){
-            System.out.println("Le posizioni scelte non corrispondono agli item");
-            throw new ActionException();
+            throw new ActionException("Le posizioni scelte non corrispondono agli item");
         }
         // check if the position of item if between 0 and 2 and all are different
         if(!checkItem()) {
-            System.out.println("Le posizioni scelte non sono accettabili");
-            throw new ActionException();
+            throw new ActionException("Le posizioni scelte non sono accettabili");
         }
     }
 

@@ -1,24 +1,14 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.Message.Action.AddItemInShelf_OK;
-import it.polimi.ingsw.Message.Action.ChooseItem_OK;
-import it.polimi.ingsw.Message.Action.ChooseOrder_OK;
-import it.polimi.ingsw.Message.GameState.*;
-import it.polimi.ingsw.Message.Request.ItemOrderRequest;
-import it.polimi.ingsw.Message.Request.NItemRequest;
-import it.polimi.ingsw.Message.Request.NPlayerRequest;
-import it.polimi.ingsw.Message.Response.BoardResponse;
-import it.polimi.ingsw.Message.Response.ShelfResponse;
-import it.polimi.ingsw.Message.TurnAlert;
-import it.polimi.ingsw.Message.Error.Error;
-import it.polimi.ingsw.Model.Bag.Item;
+import it.polimi.ingsw.Message.Request.*;
+import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.*;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Observer.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Gui extends ViewObservable implements View {
     @Override
@@ -32,17 +22,17 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void askItem(int nItem) {
+    public void askItem(Position p1,Position p2) {
 
     }
 
     @Override
-    public void askNItem(NItemRequest message) {
+    public void askOther(ChoosePositionRequest message) {
 
     }
 
     @Override
-    public void askColumn(ArrayList<Item> itemOrdered,Shelf shelf) {
+    public void askColumn() {
 
     }
 
@@ -81,16 +71,6 @@ public class Gui extends ViewObservable implements View {
 
     }
 
-    /*@Override
-    public void showLoginResult(boolean nicknameAccepted, boolean connectionSuccessful, String nickname) {
-
-    }*/
-
-    @Override
-    public void showErrorAndExit(String error) {
-
-    }
-
     @Override
     public void showError(String error) {
 
@@ -98,6 +78,11 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void showMessage(String message) {
+
+    }
+
+    @Override
+    public void exit() {
 
     }
 }

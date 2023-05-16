@@ -2,6 +2,7 @@ package it.polimi.ingsw.Message;
 
 import it.polimi.ingsw.Message.Action.*;
 import it.polimi.ingsw.Message.Error.Error;
+import it.polimi.ingsw.Message.Error.ErrorPlayer;
 import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.Response.*;
@@ -26,11 +27,14 @@ public class ViewMessageManager extends ViewObservable {
             case OK_QUESTION:
                 notifyViewObserver(obs-> obs.CompleteQuestionManager((CompletedQuestion) message));
                 break;
-            case N_ITEM_REQUEST:
-                notifyViewObserver(obs->obs.chooseNumberItem((NItemRequest) message));
+            case LOGIN_REQUEST:
+                notifyViewObserver(obs->obs.nicknameHandler((LoginRequest) message));
                 break;
             case N_PLAYER_REQUEST:
                 notifyViewObserver(obs-> obs.NumOfPlayerHandler((NPlayerRequest) message));
+                break;
+            case ERROR_PLAYER:
+                notifyViewObserver(obs->obs.errorPlayerManager((ErrorPlayer) message));
                 break;
             case BOARD_RESPONSE:
                 notifyViewObserver(obs-> obs.showBoardHandler((BoardResponse) message));
@@ -56,8 +60,17 @@ public class ViewMessageManager extends ViewObservable {
             case ADDINSHELF_OK:
                 notifyViewObserver(obs->obs.addItemInShelf((AddItemInShelf_OK) message));
                 break;
-            case ITEM_POSITION_REQUEST:
-                notifyViewObserver(obs->obs.chooseItemPosition((ItemPositionRequest) message));
+            case ITEM_1POSITION_REQUEST:
+                notifyViewObserver(obs->obs.chooseItemPosition((Item1PositionRequest) message));
+                break;
+            case ITEM_2POSITION_REQUEST:
+                notifyViewObserver(obs->obs.chooseOtherItemPosition((Item2PositionRequest) message));
+                break;
+            case ITEM_3POSITION_REQUEST:
+                notifyViewObserver(obs->obs.chooseOtherItemPosition((Item3PositionRequest) message));
+                break;
+            case CHOOSEITEM:
+                notifyViewObserver(obs->obs.chooseItem((ChoosePositionRequest) message));
                 break;
             case ITEM_ORDER_REQUEST:
                 notifyViewObserver(obs->obs.chooseOrderItem((ItemOrderRequest) message));

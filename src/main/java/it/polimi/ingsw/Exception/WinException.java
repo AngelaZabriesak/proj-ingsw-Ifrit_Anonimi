@@ -11,7 +11,8 @@ public class WinException extends Exception{
         this.nickname = nickname;
     }
 
-    public String getNickname() {
+    @Override
+    public String getMessage() {
         return nickname;
     }
 }

@@ -5,6 +5,7 @@ import it.polimi.ingsw.Message.Message;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Game.Board;
 import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
+import it.polimi.ingsw.Model.Goal.PersonalGoal.Pgoal;
 
 import java.util.ArrayList;
 

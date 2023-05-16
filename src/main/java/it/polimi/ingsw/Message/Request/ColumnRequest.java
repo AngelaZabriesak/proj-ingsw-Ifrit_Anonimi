@@ -9,13 +9,15 @@ import java.util.*;
 
 public class ColumnRequest extends Message {
 
-    private ArrayList<Item> itemOrdered;
-    private Shelf shelf;
+    private final ArrayList<Item> itemOrdered;
+    private final Shelf shelf;
+    private final String error;
 
-    public ColumnRequest(ArrayList<Item> itemOrdered,Shelf shelf){
+    public ColumnRequest(String error,ArrayList<Item> itemOrdered,Shelf shelf){
         super(MessageType.COLUMN_REQUEST);
         this.itemOrdered = itemOrdered;
         this.shelf = shelf;
+        this.error = error;
     }
 
     public ArrayList<Item> getItemOrdered() {
@@ -24,5 +26,8 @@ public class ColumnRequest extends Message {
 
     public Shelf getShelf(){
         return shelf;
+    }
+    public String getError(){
+        return error;
     }
 }

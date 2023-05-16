@@ -9,34 +9,33 @@ import it.polimi.ingsw.Model.*;
 
 public class ChooseItem implements Action {
     private final Game game;
-    private final int chosenColumn;
-    private final int chosenRow;
+    private Position p1,p2, newPosition;
     private final Player player;
     private Item item;
     private String description = "";
 
-    public ChooseItem(Game game, int chosenRow, int chosenColumn, Player player) {
+    public ChooseItem(Game game, Player player,Position p1, Position p2, Position newPosition) {
         this.game = game;
-        this.chosenColumn = chosenColumn;
-        this.chosenRow = chosenRow;
         this.player = player;
+        this.p1 = p1;
+        this.p2 = p2;
+        this.newPosition = newPosition;
     }
 
     @Override
     public void execute() throws ActionException {
         checkInput();
         if(game.getCurrentPlayer().getMyItem().size()>3)
-            throw new ActionException();
-        this.item = game.getBoard().getItem(new Position(chosenRow,chosenColumn));
-        game.getBoard().removeItem(new Position(chosenRow,chosenColumn));
-        player.setPosition(new Position(chosenRow,chosenColumn));
+            throw new ActionException("You can't choose more of 3 items");
+        this.item = game.getBoard().getItem(newPosition);
+        game.getBoard().removeItem(newPosition);
+        player.setPosition(newPosition);
         game.getCurrentPlayer().setMyItem(item);
     }
 
     @Override
     public ActionMessage getMessage() {
-
-        return new ChooseItem_OK(this.description,item,chosenRow,chosenColumn);
+        return new ChooseItem_OK(this.description,item,newPosition.getRow(), newPosition.getCol());
     }
 
     @Override
@@ -48,22 +47,32 @@ public class ChooseItem implements Action {
     public void checkInput() throws ActionException {
         // checking if the parameter in input are acceptable
         if(!checkRowCol()) {
-            System.out.println("The row and column entered aren't acceptable");
-            throw new ActionException();
+            throw new ActionException("The row and column entered aren't acceptable");
         }
         // checking adjacency
         if(!checkAdjacency()) {
-            System.out.println("The item in " + chosenRow + ", " + chosenColumn + " doesn't have the right adjacency\n");
-            throw new ActionException();
+            throw new ActionException("The item in " + newPosition.getRow() + ", " + newPosition.getCol() + " doesn't have the right adjacency");
+        }
+
+        if(!checkAvailable()) {
+            throw new ActionException("The item choosed isn't available");
         }
 
     }
 
     private boolean checkRowCol(){
-        return chosenRow > 0 && chosenRow < game.getBoard().getRow() && chosenColumn > 0 && chosenColumn < game.getBoard().getCol();
+        return newPosition.getRow() > 0 && newPosition.getRow() < game.getBoard().getRow() && newPosition.getCol() > 0 && newPosition.getCol() < game.getBoard().getCol();
     }
 
     private boolean checkAdjacency(){
-        return game.getBoard().getAdjacency(new Position(chosenRow, chosenColumn)) > 0 && game.getBoard().getAdjacency(new Position(chosenRow, chosenColumn)) < 4;
+        return game.getBoard().getPositionAvailable(newPosition.getRow(),newPosition.getCol())>0;
+    }
+
+    private boolean checkAvailable(){
+        for(Position p : game.getPositionAvailable(p1,p2)) {
+            if (p.getRow() == newPosition.getRow() && p.getCol() == newPosition.getCol())
+                return true;
+        }
+        return false;
     }
 }

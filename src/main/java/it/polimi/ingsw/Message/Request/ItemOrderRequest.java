@@ -8,13 +8,19 @@ import java.util.ArrayList;
 
 public class ItemOrderRequest extends Message {
 
-    ArrayList<Item> items;
-    public ItemOrderRequest(ArrayList<Item> items) {
+    private final ArrayList<Item> items;
+    private final String error;
+    public ItemOrderRequest(String error,ArrayList<Item> items) {
         super(MessageType.ITEM_ORDER_REQUEST);
         this.items=items;
+        this.error = error;
     }
 
     public ArrayList<Item> getItems(){
         return items;
+    }
+
+    public String getError(){
+        return error;
     }
 }
