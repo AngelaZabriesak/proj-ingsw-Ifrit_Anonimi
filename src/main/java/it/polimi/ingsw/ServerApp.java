@@ -16,7 +16,7 @@ public class ServerApp {
                 }
             }
         }
-        Server server = new Server(serverPort);
-        server.run();
+        MainSocketServer server = new MainSocketServer(serverPort);
+        server.startServer();
     }
 }

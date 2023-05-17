@@ -82,7 +82,8 @@ public class Cli extends InputObservable implements View {
 
         String finalDefaultPort = defaultPort;
         String finalDefaultAddress = defaultAddress;
-        notifyInObserver(obs -> obs.onUpdateServerInfo(finalDefaultAddress, Integer.parseInt(finalDefaultPort)));
+        notifyInObserver(obs -> {obs.onUpdateServerInfo(finalDefaultAddress, Integer.parseInt(finalDefaultPort));
+        });
     }
 
     // method that asks for the nickname
@@ -187,6 +188,13 @@ public class Cli extends InputObservable implements View {
 
                 else
                     b.append("|\tnull\t");
+            }
+            b.append("|\n");
+        }
+
+        for (int r = 0; r < 9; r++) {
+            for (int c = 0; c < 9; c++) {
+                b.append("|\t" + board.getAdjacency(new Position(r, c)) + "" + "\t");
             }
             b.append("|\n");
         }

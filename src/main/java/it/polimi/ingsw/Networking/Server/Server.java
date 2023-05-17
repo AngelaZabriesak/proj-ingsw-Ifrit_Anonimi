@@ -1,42 +1,46 @@
 package it.polimi.ingsw.Networking.Server;
 
-
 import it.polimi.ingsw.Controller.*;
-import it.polimi.ingsw.Message.Message;
-import it.polimi.ingsw.Message.ServerMessageManager;
+import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Observer.ObserverNew.*;
 
-import java.io.*;
-import java.net.*;
 import java.util.*;
 
 /**
- * Main server class that starts a socket server.
+ * This class contains all the method needed to communicate between the players and the gameControllers
  */
-public class Server implements Runnable, LoginObserver, GameControllerObserver {
+public class Server implements GameControllerObserver {
 
-    private final ServerMessageManager messageManager; //observed by gameController
-    private GameController gameController;
-    private ServerSocket serverSocket;
-    private Socket socket;
-    private final ArrayList<SocketClientHandler> clientHandler;
-    private boolean endGame;
-    private int port;
+    private final ServerMessageManager serverMessageManager; //observed by GameController
+    private final ArrayList<SocketClientHandler> clientHandlers;
+    private boolean gameEnded;
 
-    public Server(int port) {
-        this.clientHandler = new ArrayList<>();
-        this.port = port;
-        messageManager = new ServerMessageManager();
+    public Server(){
+        serverMessageManager = new ServerMessageManager();
+        clientHandlers = new ArrayList<>();
+        gameEnded = false;
     }
 
-    public void notifyAllPlayers(Message message){
-        for(ClientHandler c : clientHandler){
+
+    public void addObserverMessageManager(GameController gc) {
+        this.serverMessageManager.addObserver(gc);
+    }
+
+    /**
+     * Send a message to every connected client
+     * @param message the message to be sent
+     */
+    public void notifyAllPlayers(Message message)  {
+        for(SocketClientHandler c: clientHandlers){
             c.sendMessageToClient(message);
         }
     }
 
-    public void notifyPlayer(Message message, String nickname){
-        for(SocketClientHandler c : clientHandler){
+    /**
+     * Send a message to one client
+     */
+    public void notifyPlayer(Message message, String nickname)  {
+        for(SocketClientHandler c: clientHandlers){
             if(c.getNickname().equals(nickname)){
                 c.sendMessageToClient(message);
                 break;
@@ -44,92 +48,70 @@ public class Server implements Runnable, LoginObserver, GameControllerObserver {
         }
     }
 
-    @Override
-    public void run() {
-        try {
-            serverSocket = new ServerSocket(port);
-            System.out.println("Socket server started on port " + port + ".");
-        } catch (IOException e) {
-            System.out.println("Server could not start!");
-            return;
-        }
-        createNewGame();
-        try{
-            while(!Thread.currentThread().isInterrupted()){
-                //blocking until a connection is made
-                socket = serverSocket.accept();
-                System.out.println("New client accepted!");
-                SocketClientHandler clientHandler = new SocketClientHandler(this,socket,Integer.toString(this.clientHandler.size()));
-                this.clientHandler.add(clientHandler);
-                Thread thread = new Thread(clientHandler);
-                thread.start();
-            }
-        }catch (IOException e){
-            System.out.println(e.getMessage());
-            System.exit(1);
-        }
-        try{
-            serverSocket.close();
-        }catch (IOException e){
-            System.exit(1);
-        }
-    }
-
-    private void createNewGame(){
-        gameController = new GameController();
-        gameController.addObserver((GameControllerObserver) this);
-        gameController.addObserver((LoginObserver) this);
-        messageManager.addObserver(gameController);
-    }
-
-    public boolean isGameEnded() {
-        return endGame;
+    /**
+     * Passes the received message to the serverMessageHandler
+     * @param message the message received
+     */
+    public void read(Message message){
+        message.manageServer(serverMessageManager);
     }
 
     @Override
-    public void update() {
-        createNewGame();
-    }
-
-    @Override
-    public void sendToOnePlayer(Message message, String nickname) {
-        notifyPlayer(message,nickname);
+    public void sendToOnePlayer(Message message, String nickName)  {
+        notifyPlayer(message,nickName);
     }
 
     @Override
     public void sendToAllPlayers(Message message) {
         notifyAllPlayers(message);
+
     }
 
-    @Override
-    public void successfulLogin(Message message,String tmpNickname, String newName) {
-        clientHandler.get(Integer.parseInt(tmpNickname)).setNickname(newName);
+    /**
+     * Handles the final part of the login of a client:
+     *      sends a completedRequestMessage to the client,
+     *      sets his clientHandler name to the name chosen by the player
+     * @param message is a completedRequestMessage sent to the client
+     * @param temporaryName is the automatically assigned name to the clientHandler before the player's login
+     * @param newName is the name indicated by the client during login
+     */
+    public void successfulLogin(Message message, String temporaryName, String newName){
+        clientHandlers.get(Integer.parseInt(temporaryName)).setNickname(newName);
         notifyPlayer(message,newName);
     }
 
-    @Override
-    public void disconnectAll() {
-        if(!endGame) {
+    /**
+     * Closes every socket and set gameEnded to true
+     */
+    public void disconnectAll(){
+        if(!gameEnded) {
 
-            endGame = true;
+            gameEnded = true;
             System.out.println("Closing all sockets");
-            for (ClientHandler clientHandler : clientHandler) {
+            for (SocketClientHandler clientHandler : clientHandlers) {
                 clientHandler.disconnect();
             }
             System.out.println("All sockets closed");
         }
     }
 
+    /**
+     * calls the serverMessageHandler the method to end the game and warn and disconnect every client
+     */
     public void clientDisconnection(){
-        if(!endGame)
-            messageManager.clientDisconnection();
+        if(!gameEnded)
+            serverMessageManager.clientDisconnection();
     }
 
-    public void removeClientHandler(SocketClientHandler clientHandler){
-        this.clientHandler.remove(clientHandler);
+    public void addClientHandler(SocketClientHandler clientHandler) {
+        this.clientHandlers.add(clientHandler);
     }
 
-    public void read(Message message){
-        message.manageServer(messageManager);
+    public ArrayList<SocketClientHandler> getClientHandlers(){
+        return this.clientHandlers;
+    }
+
+    public boolean isGameEnded() {
+        return gameEnded;
     }
 }

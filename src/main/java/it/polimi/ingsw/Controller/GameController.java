@@ -168,21 +168,25 @@ public class GameController extends GameControllerObservable implements ServerOb
                     game.setAction(new AddItemInShelf(game, nColumn, getPlayerByNickname(message.getNickname())));
                     game.doAction();
                     notifyObserver(obs -> obs.sendToOnePlayer(new AddItemInShelf_OK(getPlayerByNickname(message.getNickname()).getMyShelf()), message.getNickname()));
-                    itemsToOrder = new ArrayList<>();
+                    nextPlayer();
                 } catch (ActionException | WinException e) {
                     System.out.println(e);
                     if (e.getClass().equals(WinException.class))
                         winGame(e.getMessage());
                     notifyObserver(obs -> obs.sendToOnePlayer(new ColumnRequest(e.getMessage(), getPlayerByNickname(message.getNickname()).getMyItem(), getPlayerByNickname(message.getNickname()).getMyShelf()), message.getNickname()));
                 }
-                turnController.setNextPlayer();
-                notifyActivePlayer(turnController.getCurrentPlayer());
-                startTurn();
             }
             else {
                 notifyObserver(obs -> obs.sendToOnePlayer(new Error("It's not your turn phase"), message.getNickname()));
             }
         }
+    }
+
+    private void nextPlayer(){
+        turnController.setNextPlayer();
+        notifyActivePlayer(turnController.getCurrentPlayer());
+        startTurn();
+        itemsToOrder = new ArrayList<>();
     }
 
     @Override
@@ -206,7 +210,12 @@ public class GameController extends GameControllerObservable implements ServerOb
     }
 
     private void checkAvailability(Position p1, Position p2,String nickname){
-        if(game.getPositionAvailable(p1,p2).size()>0) {
+        int max =0;
+        for(int i =0;i<5;i++){
+            if(getPlayerByNickname(nickname).getMyShelf().getFreeRowByColumn(i)>max)
+                max = getPlayerByNickname(nickname).getMyShelf().getFreeRowByColumn(i);
+        }
+        if(game.getPositionAvailable(p1,p2).size()>0 && max-getPlayerByNickname(nickname).getMyItem().size()>0) {
             notifyObserver(obs -> obs.sendToOnePlayer(new ChoosePositionRequest(p1, p2), nickname));
         }
         else{

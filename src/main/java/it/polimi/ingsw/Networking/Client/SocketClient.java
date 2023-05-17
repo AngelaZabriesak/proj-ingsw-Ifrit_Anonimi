@@ -7,20 +7,14 @@ import it.polimi.ingsw.Observer.ObserverNew.SocketClientObservable;
 
 import java.io.*;
 import java.net.*;
-import java.util.concurrent.*;
 
 // Client class
 public class SocketClient extends SocketClientObservable implements ClientObserver {
     private final Socket socket;
-
     private ObjectOutputStream writeToServer;
     private ObjectInputStream readFromServer;
 
-    private String line = null;
-
-    private final ExecutorService readExecution;
-
-    public SocketClient(String address, int port, ObsClient client){
+    public SocketClient(String address, int port, ObsClient client) throws IOException {
         this.socket = new Socket();
         this.addObserver(client);
         try {
@@ -30,41 +24,32 @@ public class SocketClient extends SocketClientObservable implements ClientObserv
         } catch (IOException e) {
             System.out.println(e);
             System.out.println("Error in creating socket\n");
+            this.socket.close();
         }
-        this.readExecution = Executors.newSingleThreadExecutor();
     }
 
     public void start(){
-        final Thread thread = new Thread(){
-            public void run(){
-                readMessageFromServer();
-            }
-        };
+        final Thread thread = new Thread(this::readMessageFromServer);
         thread.start();
     }
 
     public void readMessageFromServer() {
-        readExecution.execute(
-                ()->{
-                    while (!readExecution.isShutdown()){
-                        try{
-                            Message message = (Message) readFromServer.readObject();
-                            notifyObserver(obs->obs.update(message));
-                        } catch (Exception e) {
-                            Error message = new Error("Connection lost");
-                            notifyObserver(obs->obs.update(message));
-                            disconnect();
-                            break;
-                        }
-                    }
-                }
-        );
+        while (true){
+            try{
+                Message message = (Message) readFromServer.readObject();
+                notifyObserver(obs->obs.update(message));
+            } catch (Exception e) {
+                Error message = new Error("Connection lost");
+                notifyObserver(obs->obs.update(message));
+                disconnect();
+                break;
+            }
+        }
     }
 
     @Override
     public void sendMessageToServer(Message message) {
         try{
-            //System.out.println(message.getNickname()+" is sending a "+message.getType());
             writeToServer.writeObject(message);
             writeToServer.reset();
         }catch (IOException e){
@@ -75,11 +60,8 @@ public class SocketClient extends SocketClientObservable implements ClientObserv
     @Override
     public void disconnect() {
         try{
-            if(!socket.isClosed()){
-                removeAllObservers();
-                readExecution.shutdown();
-                socket.close();
-            }
+            removeAllObservers();
+            socket.close();
         } catch (IOException e ){
             notifyObserver(obs->obs.update(new Error("Could not disconnect.")));
         }

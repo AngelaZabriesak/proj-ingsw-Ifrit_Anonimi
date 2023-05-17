@@ -25,6 +25,9 @@ public class AddItemInShelf implements Action{
         checkInput();
         player.setItemInShelf(chosenColumn);
 
+        for(Position p : game.getCurrentPlayer().getPosition())
+            game.getBoard().updateNeighboursAdjacency(p);
+
         if (player.getMyShelf().getNEmpty()==0)
             game.endGame();
 
@@ -32,9 +35,6 @@ public class AddItemInShelf implements Action{
             if(goal.isTaken(player.getMyShelf()))
                 player.addMyScore(goal.getToken().getScore());
         }
-
-        for(Position p : game.getCurrentPlayer().getPosition())
-            game.getBoard().updateNeighboursAdjacency(p);
 
         boolean ok = true;
         for(int r =0;r<game.getBoard().getRow() && ok;r++){

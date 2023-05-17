@@ -1,8 +1,6 @@
 package it.polimi.ingsw.Networking.Server;
 
-import it.polimi.ingsw.Enumerations.MessageType;
-import it.polimi.ingsw.Message.GameState.Login;
-import it.polimi.ingsw.Message.Message;
+import it.polimi.ingsw.Message.*;
 
 import java.io.*;
 import java.net.*;
@@ -40,7 +38,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
     }
 
     private void keepListen(){
-        while(!Thread.currentThread().isInterrupted()){
+        while(true){
             try {
                 Message message = (Message) fromClient.readObject();
                 //System.out.println("Nickname older: "+nickname);
@@ -55,7 +53,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
                 System.out.println(e);
                 if(!client.isClosed()){
                     System.out.println("Connection ended from clienthandler " + nickname);
-                    server.removeClientHandler(this);
+                    server.getClientHandlers().remove(this);
                     disconnect();
                     //server.disconnectAll();
                     if(!server.isGameEnded())
