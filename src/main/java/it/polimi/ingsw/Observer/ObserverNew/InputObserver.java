@@ -5,6 +5,7 @@ import it.polimi.ingsw.Message.Response.*;
 import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Model.Bag.*;
 
+import java.io.IOException;
 import java.util.*;
 
 /**

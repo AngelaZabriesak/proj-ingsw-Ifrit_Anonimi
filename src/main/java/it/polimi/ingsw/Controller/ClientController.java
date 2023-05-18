@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Message.*;
+import it.polimi.ingsw.Message.Error.Error;
 import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Message.Response.*;
@@ -8,6 +9,7 @@ import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Networking.Client.*;
 import it.polimi.ingsw.Observer.ObserverNew.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ClientController extends ClientObservable implements InputObserver {
@@ -57,13 +59,16 @@ public class ClientController extends ClientObservable implements InputObserver 
     }
 
     @Override
-    public void onUpdateServerInfo(String address, int port) {
+    public void onUpdateServerInfo(String address, int port){
         removeAllObservers();
-        SocketClient socketClient = new SocketClient(address,port,client);
-        socketClient.start();
-        this.addObserver(socketClient);
-        socketClient.readMessageFromServer(); // Starts an asynchronous reading from the server.
-        update(new ConnectionOK(true));
+        try {
+            SocketClient socketClient = new SocketClient(address, port, client);
+            socketClient.start();
+            this.addObserver(socketClient);
+            update(new ConnectionOK(true));
+        }catch(IOException e){
+            update(new Error("error in update server info in client controller"));
+        }
     }
 
     /**
