@@ -25,8 +25,8 @@ public class CommonGoal9 extends Cgoal{
         Item[][] myshelf = myShelf.getMyShelf();
         int numOfCond = 0;
 
-        for (int j= 0; j < ROW; j++) {
-            for (int i = 0; i < COL; i++) {
+        for (int j= 0; j < ROW-1; j++) {
+            for (int i = 0; i < COL-1; i++) {
 
                 if (myshelf[j][i] != null && myshelf[j][i+1]!=null) {
                     if (myshelf[j][i].getColor() == myshelf[j][i + 1].getColor()) {

@@ -152,7 +152,18 @@ public class GameController extends GameControllerObservable implements ServerOb
 
     @Override
     public void endGameDisconnection() {
+        game.endGame();
+        for(Player p : players)
+            while(!turnController.getCurrentPlayer().equals(p)) {
+                nextPlayer();
+                notifyObserver(obs->obs.sendToOnePlayer(new Item1PositionRequest(null,game.getBoard(),game.getCGoal(),game.getCurrentPlayer().getMyGoal()), p.getNickname()));
+            }
+            // scegli item, se c'è da riempire plancia riempi, posiziona item in shelf
 
+        for(Player p : players){
+            game.calcScore(p);
+            notifyObserver(obs->obs.sendToAllPlayers(new Win(p.getNickname())));
+        }
     }
 
     @Override
@@ -167,8 +178,12 @@ public class GameController extends GameControllerObservable implements ServerOb
                     nColumn = Integer.parseInt(message.getColumn());
                     game.setAction(new AddItemInShelf(game, nColumn, getPlayerByNickname(message.getNickname())));
                     game.doAction();
-                    notifyObserver(obs -> obs.sendToOnePlayer(new AddItemInShelf_OK(getPlayerByNickname(message.getNickname()).getMyShelf()), message.getNickname()));
-                    nextPlayer();
+                    if (getPlayerByNickname(message.getNickname()).getMyShelf().getNEmpty()==0)
+                        endGameDisconnection();
+                    else{
+                        notifyObserver(obs -> obs.sendToOnePlayer(new AddItemInShelf_OK(getPlayerByNickname(message.getNickname()).getMyShelf()), message.getNickname()));
+                        nextPlayer();
+                    }
                 } catch (ActionException | WinException e) {
                     System.out.println(e);
                     if (e.getClass().equals(WinException.class))

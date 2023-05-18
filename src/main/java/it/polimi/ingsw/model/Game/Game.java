@@ -77,13 +77,6 @@ public class Game extends Observable implements Serializable {
     public void endGame(){
         // add 1 to score of the first player who have fill the shelf for first
         currentPlayer.addMyScore(1);
-        while(!currentPlayer.equals(players.get(0))) {
-            nextPlayer();
-            // scegli item, se c'è da riempire plancia riempi, posiziona item in shelf
-        }
-        for(Player p : players){
-            calcScore(p);
-        }
     }
 
     private void nextPlayer(){
