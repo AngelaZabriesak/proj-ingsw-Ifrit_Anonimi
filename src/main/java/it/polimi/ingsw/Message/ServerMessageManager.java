@@ -49,6 +49,6 @@ public class ServerMessageManager extends ServerObservable {
         }
     }
     public void clientDisconnection() {
-        notifySrvObserver(ServerObserver::endGameDisconnection);
+        notifySrvObserver(ServerObserver::clientDisconnection);
     }
 }

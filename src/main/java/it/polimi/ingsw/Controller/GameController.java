@@ -48,7 +48,7 @@ public class GameController extends GameControllerObservable implements ServerOb
         System.out.println("Game created!");
         notifyObserver(obs->obs.sendToAllPlayers(new GameStart(game.getPlayers())));
         //turnController.setCurrentPlayer(turnController.getCurrentPlayer());
-        notifyActivePlayer(turnController.getCurrentPlayer());
+        notifyAllPlayer(turnController.getCurrentPlayer());
         startTurn();
     }
 
@@ -194,7 +194,7 @@ public class GameController extends GameControllerObservable implements ServerOb
                         if (getPlayerByNickname(message.getNickname()).getMyShelf().getNEmpty() == 0)
                             endGameDisconnection();
                         else {
-                            notifyObserver(obs -> obs.sendToOnePlayer(new AddItemInShelf_OK(getPlayerByNickname(message.getNickname()).getMyShelf()), message.getNickname()));
+                            notifyObserver(obs -> obs.sendToOnePlayer(new EndTurn(message.getNickname(), players.get(players.indexOf(turnController.getCurrentPlayer())+1).getNickname()), message.getNickname()));
                             nextPlayer();
                         }
                     }
@@ -339,7 +339,16 @@ public class GameController extends GameControllerObservable implements ServerOb
         }
     }
 
+    @Override
+    public void clientDisconnection() {
+        System.out.println("Client disconnection");
+    }
+
     public void notifyActivePlayer(Player currentPlayer) {
+        notifyObserver(obs->obs.sendToOnePlayer(new TurnAlert("It's your turn"),currentPlayer.getNickname()));
+    }
+
+    public void notifyAllPlayer(Player currentPlayer) {
         notifyObserver(obs->obs.sendToOnePlayer(new TurnAlert("It's your turn"),currentPlayer.getNickname()));
         for(Player p : players){
             if(!p.equals(currentPlayer))

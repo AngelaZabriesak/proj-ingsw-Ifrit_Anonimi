@@ -85,7 +85,6 @@ public class Server implements GameControllerObserver {
      */
     public void disconnectAll(){
         if(!gameEnded) {
-
             gameEnded = true;
             System.out.println("Closing all sockets");
             for (SocketClientHandler clientHandler : clientHandlers) {

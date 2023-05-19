@@ -26,4 +26,5 @@ public interface ServerObserver {
     void choose3ItemPosition(Item3PositionResponse message);
     void manageChoose(ChoosePositionResponse message);
     void chooseOrderItem(ItemOrderResponse message);
+    void clientDisconnection();
 }
