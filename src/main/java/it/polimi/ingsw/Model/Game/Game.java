@@ -146,7 +146,7 @@ public class Game extends Observable implements Serializable {
         action = myAction;
     }
 
-    public void doAction() throws ActionException, WinException {
+    public void doAction() throws ActionException {
         action.execute();
         notifyObserver(action.getMessage());
     }

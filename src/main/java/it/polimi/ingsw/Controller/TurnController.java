@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Controller;
 
-import it.polimi.ingsw.Exception.WinException;
 import it.polimi.ingsw.Model.Player;
 
 import java.util.*;
@@ -47,7 +46,7 @@ public class TurnController {
         return currentPlayer;
     }
 
-    private void checkWin() throws WinException{
+    private void checkWin(){
 
     }
 }

@@ -63,7 +63,8 @@ public class VirtualView implements ViewObserver {
     //tells the game winner
     @Override
     public void winHandler(Win message) {
-        view.showMessage("AND THE WINNER IS..... \n" + message.getNickname());
+        for(Player p : message.getPlayers())
+            view.showMessage(p.getNickname()+"-"+p.getMyScore());
     }
 
     //tells the game ended because of player disconnection

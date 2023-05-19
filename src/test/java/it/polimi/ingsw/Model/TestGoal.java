@@ -1,15 +1,10 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Action.ChooseItem;
-import it.polimi.ingsw.Action.ChooseOrder;
-import it.polimi.ingsw.Exception.ActionException;
-import it.polimi.ingsw.Exception.WinException;
 import it.polimi.ingsw.Model.Bag.ColorItem;
 import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Game.Game;
 import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
 import it.polimi.ingsw.Model.Goal.CommonGoal.CgoalFactory;
-import it.polimi.ingsw.Model.Goal.PersonalGoal.PgoalFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
