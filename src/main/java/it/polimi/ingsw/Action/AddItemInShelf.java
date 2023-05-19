@@ -23,13 +23,11 @@ public class AddItemInShelf implements Action{
     @Override
     public void execute() throws ActionException {
         checkInput();
-        player.setItemInShelf(chosenColumn);
 
         for(Position p : game.getCurrentPlayer().getPosition())
             game.getBoard().updateNeighboursAdjacency(p);
 
-        if (player.getMyShelf().getNEmpty()==0)
-            game.endGame();
+        player.setItemInShelf(chosenColumn);
 
         for(Cgoal goal : game.getCGoal()){
             if(goal.isTaken(player.getMyShelf()))

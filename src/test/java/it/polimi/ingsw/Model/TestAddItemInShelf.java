@@ -24,7 +24,7 @@ public class TestAddItemInShelf {
 
     @Test
     @DisplayName("Testing putting an item in the column chose by player 1")
-    public void setItem1Player() throws ActionException, WinException {
+    public void setItem1Player() throws ActionException {
         ArrayList<Integer> position = new ArrayList<>();
         position.add(0);
         position.add(1);
