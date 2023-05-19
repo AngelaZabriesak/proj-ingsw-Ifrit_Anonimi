@@ -28,7 +28,7 @@ public class TestChooseOrder {
 
     @Test
     @DisplayName("Testing putting the items  chose by player 1 in order")
-    public void getItem1Player() throws ActionException, WinException {
+    public void getItem1Player() throws ActionException {
         ArrayList<Integer> position = new ArrayList<>();
         position.add(0);
         position.add(1);
@@ -47,7 +47,7 @@ public class TestChooseOrder {
 
     @Test
     @DisplayName("Testing putting the items  chose by player 2 in order")
-    public void getItem2Player() throws ActionException, WinException {
+    public void getItem2Player() throws ActionException {
         game.setActivePlayer(game.getPlayers().get(1));
         Player p0 = game.getCurrentPlayer();
         ArrayList<Integer> position = new ArrayList<>();
