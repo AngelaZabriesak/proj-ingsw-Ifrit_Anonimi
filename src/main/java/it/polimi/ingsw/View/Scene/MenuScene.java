@@ -11,7 +11,7 @@ public class MenuScene {
     private Button exitbutton;
 
     @FXML
-    private AnchorPane pane;
+    private AnchorPane rootPane;
 
     @FXML
     private Button playbutton;
