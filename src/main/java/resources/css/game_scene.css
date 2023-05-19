@@ -1,0 +1,4 @@
+.rootPane {
+    -fx-background-image: url("../images/parquet_background.png");
+    -fx-background-size: stretch;
+}
