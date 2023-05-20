@@ -8,8 +8,8 @@ import java.util.*;
 
 public class ItemOrderResponse extends Message {
 
-    private ArrayList<Item> items;
-    private ArrayList<Integer> order;
+    private final ArrayList<Item> items;
+    private final ArrayList<Integer> order;
 
     public ItemOrderResponse(ArrayList<Integer> order, ArrayList<Item> items) {
         super(MessageType.ITEM_ORDER_RESPONSE);

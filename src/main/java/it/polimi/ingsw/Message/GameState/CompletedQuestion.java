@@ -4,7 +4,7 @@ import it.polimi.ingsw.Enumerations.MessageType;
 import it.polimi.ingsw.Message.Message;
 
 public class CompletedQuestion extends Message {
-    private String message;
+    private final String message;
 
     public CompletedQuestion(String message){
         super(MessageType.OK_QUESTION);

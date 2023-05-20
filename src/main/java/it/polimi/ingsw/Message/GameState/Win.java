@@ -4,12 +4,11 @@ import it.polimi.ingsw.Enumerations.*;
 import it.polimi.ingsw.Message.Message;
 import it.polimi.ingsw.Model.Player;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Win extends Message {
 
-    private ArrayList<Player> players;
+    private final ArrayList<Player> players;
     public Win(ArrayList<Player> players) {
         super(MessageType.WIN);
         this.players = players;

@@ -2,7 +2,6 @@ package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Message.Action.*;
 import it.polimi.ingsw.Message.Error.Error;
-import it.polimi.ingsw.Message.Error.ErrorPlayer;
 import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.Response.*;
@@ -154,11 +153,5 @@ public class VirtualView implements ViewObserver {
     @Override
     public void NumOfPlayerHandler(NPlayerRequest message) {
         view.askNPlayers();
-    }
-
-    @Override
-    public void errorPlayerManager(ErrorPlayer message) {
-        view.showError("The game is already started\nEXITING");
-        view.exit();
     }
 }

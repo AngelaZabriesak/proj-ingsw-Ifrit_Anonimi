@@ -4,7 +4,7 @@ import it.polimi.ingsw.Enumerations.MessageType;
 import it.polimi.ingsw.Message.Message;
 
 public class Error extends Message {
-    private String error;
+    private final String error;
 
     public Error(String error) {
         super(MessageType.ERROR);

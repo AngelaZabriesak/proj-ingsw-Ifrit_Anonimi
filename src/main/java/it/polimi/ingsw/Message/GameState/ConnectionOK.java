@@ -5,7 +5,7 @@ import it.polimi.ingsw.Message.Message;
 
 public class ConnectionOK extends Message {
 
-    private boolean ok;
+    private final boolean ok;
 
     public ConnectionOK(boolean ok) {
         super(MessageType.OK_CONNECTION);

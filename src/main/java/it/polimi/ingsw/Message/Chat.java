@@ -4,7 +4,7 @@ import it.polimi.ingsw.Enumerations.MessageType;
 
 public class Chat extends Message{
 
-    private String msg;
+    private final String msg;
 
     public Chat(String msg){
         super(MessageType.CHAT);

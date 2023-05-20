@@ -9,7 +9,6 @@ import it.polimi.ingsw.Observer.ObserverNew.ServerObserver;
 
 public class ServerMessageManager extends ServerObservable {
     public void manage(Message message){
-        //System.out.println("tipo messaggio da gestire:" +message.getType());
         switch(message.getType()){
             case N_PLAYER_RESPONSE:
                 notifySrvObserver(obs-> obs.numberOfPlayerHandler((NPlayer) message));
@@ -48,7 +47,7 @@ public class ServerMessageManager extends ServerObservable {
                 notifySrvObserver(ServerObserver::newGame);
                 break;
             default:
-                System.out.println("ERRORE IN MESSAGE server MANAGER "+message.getClass());
+                System.out.println("ERROR IN MESSAGE server MANAGER "+message.getClass());
         }
     }
     public void clientDisconnection() {

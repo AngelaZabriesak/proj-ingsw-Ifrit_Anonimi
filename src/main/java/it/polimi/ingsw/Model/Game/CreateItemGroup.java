@@ -31,9 +31,9 @@ public class CreateItemGroup {
                         myShelf.getMyShelf()[r][c].setInGruppo();
                         controllaVicini(myShelf, primo);
                         this.gruppo[i].addAll(this.nuovoGruppo);
-                        for (Position p : this.gruppo[i]) {
+                        /*for (Position p : this.gruppo[i]) {
                             myShelf.getMyShelf()[r][c] = new Item(ColorItem.X);
-                        }
+                        }*/
                         i++;
                     }
                 }

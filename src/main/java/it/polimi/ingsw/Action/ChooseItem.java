@@ -9,7 +9,7 @@ import it.polimi.ingsw.Model.*;
 
 public class ChooseItem implements Action {
     private final Game game;
-    private Position p1,p2, newPosition;
+    private final Position p1,p2, newPosition;
     private final Player player;
     private Item item;
     private String description = "";
@@ -55,7 +55,7 @@ public class ChooseItem implements Action {
         }
 
         if(!checkAvailable()) {
-            throw new ActionException("The item choosed isn't available");
+            throw new ActionException("The item chose isn't available");
         }
 
     }

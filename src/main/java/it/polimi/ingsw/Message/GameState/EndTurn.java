@@ -5,7 +5,7 @@ import it.polimi.ingsw.Message.Message;
 
 public class EndTurn extends Message {
 
-    private String actualPlayer,nextPlayer;
+    private final String actualPlayer,nextPlayer;
     public EndTurn(String actualPlayer,String nextPlayer) {
         super(MessageType.END_TURN);
         this.nextPlayer = nextPlayer;

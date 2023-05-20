@@ -3,15 +3,13 @@ package it.polimi.ingsw.Message.Response;
 
 import it.polimi.ingsw.Enumerations.MessageType;
 import it.polimi.ingsw.Message.Message;
-import it.polimi.ingsw.Model.Position;
-
-import java.util.Objects;
+import it.polimi.ingsw.Model.*;
 
 public class ChoosePositionResponse extends Message {
 
-    Position p1,p2;
+    private final Position p1,p2;
 
-    private String response;
+    private final String response;
 
     public ChoosePositionResponse(String response,Position p1,Position p2){
         super(MessageType.CHOOSEITEM_RESPONSE);

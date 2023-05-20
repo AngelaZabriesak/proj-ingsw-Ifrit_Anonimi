@@ -7,7 +7,7 @@ import java.util.*;
 
 public class ChooseOrder_OK extends ActionMessage{
 
-    private ArrayList<Item> itemOrder;
+    private final ArrayList<Item> itemOrder;
 
     public ChooseOrder_OK(String description, ArrayList<Item> itemOrder) {
         super(description, MessageType.CHOOSEORDER_OK);

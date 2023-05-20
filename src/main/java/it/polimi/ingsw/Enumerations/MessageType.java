@@ -28,8 +28,6 @@ public enum MessageType implements Serializable {
     OK_CONNECTION,
     END,
     END_TURN,
-    ADD_ITEM,
-    N_ITEM_REQUEST,
     CHOOSEITEM_OK,
     CHOOSEORDER_OK,
     ADDINSHELF_OK,

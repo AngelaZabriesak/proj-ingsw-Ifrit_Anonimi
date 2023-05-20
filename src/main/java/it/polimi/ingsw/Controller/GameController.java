@@ -3,7 +3,6 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Action.*;
 import it.polimi.ingsw.Exception.*;
 import it.polimi.ingsw.Message.*;
-import it.polimi.ingsw.Message.Error.*;
 import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.Error.Error;
@@ -99,9 +98,6 @@ public class GameController extends GameControllerObservable implements ServerOb
             if(numberOfPlayer==9999) {
                 notifyObserver(obs->obs.sendToOnePlayer(new NPlayerRequest(),message.getNewNickname()));
             }
-        }
-        else if(gameStarted){
-            notifyObserver(obs->obs.sendToOnePlayer(new ErrorPlayer(), message.getNickname()));
         }
         else {
             if(getPlayerByNickname(message.getNewNickname())!=null) {

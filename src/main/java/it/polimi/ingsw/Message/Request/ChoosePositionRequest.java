@@ -6,7 +6,7 @@ import it.polimi.ingsw.Model.Position;
 
 public class ChoosePositionRequest extends Message {
 
-    private Position p1,p2;
+    private final Position p1,p2;
 
     public ChoosePositionRequest(Position p1, Position p2){
         super(MessageType.CHOOSEITEM);
