@@ -23,9 +23,6 @@ public class ServerMessageManager extends ServerObservable {
             case LOGIN:
                  notifySrvObserver(obs->obs.loginHandler((Login) message));
                 break;
-            /*case N_ITEM_RESPONSE:
-                notifySrvObserver(obs->obs.chooseNItemToMove((NItemResponse) message));
-                break;*/
             case COLUMN_RESPONSE:
                 notifySrvObserver(obs->obs.moveToColumn((ColumnResponse) message));
                 break;
@@ -43,6 +40,12 @@ public class ServerMessageManager extends ServerObservable {
                 break;
             case CHOOSEITEM_RESPONSE:
                 notifySrvObserver(obs->obs.manageChoose((ChoosePositionResponse) message));
+                break;
+            case CHAT:
+                notifySrvObserver(obs->obs.chat((Chat) message));
+                break;
+            case NEW_GAME:
+                notifySrvObserver(ServerObserver::newGame);
                 break;
             default:
                 System.out.println("ERRORE IN MESSAGE server MANAGER "+message.getClass());

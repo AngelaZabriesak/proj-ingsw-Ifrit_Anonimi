@@ -11,7 +11,7 @@ import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Observer.*;
 
 public class VirtualView implements ViewObserver {
-    private View view;
+    private final View view;
 
     public VirtualView(View view){
         this.view = view;
@@ -64,7 +64,8 @@ public class VirtualView implements ViewObserver {
     @Override
     public void winHandler(Win message) {
         for(Player p : message.getPlayers())
-            view.showMessage(p.getNickname()+"-"+p.getMyScore());
+            view.showScore(p);
+        view.askEnd();
     }
 
     //tells the game ended because of player disconnection
@@ -121,6 +122,7 @@ public class VirtualView implements ViewObserver {
 
     @Override
     public void chooseOrderItem(ItemOrderRequest message) {
+        view.showShelf(message.getShelf());
         view.showItemToOrder(message.getItems());
         view.askOrder(message.getItems());
     }
@@ -136,6 +138,16 @@ public class VirtualView implements ViewObserver {
     @Override
     public void nicknameHandler(LoginRequest message) {
         view.askNickname();
+    }
+
+    @Override
+    public void chat(Chat message) {
+        view.showMessage(message.getNickname()+": "+message.getMsg());
+    }
+
+    @Override
+    public void newGame() {
+        view.showMessage("Starting a new game");
     }
 
     // method that asks for number of players

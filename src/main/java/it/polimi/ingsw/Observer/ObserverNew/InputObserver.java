@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Observer.ObserverNew;
 
+import it.polimi.ingsw.Message.Chat;
 import it.polimi.ingsw.Message.Message;
 import it.polimi.ingsw.Message.Response.*;
 import it.polimi.ingsw.Message.Request.*;
@@ -28,5 +29,7 @@ public interface InputObserver {
     void onUpdateNPlayers(String numberOfPlayer);
     void onUpdateChooseItem(Message message);
     void onUpdateChoose(ChoosePositionResponse message);
+    void chat(Chat message);
+    void newGame();
     void onUpdateDisconnection();
 }

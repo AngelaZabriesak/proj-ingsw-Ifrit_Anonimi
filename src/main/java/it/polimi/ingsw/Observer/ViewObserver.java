@@ -34,4 +34,6 @@ public interface ViewObserver {
     void chooseOrderItem(ItemOrderRequest message);
     void chooseColumn(ColumnRequest message);
     void nicknameHandler(LoginRequest message);
+    void chat(Chat message);
+    void newGame();
 }

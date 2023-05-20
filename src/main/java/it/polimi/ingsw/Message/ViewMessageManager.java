@@ -78,6 +78,12 @@ public class ViewMessageManager extends ViewObservable {
             case CHOOSEITEM_OK:
                 notifyViewObserver(obs -> obs.chooseItemOk((ChooseItem_OK) message));
                 break;
+            case CHAT:
+                notifyViewObserver(obs->obs.chat((Chat) message));
+                break;
+            case NEW_GAME:
+                notifyViewObserver(ViewObserver::newGame);
+                break;
             default:
                 System.out.println("ERRORE IN view MESSAGE MANAGER");
         }

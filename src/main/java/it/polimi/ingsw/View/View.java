@@ -28,5 +28,6 @@ public interface View {
     void showPGoal(Pgoal pgoal);
     void showError(String error);
     void showMessage(String message);
+    void askEnd();
     void exit();
 }
