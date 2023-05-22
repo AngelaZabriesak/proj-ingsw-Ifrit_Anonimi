@@ -13,63 +13,63 @@ import javafx.scene.layout.VBox;
 public class GameScene {
 
     @FXML
-    private ImageView arrowcol0;
+    private ImageView arrowCol0;
 
     @FXML
-    private ImageView arrowcol1;
+    private ImageView arrowCol1;
 
     @FXML
-    private ImageView arrowcol2;
+    private ImageView arrowCol2;
 
     @FXML
-    private ImageView arrowcol3;
+    private ImageView arrowCol3;
 
     @FXML
-    private ImageView arrowcol4;
+    private ImageView arrowCol4;
 
     @FXML
-    private GridPane boardgrid;
+    private GridPane boardGrid;
 
     @FXML
-    private ImageView boardimg;
+    private ImageView boardImg;
 
     @FXML
-    private TextField chatinserttext;
+    private TextField chatInserText;
 
     @FXML
-    private Label chatlabel;
+    private Label chatLabel;
 
     @FXML
-    private HBox commongoalboxdx;
+    private HBox commonGoalBoxDx;
 
     @FXML
-    private HBox commongoalboxsx;
+    private HBox commonGoalBoxSx;
 
     @FXML
-    private GridPane itemordergrid;
+    private GridPane itemOrderGrid;
 
     @FXML
-    private ImageView itemorderimg;
+    private ImageView itemOrderImg;
 
     @FXML
-    private GridPane myshelfgrid;
+    private GridPane myShelfGrid;
 
     @FXML
-    private ImageView myshelfimg;
+    private ImageView myShelfImg;
 
     @FXML
     private AnchorPane pane;
 
     @FXML
-    private Label personalgoallabel;
+    private Label personalGoalLabel;
 
     @FXML
-    private VBox personalgolbox;
+    private VBox personalGolBox;
 
     @FXML
     private StackPane gamePane;
 
     @FXML
-    private ImageView uselessarrow;
+    private ImageView uselessArrow;
 
 }
