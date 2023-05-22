@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane stylesheets="@../css/menu_scene.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C:\Users\Mattia\Documents\GitHub\proj-ingsw-Ifrit_Anonimi\src\main\java\it\polimi\ingsw\View\Scene\MenuScene.java">
+<StackPane stylesheets="@../css/menu_scene.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Scene.MenuScene">
    <children>
       <AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="750.0" styleClass="rootPane" stylesheets="@../css/menu_scene.css">
          <children>
