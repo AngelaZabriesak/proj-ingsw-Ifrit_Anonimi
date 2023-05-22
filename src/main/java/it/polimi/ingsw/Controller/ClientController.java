@@ -6,7 +6,9 @@ import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Message.Response.*;
 import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Networking.Client.*;
-import it.polimi.ingsw.Observer.ObserverNew.*;
+import it.polimi.ingsw.Observer.ClientObservable;
+import it.polimi.ingsw.Observer.ClientObserver;
+import it.polimi.ingsw.Observer.InputObserver;
 
 import java.io.IOException;
 import java.util.ArrayList;

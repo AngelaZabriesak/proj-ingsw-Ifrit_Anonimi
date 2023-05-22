@@ -11,8 +11,9 @@ import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
+import it.polimi.ingsw.Observer.GameControllerObservable;
 import it.polimi.ingsw.Observer.Observer;
-import it.polimi.ingsw.Observer.ObserverNew.*;
+import it.polimi.ingsw.Observer.ServerObserver;
 
 import java.util.*;
 

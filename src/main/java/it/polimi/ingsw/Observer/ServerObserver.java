@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Observer.ObserverNew;
+package it.polimi.ingsw.Observer;
 
 import it.polimi.ingsw.Message.Chat;
 import it.polimi.ingsw.Message.Response.*;

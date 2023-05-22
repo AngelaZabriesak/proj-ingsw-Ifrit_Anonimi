@@ -9,7 +9,7 @@ import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.*;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Observer.ObserverNew.*;
+import it.polimi.ingsw.Observer.InputObservable;
 
 import java.io.*;
 import java.util.*;
@@ -54,7 +54,6 @@ public class Cli extends InputObservable implements View {
     public void askServerInfo() throws ExecutionException {
         String defaultAddress = "localhost";
         String defaultPort = "16847";
-        boolean validPort;
 
         out.print("Enter the server address [" + defaultAddress + "]: ");
 
@@ -63,7 +62,7 @@ public class Cli extends InputObservable implements View {
         if (!address.equals("")) {
             defaultAddress = address;
         }
-
+/*
         do {
             out.print("Enter the server port [" + defaultPort + "]: ");
             String port = readLine();
@@ -80,10 +79,9 @@ public class Cli extends InputObservable implements View {
                 }
             }
         } while (!validPort);
-
-        String finalDefaultPort = defaultPort;
+*/
         String finalDefaultAddress = defaultAddress;
-        notifyInObserver(obs -> {obs.onUpdateServerInfo(finalDefaultAddress, Integer.parseInt(finalDefaultPort));
+        notifyInObserver(obs -> {obs.onUpdateServerInfo(finalDefaultAddress, Integer.parseInt(defaultPort));
         });
     }
 

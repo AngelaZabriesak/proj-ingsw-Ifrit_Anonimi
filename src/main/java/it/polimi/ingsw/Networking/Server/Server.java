@@ -2,7 +2,7 @@ package it.polimi.ingsw.Networking.Server;
 
 import it.polimi.ingsw.Controller.*;
 import it.polimi.ingsw.Message.*;
-import it.polimi.ingsw.Observer.ObserverNew.*;
+import it.polimi.ingsw.Observer.GameControllerObserver;
 
 import java.util.*;
 

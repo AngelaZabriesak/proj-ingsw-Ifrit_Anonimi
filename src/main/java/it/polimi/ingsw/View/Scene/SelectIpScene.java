@@ -1,20 +1,14 @@
 package it.polimi.ingsw.View.Scene;
 
+import it.polimi.ingsw.Observer.*;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 
-public class SelectIpScene {
+public class SelectIpScene extends InputObservable implements GenericScene {
 
     @FXML
     private TextField ipTextField;
@@ -26,10 +20,78 @@ public class SelectIpScene {
     private AnchorPane selectIpPane;
 
     @FXML
-    private Button okButton;
+    private Button connectButton;
 
 
-    private void okButtonClick(Event event) {
+    public void initialize() {
+        connectButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onConnectButtonClick);
+
+    }
+
+
+    private void onConnectButtonClick(Event event) {
+        String address = ipTextField.getText();
+
+
+        connectButton.setDisable(true);
+
+        new Thread(() -> notifyInObserver(obs -> obs.onUpdateServerInfo(address, 16847))).start();
+        ChangeScene.changeRootPane(observers, event, "login_scene.fxml");
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      /*private void okButtonClick(Event event) {
         try {
             // push FXML file of new scene
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login_scene.fxml"));
@@ -50,5 +112,4 @@ public class SelectIpScene {
     }
 
 
-
-}
+      */

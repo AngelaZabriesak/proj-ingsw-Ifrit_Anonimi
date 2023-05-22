@@ -6,24 +6,29 @@ import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.*;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Observer.*;
+import it.polimi.ingsw.Observer.InputObservable;
+import it.polimi.ingsw.View.Scene.SelectNpScene;
+import javafx.application.Platform;
 
 import java.util.*;
 
-public class Gui extends ViewObservable implements View {
+public class Gui extends InputObservable implements View {
     @Override
     public void askNickname() {
-
+        //Platform.runLater(() -> SceneController.changeRootPane(observers, "login_scene.fxml"));
     }
 
     @Override
     public void askNPlayers() {
-
+        /*SelectNpScene pnsc = new SelectNpScene();
+        pnsc.addAllObservers(observers);
+        pnsc.setPlayersRange(2, 3);
+        Platform.runLater(() -> SceneController.changeRootPane(pnsc, "select_np_scene.fxml"));*/
     }
 
     @Override
     public void askItem(Position p1,Position p2) {
-
+        
     }
 
     @Override

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.View.Scene;
 
-import it.polimi.ingsw.Observer.ObserverNew.InputObservable;
+import it.polimi.ingsw.Observer.*;
 // ricordarsi di importare la disconnessione
 import it.polimi.ingsw.Message.Request.LoginRequest;
 import javafx.event.Event;
