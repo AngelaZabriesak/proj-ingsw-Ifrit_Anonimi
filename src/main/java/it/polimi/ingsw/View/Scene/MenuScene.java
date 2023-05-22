@@ -8,10 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 
-public class MenuScene extends InputObservable implements GenericScene { }
-
-
-    /*
+public class MenuScene extends InputObservable implements GenericScene {
     @FXML
     private Button exitButton;
 
