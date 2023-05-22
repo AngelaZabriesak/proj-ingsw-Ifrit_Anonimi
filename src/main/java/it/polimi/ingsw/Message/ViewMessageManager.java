@@ -79,6 +79,9 @@ public class ViewMessageManager extends ViewObservable {
             case NEW_GAME:
                 notifyViewObserver(ViewObserver::newGame);
                 break;
+            case GOAL_TAKE:
+                notifyViewObserver(obs->obs.goalTake((GoalTake) message));
+                break;
             default:
                 System.out.println("ERROR IN view MESSAGE MANAGER");
         }

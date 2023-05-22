@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model.Game;
 
 import it.polimi.ingsw.Action.*;
 import it.polimi.ingsw.Exception.*;
+import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Model.Position;
 import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Model.*;
@@ -9,7 +10,7 @@ import it.polimi.ingsw.Model.Goal.CommonGoal.*;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
 import it.polimi.ingsw.Observer.Observable;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 public class Game extends Observable implements Serializable {
@@ -77,15 +78,6 @@ public class Game extends Observable implements Serializable {
     public void endGame(){
         // add 1 to score of the first player who have fill the shelf for first
         currentPlayer.addMyScore(1);
-    }
-
-    private void nextPlayer(){
-        int pos = players.indexOf(currentPlayer);
-        if(pos== players.size()-1)
-            pos=0;
-        else
-            pos++;
-        currentPlayer = players.get(pos);
     }
 
     public void refillBoard() {

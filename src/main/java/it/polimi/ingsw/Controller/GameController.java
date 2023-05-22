@@ -10,6 +10,7 @@ import it.polimi.ingsw.Message.Response.*;
 import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
 import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.Observer.ObserverNew.*;
 
@@ -169,7 +170,7 @@ public class GameController extends GameControllerObservable implements ServerOb
 
     @Override
     public void moveToColumn(ColumnResponse message) {
-        int nColumn;
+        int nColumn,score = 0;
         if(isInt(message.getColumn())){
             notifyObserver(obs->obs.sendToOnePlayer(new ColumnRequest("Invalid number of column, is not integer", Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyItem(), Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyShelf()), message.getNickname()));
         }
@@ -179,6 +180,14 @@ public class GameController extends GameControllerObservable implements ServerOb
                     nColumn = Integer.parseInt(message.getColumn());
                     game.setAction(new AddItemInShelf(game, nColumn, getPlayerByNickname(message.getNickname())));
                     game.doAction();
+                    for(Cgoal cg : game.getCGoal()){
+                        if(cg.isTaken(getPlayerByNickname(message.getNickname()).getMyShelf())){
+                            score = cg.getToken().getScore();
+                            getPlayerByNickname(message.getNickname()).addMyScore(score);
+                            int finalScore = score;
+                            notifyObserver(obs->obs.sendToOnePlayer(new GoalTake(cg, finalScore),message.getNickname()));
+                        }
+                    }
                     if(!gameEnded) {
                         if (Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyShelf().getNEmpty() == 0)
                             endGameDisconnection();

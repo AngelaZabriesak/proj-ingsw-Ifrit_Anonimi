@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Model.Game;
 
 import it.polimi.ingsw.Model.Bag.ColorItem;
-import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Position;
 import it.polimi.ingsw.Model.Shelf;
 
@@ -24,11 +23,11 @@ public class CreateItemGroup {
             for(int c=0; c<myShelf.getCol();c++) {
                 this.nuovoGruppo = new ArrayList<>();
                 if(myShelf.getMyShelf()[r][c]!=null){
-                    if (myShelf.getMyShelf()[r][c].getColor() != ColorItem.X && !myShelf.getMyShelf()[r][c].getInGruppo()) {
+                    if (myShelf.getMyShelf()[r][c].getColor() != ColorItem.X && myShelf.getMyShelf()[r][c].getInGroup()) {
                         this.gruppo[i] = new ArrayList<>();
                         primo = new Position(r, c);
                         this.gruppo[i].add(primo);
-                        myShelf.getMyShelf()[r][c].setInGruppo();
+                        myShelf.getMyShelf()[r][c].setInGroup();
                         controllaVicini(myShelf, primo);
                         this.gruppo[i].addAll(this.nuovoGruppo);
                         /*for (Position p : this.gruppo[i]) {
@@ -53,40 +52,40 @@ public class CreateItemGroup {
         int adiacenze =0;
         if(primo.getRow()<5 && myShelf.getMyShelf()[primo.getRow()+1][primo.getCol()]!=null) {
             if(myShelf.getMyShelf()[primo.getRow()][primo.getCol()].getColor()==myShelf.getMyShelf()[primo.getRow()+1][primo.getCol()].getColor()){
-                if (!myShelf.getMyShelf()[primo.getRow() + 1][primo.getCol()].getInGruppo()) {
+                if (myShelf.getMyShelf()[primo.getRow() + 1][primo.getCol()].getInGroup()) {
                     gruppo.add(new Position(primo.getRow() + 1, primo.getCol()));
                     adiacenze++;
-                    myShelf.getMyShelf()[primo.getRow() + 1][primo.getCol()].setInGruppo();
+                    myShelf.getMyShelf()[primo.getRow() + 1][primo.getCol()].setInGroup();
                     controllaVicini(myShelf, new Position(primo.getRow() + 1, primo.getCol()));
                 }
             }
         }
         if(primo.getRow()>0 && myShelf.getMyShelf()[primo.getRow()-1][primo.getCol()]!=null) {
             if(myShelf.getMyShelf()[primo.getRow()][primo.getCol()].getColor()==myShelf.getMyShelf()[primo.getRow()-1][primo.getCol()].getColor()){
-                if (!myShelf.getMyShelf()[primo.getRow() - 1][primo.getCol()].getInGruppo()) {
+                if (myShelf.getMyShelf()[primo.getRow() - 1][primo.getCol()].getInGroup()) {
                     gruppo.add(new Position(primo.getRow() - 1, primo.getCol()));
                     adiacenze++;
-                    myShelf.getMyShelf()[primo.getRow() - 1][primo.getCol()].setInGruppo();
+                    myShelf.getMyShelf()[primo.getRow() - 1][primo.getCol()].setInGroup();
                     controllaVicini(myShelf, new Position(primo.getRow() - 1, primo.getCol()));
                 }
             }
         }
         if(primo.getCol()<4 && myShelf.getMyShelf()[primo.getRow()][primo.getCol()+1]!=null){
             if(myShelf.getMyShelf()[primo.getRow()][primo.getCol()].getColor()==myShelf.getMyShelf()[primo.getRow()][primo.getCol()+1].getColor()){
-                if(!myShelf.getMyShelf()[primo.getRow()][primo.getCol()+1].getInGruppo()){
+                if(myShelf.getMyShelf()[primo.getRow()][primo.getCol() + 1].getInGroup()){
                     gruppo.add(new Position(primo.getRow(), primo.getCol()+1));
                     adiacenze++;
-                    myShelf.getMyShelf()[primo.getRow()][primo.getCol()+1].setInGruppo();
+                    myShelf.getMyShelf()[primo.getRow()][primo.getCol()+1].setInGroup();
                     controllaVicini(myShelf,new Position(primo.getRow(), primo.getCol() + 1));
                 }
             }
         }
         if(primo.getCol()>0 && myShelf.getMyShelf()[primo.getRow()][primo.getCol()-1]!=null){
             if(myShelf.getMyShelf()[primo.getRow()][primo.getCol()].getColor()==myShelf.getMyShelf()[primo.getRow()][primo.getCol()-1].getColor()) {
-                if (!myShelf.getMyShelf()[primo.getRow()][primo.getCol() - 1].getInGruppo()) {
+                if (myShelf.getMyShelf()[primo.getRow()][primo.getCol() - 1].getInGroup()) {
                     gruppo.add(new Position(primo.getRow(), primo.getCol() - 1));
                     adiacenze++;
-                    myShelf.getMyShelf()[primo.getRow()][primo.getCol() - 1].setInGruppo();
+                    myShelf.getMyShelf()[primo.getRow()][primo.getCol() - 1].setInGroup();
                     controllaVicini(myShelf, new Position(primo.getRow(), primo.getCol() - 1));
                 }
             }
