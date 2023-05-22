@@ -67,7 +67,7 @@ public class GameScene {
     private VBox personalgolbox;
 
     @FXML
-    private StackPane rootPane;
+    private StackPane gamePane;
 
     @FXML
     private ImageView uselessarrow;

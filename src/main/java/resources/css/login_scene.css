@@ -1,0 +1,4 @@
+.loginPane {
+    -fx-background-image: url("../images/banner_background.png");
+    -fx-background-size: stretch;
+}
