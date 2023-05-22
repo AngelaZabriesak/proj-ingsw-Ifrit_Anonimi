@@ -14,7 +14,7 @@
                </font>
             </Label>
             <TextField layoutX="239.0" layoutY="242.0" prefHeight="25.0" prefWidth="273.0" />
-            <Button fx:id="okButton" layoutX="353.0" layoutY="305.0" mnemonicParsing="false" text="OK">
+            <Button fx:id="okButton" layoutX="353.0" layoutY="305.0" mnemonicParsing="false" text="OK" styleClass="loginButton" stylesheets="@../css/login_scene.css">
                <font>
                   <Font name="Gloucester MT Extra Condensed" size="20.0" />
                </font>

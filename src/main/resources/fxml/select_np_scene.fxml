@@ -13,9 +13,9 @@
                   <Font name="Gloucester MT Extra Condensed" size="33.0" />
                </font>
             </Label>
-            <Button fx:id="twoplayerbutton" layoutX="90.0" layoutY="188.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="73.0" text="2 giocatori" />
-            <Button fx:id="threeplayerbutton" layoutX="339.0" layoutY="275.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="73.0" text="3 giocatori" />
-            <Button fx:id="fourplayerbutton" layoutX="595.0" layoutY="188.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="73.0" text="4 giocatori" />
+            <Button fx:id="twoplayerbutton" layoutX="90.0" layoutY="188.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="73.0" text="2 giocatori" styleClass="loginButton" stylesheets="@../css/login_scene.css"/>
+            <Button fx:id="threeplayerbutton" layoutX="339.0" layoutY="275.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="73.0" text="3 giocatori" styleClass="loginButton" stylesheets="@../css/login_scene.css"/>
+            <Button fx:id="fourplayerbutton" layoutX="595.0" layoutY="188.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="73.0" text="4 giocatori" styleClass="loginButton" stylesheets="@../css/login_scene.css"/>
          </children>
       </AnchorPane>
    </children>
