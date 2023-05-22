@@ -8,8 +8,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 
-public class MenuScene extends InputObservable implements GenericScene {
+public class MenuScene extends InputObservable implements GenericScene { }
 
+
+    /*
     @FXML
     private Button exitButton;
 
@@ -31,55 +33,12 @@ public class MenuScene extends InputObservable implements GenericScene {
 
     }
 }
+/* @FXML
 
 
+     comenti
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   /* @FXML
-    private void playButtonClick(Event event) {
+   
         try {
             // push FXML file of new scene
             FXMLLoader loader = new FXMLLoader(getClass().getResource("select_ip_scene.fxml"));
@@ -98,6 +57,13 @@ public class MenuScene extends InputObservable implements GenericScene {
             e.printStackTrace();
         }
     }
+<<<<<<< HEAD
 
 
-}   */
+}
+=======
+}
+>>>>>>> 44f557f2011e4c0fa37a526ed980dce93ff92f97
+
+
+*/
