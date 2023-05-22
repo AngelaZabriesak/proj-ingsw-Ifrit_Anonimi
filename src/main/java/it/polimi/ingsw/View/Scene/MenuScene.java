@@ -29,17 +29,17 @@ public class MenuScene {
         private void playButtonClick(Event event) {
             try {
                 // push FXML file of new scene
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("game_scene.fxml"));
-                Parent gameSceneRoot = loader.load();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ip_scene.fxml"));
+                Parent ipSceneRoot = loader.load();
 
                 // create a new scene by the root of the new scene
-                Scene gameScene= new Scene(gameSceneRoot);
+                Scene ipScene= new Scene(ipSceneRoot);
 
                 // get the current window
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
                 // set new scene as current
-                stage.setScene(gameScene);
+                stage.setScene(ipScene);
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();

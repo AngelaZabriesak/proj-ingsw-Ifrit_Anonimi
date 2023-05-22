@@ -16,4 +16,6 @@ public class WaitScene {
     @FXML
     private AnchorPane waitPane;
 
+
+
 }

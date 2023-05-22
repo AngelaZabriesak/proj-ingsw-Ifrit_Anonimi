@@ -13,9 +13,9 @@ public class WinScene {
     private Label endGameLabel2;
 
     @FXML
-    private AnchorPane winPane;
+    private Label winnerLabel;
 
     @FXML
-    private Label winnerLabel;
+    private AnchorPane winPane;
 
 }
