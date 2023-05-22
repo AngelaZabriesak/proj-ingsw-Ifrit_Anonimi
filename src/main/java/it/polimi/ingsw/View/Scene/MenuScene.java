@@ -5,6 +5,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
 import java.io.*;
@@ -27,7 +28,7 @@ public class MenuScene extends InputObservable {
     private void playButtonClick(Event event) {
         try {
             // push FXML file of new scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ip_scene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("select_ip_scene.fxml"));
             Parent ipSceneRoot = loader.load();
 
             // create a new scene by the root of the new scene
@@ -43,5 +44,4 @@ public class MenuScene extends InputObservable {
             e.printStackTrace();
         }
     }
-
 }

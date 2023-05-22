@@ -47,7 +47,7 @@ public class TestGoal {
             cgoals.add(CgoalFactory.getInstance().getCommonGoal(i,game));
         }
         for(Cgoal cg : cgoals){
-            System.out.println(cg.isTaken(shelf));
+            System.out.println(cg.isTaken(shelf)+" "+cg.getDescription());
         }
         game.calcScore(p0);
         System.out.println(p0.getMyScore());
