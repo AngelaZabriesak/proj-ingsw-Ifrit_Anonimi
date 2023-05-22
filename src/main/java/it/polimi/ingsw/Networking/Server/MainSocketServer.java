@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Networking.Server;
 
 import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Observer.ObserverNew.LoginObserver;
+import it.polimi.ingsw.Observer.LoginObserver;
 
 import java.io.*;
 import java.net.*;

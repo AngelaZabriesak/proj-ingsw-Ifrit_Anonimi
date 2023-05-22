@@ -1,20 +1,17 @@
-package it.polimi.ingsw.Observer.ObserverNew;
+package it.polimi.ingsw.Observer;
+
 
 import java.util.*;
 import java.util.function.*;
 
-/**
- * Implementation of the observable class
- */
-public abstract class ClientObservable{
-
-    private final List<ClientObserver> observers = new ArrayList<>();
+public abstract class SocketClientObservable {
+    private final List<SocketClientObserver> observers = new ArrayList<>();
 
     /**
      * Adds an observer
      * @param observer is the new observer
      */
-    public void addObserver(ClientObserver observer) {
+    public void addObserver(SocketClientObserver observer) {
         observers.add(observer);
     }
 
@@ -22,7 +19,7 @@ public abstract class ClientObservable{
      * Removes an observer
      * @param observer is the removed observer
      */
-    public void removeObserver(ClientObserver observer) {
+    public void removeObserver(SocketClientObserver observer) {
         observers.remove(observer);
     }
 
@@ -33,16 +30,15 @@ public abstract class ClientObservable{
         observers.clear();
     }
 
-
     /**
      * Notifies all the current observers through the lambda argument.
      *
      * @param lambda the lambda to be called on the observers.
      */
-    public void notifyObserver(Consumer<ClientObserver> lambda) {
+    public void notifyObserver(Consumer<SocketClientObserver> lambda) {
         int dim = observers.size();
-        //System.out.println("DIMENSIONE CLIENT-OBSERVABLE "+dim);
-        for (ClientObserver observer : observers) {
+        //System.out.println("DIMENSIONE socketclient-OBSERVABLE "+dim);
+        for (SocketClientObserver observer : observers) {
             lambda.accept(observer);
         }
     }

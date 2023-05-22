@@ -6,11 +6,11 @@ import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.*;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Observer.*;
+import it.polimi.ingsw.Observer.InputObservable;
 
 import java.util.*;
 
-public class Gui extends ViewObservable implements View {
+public class Gui extends InputObservable implements View {
     @Override
     public void askNickname() {
 

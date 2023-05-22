@@ -1,10 +1,10 @@
 package it.polimi.ingsw.View.Scene;
-import it.polimi.ingsw.Observer.ViewObservable;
+
+import it.polimi.ingsw.Observer.*;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
 import java.io.*;
@@ -12,7 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class MenuScene {
+public class MenuScene extends InputObservable {
 
     @FXML
     private Button exitButton;
@@ -23,26 +23,25 @@ public class MenuScene {
     @FXML
     private Button playButton;
 
+    @FXML
+    private void playButtonClick(Event event) {
+        try {
+            // push FXML file of new scene
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ip_scene.fxml"));
+            Parent ipSceneRoot = loader.load();
 
+            // create a new scene by the root of the new scene
+            Scene ipScene= new Scene(ipSceneRoot);
 
-        @FXML
-        private void playButtonClick(Event event) {
-            try {
-                // push FXML file of new scene
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("ip_scene.fxml"));
-                Parent ipSceneRoot = loader.load();
+            // get the current window
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-                // create a new scene by the root of the new scene
-                Scene ipScene= new Scene(ipSceneRoot);
-
-                // get the current window
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-                // set new scene as current
-                stage.setScene(ipScene);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            // set new scene as current
+            stage.setScene(ipScene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
+}

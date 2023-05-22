@@ -2,7 +2,7 @@ package it.polimi.ingsw.Networking.Client;
 
 import it.polimi.ingsw.Message.Message;
 import it.polimi.ingsw.Message.ViewMessageManager;
-import it.polimi.ingsw.Observer.ObserverNew.*;
+import it.polimi.ingsw.Observer.SocketClientObserver;
 
 public class ObsClient implements SocketClientObserver {
 

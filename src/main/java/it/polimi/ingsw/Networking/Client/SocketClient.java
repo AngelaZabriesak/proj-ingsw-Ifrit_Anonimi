@@ -2,8 +2,8 @@ package it.polimi.ingsw.Networking.Client;
 
 import it.polimi.ingsw.Message.Error.Error;
 import it.polimi.ingsw.Message.Message;
-import it.polimi.ingsw.Observer.ObserverNew.ClientObserver;
-import it.polimi.ingsw.Observer.ObserverNew.SocketClientObservable;
+import it.polimi.ingsw.Observer.ClientObserver;
+import it.polimi.ingsw.Observer.SocketClientObservable;
 
 import java.io.*;
 import java.net.*;

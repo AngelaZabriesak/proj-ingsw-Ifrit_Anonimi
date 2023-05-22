@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Observer.ObserverNew;
+package it.polimi.ingsw.Observer;
 
 public interface LoginObserver {
     void update();
