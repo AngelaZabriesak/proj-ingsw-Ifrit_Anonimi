@@ -2,7 +2,6 @@ package it.polimi.ingsw.Message;
 
 import it.polimi.ingsw.Message.Action.*;
 import it.polimi.ingsw.Message.Error.Error;
-import it.polimi.ingsw.Message.Error.ErrorPlayer;
 import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.Response.*;
@@ -10,7 +9,6 @@ import it.polimi.ingsw.Observer.*;
 
 public class ViewMessageManager extends ViewObservable {
     public void manage(Message message){
-        //System.out.println("tipo messaggio da gestire:" +message.getType());
         switch(message.getType()){
             case TURN_ALERT:
                 notifyViewObserver(obs->obs.TurnAlert((TurnAlert) message));
@@ -32,9 +30,6 @@ public class ViewMessageManager extends ViewObservable {
                 break;
             case N_PLAYER_REQUEST:
                 notifyViewObserver(obs-> obs.NumOfPlayerHandler((NPlayerRequest) message));
-                break;
-            case ERROR_PLAYER:
-                notifyViewObserver(obs->obs.errorPlayerManager((ErrorPlayer) message));
                 break;
             case BOARD_RESPONSE:
                 notifyViewObserver(obs-> obs.showBoardHandler((BoardResponse) message));
@@ -78,8 +73,14 @@ public class ViewMessageManager extends ViewObservable {
             case CHOOSEITEM_OK:
                 notifyViewObserver(obs -> obs.chooseItemOk((ChooseItem_OK) message));
                 break;
+            case CHAT:
+                notifyViewObserver(obs->obs.chat((Chat) message));
+                break;
+            case NEW_GAME:
+                notifyViewObserver(ViewObserver::newGame);
+                break;
             default:
-                System.out.println("ERRORE IN view MESSAGE MANAGER");
+                System.out.println("ERROR IN view MESSAGE MANAGER");
         }
     }
 }

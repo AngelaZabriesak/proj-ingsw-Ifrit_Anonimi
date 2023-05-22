@@ -1,6 +1,7 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Controller.*;
+import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.Response.*;
 import it.polimi.ingsw.Model.Bag.*;
@@ -107,19 +108,25 @@ public class Cli extends InputObservable implements View {
         Position position;
         out.print("Choose the position of the item you want to pick from Board [row-col]: ");
         String read = readLine();
-        try{
-            position = new Position(Integer.parseInt(read.split("-")[0]), Integer.parseInt(read.split("-")[1]));
-            Position finalPosition = position;
-            //System.out.println("Read "+finalPosition.getRow()+"-"+finalPosition.getCol());
-            if(p1==null)
-                notifyInObserver(obs -> obs.onUpdateChooseItem(new Item1PositionResponse(finalPosition)));
-            else if (p2==null)
-                notifyInObserver(obs -> obs.onUpdateChooseItem(new Item2PositionResponse(p1,finalPosition)));
-            else
-                notifyInObserver(obs -> obs.onUpdateChooseItem(new Item3PositionResponse(p1,p2,finalPosition)));
-        }catch(Exception e){
-            out.println("Error in entering position of item");
+        if(read.split(":")[0].equalsIgnoreCase("CHAT")) {
+            notifyInObserver(obs -> obs.chat(new Chat(read)));
             askItem(p1,p2);
+        }
+        else{
+            try{
+                position = new Position(Integer.parseInt(read.split("-")[0]), Integer.parseInt(read.split("-")[1]));
+                Position finalPosition = position;
+                //System.out.println("Read "+finalPosition.getRow()+"-"+finalPosition.getCol());
+                if(p1==null)
+                    notifyInObserver(obs -> obs.onUpdateChooseItem(new Item1PositionResponse(finalPosition)));
+                else if (p2==null)
+                    notifyInObserver(obs -> obs.onUpdateChooseItem(new Item2PositionResponse(p1,finalPosition)));
+                else
+                    notifyInObserver(obs -> obs.onUpdateChooseItem(new Item3PositionResponse(p1,p2,finalPosition)));
+            }catch(Exception e){
+                out.println("Error in entering position of item");
+                askItem(p1,p2);
+            }
         }
     }
 
@@ -127,7 +134,13 @@ public class Cli extends InputObservable implements View {
     public void askOther(ChoosePositionRequest message) {
         out.println("Do you want to choose another item? (yes or no) ");
         String response = readLine();
-        notifyInObserver(obs->obs.onUpdateChoose(new ChoosePositionResponse(response,message.getP1(),message.getP2())));
+
+        if(response.split(":")[0].equalsIgnoreCase("CHAT")) {
+            notifyInObserver(obs -> obs.chat(new Chat(response)));
+            askOther(message);
+        }
+        else
+            notifyInObserver(obs->obs.onUpdateChoose(new ChoosePositionResponse(response,message.getP1(),message.getP2())));
     }
 
     // method that asks you to choose the column of the Shelf in which you want to put your Items
@@ -135,34 +148,45 @@ public class Cli extends InputObservable implements View {
     public void askColumn() {
         out.print("Choose the column in your Shelf");
         String column = readLine();
-        if(Integer.parseInt(column)<0 || Integer.parseInt(column)>4) {
-            out.println("This id column isn't acceptable");
+        if(column.split(":")[0].equalsIgnoreCase("CHAT")) {
+            notifyInObserver(obs -> obs.chat(new Chat(column)));
             askColumn();
         }
-        notifyInObserver(obs -> obs.onUpdateColumn(column));
+        else {
+            if (Integer.parseInt(column) < 0 || Integer.parseInt(column) > 4) {
+                out.println("This id column isn't acceptable");
+                askColumn();
+            }
+            notifyInObserver(obs -> obs.onUpdateColumn(column));
+        }
     }
 
     // method that asks you to choose the order of Items in Shelf
     @Override
     public void askOrder(ArrayList<Item> itemToOrder) {
         ArrayList<Integer> orderInt = new ArrayList<>();
-        //for(Item i : itemToOrder)
         out.print("Choose the insertion order of items in your Shelf, separated by -: ");
         String order = readLine();
-        try{
-            if(
-                    order.split("-").length!= itemToOrder.size() ||
-                    max(order.split("-"))> itemToOrder.size()-1 ||
-                    areSame(order.split("-"))
-            )
-                throw new Exception();
-            for(int i = 0 ; i<itemToOrder.size(); i++){
-                orderInt.add(Integer.parseInt(order.split("-")[i]));
-            }
-            notifyInObserver(obs -> obs.onUpdateOrder(orderInt, itemToOrder));
-        }catch(Exception e){
-            out.println("Error in entering order of item");
+        if(order.split(":")[0].equalsIgnoreCase("CHAT")) {
+            notifyInObserver(obs -> obs.chat(new Chat(order)));
             askOrder(itemToOrder);
+        }
+        else {
+            try {
+                if (
+                    order.split("-").length != itemToOrder.size() ||
+                    max(order.split("-")) > itemToOrder.size() - 1 ||
+                    areSame(order.split("-"))
+                )
+                    throw new Exception();
+                for (int i = 0; i < itemToOrder.size(); i++) {
+                    orderInt.add(Integer.parseInt(order.split("-")[i]));
+                }
+                notifyInObserver(obs -> obs.onUpdateOrder(orderInt, itemToOrder));
+            } catch (Exception e) {
+                out.println("Error in entering order of item");
+                askOrder(itemToOrder);
+            }
         }
     }
 
@@ -185,19 +209,11 @@ public class Cli extends InputObservable implements View {
                     else
                         b.append("|\t").append(board.getItem(new Position(r, c)).getColor()).append("\t");
                 }
-
                 else
                     b.append("|\tnull\t");
             }
             b.append("|\n");
         }
-        /*
-        for (int r = 0; r < 9; r++) {
-            for (int c = 0; c < 9; c++) {
-                b.append("|\t" + board.getAdjacency(new Position(r, c)) + "" + "\t");
-            }
-            b.append("|\n");
-        }*/
         out.println(b);
     }
 
@@ -231,7 +247,7 @@ public class Cli extends InputObservable implements View {
     //method that shows the personal score
     @Override
     public void showScore(Player player) {
-        out.println("Your current score is " +player.getMyScore());
+        out.println(player.getNickname()+": Your current score is " +player.getMyScore());
     }
 
     //method that shows the PGoal
@@ -271,6 +287,20 @@ public class Cli extends InputObservable implements View {
     }
 
     @Override
+    public void askEnd(){
+        out.println("Do you want to play other game?");
+        String read = readLine();
+        if(read.equalsIgnoreCase("no"))
+            exit();
+        else if(read.equalsIgnoreCase("yes"))
+            notifyInObserver(obs->obs.newGame());
+        else{
+            out.println("Error in entered choose, choose again");
+            askEnd();
+        }
+    }
+
+    @Override
     public void exit() {
         inputThread.close();
         System.exit(1);
@@ -287,7 +317,7 @@ public class Cli extends InputObservable implements View {
 
     /**
      *
-     * @param order is the array of the position choose by  user
+     * @param order is the array of the position choose by user
      * @return true if are some that are equals
      */
     private boolean areSame(String[] order){

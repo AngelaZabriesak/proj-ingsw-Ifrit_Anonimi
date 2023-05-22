@@ -6,7 +6,7 @@ import it.polimi.ingsw.Model.*;
 
 public class Item1PositionResponse extends Message {
     private int row,col;
-    private Position position;
+    private final Position position;
     public Item1PositionResponse(Position position) {
         super(MessageType.ITEM_1POSITION_RESPONSE);
         this.position = position;

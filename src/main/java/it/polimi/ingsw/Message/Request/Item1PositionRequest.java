@@ -16,10 +16,10 @@ public class Item1PositionRequest extends Message {
     private final String error;
 
 
-    public Item1PositionRequest(String error,Board board, ArrayList<Cgoal> commmonGoals, Pgoal myPgoal) {
+    public Item1PositionRequest(String error,Board board, ArrayList<Cgoal> commonGoals, Pgoal myPgoal) {
         super(MessageType.ITEM_1POSITION_REQUEST);
         this.board = board;
-        this.commonGoals = commmonGoals;
+        this.commonGoals = commonGoals;
         this.myPgoal = myPgoal;
         this.error = error;
     }

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Message.Request.ChoosePositionRequest;
-import it.polimi.ingsw.Message.Request.NItemRequest;
 import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.*;
@@ -28,5 +27,6 @@ public interface View {
     void showPGoal(Pgoal pgoal);
     void showError(String error);
     void showMessage(String message);
+    void askEnd();
     void exit();
 }

@@ -1,10 +1,8 @@
 package it.polimi.ingsw.Action;
 
 import it.polimi.ingsw.Exception.*;
-import it.polimi.ingsw.Message.Action.ActionMessage;
-import it.polimi.ingsw.Message.Action.AddItemInShelf_OK;
+import it.polimi.ingsw.Message.Action.*;
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Model.Bag.ColorItem;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
 

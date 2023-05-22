@@ -7,7 +7,7 @@ import java.util.*;
 public class TurnController {
     private final GameController gameController;
     private Player currentPlayer;
-    private ArrayList<Player> players;
+    private final ArrayList<Player> players;
 
     public TurnController(GameController gameController,ArrayList<Player> players){
         this.gameController = gameController;
@@ -46,7 +46,11 @@ public class TurnController {
         return currentPlayer;
     }
 
-    private void checkWin(){
-
+    public String getNextNickname(){
+        int indexCurrent = players.indexOf(currentPlayer);
+        if(indexCurrent== players.size()-1)
+            return players.get(0).getNickname();
+        else
+            return players.get(indexCurrent+1).getNickname();
     }
 }

@@ -5,10 +5,10 @@ import it.polimi.ingsw.Message.Message;
 
 public abstract class ActionMessage extends Message {
 
-    private String description;
+    private final String description;
 
-    public ActionMessage(String description, MessageType tipo){
-        super(tipo);
+    public ActionMessage(String description, MessageType type){
+        super(type);
         this.description = description;
     }
 

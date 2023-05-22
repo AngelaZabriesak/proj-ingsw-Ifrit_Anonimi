@@ -5,7 +5,7 @@ import it.polimi.ingsw.Message.Message;
 import it.polimi.ingsw.Model.Game.*;
 
 public class BoardResponse extends Message {
-    private Board board;
+    private final Board board;
     public BoardResponse(Board board) {
         super(MessageType.BOARD_RESPONSE);
         this.board = board;

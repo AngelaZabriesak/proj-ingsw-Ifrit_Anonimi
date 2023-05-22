@@ -2,7 +2,6 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Message.Error.Error;
-import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Message.Response.*;
 import it.polimi.ingsw.Model.Bag.*;
@@ -13,8 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ClientController extends ClientObservable implements InputObserver {
-    private ViewMessageManager messageManager;
-    private ObsClient client;
+    private final ViewMessageManager messageManager;
+    private final ObsClient client;
 
     /**
      * Constructs Client Controller.
@@ -94,7 +93,17 @@ public class ClientController extends ClientObservable implements InputObserver 
     }
 
     @Override
+    public void chat(Chat message) {
+        notifyObserver(obs->obs.sendMessageToServer(message));
+    }
+
+    @Override
+    public void newGame(){
+        notifyObserver(obs->obs.sendMessageToServer(new newGame()));
+    }
+
+    @Override
     public void onUpdateDisconnection() {
-        notifyObserver(obs->obs.disconnect());
+        notifyObserver(ClientObserver::disconnect);
     }
 }

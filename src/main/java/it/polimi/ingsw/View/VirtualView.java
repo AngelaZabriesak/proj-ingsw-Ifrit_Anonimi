@@ -2,7 +2,6 @@ package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Message.Action.*;
 import it.polimi.ingsw.Message.Error.Error;
-import it.polimi.ingsw.Message.Error.ErrorPlayer;
 import it.polimi.ingsw.Message.GameState.*;
 import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.Response.*;
@@ -11,7 +10,7 @@ import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Observer.*;
 
 public class VirtualView implements ViewObserver {
-    private View view;
+    private final View view;
 
     public VirtualView(View view){
         this.view = view;
@@ -24,7 +23,7 @@ public class VirtualView implements ViewObserver {
 
     @Override
     public void endTurnHandler(EndTurn message) {
-        view.showMessage(message.getNickname() + ", your turn ended! Now is " + message.getNextPlayer() + "'s turn");
+        view.showMessage(message.getActualPlayer() + ", your turn ended! Now is " + message.getNextPlayer() + "'s turn");
     }
 
     @Override
@@ -64,7 +63,8 @@ public class VirtualView implements ViewObserver {
     @Override
     public void winHandler(Win message) {
         for(Player p : message.getPlayers())
-            view.showMessage(p.getNickname()+"-"+p.getMyScore());
+            view.showScore(p);
+        view.askEnd();
     }
 
     //tells the game ended because of player disconnection
@@ -121,6 +121,7 @@ public class VirtualView implements ViewObserver {
 
     @Override
     public void chooseOrderItem(ItemOrderRequest message) {
+        view.showShelf(message.getShelf());
         view.showItemToOrder(message.getItems());
         view.askOrder(message.getItems());
     }
@@ -138,15 +139,19 @@ public class VirtualView implements ViewObserver {
         view.askNickname();
     }
 
+    @Override
+    public void chat(Chat message) {
+        view.showMessage(message.getNickname()+": "+message.getMsg());
+    }
+
+    @Override
+    public void newGame() {
+        view.showMessage("Starting a new game");
+    }
+
     // method that asks for number of players
     @Override
     public void NumOfPlayerHandler(NPlayerRequest message) {
         view.askNPlayers();
-    }
-
-    @Override
-    public void errorPlayerManager(ErrorPlayer message) {
-        view.showError("The game is already started\nEXITING");
-        view.exit();
     }
 }

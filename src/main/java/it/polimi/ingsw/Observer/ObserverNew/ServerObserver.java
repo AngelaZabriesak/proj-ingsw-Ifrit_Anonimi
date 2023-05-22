@@ -1,11 +1,9 @@
 package it.polimi.ingsw.Observer.ObserverNew;
 
+import it.polimi.ingsw.Message.Chat;
 import it.polimi.ingsw.Message.Response.*;
-import it.polimi.ingsw.Message.Request.BoardRequest;
-import it.polimi.ingsw.Message.Request.ItemOrderRequest;
-import it.polimi.ingsw.Message.Request.ShelfRequest;
-import it.polimi.ingsw.Message.GameState.Login;
-import it.polimi.ingsw.Message.GameState.NPlayer;
+import it.polimi.ingsw.Message.Request.*;
+import it.polimi.ingsw.Message.GameState.*;
 
 /**
  * Interface used to implement the Observer-Observable pattern between Server and GameController.
@@ -16,7 +14,6 @@ public interface ServerObserver {
 
     void loginHandler(Login message);
     void numberOfPlayerHandler(NPlayer message);
-    void showItemChooseForOrdering(ItemOrderRequest message);
     void showShelfRequestHandler(ShelfRequest message);
     void showBoardRequestHandler(BoardRequest message);
     void endGameDisconnection();
@@ -26,4 +23,7 @@ public interface ServerObserver {
     void choose3ItemPosition(Item3PositionResponse message);
     void manageChoose(ChoosePositionResponse message);
     void chooseOrderItem(ItemOrderResponse message);
+    void chat(Chat message);
+    void clientDisconnection();
+    void newGame();
 }

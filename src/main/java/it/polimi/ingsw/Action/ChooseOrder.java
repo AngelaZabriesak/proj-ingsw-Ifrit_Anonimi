@@ -49,16 +49,16 @@ public class ChooseOrder implements Action{
     @Override
     public void checkInput() throws ActionException {
         // check that position and myItem have the same length
-        if(!checkLenght()){
-            throw new ActionException("Le posizioni scelte non corrispondono agli item");
+        if(!checkLength()){
+            throw new ActionException("The chosen positions do not correspond to the items");
         }
         // check if the position of item if between 0 and 2 and all are different
         if(!checkItem()) {
-            throw new ActionException("Le posizioni scelte non sono accettabili");
+            throw new ActionException("The chosen positions are not acceptable");
         }
     }
 
-    private boolean checkLenght() {
+    private boolean checkLength() {
         return orderedPositionItem.size() == game.getCurrentPlayer().getMyItem().size();
     }
 

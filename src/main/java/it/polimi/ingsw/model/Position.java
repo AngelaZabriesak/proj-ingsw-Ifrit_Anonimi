@@ -19,10 +19,6 @@ public class Position implements Serializable {
         return row;
     }
 
-    public boolean getCheck() {
-        return check;
-    }
-
     public void setCheck(){
         this.check = true;
     }

@@ -168,7 +168,7 @@ public class Game extends Observable implements Serializable {
         int token_score2=0;
         int p_score;
         int myScore = player.getMyScore();
-
+        System.out.println("All'inizio "+myScore);
         int[] p_points = new int[7];
         p_points[0] = 0;
         p_points[1] = 1;
@@ -190,7 +190,7 @@ public class Game extends Observable implements Serializable {
                     myScore += 8;
             }
         }
-
+        System.out.println("raggrupando: "+myScore);
         for(int r =0; r<player.getMyShelf().getRow(); r++){
             for(int c=0; c<player.getMyShelf().getCol(); c++){
                 if(player.getMyShelf().getMyShelf()[r][c]!=null){
@@ -202,8 +202,10 @@ public class Game extends Observable implements Serializable {
             }
         }
 
+        System.out.println("check p score "+check_p_score);
         p_score= p_points[check_p_score];
 
+        System.out.println("p socre "+p_score);
         myScore+= p_score+token_score1+token_score2;
         player.setMyScore(myScore);
     }

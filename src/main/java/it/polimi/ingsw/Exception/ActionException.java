@@ -5,7 +5,7 @@ package it.polimi.ingsw.Exception;
  */
 public class ActionException extends Exception{
 
-    private String message;
+    private final String message;
     public ActionException(String description){
         super();
         this.message = description;

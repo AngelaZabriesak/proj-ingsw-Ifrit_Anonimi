@@ -5,7 +5,7 @@ import it.polimi.ingsw.Message.Message;
 
 public class ColumnResponse extends Message {
 
-    private String column;
+    private final String column;
 
     public ColumnResponse(String column) {
         super(MessageType.COLUMN_RESPONSE);

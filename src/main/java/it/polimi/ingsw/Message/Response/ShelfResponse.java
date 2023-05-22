@@ -5,7 +5,7 @@ import it.polimi.ingsw.Message.Message;
 import it.polimi.ingsw.Model.*;
 
 public class ShelfResponse extends Message {
-    private Shelf shelf;
+    private final Shelf shelf;
     public ShelfResponse(Shelf shelf) {
         super(MessageType.SHELF_RESPONSE);
         this.shelf = shelf;

@@ -5,8 +5,8 @@ import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Model.Position;
 
 public class ChooseItem_OK extends ActionMessage{
-    private Item item;
-    private int chosenRow,chosenCol;
+    private final Item item;
+    private final int chosenRow,chosenCol;
 
     public ChooseItem_OK(String description,Item item,int chosenRow, int chosenCol) {
         super(description, MessageType.CHOOSEITEM_OK);
