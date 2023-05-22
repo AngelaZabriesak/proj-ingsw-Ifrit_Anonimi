@@ -27,11 +27,6 @@ public class AddItemInShelf implements Action{
 
         player.setItemInShelf(chosenColumn);
 
-        for(Cgoal goal : game.getCGoal()){
-            if(goal.isTaken(player.getMyShelf()))
-                player.addMyScore(goal.getToken().getScore());
-        }
-
         boolean ok = true;
         for(int r =0;r<game.getBoard().getRow() && ok;r++){
             for(int c=0; c<game.getBoard().getCol() && ok; c++){

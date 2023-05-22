@@ -34,4 +34,5 @@ public interface ViewObserver {
     void nicknameHandler(LoginRequest message);
     void chat(Chat message);
     void newGame();
+    void goalTake(GoalTake message);
 }

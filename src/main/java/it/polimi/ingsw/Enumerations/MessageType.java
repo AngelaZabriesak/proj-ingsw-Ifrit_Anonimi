@@ -11,7 +11,6 @@ public enum MessageType implements Serializable {
     ITEM_2POSITION_REQUEST,
     ITEM_3POSITION_REQUEST,
     COLUMN_RESPONSE,
-    N_ITEM_RESPONSE,
     BOARD,
     BOARD_RESPONSE,
     N_PLAYER_REQUEST,
@@ -34,5 +33,7 @@ public enum MessageType implements Serializable {
     LOGIN_REQUEST,
     CHOOSEITEM,
     CHOOSEITEM_RESPONSE,
-    ERROR_PLAYER, CHAT, NEW_GAME, COLUMN_REQUEST
+    CHAT,
+    NEW_GAME,
+    GOAL_TAKE, COLUMN_REQUEST
 }

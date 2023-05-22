@@ -149,6 +149,11 @@ public class VirtualView implements ViewObserver {
         view.showMessage("Starting a new game");
     }
 
+    @Override
+    public void goalTake(GoalTake message) {
+        view.showMessage("You conquered the goal "+message.getGoal().getDescription()+"\nYou have "+message.getScore()+" points");
+    }
+
     // method that asks for number of players
     @Override
     public void NumOfPlayerHandler(NPlayerRequest message) {
