@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<StackPane stylesheets="@../css/menu_scene.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Scene.MenuScene">
+<StackPane stylesheets="@../css/global.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Scene.MenuScene">
    <children>
-      <AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="750.0" styleClass="rootPane" stylesheets="@../css/menu_scene.css">
+      <AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="750.0" styleClass="rootPane" stylesheets="@../css/global.css">
          <children>
-            <Button fx:id="playButton" layoutX="212.0" layoutY="224.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="328.0" styleClass="playButton" stylesheets="@../css/menu_scene.css" text="Gioca" AnchorPane.bottomAnchor="112.0">
+            <Button fx:id="playbutton" layoutX="212.0" layoutY="224.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="328.0" styleClass="playButton" stylesheets="@../css/global.css" text="Gioca" AnchorPane.bottomAnchor="112.0">
 
                   <Font name="Gloucester MT Extra Condensed" size="28.0" />
 

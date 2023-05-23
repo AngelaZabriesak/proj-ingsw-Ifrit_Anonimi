@@ -6,9 +6,9 @@
 
 <StackPane fx:id="loginStackPane" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Scene.LoginScene">
    <children>
-      <AnchorPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="750.0" styleClass="loginPane" stylesheets="@../css/login_scene.css">
+      <AnchorPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="750.0" styleClass="rootPane" stylesheets="@../css/global.css">
          <children>
-            <Button fx:id="loginButton" layoutX="351.0" layoutY="294.0" mnemonicParsing="false" text="Login" styleClass="loginButton" stylesheets="@../css/login_scene.css">
+            <Button fx:id="loginButton" layoutX="351.0" layoutY="294.0" mnemonicParsing="false" text="Login" styleClass="button" stylesheets="@../css/global.css">
                <font>
                   <Font name="Gloucester MT Extra Condensed" size="19.0" />
                </font>

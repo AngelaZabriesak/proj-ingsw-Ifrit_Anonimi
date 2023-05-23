@@ -6,7 +6,7 @@
 
 <StackPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Scene.SelectIpScene">
    <children>
-      <AnchorPane fx:id="selectIpPane" prefHeight="400.0" prefWidth="750.0" styleClass="loginPane" stylesheets="@../css/login_scene.css">
+      <AnchorPane fx:id="selectippane" prefHeight="400.0" prefWidth="750.0" styleClass="rootPane" stylesheets="@../css/global.css">
          <children>
             <Label layoutX="233.0" layoutY="79.0" text="Inserisci il tuo indirizzo IP">
                <font>
@@ -14,7 +14,7 @@
                </font>
             </Label>
             <TextField layoutX="239.0" layoutY="242.0" prefHeight="25.0" prefWidth="273.0" />
-            <Button fx:id="connectButton" layoutX="353.0" layoutY="305.0" mnemonicParsing="false" text="OK" styleClass="loginButton" stylesheets="@../css/login_scene.css">
+            <Button fx:id="okButton" layoutX="353.0" layoutY="305.0" mnemonicParsing="false" text="OK" styleClass="button" stylesheets="@../css/global.css">
                <font>
                   <Font name="Gloucester MT Extra Condensed" size="20.0" />
                </font>
