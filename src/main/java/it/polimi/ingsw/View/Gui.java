@@ -1,29 +1,31 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.Message.Request.*;
-import it.polimi.ingsw.Model.Bag.*;
-import it.polimi.ingsw.Model.Game.*;
-import it.polimi.ingsw.Model.Goal.CommonGoal.*;
-import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
-import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Message.Request.ChoosePositionRequest;
+import it.polimi.ingsw.Model.Bag.Item;
+import it.polimi.ingsw.Model.Game.Board;
+import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
+import it.polimi.ingsw.Model.Goal.PersonalGoal.Pgoal;
+import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.Position;
+import it.polimi.ingsw.Model.Shelf;
 import it.polimi.ingsw.Observer.InputObservable;
+import it.polimi.ingsw.View.Scene.ChangeScene;
 import it.polimi.ingsw.View.Scene.SelectNpScene;
 import javafx.application.Platform;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class Gui extends InputObservable implements View {
     @Override
     public void askNickname() {
-        //Platform.runLater(() -> SceneController.changeRootPane(observers, "login_scene.fxml"));
+        Platform.runLater(() -> ChangeScene.changeRootPane(observers, "login_scene.fxml"));
     }
 
     @Override
     public void askNPlayers() {
-        /*SelectNpScene pnsc = new SelectNpScene();
-        pnsc.addAllObservers(observers);
-        pnsc.setPlayersRange(2, 3);
-        Platform.runLater(() -> SceneController.changeRootPane(pnsc, "select_np_scene.fxml"));*/
+        SelectNpScene npsc = new SelectNpScene();
+        npsc.addAllObservers(observers);
+        Platform.runLater(() -> ChangeScene.changeRootPane(npsc, "select_np_scene.fxml"));
     }
 
     @Override

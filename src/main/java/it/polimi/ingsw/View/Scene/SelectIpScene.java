@@ -37,7 +37,7 @@ public class SelectIpScene extends InputObservable implements GenericScene {
         connectButton.setDisable(true);
 
         String finalDefaultAddress = defaultAddress;
-        new Thread(() -> notifyInObserver(obs -> obs.onUpdateServerInfo(finalDefaultAddress, 16847))).start();
+        notifyInObserver(obs -> obs.onUpdateServerInfo(finalDefaultAddress, 16847));
         ChangeScene.changeRootPane(observers, event, "login_scene.fxml");
     }
 
