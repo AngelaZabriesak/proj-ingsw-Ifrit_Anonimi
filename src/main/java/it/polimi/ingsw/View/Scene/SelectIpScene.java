@@ -12,22 +12,16 @@ public class SelectIpScene extends InputObservable implements GenericScene {
 
     @FXML
     private TextField ipTextField;
-
     @FXML
     private Label label;
-
     @FXML
     private AnchorPane selectIpPane;
-
     @FXML
     private Button connectButton;
 
-
     public void initialize() {
         connectButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onConnectButtonClick);
-
     }
-
 
     private void onConnectButtonClick(Event event) {
         String defaultAddress = "127.0.0.1";
@@ -38,7 +32,7 @@ public class SelectIpScene extends InputObservable implements GenericScene {
 
         String finalDefaultAddress = defaultAddress;
         notifyInObserver(obs -> obs.onUpdateServerInfo(finalDefaultAddress, 16847));
-        //ChangeScene.changeRootPane(observers, event, "login_scene.fxml");
+        ChangeScene.changeRootPane(observers, event, "login_scene.fxml");
     }
 
 }

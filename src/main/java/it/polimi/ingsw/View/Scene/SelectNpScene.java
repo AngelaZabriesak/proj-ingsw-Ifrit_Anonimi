@@ -29,7 +29,7 @@ public class SelectNpScene extends InputObservable implements GenericScene {
     }
 
     private void onPlayButtonClick(MouseEvent event) {
-        System.out.println(event.getPickResult().getIntersectedNode().toString());
+
         if(event.getButton().toString().equals("twoPlayerButton"))
             notifyInObserver(obs->obs.onUpdateNPlayers("2"));
         //ChangeScene.changeRootPane(observers, event, "game_scene.fxml");

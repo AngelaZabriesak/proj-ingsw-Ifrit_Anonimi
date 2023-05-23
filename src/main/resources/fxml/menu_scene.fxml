@@ -11,7 +11,7 @@
          <children>
             <Button fx:id="playButton" layoutX="212.0" layoutY="224.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="328.0" styleClass="playButton" AnchorPane.bottomAnchor="112.0">
             </Button>
-            <Button fx:id="exitButton" layoutX="344.0" layoutY="312.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="63.0" styleClass="smallButton" AnchorPane.bottomAnchor="52.0">
+            <Button fx:id="exitButton" layoutX="344.0" layoutY="312.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="63.0" styleClass="exitButton" AnchorPane.bottomAnchor="52.0">
             </Button>
             <ImageView fitHeight="183.0" fitWidth="600.0" layoutX="94.0" layoutY="28.0" AnchorPane.topAnchor="28.0">
                <image>
