@@ -13,7 +13,7 @@
                   <Font name="Gloucester MT Extra Condensed" size="19.0" />
                </font>
             </Button>
-            <TextField fx:id="textField" layoutX="279.0" layoutY="232.0" prefHeight="25.0" prefWidth="199.0" />
+            <TextField fx:id="nicknameField" layoutX="279.0" layoutY="232.0" prefHeight="25.0" prefWidth="199.0" />
             <Label fx:id="textLabel" layoutX="270.0" layoutY="94.0" text="Inserisci il tuo username">
                <font>
                   <Font name="Gloucester MT Extra Condensed" size="31.0" />

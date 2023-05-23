@@ -8,7 +8,7 @@ import javafx.scene.layout.StackPane;
 public class WaitScene {
 
     @FXML
-    private StackPane pane;
+    private StackPane waitSPane;
 
     @FXML
     private Label waitLabel;
