@@ -22,7 +22,7 @@ public class LoginScene {
     private Button loginButton;
 
     @FXML
-    private AnchorPane pane;
+    private AnchorPane loginPane;
 
     @FXML
     private TextField nicknameField;

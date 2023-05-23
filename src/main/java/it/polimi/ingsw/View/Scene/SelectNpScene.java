@@ -25,7 +25,7 @@ public class SelectNpScene {
     private Button twoPlayerButton;
 
     @FXML
-    private AnchorPane pane;
+    private AnchorPane selectNpPane;
 
     @FXML
     private Label textLabel;
