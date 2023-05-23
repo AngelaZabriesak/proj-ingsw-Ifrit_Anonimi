@@ -34,7 +34,7 @@ public class GameScene {
     private ImageView boardImg;
 
     @FXML
-    private TextField chatInserText;
+    private TextField chatInsertText;
 
     @FXML
     private Label chatLabel;
