@@ -12,14 +12,14 @@
       <AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="750.0" styleClass="rootPane" stylesheets="@../css/menu_scene.css">
          <children>
             <Button fx:id="playbutton" layoutX="212.0" layoutY="224.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="328.0" styleClass="playButton" stylesheets="@../css/menu_scene.css" text="Gioca" AnchorPane.bottomAnchor="112.0">
-               <font>
+
                   <Font name="Gloucester MT Extra Condensed" size="28.0" />
-               </font>
+
             </Button>
             <Button fx:id="exitButton" layoutX="344.0" layoutY="312.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="63.0" styleClass="exitButton" text="Esci" AnchorPane.bottomAnchor="52.0">
-               <font>
+
                   <Font name="Gloucester MT Extra Condensed" size="15.0" />
-               </font>
+
             </Button>
             <ImageView fitHeight="183.0" fitWidth="600.0" layoutX="94.0" layoutY="28.0" AnchorPane.topAnchor="28.0">
                <image>
