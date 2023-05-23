@@ -1,43 +1,58 @@
 .menuPane {
-
     -fx-background-image: url("../images/banner_background.png");
     -fx-background-size: stretch;
 }
 
-.bigButton {
-
-    -fx-background-image: url("../images/page_button.png");
-    -fx-background-size: stretch;
-    -fx-border-color: transparent;
-    -fx-background-color: transparent;
-
-}
-
-.smallButton {
-
-    -fx-background-image: url("../images/page_button.png");
-    -fx-background-size: stretch;
-    -fx-border-color: transparent;
-    -fx-background-color: transparent;
-
-}
-
-.okButton {
-    -fx-background-image: url("../images/page_button.png");
-    -fx-background-size: stretch;
-    -fx-border-color: transparent;
-    -fx-background-color: transparent;
-
-}
-
 .gamePane {
-
     -fx-background-image: url("../images/parquet_background.jpg");
     -fx-background-size: stretch;
 }
 
-.label {
-
-    -fx-background-image: url("../images/label_wood_background.jpg");
+.playButton {
+    -fx-background-image: url("../images/buttons/play_button.png");
     -fx-background-size: stretch;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.okButton {
+    -fx-background-image: url("../images/buttons/ok_button.png");
+    -fx-background-size: stretch;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.exitButton {
+    -fx-background-image: url("../images/buttons/exit_button.png");
+    -fx-background-size: stretch;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.ipLabel {
+    -fx-background-image: url("../images/labels/ip_label.png");
+    -fx-background-size: stretch;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.loginLabel {
+    -fx-background-image: url("../images/labels/login_label.png");
+    -fx-background-size: stretch;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.selectNPlayerLabel {
+    -fx-background-image: url("../images/labels/select_nplayer_label.png");
+    -fx-background-size: stretch;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.winLabel {
+    -fx-background-image: url("../images/labels/win_label.png");
+    -fx-background-size: stretch;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
 }
