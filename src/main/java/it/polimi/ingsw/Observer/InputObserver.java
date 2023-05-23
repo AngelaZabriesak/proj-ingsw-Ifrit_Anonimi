@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Observer;
 
-import it.polimi.ingsw.Message.Chat;
+import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Message.Message;
 import it.polimi.ingsw.Message.Response.*;
 import it.polimi.ingsw.Message.Request.*;

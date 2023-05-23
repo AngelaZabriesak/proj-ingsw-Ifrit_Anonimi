@@ -1,8 +1,6 @@
 package it.polimi.ingsw.View.Scene;
 
-import it.polimi.ingsw.Observer.*;
-// ricordarsi di importare la disconnessione
-import it.polimi.ingsw.Message.Request.LoginRequest;
+import it.polimi.ingsw.Observer.InputObservable;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,9 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import java.io.*;
 
-public class LoginScene {
+import java.io.IOException;
+
+public class LoginScene extends InputObservable implements GenericScene {
     @FXML
     private StackPane loginStackPane;
 

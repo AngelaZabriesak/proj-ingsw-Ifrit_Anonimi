@@ -1,17 +1,18 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.Controller.*;
-import it.polimi.ingsw.Message.*;
-import it.polimi.ingsw.Networking.Client.*;
+import it.polimi.ingsw.Controller.ClientController;
+import it.polimi.ingsw.Message.ViewMessageManager;
+import it.polimi.ingsw.Networking.Client.ObsClient;
 import it.polimi.ingsw.View.Scene.MenuScene;
-import javafx.application.*;
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.*;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
-import javafx.stage.*;
+import javafx.stage.Stage;
 
-import java.io.*;
-import java.util.Objects;
+import java.io.IOException;
 
 public class GuiJavaFX extends Application {
 
@@ -40,8 +41,6 @@ public class GuiJavaFX extends Application {
         // Show the scene containing the root layout.
         Scene scene = new Scene(rootLayout);
         stage.setScene(scene);
-        stage.setWidth(1000d);
-        stage.setHeight(650d);
         stage.setResizable(true);
         stage.setMaximized(false);
         stage.setFullScreen(false);

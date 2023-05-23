@@ -1,5 +1,6 @@
 package it.polimi.ingsw.View.Scene;
 
+import it.polimi.ingsw.Observer.InputObservable;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SelectNpScene {
+public class SelectNpScene extends InputObservable implements GenericScene {
 
     @FXML
     private Button fourPlayerButton;

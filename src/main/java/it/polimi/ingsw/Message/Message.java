@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Message;
 
-import it.polimi.ingsw.Enumerations.MessageType;
+import it.polimi.ingsw.Enumerations.*;
 
 import java.io.Serializable;
 

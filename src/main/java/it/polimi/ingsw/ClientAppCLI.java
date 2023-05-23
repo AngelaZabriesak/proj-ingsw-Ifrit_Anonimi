@@ -1,7 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.Controller.*;
-import it.polimi.ingsw.Message.ViewMessageManager;
+import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Networking.Client.*;
 import it.polimi.ingsw.View.*;
 

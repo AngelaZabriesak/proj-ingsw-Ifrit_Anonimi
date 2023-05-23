@@ -7,6 +7,7 @@ import it.polimi.ingsw.Message.Response.*;
 import it.polimi.ingsw.Message.*;
 import it.polimi.ingsw.Message.Error.Error;
 
+
 /**
  * Custom observer interface for views. It supports different types of notification.
  */

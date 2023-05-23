@@ -1,30 +1,43 @@
 .menuPane {
+
     -fx-background-image: url("../images/banner_background.png");
     -fx-background-size: stretch;
 }
 
 .bigButton {
+
     -fx-background-image: url("../images/page_button.png");
     -fx-background-size: stretch;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
-    -fx-font-size: 24
+
 }
 
 .smallButton {
+
     -fx-background-image: url("../images/page_button.png");
     -fx-background-size: stretch;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
-    -fx-font-size: 12
+
+}
+
+.okButton {
+    -fx-background-image: url("../images/page_button.png");
+    -fx-background-size: stretch;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+
 }
 
 .gamePane {
+
     -fx-background-image: url("../images/parquet_background.jpg");
     -fx-background-size: stretch;
 }
 
 .label {
-    -fx-background-image: url("../images/label_wood_background.png");
+
+    -fx-background-image: url("../images/label_wood_background.jpg");
     -fx-background-size: stretch;
 }

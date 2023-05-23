@@ -1,11 +1,9 @@
 package it.polimi.ingsw.Message;
 
 import it.polimi.ingsw.Message.GameState.*;
-import it.polimi.ingsw.Message.Request.BoardRequest;
-import it.polimi.ingsw.Message.Request.ShelfRequest;
+import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.Response.*;
-import it.polimi.ingsw.Observer.ServerObservable;
-import it.polimi.ingsw.Observer.ServerObserver;
+import it.polimi.ingsw.Observer.*;
 
 public class ServerMessageManager extends ServerObservable {
     public void manage(Message message){

@@ -7,6 +7,8 @@ import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.Response.*;
 import it.polimi.ingsw.Observer.*;
 
+import javax.swing.text.View;
+
 public class ViewMessageManager extends ViewObservable {
     public void manage(Message message){
         switch(message.getType()){
