@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -35,24 +36,16 @@ public class SelectNpScene extends InputObservable implements GenericScene {
 
     @FXML
 
-    private void nPlayerButtonClick(Event event) {
-        try {
-            // push FXML file of new scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("wait_scene.fxml"));
-            Parent waitSceneRoot = loader.load();
+    public void initialize() {
+        twoPlayerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onPlayButtonClick);
+        threePlayerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onPlayButtonClick);
+        fourPlayerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onPlayButtonClick);
 
-            // create a new scene by the root of the new scene
-            Scene waitScene= new Scene(waitSceneRoot);
+    }
 
-            // get the current window
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    private void onPlayButtonClick(Event event) {
+        ChangeScene.changeRootPane(observers, event, "game_scene.fxml");
 
-            // set new scene as current
-            stage.setScene(waitScene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

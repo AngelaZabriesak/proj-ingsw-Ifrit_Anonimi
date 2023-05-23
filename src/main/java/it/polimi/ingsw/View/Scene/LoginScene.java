@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -34,24 +35,13 @@ public class LoginScene extends InputObservable implements GenericScene {
 
     @FXML
 
-    private void onLoginButtonClick(Event event) {
-        try {
-            // push FXML file of new scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("select_np_scene.fxml"));
-            Parent nPSceneRoot = loader.load();
+    public void initialize() {
+        loginButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onPlayButtonClick);
 
-            // create a new scene by the root of the new scene
-            Scene nPScene = new Scene(nPSceneRoot);
+    }
 
-            // get the current window
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // set new scene as current
-            stage.setScene(nPScene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void onPlayButtonClick(Event event) {
+        ChangeScene.changeRootPane(observers, event, "select_np_scene.fxml");
     }
 
 }
