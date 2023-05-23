@@ -9,21 +9,21 @@
 }
 
 .playButton {
-    -fx-background-image: url("../images/buttons/play_button.png");
+    -fx-background-image: url("../images/buttons/play_button_img.png");
     -fx-background-size: stretch;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
 }
 
 .okButton {
-    -fx-background-image: url("../images/buttons/ok_button.png");
+    -fx-background-image: url("../images/buttons/ok_button_img.png");
     -fx-background-size: stretch;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
 }
 
 .exitButton {
-    -fx-background-image: url("../images/buttons/exit_button.png");
+    -fx-background-image: url("../images/buttons/exit_button_img.png");
     -fx-background-size: stretch;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
