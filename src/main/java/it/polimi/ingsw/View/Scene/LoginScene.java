@@ -41,6 +41,14 @@ public class LoginScene extends InputObservable implements GenericScene {
     }
 
     private void onPlayButtonClick(Event event) {
+        String defaultAddress = "127.0.0.1";
+        if(nicknameField!=null){
+            defaultAddress = nicknameField.getText();
+        }
+        loginButton.setDisable(true);
+
+        String finalDefaultAddress = defaultAddress;
+        new Thread(() -> notifyInObserver(obs -> obs.onUpdateServerInfo(finalDefaultAddress, 16847))).start();
         ChangeScene.changeRootPane(observers, event, "select_np_scene.fxml");
     }
 
