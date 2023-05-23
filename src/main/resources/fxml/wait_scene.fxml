@@ -6,11 +6,11 @@
 <?import javafx.scene.text.Font?>
 
 
-<StackPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Scene.SelectNpScene">
+<StackPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Scene.WaitScene">
     <children>
         <AnchorPane fx:id="waitPane" prefHeight="400.0" prefWidth="750.0" styleClass="menuPane" stylesheets="@../css/global.css">
             <children>
-                <Label fx:id="waitLabel" layoutX="236.0" layoutY="181.0" text="Aspettiamo gli altri giocatori...">
+                <Label fx:id="waitLabel" layoutX="236.0" layoutY="181.0" text="Aspettiamo gli altri giocatori..." >
                     <font>
                         <Font name="Gloucester MT Extra Condensed" size="33.0" />
                     </font>

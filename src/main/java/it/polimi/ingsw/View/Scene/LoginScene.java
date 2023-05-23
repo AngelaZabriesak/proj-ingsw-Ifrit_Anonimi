@@ -13,10 +13,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.io.*;
 
 public class LoginScene {
+    @FXML
+    private StackPane loginStackPane;
 
     @FXML
     private Button loginButton;
