@@ -4,18 +4,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane stylesheets="@../css/login_scene.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Scene.SelectNpScene">
+<StackPane stylesheets="@../css/global.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Scene.SelectNpScene">
    <children>
-      <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="750.0" styleClass="loginPane" stylesheets="@../css/login_scene.css">
+      <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="750.0" styleClass="rootPane" stylesheets="@../css/global.css">
          <children>
             <Label fx:id="textlabel" layoutX="231.0" layoutY="76.0" text="Seleziona il numero di giocatori">
                <font>
                   <Font name="Gloucester MT Extra Condensed" size="33.0" />
                </font>
             </Label>
-            <Button fx:id="twoplayerbutton" layoutX="90.0" layoutY="188.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="73.0" text="2 giocatori" styleClass="loginButton" stylesheets="@../css/login_scene.css"/>
-            <Button fx:id="threeplayerbutton" layoutX="339.0" layoutY="275.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="73.0" text="3 giocatori" styleClass="loginButton" stylesheets="@../css/login_scene.css"/>
-            <Button fx:id="fourplayerbutton" layoutX="595.0" layoutY="188.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="73.0" text="4 giocatori" styleClass="loginButton" stylesheets="@../css/login_scene.css"/>
+            <Button fx:id="twoplayerbutton" layoutX="90.0" layoutY="188.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="73.0" text="2 giocatori" styleClass="button" stylesheets="@../css/global.css"/>
+            <Button fx:id="threeplayerbutton" layoutX="339.0" layoutY="275.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="73.0" text="3 giocatori" styleClass="button" stylesheets="@../css/global.css"/>
+            <Button fx:id="fourplayerbutton" layoutX="595.0" layoutY="188.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="73.0" text="4 giocatori" styleClass="button" stylesheets="@../css/global.css"/>
          </children>
       </AnchorPane>
    </children>
