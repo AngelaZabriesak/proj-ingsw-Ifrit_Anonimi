@@ -22,6 +22,27 @@
     -fx-background-color: transparent;
 }
 
+.twoPlayersButton {
+    -fx-background-image: url("../images/buttons/two_players_button_img.png");
+    -fx-background-size: stretch;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.threePlayersButton {
+    -fx-background-image: url("../images/buttons/three_players_button_img.png");
+    -fx-background-size: stretch;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.fourPlayersButton {
+    -fx-background-image: url("../images/buttons/four_players_button_img.png");
+    -fx-background-size: stretch;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
 .exitButton {
     -fx-background-image: url("../images/buttons/exit_button_img.png");
     -fx-background-size: stretch;
