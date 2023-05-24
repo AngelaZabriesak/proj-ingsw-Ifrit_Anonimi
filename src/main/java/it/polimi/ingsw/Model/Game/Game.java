@@ -9,6 +9,7 @@ import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.*;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.*;
 import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.View.Scene.GameScene;
 
 import java.io.*;
 import java.util.*;
@@ -214,6 +215,7 @@ public class Game extends Observable implements Serializable {
         Pgoal myGoal = myGoals.get(pos);
         myGoals.remove(pos);
         return myGoal;
+
     }
 
     /**
@@ -226,6 +228,7 @@ public class Game extends Observable implements Serializable {
         Cgoal myGoal = myGoals.get(pos);
         myGoals.remove(pos);
         return myGoal;
+
     }
 
     public Player getCurrentPlayer(){
@@ -298,4 +301,21 @@ public class Game extends Observable implements Serializable {
         return null;
     }
 
+
+
+ /*
+    @FunctionalInterface
+    private interface RandomCGoal{
+        int getRandomCGoal();
+    }
+
+    private RandomCGoal randomCGoal;
+
+    public void setRandomCGoal(RandomCGoal randomCGoal){
+       this.randomCGoal = randomCGoal;
+    }
+
+
+  */
 }
+
