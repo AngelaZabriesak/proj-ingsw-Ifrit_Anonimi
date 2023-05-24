@@ -131,6 +131,8 @@ public class Game extends Observable implements Serializable {
         }
     }
 
+
+
     /**
      * manage the action of the players
      */
