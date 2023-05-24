@@ -130,9 +130,9 @@
                </effect>
             </Label>
             <TextField fx:id="chatInsertText" layoutX="77.0" layoutY="228.0" prefHeight="25.0" prefWidth="387.0" />
-            <VBox fx:id="personalGolBox" layoutX="526.0" layoutY="155.0" prefHeight="201.0" prefWidth="131.0" />
-            <HBox fx:id="commonGoalBoxSx" layoutX="757.0" layoutY="575.0" prefHeight="113.0" prefWidth="191.0" />
-            <HBox fx:id="commonGoalBoxDx" layoutX="1002.0" layoutY="622.0" prefHeight="119.0" prefWidth="201.0" />
+             <ImageView fx:id="personalGoal" layoutX="526.0" layoutY="155.0" fitHeight="201.0" fitWidth="131.0" />
+             <ImageView fx:id="commonGoalSx" layoutX="757.0" layoutY="575.0" fitHeight="113.0" fitWidth="191.0" />
+             <ImageView fx:id="commonGoalDx" layoutX="1002.0" layoutY="622.0" fitHeight="119.0" fitWidth="201.0" />
          </children>
       </AnchorPane>
    </children>
