@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-
-<StackPane fx:controller="it.polimi.ingsw.View.Scene.TwoPCompareScene" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="gamePane" stylesheets="@../css/global.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="gamePane" stylesheets="@../css/global.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Scene.TwoPCompareScene">
    <children>
       <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0">
          <children>
@@ -61,7 +54,7 @@
             </ImageView>
             <HBox fx:id="selfUsernameBox" layoutX="186.0" layoutY="640.0" prefHeight="82.0" prefWidth="326.0" />
             <HBox fx:id="selfUsernameBox1" layoutX="744.0" layoutY="640.0" prefHeight="82.0" prefWidth="326.0" />
-            <Button fx:id="backButton" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" />
+            <Button fx:id="backButton" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" styleClass="backButton" stylesheets="@../css/global.css" />
          </children>
       </AnchorPane>
    </children>

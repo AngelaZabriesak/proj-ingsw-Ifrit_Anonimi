@@ -50,6 +50,13 @@
     -fx-background-color: transparent;
 }
 
+.backButton {
+    -fx-background-image: url("../images/buttons/back_arrow_button_img.png");
+    -fx-background-size: stretch;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
 .ipLabel {
     -fx-background-image: url("../images/labels/ip_label.png");
     -fx-background-size: stretch;

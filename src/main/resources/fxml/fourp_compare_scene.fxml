@@ -107,7 +107,7 @@
             <HBox fx:id="playerThreeUsernameBox" layoutX="690.0" layoutY="325.0" prefHeight="58.0" prefWidth="200.0" />
             <HBox fx:id="playerTwoUsernameBox" layoutX="400.0" layoutY="410.0" prefHeight="58.0" prefWidth="200.0" />
             <HBox fx:id="playerFourUsernameBox" layoutX="979.0" layoutY="410.0" prefHeight="58.0" prefWidth="200.0" />
-            <Button fx:id="backButton" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" />
+            <Button fx:id="backButton" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" styleClass="backButton" stylesheets="@../css/global.css"/>
          </children>
       </AnchorPane>
    </children>
