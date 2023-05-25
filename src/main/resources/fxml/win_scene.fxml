@@ -3,11 +3,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Scene.WinScene" styleClass="menuPane" stylesheets="@../css/global.css">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="menuPane" stylesheets="@../css/global.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Scene.WinScene">
     <children>
         <AnchorPane fx:id="winPane" prefHeight="400.0" prefWidth="750.0">
             <children>
-                <Label fx:id="textLabel" layoutX="185.0" layoutY="60.0" prefHeight="260.0" prefWidth="382.0" styleClass="winLabel" stylesheets="@../css/global.css">
+                <Label fx:id="textLabel" layoutX="125.0" layoutY="70.0" prefHeight="260.0" prefWidth="500.0" styleClass="winLabel" stylesheets="@../css/global.css">
                 </Label>
             </children>
         </AnchorPane>
