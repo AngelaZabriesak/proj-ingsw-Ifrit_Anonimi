@@ -70,17 +70,20 @@
     -fx-background-color: transparent;
 }
 
+.exitButton:hover{
+    -fx-effect: dropshadow(gaussian, #f2e0d6, 20, 0.3, 0, 0);
+}
+
 .backButton {
-    -fx-background-image: url("../images/buttons/back_arrow_button.png");
+    -fx-background-image: url("../images/buttons/back_button.png");
     -fx-background-size: stretch;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
 }
 
-.exitButton:hover{
+.backButton:hover{
     -fx-effect: dropshadow(gaussian, #f2e0d6, 20, 0.3, 0, 0);
 }
-
 
 .columnButton {
     -fx-background-image: url("../images/buttons/arrow_column_button_img.png");

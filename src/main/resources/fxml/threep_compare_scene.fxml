@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-
-<StackPane fx:controller="it.polimi.ingsw.View.Scene.ThreePCompareScene" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="gamePane" stylesheets="@../css/global.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="gamePane" stylesheets="@../css/global.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Scene.ThreePCompareScene">
    <children>
       <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0">
          <children>
@@ -88,7 +81,7 @@
             <HBox fx:id="selfUsernameBox" layoutX="134.0" layoutY="258.0" prefHeight="61.0" prefWidth="262.0" />
             <HBox fx:id="playerTwoUsernameBox" layoutX="507.0" layoutY="458.0" prefHeight="61.0" prefWidth="262.0" />
             <HBox fx:id="playerThreeUsernameBox" layoutX="884.0" layoutY="258.0" prefHeight="61.0" prefWidth="262.0" />
-            <Button fx:id="backButton" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" styleClass="backButton" stylesheets="@../css/global.css"/>
+            <Button fx:id="backButton" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="134.0" styleClass="backButton" stylesheets="@../css/global.css" />
          </children>
       </AnchorPane>
    </children>

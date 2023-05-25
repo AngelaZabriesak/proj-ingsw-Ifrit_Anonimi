@@ -7,10 +7,10 @@
    <children>
       <AnchorPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="750.0">
          <children>
-            <Button fx:id="loginButton" layoutX="350.0" layoutY="305.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="okButton" stylesheets="@../css/global.css">
+            <Button fx:id="loginButton" layoutX="338.0" layoutY="294.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="77.0" styleClass="okButton" stylesheets="@../css/global.css">
             </Button>
             <TextField fx:id="nicknameField" layoutX="276.0" layoutY="232.0" prefHeight="25.0" prefWidth="199.0" />
-            <Label fx:id="textLabel" layoutX="185.0" layoutY="60.0" prefHeight="140.0" prefWidth="382.0" styleClass="loginLabel" stylesheets="@../css/global.css">
+            <Label fx:id="textLabel" layoutX="185.0" layoutY="45.0" prefHeight="170.0" prefWidth="382.0" styleClass="loginLabel" stylesheets="@../css/global.css">
             </Label>
          </children>
       </AnchorPane>
