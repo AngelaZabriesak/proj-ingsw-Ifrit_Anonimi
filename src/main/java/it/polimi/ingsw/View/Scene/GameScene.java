@@ -97,7 +97,7 @@ public class GameScene extends InputObservable implements GenericScene {
         //btnItem = new Button();
     }
 
-
+/*
     Image azure1 = new Image("../images/items/azureitem1.png");
     Image azure2 = new Image("../images/items/azureitem2.png");
     Image azure3 = new Image("../images/items/azureitem3.png");
@@ -119,6 +119,8 @@ public class GameScene extends InputObservable implements GenericScene {
 
 
 
+
+ */
 
 
 
