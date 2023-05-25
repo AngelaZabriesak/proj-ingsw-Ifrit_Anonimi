@@ -188,6 +188,11 @@ public class Cli extends InputObservable implements View {
         }
     }
 
+    @Override
+    public void showWait(int nPlayers) {
+        out.println("Waiting others "+nPlayers+" players!");
+    }
+
     // method that shows the Board
     @Override
     public void showBoard(Board board) {

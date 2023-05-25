@@ -15,11 +15,19 @@
     -fx-background-color: transparent;
 }
 
+.playButton:hover{
+    -fx-effect: dropshadow(gaussian, #f2e0d6, 20, 0.3, 0, 0);
+}
+
 .okButton {
     -fx-background-image: url("../images/buttons/ok_button_img.png");
     -fx-background-size: stretch;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
+}
+
+.okButton:hover{
+    -fx-effect: dropshadow(gaussian, #f2e0d6, 20, 0.3, 0, 0);
 }
 
 .twoPlayersButton {
@@ -29,6 +37,10 @@
     -fx-background-color: transparent;
 }
 
+.twoPlayersButton:hover{
+    -fx-effect: dropshadow(gaussian, #f2e0d6, 20, 0.3, 0, 0);
+}
+
 .threePlayersButton {
     -fx-background-image: url("../images/buttons/three_players_button_img.png");
     -fx-background-size: stretch;
@@ -36,11 +48,19 @@
     -fx-background-color: transparent;
 }
 
+.threePlayersButton:hover{
+    -fx-effect: dropshadow(gaussian, #f2e0d6, 20, 0.3, 0, 0);
+}
+
 .fourPlayersButton {
     -fx-background-image: url("../images/buttons/four_players_button_img.png");
     -fx-background-size: stretch;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
+}
+
+.fourPlayersButton:hover{
+    -fx-effect: dropshadow(gaussian, #f2e0d6, 20, 0.3, 0, 0);
 }
 
 .exitButton {
@@ -57,11 +77,20 @@
     -fx-background-color: transparent;
 }
 
+.exitButton:hover{
+    -fx-effect: dropshadow(gaussian, #f2e0d6, 20, 0.3, 0, 0);
+}
+
+
 .columnButton {
     -fx-background-image: url("../images/buttons/arrow_column_button_img.png");
     -fx-background-size: stretch;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
+}
+
+.columnButton:hover{
+    -fx-effect: dropshadow(gaussian, #f2e0d6, 20, 0.3, 0, 0);
 }
 
 .ipLabel {

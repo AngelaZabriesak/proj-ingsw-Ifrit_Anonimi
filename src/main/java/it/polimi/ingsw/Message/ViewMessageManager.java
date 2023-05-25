@@ -21,6 +21,9 @@ public class ViewMessageManager extends ViewObservable {
             case ERROR:
                 notifyViewObserver(obs-> obs.ErrorManager((Error) message));
                 break;
+            case WAIT:
+                notifyViewObserver(obs->obs.waitPlayers((Wait) message));
+                break;
             case OK_CONNECTION:
                 notifyViewObserver(obs-> obs.ConnectionSuccessfulHandler((ConnectionOK) message));
                 break;

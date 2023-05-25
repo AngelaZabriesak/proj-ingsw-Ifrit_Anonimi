@@ -23,17 +23,17 @@ public class SelectNpScene extends InputObservable implements GenericScene {
     @FXML
 
     public void initialize() {
+        twoPlayerButton.setAccessibleText("2");
+        threePlayerButton.setAccessibleText("3");
+        fourPlayerButton.setAccessibleText("4");
         twoPlayerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onPlayButtonClick);
         threePlayerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onPlayButtonClick);
         fourPlayerButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onPlayButtonClick);
     }
 
     private void onPlayButtonClick(MouseEvent event) {
-
-        if(event.getButton().toString().equals("twoPlayerButton"))
-            notifyInObserver(obs->obs.onUpdateNPlayers("2"));
-        //ChangeScene.changeRootPane(observers, event, "game_scene.fxml");
-
+        String btn = ((Button) event.getSource()).getAccessibleText();
+        notifyInObserver(obs->obs.onUpdateNPlayers(btn));
     }
 
 }

@@ -17,6 +17,7 @@ public interface ServerObserver {
     void showShelfRequestHandler(ShelfRequest message);
     void showBoardRequestHandler(BoardRequest message);
     void endGameDisconnection();
+    void waitPlayers(Wait message);
     void moveToColumn(ColumnResponse message);
     void choose1ItemPosition(Item1PositionResponse message);
     void choose2ItemPosition(Item2PositionResponse message);

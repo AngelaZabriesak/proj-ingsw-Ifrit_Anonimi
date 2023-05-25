@@ -43,7 +43,7 @@ public class ChangeScene extends InputObservable {
             activeScene = scene;
             activeScene.setRoot(root);
         } catch (IOException e) {
-
+            System.out.println(e);
         }
         return controller;
     }
@@ -77,7 +77,7 @@ public class ChangeScene extends InputObservable {
             activeScene = scene;
             activeScene.setRoot(root);
         } catch (IOException e) {
-
+            System.out.println(e);
         }
     }
 
@@ -91,27 +91,20 @@ public class ChangeScene extends InputObservable {
     public static void changeRootPane(GenericScene controller, String fxml) {
         changeRootPane(controller, activeScene, fxml);
     }
-
-
-
-
-    /* public static void showAlert(String title, String message) {
-        FXMLLoader loader = new FXMLLoader(ChangeScene.class.getResource("/fxml/alert_scene.fxml"));
-
-        Parent parent;
+    public static void showAlert(String message) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(ChangeScene.class.getResource("/fxml/message_scene.fxml"));
+        Parent parent = null;
         try {
             parent = loader.load();
         } catch (IOException e) {
-            return;
+            System.out.println(e);
         }
-        AlertSceneController alertSceneController = loader.getController();
-        Scene alertScene = new Scene(parent);
-        alertSceneController.setScene(alertScene);
-        alertSceneController.setAlertTitle(title);
-        alertSceneController.setAlertMessage(message);
-        alertSceneController.displayAlert();
+        MessageScene errorSceneController = loader.getController();
+        javafx.scene.Scene alertScene = new javafx.scene.Scene(parent);
+        errorSceneController.setScene(alertScene);
+        errorSceneController.setAlertMessage(message);
+        errorSceneController.displayAlert();
     }
- */
-
 
 }

@@ -36,7 +36,7 @@ public class LoginScene extends InputObservable implements GenericScene {
         String nicknameFieldText = nicknameField.getText();
         loginButton.setDisable(true);
         notifyInObserver(obs -> obs.onUpdateNickname(nicknameFieldText));
-        ChangeScene.changeRootPane(observers, event, "select_np_scene.fxml");
+       // ChangeScene.changeRootPane(observers, event, "select_np_scene.fxml");
     }
 
 }

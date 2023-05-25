@@ -27,6 +27,7 @@ public interface View {
     void showPGoal(Pgoal pgoal);
     void showError(String error);
     void showMessage(String message);
+    void showWait(int nPlayers);
     void askEnd();
     void exit();
 }

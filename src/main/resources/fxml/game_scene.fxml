@@ -70,25 +70,16 @@
                   <Image url="@../images/shelf.png" />
                </image>
             </ImageView>
-            <Button fx:id="arrowCol0" prefHeight="25.0" prefWidth="25.0" mnemonicParsing="false" layoutX="117.0" layoutY="278.0" styleClass="columnButton" stylesheets="@../css/global.css">
-            </Button>
-            <Button fx:id="arrowCol1" prefHeight="25.0" prefWidth="25.0" mnemonicParsing="false" layoutX="188.0" layoutY="278.0" styleClass="columnButton" stylesheets="@../css/global.css">
-            </Button>
-            <Button fx:id="arrowCol2" prefHeight="25.0" prefWidth="25.0" mnemonicParsing="false" layoutX="261.0" layoutY="278.0" styleClass="columnButton" stylesheets="@../css/global.css">
-            </Button>
-            <Button fx:id="arrowCol3" prefHeight="25.0" prefWidth="25.0" mnemonicParsing="false" layoutX="407.0" layoutY="278.0" styleClass="columnButton" stylesheets="@../css/global.css">
-            </Button>
-            <Button fx:id="arrowCol4" prefHeight="25.0" prefWidth="25.0" mnemonicParsing="false" layoutX="335.0" layoutY="278.0" styleClass="columnButton" stylesheets="@../css/global.css">
-            </Button>
+            <Button fx:id="arrowCol0" prefHeight="25.0" prefWidth="25.0" mnemonicParsing="false" layoutX="117.0" layoutY="278.0" styleClass="columnButton" stylesheets="@../css/global.css"/>
+            <Button fx:id="arrowCol1" prefHeight="25.0" prefWidth="25.0" mnemonicParsing="false" layoutX="188.0" layoutY="278.0" styleClass="columnButton" stylesheets="@../css/global.css"/>
+            <Button fx:id="arrowCol2" prefHeight="25.0" prefWidth="25.0" mnemonicParsing="false" layoutX="261.0" layoutY="278.0" styleClass="columnButton" stylesheets="@../css/global.css"/>
+            <Button fx:id="arrowCol3" prefHeight="25.0" prefWidth="25.0" mnemonicParsing="false" layoutX="407.0" layoutY="278.0" styleClass="columnButton" stylesheets="@../css/global.css"/>
+            <Button fx:id="arrowCol4" prefHeight="25.0" prefWidth="25.0" mnemonicParsing="false" layoutX="335.0" layoutY="278.0" styleClass="columnButton" stylesheets="@../css/global.css"/>
             <Label fx:id="personalGoalLabel" layoutX="526.0" layoutY="76.0" text="Personal Goal">
-               <font>
-                  <Font name="Gloucester MT Extra Condensed" size="31.0" />
-               </font>
+
             </Label>
             <Label layoutX="638.0" layoutY="629.0" rotate="-90.0" text="Common Goals">
-               <font>
-                  <Font name="Gloucester MT Extra Condensed" size="30.0" />
-               </font>
+
             </Label>
             <ImageView fx:id="uselessArrow" fitHeight="25.0" fitWidth="25.0" layoutX="579.0" layoutY="625.0">
                <image>

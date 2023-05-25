@@ -17,6 +17,9 @@ public class ServerMessageManager extends ServerObservable {
             case SHELF:
                 notifySrvObserver(obs->obs.showShelfRequestHandler((ShelfRequest) message));
                 break;
+            case WAIT:
+                notifySrvObserver(obs->obs.waitPlayers((Wait) message));
+                break;
             case LOGIN:
                  notifySrvObserver(obs->obs.loginHandler((Login) message));
                 break;

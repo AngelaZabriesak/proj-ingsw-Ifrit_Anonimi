@@ -159,4 +159,10 @@ public class VirtualView implements ViewObserver {
     public void NumOfPlayerHandler(NPlayerRequest message) {
         view.askNPlayers();
     }
+
+
+    @Override
+    public void waitPlayers(Wait message) {
+        view.showWait(message.getnPlayer());
+    }
 }

@@ -22,6 +22,7 @@ public interface ViewObserver {
     void GameStartedHandler(GameStart message);
     void TurnAlert(TurnAlert message);
     void winHandler(Win message);
+    void waitPlayers(Wait message);
     void GameEndedHandler(EndGame message);
     void chooseItemPosition(Item1PositionRequest message);
     void chooseOtherItemPosition(Item2PositionRequest message);

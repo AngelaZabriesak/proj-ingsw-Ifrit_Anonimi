@@ -47,7 +47,6 @@ public class GameController extends GameControllerObservable implements ServerOb
         notifyObserver();
         System.out.println("Game created!");
         notifyObserver(obs->obs.sendToAllPlayers(new GameStart(game.getPlayers())));
-        //turnController.setCurrentPlayer(turnController.getCurrentPlayer());
         notifyAllPlayer(turnController.getCurrentPlayer());
         startTurn();
     }
@@ -126,7 +125,7 @@ public class GameController extends GameControllerObservable implements ServerOb
             }
             else{
                 this.numberOfPlayer = nPlayer;
-                notifyObserver(obs -> obs.sendToOnePlayer(new CompletedQuestion("Waiting others  "+ (numberOfPlayer-players.size())+" players" ),message.getNickname()));
+                notifyObserver(obs -> obs.sendToOnePlayer(new Wait(numberOfPlayer-players.size()),message.getNickname()));
             }
         }
     }
@@ -167,6 +166,11 @@ public class GameController extends GameControllerObservable implements ServerOb
         }*/
 
         notifyObserver(obs->obs.sendToAllPlayers(new Win(players)));
+    }
+
+    @Override
+    public void waitPlayers(Wait message) {
+        notifyObserver(obs->obs.sendToOnePlayer(message,message.getNickname()));
     }
 
     @Override

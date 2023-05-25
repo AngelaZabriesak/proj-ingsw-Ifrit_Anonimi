@@ -1,14 +1,18 @@
 package it.polimi.ingsw.View.Scene;
 
-
 import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.Pgoal;
+import it.polimi.ingsw.Model.Bag.ColorItem;
+import it.polimi.ingsw.Model.Game.Board;
+import it.polimi.ingsw.Model.Goal.Goal;
 import it.polimi.ingsw.Observer.InputObservable;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -33,6 +37,8 @@ public class GameScene extends InputObservable implements GenericScene {
 
     @FXML
     private Button arrowCol4;
+
+
 
     @FXML
     private GridPane boardGrid;
@@ -78,6 +84,65 @@ public class GameScene extends InputObservable implements GenericScene {
 
     @FXML
     private ImageView uselessArrow;
+
+    /**
+     * Default constructor.
+     */
+    public GameScene() {
+        //btnItem = new Button();
+    }
+
+    public static void setBoardGrid(Board board){
+        /*for(int r = 0; r<board.getRow(); r++){
+            for(int c =0; c< board.getCol(); c++){
+                if(board.getMyBoardItem()[r][c]!=null){
+                    if(!board.getMyBoardItem()[r][c].getColor().equals(ColorItem.X)) {
+                        btnItem.setStyle(
+                                "-fx-background-image: url('images/items/azureitem1.png');\n" +
+                                        "-fx-background-size: stretch;");
+                        boardGrid.add(btnItem, r, c);
+                    }
+                }
+            }
+        }*/
+    }
+
+    @FXML
+    public void initialize() {
+
+    }
+
+    /**
+     * Handles the click on the Ok button.
+     * An alert message will be shown.
+     *
+     * @param event the mouse click event.
+     */
+    private void onOkBtnClick(MouseEvent event) {
+    }
+
+    /**
+     * Sets the message of the Alert Scene.
+     *
+     * @param str message of the Alert Scene.
+     */
+    public void setAlertMessage(String str) {
+    }
+
+    /**
+     * Displays Alert Message Pop-Up
+     */
+    public void displayAlert() {
+    }
+
+    /**
+     * Sets the scene of the stage.
+     *
+     * @param scene the scene to be set.
+     */
+    public void setScene(Scene scene) {
+    }
+
 
 
     private ArrayList<Cgoal> cGoals;

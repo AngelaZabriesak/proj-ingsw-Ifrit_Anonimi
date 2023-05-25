@@ -35,5 +35,5 @@ public enum MessageType implements Serializable {
     CHOOSEITEM_RESPONSE,
     CHAT,
     NEW_GAME,
-    GOAL_TAKE, COLUMN_REQUEST
+    GOAL_TAKE, WAIT, COLUMN_REQUEST
 }
