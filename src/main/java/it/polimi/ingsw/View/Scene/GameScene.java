@@ -1,12 +1,16 @@
 package it.polimi.ingsw.View.Scene;
 
+import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.Pgoal;
 import it.polimi.ingsw.Model.Bag.ColorItem;
 import it.polimi.ingsw.Model.Game.Board;
 import it.polimi.ingsw.Model.Goal.Goal;
+import it.polimi.ingsw.Model.Position;
 import it.polimi.ingsw.Observer.InputObservable;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,6 +23,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.control.Button;
 import javafx.geometry.Insets;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class GameScene extends InputObservable implements GenericScene {
@@ -92,8 +97,191 @@ public class GameScene extends InputObservable implements GenericScene {
         //btnItem = new Button();
     }
 
-    public static void setBoardGrid(Board board){
-        /*for(int r = 0; r<board.getRow(); r++){
+
+    Image azure1 = new Image("../images/items/azureitem1.png");
+    Image azure2 = new Image("../images/items/azureitem2.png");
+    Image azure3 = new Image("../images/items/azureitem3.png");
+    Image blue1 = new Image("../images/items/blueitem1.png");
+    Image blue2 = new Image("../images/items/blueitem2.png");
+    Image blue3 = new Image("../images/items/blueitem3.png");
+    Image green1 = new Image("../images/items/greenitem1.png");
+    Image green2 = new Image("../images/items/greenitem2.png");
+    Image green3 = new Image("../images/items/greenitem3.png");
+    Image pink1 = new Image("../images/items/pinkitem1.png");
+    Image pink2 = new Image("../images/items/pinkitem2.png");
+    Image pink3 = new Image("../images/items/pinkitem3.png");
+    Image white1 = new Image("images/items/whiteitem1.png");
+    Image white2 = new Image("../images/items/whiteitem2.png");
+    Image white3 = new Image("../images/items/whiteitem3.png");
+    Image yellow1 = new Image("../images/items/yellowitem1.png");
+    Image yellow2 = new Image("../images/items/yellowitem2.png");
+    Image yellow3 = new Image("../images/items/yellowitem3.png");
+
+
+
+
+
+
+
+
+
+
+    public  void setBoardGrid(Board board){
+
+
+            boardGrid.getChildren().clear(); // Rimuovi le celle esistenti
+
+            for (int r = -1; r < 9; r++) {
+                for (int c = -1; c < 9; c++) {
+                    Node cell;
+                    if (r == -1 && c == -1) {
+                        cell = createCell("R\\C", null); // Cellula dell'intestazione
+                    } else if (r == -1) {
+                        cell = createCell(String.valueOf(c), null); // Cellula di intestazione della colonna
+                    } else if (c == -1) {
+                        cell = createCell(String.valueOf(r), null); // Cellula di intestazione della riga
+                    } else {
+                        Position position = new Position(r, c);
+                        Item boardItem = board.getItem(position);
+                        Image image = null;
+                        if (boardItem != null) {
+                            image = getImageForColor(boardItem.getColor()); // Ottieni l'immagine in base al colore
+                        }
+                        cell = createCell(null, image); // Cellula con immagine
+                    }
+
+                    GridPane.setRowIndex(cell, r + 1);
+                    GridPane.setColumnIndex(cell, c + 1);
+
+                    boardGrid.getChildren().add(cell);
+                }
+            }
+        }
+
+        private Node createCell(String text, Image image) {
+            if (image != null) {
+                ImageView imageView = new ImageView(image);
+                imageView.setFitWidth(43);
+                imageView.setFitHeight(43);
+                imageView.setPreserveRatio(true);
+                imageView.setSmooth(true);
+                imageView.setCache(true);
+                return imageView;
+            } else {
+                Label label = new Label(text);
+                label.setStyle("-fx-border-color: black;");
+                label.setPrefSize(43, 43);
+                label.setAlignment(Pos.CENTER);
+                return label;
+            }
+        }
+
+
+
+        private Image getImageForColor(ColorItem color) {
+            // Restituisci l'immagine corrispondente in base al colore
+            // Esempio:
+            Random random = new Random();
+            int randomNumber = random.nextInt(3); // Genera un numero casuale tra 0 e 2
+
+
+            if (color == ColorItem.AZURE) {
+                if (randomNumber == 0) {
+                    return azure1;
+                }
+                if (randomNumber == 1) {
+                    return azure2;
+                }
+                return azure3;
+            }
+
+            if (color == ColorItem.BLUE) {
+                if (randomNumber == 0) {
+                    return blue1;
+                }
+                if (randomNumber == 1) {
+                    return blue2;
+                }
+                return blue3;
+            }
+            if (color == ColorItem.GREEN) {
+                if (randomNumber == 0) {
+                    return green1;
+                }
+                if (randomNumber == 1) {
+                    return green2;
+                }
+                return green3;
+            }
+
+            if (color == ColorItem.PINK) {
+                if (randomNumber == 0) {
+                    return pink1;
+                }
+                if (randomNumber == 1) {
+                    return pink2;
+                }
+                return pink3;
+            }
+
+            if (color == ColorItem.WHITE) {
+                if (randomNumber == 0) {
+                    return white1;
+                }
+                if (randomNumber == 1) {
+                    return white2;
+                }
+                return white3;
+            }
+
+
+            if (color == ColorItem.YELLOW) {
+                if (randomNumber == 0) {
+                    return yellow1;
+                }
+                if (randomNumber == 1) {
+                    return yellow2;
+                }
+                return yellow3;
+            }
+
+            return null;
+
+
+        }
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+        for(int r = 0; r<board.getRow(); r++){
             for(int c =0; c< board.getCol(); c++){
                 if(board.getMyBoardItem()[r][c]!=null){
                     if(!board.getMyBoardItem()[r][c].getColor().equals(ColorItem.X)) {
@@ -105,12 +293,12 @@ public class GameScene extends InputObservable implements GenericScene {
                 }
             }
         }*/
-    }
+
 
     @FXML
     public void initialize() {
 
-    }
+        }
 
     /**
      * Handles the click on the Ok button.
@@ -158,6 +346,7 @@ public class GameScene extends InputObservable implements GenericScene {
 
     public void fillGuiBoard() {
 
+        /*
             int numRows = 9;
             int numCols = 9;
 
@@ -173,9 +362,11 @@ public class GameScene extends InputObservable implements GenericScene {
                     boardGrid.add(imageView, col, row);
                 }
             }
-        }
 
 
+         */
+
+    }
 
 
         @FXML
@@ -276,66 +467,63 @@ public class GameScene extends InputObservable implements GenericScene {
     }
 
 
-        public void showPGoal() {
+        public void showPGoal(){
 
-            Image pGoal0 = new Image("../images/personalgoals/personalgoal0.jpg");
-            Image pGoal1 = new Image("../images/personalgoals/personalgoal1.jpg");
-            Image pGoal2 = new Image("../images/personalgoals/personalgoal2.jpg");
-            Image pGoal3 = new Image("../images/personalgoals/personalgoal3.jpg");
-            Image pGoal4 = new Image("../images/personalgoals/personalgoal4.jpg");
-            Image pGoal5 = new Image("../images/personalgoals/personalgoal5.jpg");
-            Image pGoal6 = new Image("../images/personalgoals/personalgoal6.jpg");
-            Image pGoal7 = new Image("../images/personalgoals/personalgoal7.jpg");
-            Image pGoal8 = new Image("../images/personalgoals/personalgoal8.jpg");
-            Image pGoal9 = new Image("../images/personalgoals/personalgoal9.jpg");
-            Image pGoal10 = new Image("../images/personalgoals/personalgoal10.jpg");
-            Image pGoal11 = new Image("../images/personalgoals/personalgoal11.jpg");
+        Image pGoal0=new Image("../images/personalgoals/personalgoal0.jpg");
+        Image pGoal1=new Image("../images/personalgoals/personalgoal1.jpg");
+        Image pGoal2=new Image("../images/personalgoals/personalgoal2.jpg");
+        Image pGoal3=new Image("../images/personalgoals/personalgoal3.jpg");
+        Image pGoal4=new Image("../images/personalgoals/personalgoal4.jpg");
+        Image pGoal5=new Image("../images/personalgoals/personalgoal5.jpg");
+        Image pGoal6=new Image("../images/personalgoals/personalgoal6.jpg");
+        Image pGoal7=new Image("../images/personalgoals/personalgoal7.jpg");
+        Image pGoal8=new Image("../images/personalgoals/personalgoal8.jpg");
+        Image pGoal9=new Image("../images/personalgoals/personalgoal9.jpg");
+        Image pGoal10=new Image("../images/personalgoals/personalgoal10.jpg");
+        Image pGoal11=new Image("../images/personalgoals/personalgoal11.jpg");
 
 
-            // SET PGoal image
+        // SET PGoal image
 
-            if (pGoal.get(0).getIndex()==0) {
-                personalGoal.setImage(pGoal0);
-            }
-            if (pGoal.get(0).getIndex()==1) {
-                personalGoal.setImage(pGoal1);
-            }
-            if (pGoal.get(0).getIndex()==2) {
-                personalGoal.setImage(pGoal2);
-            }
-            if (pGoal.get(0).getIndex()==3) {
-                personalGoal.setImage(pGoal3);
-            }
-            if (pGoal.get(0).getIndex()==4) {
-                personalGoal.setImage(pGoal4);
-            }
-            if (pGoal.get(0).getIndex()==5) {
-                personalGoal.setImage(pGoal5);
-            }
-            if (pGoal.get(0).getIndex()==6) {
-                personalGoal.setImage(pGoal6);
-            }
-            if (pGoal.get(0).getIndex()==7) {
-                personalGoal.setImage(pGoal7);
-            }
-            if (pGoal.get(0).getIndex()==8) {
-                personalGoal.setImage(pGoal8);
-            }
-            if (pGoal.get(0).getIndex()==9) {
-                personalGoal.setImage(pGoal9);
-            }
-            if (pGoal.get(0).getIndex()==10) {
-                personalGoal.setImage(pGoal10);
-            }
-            if (pGoal.get(0).getIndex()==11) {
-                personalGoal.setImage(pGoal11);
-            }
-
+        if(pGoal.get(0).getIndex()==0){
+        personalGoal.setImage(pGoal0);
+        }
+        if(pGoal.get(0).getIndex()==1){
+        personalGoal.setImage(pGoal1);
+        }
+        if(pGoal.get(0).getIndex()==2){
+        personalGoal.setImage(pGoal2);
+        }
+        if(pGoal.get(0).getIndex()==3){
+        personalGoal.setImage(pGoal3);
+        }
+        if(pGoal.get(0).getIndex()==4){
+        personalGoal.setImage(pGoal4);
+        }
+        if(pGoal.get(0).getIndex()==5){
+        personalGoal.setImage(pGoal5);
+        }
+        if(pGoal.get(0).getIndex()==6){
+        personalGoal.setImage(pGoal6);
+        }
+        if(pGoal.get(0).getIndex()==7){
+        personalGoal.setImage(pGoal7);
+        }
+        if(pGoal.get(0).getIndex()==8){
+        personalGoal.setImage(pGoal8);
+        }
+        if(pGoal.get(0).getIndex()==9){
+        personalGoal.setImage(pGoal9);
+        }
+        if(pGoal.get(0).getIndex()==10){
+        personalGoal.setImage(pGoal10);
+        }
+        if(pGoal.get(0).getIndex()==11){
+        personalGoal.setImage(pGoal11);
         }
 
-
-    }
-
+        }
+}
 
 
 
