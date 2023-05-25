@@ -8,7 +8,14 @@ import java.io.Serializable;
 
 public abstract class Pgoal extends Goal implements Serializable {
     private Game game;
+    private int index;
     final int[] scores = {1,2,4,6,9,12};
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getIndex() {return this.index;}
 
     public void setGame(Game game) {
         this.game = game;

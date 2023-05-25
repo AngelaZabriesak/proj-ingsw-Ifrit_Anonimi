@@ -20,6 +20,8 @@ public abstract class Cgoal extends Goal implements Serializable {
         this.index = index;
     }
 
+    public int getIndex() {return this.index;}
+
     public void setGame(Game game) {
         this.game = game;
     }
