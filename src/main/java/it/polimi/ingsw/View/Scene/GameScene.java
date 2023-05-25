@@ -10,22 +10,24 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.control.Button;
+
 public class GameScene extends InputObservable implements GenericScene {
 
     @FXML
-    private ImageView arrowCol0;
+    private Button arrowCol0;
 
     @FXML
-    private ImageView arrowCol1;
+    private Button arrowCol1;
 
     @FXML
-    private ImageView arrowCol2;
+    private Button arrowCol2;
 
     @FXML
-    private ImageView arrowCol3;
+    private Button arrowCol3;
 
     @FXML
-    private ImageView arrowCol4;
+    private Button arrowCol4;
 
     @FXML
     private GridPane boardGrid;
