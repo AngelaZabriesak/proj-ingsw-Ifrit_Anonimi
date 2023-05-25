@@ -126,8 +126,9 @@ public class GameScene extends InputObservable implements GenericScene {
 
 
 
-    public  void setBoardGrid(Board board){
+    public  void setBoardGrid(Board board) {
 
+        /*
 
             boardGrid.getChildren().clear(); // Rimuovi le celle esistenti
 
@@ -250,37 +251,9 @@ public class GameScene extends InputObservable implements GenericScene {
 
         }
 
-        
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
         for(int r = 0; r<board.getRow(); r++){
             for(int c =0; c< board.getCol(); c++){
                 if(board.getMyBoardItem()[r][c]!=null){
@@ -292,8 +265,8 @@ public class GameScene extends InputObservable implements GenericScene {
                     }
                 }
             }
-        }*/
-
+        */
+    }
 
     @FXML
     public void initialize() {
