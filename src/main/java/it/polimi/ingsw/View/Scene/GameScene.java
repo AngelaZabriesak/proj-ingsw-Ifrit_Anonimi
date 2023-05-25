@@ -1,6 +1,9 @@
 package it.polimi.ingsw.View.Scene;
 
 import it.polimi.ingsw.Model.Bag.Item;
+import it.polimi.ingsw.Message.Response.Item1PositionResponse;
+import it.polimi.ingsw.Message.Response.Item2PositionResponse;
+import it.polimi.ingsw.Message.Response.Item3PositionResponse;
 import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.Pgoal;
 import it.polimi.ingsw.Model.Bag.ColorItem;
@@ -17,9 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.control.Button;
 import javafx.geometry.Insets;
 import java.util.ArrayList;
@@ -28,25 +29,18 @@ import java.util.Random;
 
 public class GameScene extends InputObservable implements GenericScene {
 
+    // frecce sulle colonne
     @FXML
-    private Button arrowCol0;
+    private Button arrowCol0, arrowCol1, arrowCol2, arrowCol3, arrowCol4;
 
+    //btn board
     @FXML
-    private Button arrowCol1;
+    private static Button myButtonItem_0_3, myButtonItem_0_4, myButtonItem_1_3, myButtonItem_1_4, myButtonItem_1_5, myButtonItem_2_2, myButtonItem_2_3, myButtonItem_2_4, myButtonItem_2_5, myButtonItem_2_6, myButtonItem_3_1, myButtonItem_3_2, myButtonItem_3_3, myButtonItem_3_4, myButtonItem_3_5, myButtonItem_3_6, myButtonItem_3_7, myButtonItem_3_8, myButtonItem_3_9, myButtonItem_4_0, myButtonItem_4_1, myButtonItem_4_2, myButtonItem_4_3, myButtonItem_4_4, myButtonItem_4_5, myButtonItem_4_6, myButtonItem_4_7, myButtonItem_4_8, myButtonItem_5_0, myButtonItem_5_1, myButtonItem_5_2, myButtonItem_5_3, myButtonItem_5_4, myButtonItem_5_5, myButtonItem_5_6, myButtonItem_5_7, myButtonItem_6_2, myButtonItem_6_3, myButtonItem_6_4, myButtonItem_6_5, myButtonItem_6_6, myButtonItem_7_3, myButtonItem_7_4, myButtonItem_7_5, myButtonItem_8_4, myButtonItem_8_5;
 
-    @FXML
-    private Button arrowCol2;
-
-    @FXML
-    private Button arrowCol3;
+    private static Button[][] myBoard;
 
     @FXML
-    private Button arrowCol4;
-
-
-
-    @FXML
-    private GridPane boardGrid;
+    private static GridPane boardGrid;
 
     @FXML
     private ImageView boardImg;
@@ -75,14 +69,9 @@ public class GameScene extends InputObservable implements GenericScene {
     @FXML
     private Label personalGoalLabel;
 
+    //goals
     @FXML
-    private ImageView personalGoal;
-
-    @FXML
-    private ImageView commonGoalDx;
-
-    @FXML
-    private ImageView commonGoalSx;
+    private ImageView personalGoal, commonGoalDx, commonGoalSx;
 
     @FXML
     private StackPane gamePane;
@@ -258,22 +247,46 @@ public class GameScene extends InputObservable implements GenericScene {
 
         for(int r = 0; r<board.getRow(); r++){
             for(int c =0; c< board.getCol(); c++){
+=======
+    public static void setBoardGrid(Board board){
+        myBoard =new Button[board.getRow()][board.getCol()];
+        boardGrid = new GridPane();
+        int i =0;
+        for(int r =0;r< board.getRow(); r++){
+            for(int c=0; c< board.getCol(); c++){
+>>>>>>> Stashed changes
                 if(board.getMyBoardItem()[r][c]!=null){
-                    if(!board.getMyBoardItem()[r][c].getColor().equals(ColorItem.X)) {
-                        btnItem.setStyle(
-                                "-fx-background-image: url('images/items/azureitem1.png');\n" +
-                                        "-fx-background-size: stretch;");
-                        boardGrid.add(btnItem, r, c);
+                    if(!board.getMyBoardItem()[r][c].getColor().equals(ColorItem.X)){
+                        myBoard[r][c] = new Button(board.getMyBoardItem()[r][c].getColor()+" "+i%3);
+                        boardGrid.add(myBoard[r][c],r,c);
+                        i++;
                     }
                 }
             }
+<<<<<<< Updated upstream
         */
-    }
+        }
 
     @FXML
     public void initialize() {
+        boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onSpaceClick);
+    }
 
-        }
+
+    private void onSpaceClick(MouseEvent event) {
+        Node clickedNode = event.getPickResult().getIntersectedNode();
+        Integer row = GridPane.getRowIndex(clickedNode);
+        Integer col = GridPane.getColumnIndex(clickedNode);
+        Position p = new Position(row,col);
+
+        /*if(p1==null)
+            notifyInObserver(obs -> obs.onUpdateChooseItem(new Item1PositionResponse(p)));
+        else if (p2==null)
+            notifyInObserver(obs -> obs.onUpdateChooseItem(new Item2PositionResponse(p1,p)));
+        else
+            notifyInObserver(obs -> obs.onUpdateChooseItem(new Item3PositionResponse(p1,p2,p)));*/
+        System.out.println("row: "+p.getRow()+" col: "+p.getCol());
+    }
 
     /**
      * Handles the click on the Ok button.

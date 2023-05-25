@@ -130,3 +130,31 @@
     -fx-border-color: transparent;
     -fx-background-color: transparent;
 }
+
+.btnItem{
+    -fx-background-image: url("../images/items/azureitem1.png");
+    -fx-background-size: stretch;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.btnItem:hover{
+    -fx-effect: dropshadow(gaussian, #ff001c, 20, 0.3, 0, 0);
+}
+
+.glassPane {
+    -fx-background-color: #a5f1f6;
+    -fx-opacity: 0.6;
+}
+
+.spacePane {
+    -fx-opacity: inherit;
+    -fx-background-size: stretch;
+}
+
+.spaceWorkerPane {
+    -fx-background-size: stretch;
+    -fx-scale-x: 0.6;
+    -fx-scale-y: 0.6;
+    -fx-scale-z: 0.6;
+}
