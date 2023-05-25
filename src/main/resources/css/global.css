@@ -85,6 +85,13 @@
     -fx-background-color: transparent;
 }
 
+.waitLabel {
+    -fx-background-image: url("../images/labels/wait_scene_label.png");
+    -fx-background-size: stretch;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
 .winLabel {
     -fx-background-image: url("../images/labels/win_label.png");
     -fx-background-size: stretch;

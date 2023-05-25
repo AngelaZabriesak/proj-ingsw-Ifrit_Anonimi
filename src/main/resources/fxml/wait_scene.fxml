@@ -10,10 +10,7 @@
     <children>
         <AnchorPane fx:id="waitPane" prefHeight="400.0" prefWidth="750.0" >
             <children>
-                <Label fx:id="waitLabel" layoutX="236.0" layoutY="181.0" text="Aspettiamo gli altri giocatori..." >
-                    <font>
-                        <Font name="Gloucester MT Extra Condensed" size="33.0" />
-                    </font>
+                <Label fx:id="waitLabel" layoutX="236.0" layoutY="181.0" styleClass="waitLabel" stylesheets="@../css/global.css">
                 </Label>
             </children>
         </AnchorPane>
