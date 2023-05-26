@@ -51,7 +51,10 @@ public class Gui extends InputObservable implements View {
 
     @Override
     public void showBoard(Board board) {
-      //  Platform.runLater(() -> GameScene.setBoardGrid(board));
+        //GameScene gameScene = new GameScene();
+        //gameScene.setBoardGrid(board);
+        //gameScene.addAllObservers(observers);
+        Platform.runLater(()-> GameScene.setBoardGrid(board));
         Platform.runLater(() -> ChangeScene.changeRootPane(observers, "game_scene.fxml"));
     }
 
