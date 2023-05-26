@@ -72,9 +72,13 @@ public class Gui extends InputObservable implements View {
 
     @Override
     public void showCGoal(ArrayList<Cgoal> cgoal) {
-       /*GameScene gamescene= new GameScene();
-       gamescene.addAllObservers(observers);
-       Platform.runLater(()->GameScene.setGuiCGoals(goals));*/
+       /* GameScene gamescene= new GameScene();
+        gamescene.addAllObservers(observers)
+
+        Platform.runLater(()->GameScene.setGuiCGoals(goals));
+
+       */
+        Platform.runLater(() -> ChangeScene.changeRootPane(observers, "game_scene.fxml"));
     }
 
     @Override
