@@ -97,18 +97,30 @@ public class GameScene extends InputObservable implements GenericScene {
         //btnItem = new Button();
     }
 
-
+/*
     Image azure1 = new Image("../images/items/azureitem1.png");
+    Image azure2 = new Image("../images/items/azureitem2.png");
+    Image azure3 = new Image("../images/items/azureitem3.png");
+    Image blue1 = new Image("../images/items/blueitem1.png");
     Image blue2 = new Image("../images/items/blueitem2.png");
+    Image blue3 = new Image("../images/items/blueitem3.png");
+    Image green1 = new Image("../images/items/greenitem1.png");
+    Image green2 = new Image("../images/items/greenitem2.png");
     Image green3 = new Image("../images/items/greenitem3.png");
     Image pink1 = new Image("../images/items/pinkitem1.png");
+    Image pink2 = new Image("../images/items/pinkitem2.png");
+    Image pink3 = new Image("../images/items/pinkitem3.png");
+    Image white1 = new Image("images/items/whiteitem1.png");
     Image white2 = new Image("../images/items/whiteitem2.png");
+    Image white3 = new Image("../images/items/whiteitem3.png");
+    Image yellow1 = new Image("../images/items/yellowitem1.png");
+    Image yellow2 = new Image("../images/items/yellowitem2.png");
     Image yellow3 = new Image("../images/items/yellowitem3.png");
 
 
 
 
-
+ */
 
 
 
@@ -118,43 +130,121 @@ public class GameScene extends InputObservable implements GenericScene {
 
     public  void setBoardGrid(Board board) {
 
-        /*funzione che scorre le ImageView della greed
+        /*
 
-    }
+            boardGrid.getChildren().clear(); // Rimuovi le celle esistenti
 
-                        image = getImageForColor(boardItem.getColor()); // Ottieni l'immagine in base al colore
+            for (int r = -1; r < 9; r++) {
+                for (int c = -1; c < 9; c++) {
+                    Node cell;
+                    if (r == -1 && c == -1) {
+                        cell = createCell("R\\C", null); // Cellula dell'intestazione
+                    } else if (r == -1) {
+                        cell = createCell(String.valueOf(c), null); // Cellula di intestazione della colonna
+                    } else if (c == -1) {
+                        cell = createCell(String.valueOf(r), null); // Cellula di intestazione della riga
+                    } else {
+                        Position position = new Position(r, c);
+                        Item boardItem = board.getItem(position);
+                        Image image = null;
+                        if (boardItem != null) {
+                            image = getImageForColor(boardItem.getColor()); // Ottieni l'immagine in base al colore
+                        }
+                        cell = createCell(null, image); // Cellula con immagine
+                    }
 
+                    GridPane.setRowIndex(cell, r + 1);
+                    GridPane.setColumnIndex(cell, c + 1);
+
+                    boardGrid.getChildren().add(cell);
+                }
+            }
+        }
+
+        private Node createCell(String text, Image image) {
+            if (image != null) {
+                ImageView imageView = new ImageView(image);
+                imageView.setFitWidth(43);
+                imageView.setFitHeight(43);
+                imageView.setPreserveRatio(true);
+                imageView.setSmooth(true);
+                imageView.setCache(true);
+                return imageView;
+            } else {
+                Label label = new Label(text);
+                label.setStyle("-fx-border-color: black;");
+                label.setPrefSize(43, 43);
+                label.setAlignment(Pos.CENTER);
+                return label;
+            }
         }
 
 
-       //
-        private Image getImageForColor( Item item){
 
-    ColorItem color= ColorItem.getColor();
+        private Image getImageForColor(ColorItem color) {
+            // Restituisci l'immagine corrispondente in base al colore
+            // Esempio:
+            Random random = new Random();
+            int randomNumber = random.nextInt(3); // Genera un numero casuale tra 0 e 2
 
 
             if (color == ColorItem.AZURE) {
+                if (randomNumber == 0) {
                     return azure1;
+                }
+                if (randomNumber == 1) {
+                    return azure2;
+                }
+                return azure3;
             }
 
             if (color == ColorItem.BLUE) {
-                return blue2;
+                if (randomNumber == 0) {
+                    return blue1;
+                }
+                if (randomNumber == 1) {
+                    return blue2;
+                }
+                return blue3;
             }
-
             if (color == ColorItem.GREEN) {
+                if (randomNumber == 0) {
+                    return green1;
+                }
+                if (randomNumber == 1) {
+                    return green2;
+                }
                 return green3;
             }
 
             if (color == ColorItem.PINK) {
-                return pink1;
-
+                if (randomNumber == 0) {
+                    return pink1;
+                }
+                if (randomNumber == 1) {
+                    return pink2;
+                }
+                return pink3;
             }
 
             if (color == ColorItem.WHITE) {
-                return white2;
+                if (randomNumber == 0) {
+                    return white1;
+                }
+                if (randomNumber == 1) {
+                    return white2;
+                }
+                return white3;
             }
 
+
             if (color == ColorItem.YELLOW) {
+                if (randomNumber == 0) {
+                    return yellow1;
+                }
+                if (randomNumber == 1) {
+                    return yellow2;
+                }
                 return yellow3;
             }
 
