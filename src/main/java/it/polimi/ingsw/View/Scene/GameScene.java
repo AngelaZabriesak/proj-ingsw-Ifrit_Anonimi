@@ -93,18 +93,7 @@ public class GameScene extends InputObservable implements GenericScene {
     Image pink1 = new Image("../images/items/pinkitem1.png");
     Image white2 = new Image("../images/items/whiteitem2.png");
     Image yellow3 = new Image("../images/items/yellowitem3.png");
-
-
-
-
-
-
-
-
-
-
-
-
+    
     public  void setBoardGrid(Board board) {
 
         /*funzione che scorre le ImageView della greed
