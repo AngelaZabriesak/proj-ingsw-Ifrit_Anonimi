@@ -27,7 +27,6 @@ public class LoginScene extends InputObservable implements GenericScene {
     private Label textLabel;
 
     @FXML
-
     public void initialize() {
         loginButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onPlayButtonClick);
     }

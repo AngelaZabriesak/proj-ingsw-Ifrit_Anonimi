@@ -2,6 +2,7 @@ package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Controller.*;
 import it.polimi.ingsw.Message.*;
+import it.polimi.ingsw.Message.GameState.GameStart;
 import it.polimi.ingsw.Message.Request.*;
 import it.polimi.ingsw.Message.Response.*;
 import it.polimi.ingsw.Model.Bag.*;
@@ -44,6 +45,13 @@ public class Cli extends InputObservable implements View {
         } catch (ExecutionException e) {
             out.println("Error init");
         }
+    }
+
+    public void initGame(GameStart message){
+        StringBuilder msg = new StringBuilder("Welcome to My Shelfie \nThe order of player is :\n");
+        for(Player p : message.getPlayers())
+            msg.append("-> ").append(p.getNickname()).append("\n");
+        out.println(msg);
     }
 
     /**
@@ -102,13 +110,20 @@ public class Cli extends InputObservable implements View {
 
     // method that asks you to choose Items from Board
     @Override
-    public void askItem(Position p1, Position p2) {
+    public void askItem(Board board, Position p1, Position p2,ArrayList<Position> availablePosition) {
+        showBoard(board);
         Position position;
+        StringBuilder msg= new StringBuilder();
+        msg.append("These are the position available: ");
+        for(Position p : availablePosition){
+            msg.append(p.getRow()).append("-").append(p.getCol()).append("\t");
+        }
+        out.println(msg);
         out.print("Choose the position of the item you want to pick from Board [row-col]: ");
         String read = readLine();
         if(read.split(":")[0].equalsIgnoreCase("CHAT")) {
             notifyInObserver(obs -> obs.chat(new Chat(read)));
-            askItem(p1,p2);
+            askItem(board,p1,p2,availablePosition);
         }
         else{
             try{
@@ -123,7 +138,7 @@ public class Cli extends InputObservable implements View {
                     notifyInObserver(obs -> obs.onUpdateChooseItem(new Item3PositionResponse(p1,p2,finalPosition)));
             }catch(Exception e){
                 out.println("Error in entering position of item");
-                askItem(p1,p2);
+                askItem(board,p1,p2,availablePosition);
             }
         }
     }
@@ -307,6 +322,13 @@ public class Cli extends InputObservable implements View {
     public void exit() {
         inputThread.close();
         System.exit(1);
+    }
+
+    @Override
+    public void showTable(Board board, ArrayList<Position> availablePositions, Shelf shelf, ArrayList<Cgoal> cgoal, Pgoal pgoal) {
+        showBoard(board);
+        showCGoal(cgoal);
+        showPGoal(pgoal);
     }
 
     private int max(String[] order){

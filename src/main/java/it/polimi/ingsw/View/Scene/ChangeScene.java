@@ -1,5 +1,10 @@
 package it.polimi.ingsw.View.Scene;
 
+import it.polimi.ingsw.Model.Game.Board;
+import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
+import it.polimi.ingsw.Model.Goal.PersonalGoal.Pgoal;
+import it.polimi.ingsw.Model.Position;
+import it.polimi.ingsw.Model.Shelf;
 import it.polimi.ingsw.Observer.InputObservable;
 import it.polimi.ingsw.Observer.InputObserver;
 import javafx.event.Event;
@@ -7,7 +12,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.Node;
+import javafx.stage.Stage;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -105,6 +113,29 @@ public class ChangeScene extends InputObservable {
         errorSceneController.setScene(alertScene);
         errorSceneController.setAlertMessage(message);
         errorSceneController.displayAlert();
+    }
+
+    public static void showTable(Board board, Shelf shelf, ArrayList<Position> availablePositions, ArrayList<Cgoal> cgoal, Pgoal pgoal){
+        new TableScene(new Stage(),board,shelf,availablePositions,cgoal,pgoal);
+    }
+
+    public static void showBoard(Board board, ArrayList<Position> availablePositions){
+        BoardScene bs = new BoardScene();
+        bs.start(new Stage(),board,availablePositions);
+    }
+
+    public static void showShelf(Shelf shelf){
+        ShelfScene ss = new ShelfScene();
+        ss.start(new Stage(),shelf);
+    }
+
+    public static void showPgoal(Pgoal pgoal){
+        GoalScene gs = new GoalScene();
+        gs.start(new Stage(),null,pgoal);
+    }
+    public static void showCgoal(ArrayList<Cgoal> cgoals){
+        GoalScene gs = new GoalScene();
+        gs.start(new Stage(),cgoals,null);
     }
 
 }

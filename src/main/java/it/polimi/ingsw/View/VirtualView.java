@@ -48,10 +48,7 @@ public class VirtualView implements ViewObserver {
 
     @Override
     public void GameStartedHandler(GameStart message) {
-        StringBuilder msg = new StringBuilder("Welcome to My Shelfie \nThe order of player is :\n");
-        for(Player p : message.getPlayers())
-            msg.append("-> ").append(p.getNickname()).append("\n");
-        view.showMessage(msg.toString());
+        view.initGame(message);
     }
 
     @Override
@@ -76,27 +73,25 @@ public class VirtualView implements ViewObserver {
     @Override
     public void chooseItemPosition(Item1PositionRequest message) {
         if(message.getBoard()!=null && message.getCommonGoals()!=null && message.getMyPgoal()!=null) {
-            view.showBoard(message.getBoard());
-            view.showCGoal(message.getCommonGoals());
-            view.showPGoal(message.getMyPgoal());
+            view.showTable(message.getBoard(),message.getAvailablePosition(),message.getShelf(),message.getCommonGoals(),message.getMyPgoal());
         }
         if (message.getError()!=null)
             view.showError(message.getError());
-        view.askItem(null,null);
+        view.askItem(message.getBoard(),null,null,message.getAvailablePosition());
     }
 
     @Override
     public void chooseOtherItemPosition(Item2PositionRequest message) {
         if (message.getError()!=null)
             view.showError(message.getError());
-        view.askItem(message.getP1(),null);
+        view.askItem(null,message.getP1(),null,message.getPositionAvailable());
     }
 
     @Override
     public void chooseOtherItemPosition(Item3PositionRequest message) {
         if (message.getError()!=null)
             view.showError(message.getError());
-        view.askItem(message.getP1(),message.getP2());
+        view.askItem(null,message.getP1(),message.getP2(),message.getPosAvailable());
     }
 
     @Override
@@ -165,4 +160,5 @@ public class VirtualView implements ViewObserver {
     public void waitPlayers(Wait message) {
         view.showWait(message.getnPlayer());
     }
+
 }

@@ -52,7 +52,7 @@ public class GameController extends GameControllerObservable implements ServerOb
     }
 
     private void startTurn(){
-        notifyObserver(obs->obs.sendToOnePlayer(new Item1PositionRequest(null,game.getBoard(),game.getCGoal(),game.getCurrentPlayer().getMyGoal()),turnController.getCurrentPlayer().getNickname()));
+        notifyObserver(obs->obs.sendToOnePlayer(new Item1PositionRequest(null,game.getBoard(),turnController.getCurrentPlayer().getMyShelf(),game.getCGoal(),game.getCurrentPlayer().getMyGoal(),game.getPositionAvailable(null,null)),turnController.getCurrentPlayer().getNickname()));
         //notifyObserver(obs -> obs.sendToOnePlayer(new NItemRequest(game.getBoard(),game.getCGoal(),game.getCurrentPlayer().getMyGoal()),turnController.getCurrentPlayer().getNickname()));
     }
 
@@ -152,7 +152,7 @@ public class GameController extends GameControllerObservable implements ServerOb
         }
         for(Player p : playerMancanti) {
             turnController.setCurrentPlayer(p);
-            notifyObserver(obs -> obs.sendToOnePlayer(new Item1PositionRequest(null, game.getBoard(), game.getCGoal(), game.getCurrentPlayer().getMyGoal()), p.getNickname()));
+            notifyObserver(obs -> obs.sendToOnePlayer(new Item1PositionRequest(null, game.getBoard(),p.getMyShelf(), game.getCGoal(), game.getCurrentPlayer().getMyGoal(),game.getPositionAvailable(null,null)), p.getNickname()));
         }
         for(Player p : players){
             game.calcScore(p);
@@ -223,15 +223,15 @@ public class GameController extends GameControllerObservable implements ServerOb
     public void choose1ItemPosition(Item1PositionResponse message) {
         if(checkActivePlayer(message.getNickname())){
             try {
-                for(Position p : game.getPositionAvailable(null,null)){
+                /*for(Position p : game.getPositionAvailable(null,null)){
                     System.out.println(p.getRow()+"-"+p.getCol()+"   ");
-                }
+                }*/
                 game.setAction(new ChooseItem(game,getPlayerByNickname(message.getNickname()),null,null,message.getP()));
                 game.doAction();
                 itemsToOrder.add(game.getBoard().getItem(message.getP()));
                 checkAvailability(message.getP(),null,message.getNickname());
             } catch (ActionException e) {
-                notifyObserver(obs->obs.sendToOnePlayer(new Item1PositionRequest(e.getMessage(),null,null,null), message.getNickname()));
+                notifyObserver(obs->obs.sendToOnePlayer(new Item1PositionRequest(e.getMessage(),null,null,null,null,null), message.getNickname()));
             }
         }
         else{
@@ -292,8 +292,8 @@ public class GameController extends GameControllerObservable implements ServerOb
     public void choose2ItemPosition(Item2PositionResponse message) {
         if(checkActivePlayer(message.getNickname())){
             try {
-                for(Position p : game.getPositionAvailable(message.getP1(),null))
-                    System.out.println(p.getRow()+"-"+p.getCol()+"   ");
+                /*for(Position p : game.getPositionAvailable(message.getP1(),null))
+                    System.out.println(p.getRow()+"-"+p.getCol()+"   ");*/
                 game.setAction(new ChooseItem(game,getPlayerByNickname(message.getNickname()),message.getP1(),null,message.getP2()));
                 game.doAction();
                 itemsToOrder.add(game.getBoard().getItem(message.getP2()));
@@ -311,8 +311,8 @@ public class GameController extends GameControllerObservable implements ServerOb
     public void choose3ItemPosition(Item3PositionResponse message) {
         if(checkActivePlayer(message.getNickname())){
             try {
-                for(Position p : game.getPositionAvailable(message.getP1(),message.getP2()))
-                    System.out.println(p.getRow()+"-"+p.getCol()+"   ");
+                /*for(Position p : game.getPositionAvailable(message.getP1(),message.getP2()))
+                    System.out.println(p.getRow()+"-"+p.getCol()+"   ");*/
                 game.setAction(new ChooseItem(game,getPlayerByNickname(message.getNickname()),message.getP1(),message.getP2(),message.getP3()));
                 game.doAction();
                 itemsToOrder.add(game.getBoard().getItem(message.getP3()));

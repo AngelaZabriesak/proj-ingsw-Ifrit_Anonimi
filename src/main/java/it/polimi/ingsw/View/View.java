@@ -1,5 +1,6 @@
 package it.polimi.ingsw.View;
 
+import it.polimi.ingsw.Message.GameState.GameStart;
 import it.polimi.ingsw.Message.Request.ChoosePositionRequest;
 import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Game.*;
@@ -15,7 +16,7 @@ import java.util.*;
 public interface View {
     void askNPlayers();
     void askNickname();
-    void askItem(Position p1, Position p2);
+    void askItem(Board board,Position p1, Position p2,ArrayList<Position> availablePosition);
     void askOther(ChoosePositionRequest message);
     void askColumn();
     void askOrder(ArrayList<Item> itemToOrder);
@@ -30,4 +31,6 @@ public interface View {
     void showWait(int nPlayers);
     void askEnd();
     void exit();
+    void initGame(GameStart message);
+    void showTable(Board board,ArrayList<Position> availablePositions, Shelf shelf, ArrayList<Cgoal> cgoal,Pgoal pgoal);
 }
