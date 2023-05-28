@@ -23,17 +23,20 @@ public class BoardScene extends InputObservable implements GenericScene {
     private GridPane gridPane;
     private AnchorPane sfondo;
     private Board board;
+
     private Button okItem;
     private Position p1,p2;
     private static Stage stageInstance;
 
     public /*GridPane*/ void start(Stage primaryStage, Board board, ArrayList<Position> availablePositions, Position p1, Position p2) {
         this.stageInstance = primaryStage;
+        this.board=board;
+
         okItem = new Button();
         String urlBtn = "file:src/main/resources/images/buttons/ok_button.png";
         okItem.setStyle("-fx-background-image: url('"+urlBtn+"');"+"\n" +
                 "    -fx-background-size: stretch;");
-        this.board = board;
+
         this.p1 = p1;
         this.p2 = p2;
         gridPane = new GridPane();
@@ -59,7 +62,7 @@ public class BoardScene extends InputObservable implements GenericScene {
                             Position p = availablePositions.get(i);
                             if(p.getRow()==row && p.getCol() == col){
                                 button.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickItem);
-                                button.setStyle("-fx-background-color: red;"+"\n" +
+                                button.setStyle("-fx-background-color: blue;"+"\n" +
                                         "    -fx-background-size: stretch;");
                                 ok = true;
                             }
