@@ -39,9 +39,10 @@ public class BoardScene extends InputObservable implements GenericScene {
         gridPane = new GridPane();
         primaryStage.setWidth(600);
         primaryStage.setHeight(600);
-        gridPane.setHgap(1);
-        gridPane.setVgap(1);
-        gridPane.setPadding(new Insets(10));
+        gridPane.setHgap(0);
+        gridPane.setVgap(0);
+      //  gridPane.setPadding(new Insets(69,54,13,66));
+
         boolean ok;
 
         for (int row = 0; row < board.getRow(); row++) {
@@ -52,7 +53,7 @@ public class BoardScene extends InputObservable implements GenericScene {
                         Button button = new Button();
                         button.setGraphic(createRandomImageView(row,col));
                         button.setAccessibleText(row+"-"+col);
-                        button.setMaxSize(20,20);
+                        button.setMaxSize(50,55);
                         for(int i = 0; i<availablePositions.size() && !ok; i++){
                             Position p = availablePositions.get(i);
                             if(p.getRow()==row && p.getCol() == col){
@@ -73,13 +74,14 @@ public class BoardScene extends InputObservable implements GenericScene {
         }
         initialize();
         String url = "file:src/main/resources/images/board.png";
-        gridPane.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
-                "-fx-background-size: 525 525;");
+
         sfondo = new AnchorPane(gridPane,okItem);
-        AnchorPane.setTopAnchor(gridPane,25.0);
-        AnchorPane.setLeftAnchor(gridPane,25.0);
-        AnchorPane.setBottomAnchor(gridPane,25.0);
-        AnchorPane.setRightAnchor(gridPane,25.0);
+        sfondo.setPrefSize(600, 600);
+        sfondo.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
+                "-fx-background-size: 625 625;");
+        AnchorPane.setTopAnchor(gridPane,24.0);
+        AnchorPane.setLeftAnchor(gridPane,20.0);
+
         Scene scene = new Scene(sfondo);
         primaryStage.setScene(scene);
         primaryStage.setX(0);
@@ -97,8 +99,12 @@ public class BoardScene extends InputObservable implements GenericScene {
     private ImageView createRandomImageView(int row, int col) {
         String imagePath=null;
         ImageView imageView = new ImageView();
-        imageView.setFitWidth(50);
+        imageView.setFitWidth(45);
         imageView.setFitHeight(50);
+       /* AnchorPane.setTopAnchor(imageView,25.0);
+        AnchorPane.setLeftAnchor(imageView,20.0);
+        AnchorPane.setBottomAnchor(imageView,25.0);
+        AnchorPane.setRightAnchor(imageView,20.0); */
         imageView.setPreserveRatio(true);
         switch (board.getMyBoardItem()[row][col].getColor()) {
             case BLUE:

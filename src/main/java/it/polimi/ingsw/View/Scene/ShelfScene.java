@@ -26,17 +26,25 @@ public class ShelfScene extends InputObservable implements GenericScene {
     private GridPane gridPane;
     private Shelf shelf;
     private static Stage stageInstance;
+    private AnchorPane immShelf;
 
     public /*GridPane*/ void start(Stage primaryStage, Shelf shelf) {
         this.stageInstance = primaryStage;
         this.shelf = shelf;
+        immShelf= new AnchorPane();
         gridPane = new GridPane();
         tableShelf = new GridPane();
+        tableShelf.setPrefSize(600, 500);
+        gridPane.setPrefSize(600, 500);
         primaryStage.setWidth(600);
         primaryStage.setHeight(500);
         gridPane.setHgap(5);
         gridPane.setVgap(5);
         gridPane.setPadding(new Insets(10));
+        String urlS = "file:src/main/resources/images/shelf.png";   
+        immShelf.setStyle("-fx-background-image: url('" + urlS+ "'); " +"-fx-background-repeat: no-repeat;"+
+                "-fx-background-size: 500 500;");
+
 
         for (int row = -1; row < shelf.getRow(); row++) {
             for (int col = 0; col < shelf.getCol(); col++) {
@@ -57,19 +65,18 @@ public class ShelfScene extends InputObservable implements GenericScene {
             }
         }
 
-        String url = "file:src/main/resources/images/shelf.png";
-        gridPane.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;"+
-                "-fx-background-size: 500 500;");
+
         Scene scene = new Scene(gridPane);
         tableShelf.add(scene.getRoot(),0,0);
         ImageView orderView = new ImageView(new Image("file:src/main/resources/images/minishelf_pickeditems.png"));
         //Scene order = new Scene(orderView.getParent());
         tableShelf.add(orderView,1,0);
         sfondo = new StackPane(tableShelf);
-        AnchorPane.setTopAnchor(gridPane, 20.0);
-        AnchorPane.setLeftAnchor(gridPane, 20.0);
-        AnchorPane.setBottomAnchor(orderView, 20.0);
-        AnchorPane.setRightAnchor(orderView, 20.0);
+        sfondo.setPrefSize(500, 400);
+        AnchorPane.setTopAnchor(gridPane, 25.0);
+        AnchorPane.setLeftAnchor(gridPane, 25.0);
+        AnchorPane.setBottomAnchor(orderView, 25.0);
+        AnchorPane.setRightAnchor(orderView, 25.0);
         Scene sceneFinale = new Scene(sfondo);
         primaryStage.setScene(sceneFinale);
         primaryStage.setTitle("shelf");
