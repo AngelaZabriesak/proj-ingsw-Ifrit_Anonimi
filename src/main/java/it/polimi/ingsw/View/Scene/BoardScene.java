@@ -39,8 +39,8 @@ public class BoardScene extends InputObservable implements GenericScene {
         gridPane = new GridPane();
         primaryStage.setWidth(600);
         primaryStage.setHeight(600);
-        gridPane.setHgap(0);
-        gridPane.setVgap(0);
+        gridPane.setHgap(4);
+        gridPane.setVgap(4);
       //  gridPane.setPadding(new Insets(69,54,13,66));
 
         boolean ok;
@@ -53,7 +53,7 @@ public class BoardScene extends InputObservable implements GenericScene {
                         Button button = new Button();
                         button.setGraphic(createRandomImageView(row,col));
                         button.setAccessibleText(row+"-"+col);
-                        button.setMaxSize(50,55);
+                        button.setMaxSize(42,110);
                         for(int i = 0; i<availablePositions.size() && !ok; i++){
                             Position p = availablePositions.get(i);
                             if(p.getRow()==row && p.getCol() == col){
@@ -78,9 +78,9 @@ public class BoardScene extends InputObservable implements GenericScene {
         sfondo = new AnchorPane(gridPane,okItem);
         sfondo.setPrefSize(600, 600);
         sfondo.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
-                "-fx-background-size: 625 625;");
-        AnchorPane.setTopAnchor(gridPane,24.0);
-        AnchorPane.setLeftAnchor(gridPane,20.0);
+                "-fx-background-size: 600 600;");
+        AnchorPane.setTopAnchor(gridPane,88.0);
+        AnchorPane.setLeftAnchor(gridPane,84.5);
 
         Scene scene = new Scene(sfondo);
         primaryStage.setScene(scene);
@@ -99,8 +99,8 @@ public class BoardScene extends InputObservable implements GenericScene {
     private ImageView createRandomImageView(int row, int col) {
         String imagePath=null;
         ImageView imageView = new ImageView();
-        imageView.setFitWidth(45);
-        imageView.setFitHeight(50);
+        imageView.setFitWidth(40);
+        imageView.setFitHeight(100);
        /* AnchorPane.setTopAnchor(imageView,25.0);
         AnchorPane.setLeftAnchor(imageView,20.0);
         AnchorPane.setBottomAnchor(imageView,25.0);
