@@ -246,7 +246,7 @@ public class GameController extends GameControllerObservable implements ServerOb
                 max = Objects.requireNonNull(getPlayerByNickname(nickname)).getMyShelf().getFreeRowByColumn(i);
         }
         if(game.getPositionAvailable(p1,p2).size()>0 && max- Objects.requireNonNull(getPlayerByNickname(nickname)).getMyItem().size()>0) {
-            notifyObserver(obs -> obs.sendToOnePlayer(new ChoosePositionRequest(p1, p2), nickname));
+            notifyObserver(obs -> obs.sendToOnePlayer(new ChoosePositionRequest(game.getBoard() ,p1, p2,game.getPositionAvailable(p1,p2)), nickname));
         }
         else{
             if(itemsToOrder.size() != 1){
@@ -275,7 +275,7 @@ public class GameController extends GameControllerObservable implements ServerOb
                 }
             } else {
                 notifyObserver(obs -> obs.sendToOnePlayer(new Error("Input error"), message.getNickname()));
-                notifyObserver(obs -> obs.sendToOnePlayer(new ChoosePositionRequest(message.getP1(), message.getP2()), message.getNickname()));
+                notifyObserver(obs -> obs.sendToOnePlayer(new ChoosePositionRequest(game.getBoard() ,message.getP1(), message.getP2(),game.getPositionAvailable(message.getP1(),message.getP2())), message.getNickname()));
             }
         }
         else{

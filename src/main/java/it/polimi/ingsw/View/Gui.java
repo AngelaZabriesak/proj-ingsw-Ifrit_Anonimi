@@ -10,15 +10,15 @@ import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Position;
 import it.polimi.ingsw.Model.Shelf;
 import it.polimi.ingsw.Observer.InputObservable;
-import it.polimi.ingsw.View.Scene.BoardScene;
-import it.polimi.ingsw.View.Scene.ChangeScene;
-import it.polimi.ingsw.View.Scene.GameScene;
-import it.polimi.ingsw.View.Scene.SelectNpScene;
+import it.polimi.ingsw.View.Scene.*;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
 
 public class Gui extends InputObservable implements View {
+    BoardScene bs = new BoardScene();
+    ShelfScene ss = new ShelfScene();
+    GoalScene gs = new GoalScene();
     @Override
     public void askNickname() {
         Platform.runLater(() -> ChangeScene.changeRootPane(observers, "login_scene.fxml"));
@@ -33,11 +33,13 @@ public class Gui extends InputObservable implements View {
 
     @Override
     public void askItem(Board board,Position p1,Position p2,ArrayList<Position> availablePositions) {
-        Platform.runLater(() -> ChangeScene.showBoard(board,availablePositions));
+        bs.addAllObservers(observers);
+        Platform.runLater(() -> ChangeScene.showBoard(bs,board,availablePositions,p1,p2));
     }
 
     @Override
     public void askOther(ChoosePositionRequest message) {
+        askItem(message.getBoard(),message.getP1(),message.getP2(),message.getAvailable());
         //Platform.runLater(() -> ChangeScene.changeRootPane(observers, "game_scene.fxml"));
     }
 
@@ -61,7 +63,8 @@ public class Gui extends InputObservable implements View {
 
     @Override
     public void showShelf(Shelf shelf) {
-        Platform.runLater(() -> ChangeScene.showShelf(shelf));
+        ss.addAllObservers(observers);
+        Platform.runLater(() -> ChangeScene.showShelf(ss,shelf));
         //Platform.runLater(() -> ChangeScene.changeRootPane(observers, "game_scene.fxml"));
     }
 
@@ -77,7 +80,8 @@ public class Gui extends InputObservable implements View {
 
     @Override
     public void showCGoal(ArrayList<Cgoal> cgoal) {
-        Platform.runLater(() -> ChangeScene.showCgoal(cgoal));
+        gs.addAllObservers(observers);
+        Platform.runLater(() -> ChangeScene.showCgoal(gs,cgoal));
        /* GameScene gamescene= new GameScene();
         gamescene.addAllObservers(observers)
 
@@ -89,7 +93,8 @@ public class Gui extends InputObservable implements View {
 
     @Override
     public void showPGoal(Pgoal pgoal) {
-        Platform.runLater(() -> ChangeScene.showPgoal(pgoal));
+        gs.addAllObservers(observers);
+        Platform.runLater(() -> ChangeScene.showPgoal(gs,pgoal));
         //Platform.runLater(() -> ChangeScene.changeRootPane(observers, "game_scene.fxml"));
     }
 

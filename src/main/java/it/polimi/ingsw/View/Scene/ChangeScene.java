@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 
 public class ChangeScene extends InputObservable {
@@ -119,23 +118,19 @@ public class ChangeScene extends InputObservable {
         new TableScene(new Stage(),board,shelf,availablePositions,cgoal,pgoal);
     }
 
-    public static void showBoard(Board board, ArrayList<Position> availablePositions){
-        BoardScene bs = new BoardScene();
-        bs.start(new Stage(),board,availablePositions);
+    public static void showBoard(BoardScene bs,Board board, ArrayList<Position> availablePositions,Position p1, Position p2){
+        bs.start(BoardScene.getStageInstance(),board,availablePositions,p1,p2);
     }
 
-    public static void showShelf(Shelf shelf){
-        ShelfScene ss = new ShelfScene();
-        ss.start(new Stage(),shelf);
+    public static void showShelf(ShelfScene ss,Shelf shelf){
+        ss.start(ShelfScene.getStageInstance(),shelf);
     }
 
-    public static void showPgoal(Pgoal pgoal){
-        GoalScene gs = new GoalScene();
-        gs.start(new Stage(),null,pgoal);
+    public static void showPgoal(GoalScene gs,Pgoal pgoal){
+        gs.start(GoalScene.getStagePInstance(),null,pgoal);
     }
-    public static void showCgoal(ArrayList<Cgoal> cgoals){
-        GoalScene gs = new GoalScene();
-        gs.start(new Stage(),cgoals,null);
+    public static void showCgoal(GoalScene gs,ArrayList<Cgoal> cgoals){
+        gs.start(GoalScene.getStageCInstance(),cgoals,null);
     }
 
 }

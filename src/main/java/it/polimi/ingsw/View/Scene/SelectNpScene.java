@@ -21,7 +21,6 @@ public class SelectNpScene extends InputObservable implements GenericScene {
     private Label textLabel;
 
     @FXML
-
     public void initialize() {
         twoPlayerButton.setAccessibleText("2");
         threePlayerButton.setAccessibleText("3");

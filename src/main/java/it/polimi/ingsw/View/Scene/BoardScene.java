@@ -1,12 +1,15 @@
 package it.polimi.ingsw.View.Scene;
 
+import it.polimi.ingsw.Message.Response.ChoosePositionResponse;
+import it.polimi.ingsw.Message.Response.Item1PositionResponse;
+import it.polimi.ingsw.Message.Response.Item2PositionResponse;
+import it.polimi.ingsw.Message.Response.Item3PositionResponse;
 import it.polimi.ingsw.Model.Bag.ColorItem;
 import it.polimi.ingsw.Model.Game.Board;
 import it.polimi.ingsw.Model.Position;
 import it.polimi.ingsw.Observer.InputObservable;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.*;
@@ -20,9 +23,19 @@ public class BoardScene extends InputObservable implements GenericScene {
     private GridPane gridPane;
     private AnchorPane sfondo;
     private Board board;
+    private Button okItem;
+    private Position p1,p2;
+    private static Stage stageInstance;
 
-    public /*GridPane*/ void start(Stage primaryStage, Board board, ArrayList<Position> availablePositions) {
+    public /*GridPane*/ void start(Stage primaryStage, Board board, ArrayList<Position> availablePositions, Position p1, Position p2) {
+        this.stageInstance = primaryStage;
+        okItem = new Button();
+        String urlBtn = "file:src/main/resources/images/buttons/ok_button.png";
+        okItem.setStyle("-fx-background-image: url('"+urlBtn+"');"+"\n" +
+                "    -fx-background-size: stretch;");
         this.board = board;
+        this.p1 = p1;
+        this.p2 = p2;
         gridPane = new GridPane();
         primaryStage.setWidth(600);
         primaryStage.setHeight(600);
@@ -44,7 +57,7 @@ public class BoardScene extends InputObservable implements GenericScene {
                             Position p = availablePositions.get(i);
                             if(p.getRow()==row && p.getCol() == col){
                                 button.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickItem);
-                                button.setStyle("-fx-effect: dropshadow(gaussian, #000000, 20, 0.3, 0, 0);"+"\n" +
+                                button.setStyle("-fx-background-color: red;"+"\n" +
                                         "    -fx-background-size: stretch;");
                                 ok = true;
                             }
@@ -58,10 +71,11 @@ public class BoardScene extends InputObservable implements GenericScene {
                 }
             }
         }
+        initialize();
         String url = "file:src/main/resources/images/board.png";
         gridPane.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
                 "-fx-background-size: 525 525;");
-        sfondo = new AnchorPane(gridPane);
+        sfondo = new AnchorPane(gridPane,okItem);
         AnchorPane.setTopAnchor(gridPane,25.0);
         AnchorPane.setLeftAnchor(gridPane,25.0);
         AnchorPane.setBottomAnchor(gridPane,25.0);
@@ -72,6 +86,12 @@ public class BoardScene extends InputObservable implements GenericScene {
         primaryStage.setY(0);
         primaryStage.setTitle("board");
         primaryStage.show();
+    }
+
+    public static Stage getStageInstance(){
+        if(stageInstance == null)
+            stageInstance = new Stage();
+        return stageInstance;
     }
 
     private ImageView createRandomImageView(int row, int col) {
@@ -112,17 +132,22 @@ public class BoardScene extends InputObservable implements GenericScene {
         int col = Integer.parseInt(((Button)event.getSource()).getAccessibleText().split("-")[1]);
         System.out.println("Click on "+row+"-"+col);
         Position p = new Position(row,col);
-        //notifyInObserver(obs->obs.onUpdateChooseItem(new Item1PositionResponse(p)));
-
+        if(p1==null)
+            notifyInObserver(obs -> obs.onUpdateChooseItem(new Item1PositionResponse(p)));
+        else if (p2==null)
+            notifyInObserver(obs -> obs.onUpdateChooseItem(new Item2PositionResponse(p1,p)));
+        else
+            notifyInObserver(obs -> obs.onUpdateChooseItem(new Item3PositionResponse(p1,p2,p)));
+        okItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickOk);
     }
 
-    public static void showAvailable(Position p1, Position p2, ArrayList<Position> availablePositions){
+    private void onClickOk(MouseEvent event){
+        notifyInObserver(obs->obs.onUpdateChoose(new ChoosePositionResponse("no",p1,p2)));
     }
-
     @FXML
     public void initialize(){
-        //System.out.println("Size children: "+gridPane.getChildren());
-        /*for(Node n : gridPane.getChildren())
-            n.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onClickItem);*/
+        System.out.println("Size children: "+gridPane.getChildren().size());
+        //for(Node n : gridPane.getChildren())
+            //n.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onClickItem);
     }
 }

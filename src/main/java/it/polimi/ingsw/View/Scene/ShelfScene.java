@@ -25,8 +25,10 @@ public class ShelfScene extends InputObservable implements GenericScene {
     private StackPane sfondo;
     private GridPane gridPane;
     private Shelf shelf;
+    private static Stage stageInstance;
 
     public /*GridPane*/ void start(Stage primaryStage, Shelf shelf) {
+        this.stageInstance = primaryStage;
         this.shelf = shelf;
         gridPane = new GridPane();
         tableShelf = new GridPane();
@@ -81,6 +83,12 @@ public class ShelfScene extends InputObservable implements GenericScene {
     private void onClickColumn(MouseEvent event){
         int col = Integer.parseInt(((Button)event.getSource()).getAccessibleText().split("-")[0]);
         System.out.println("Click on column "+col);
+    }
+
+    public static Stage getStageInstance(){
+        if(stageInstance == null)
+            stageInstance = new Stage();
+        return stageInstance;
     }
 
     @FXML

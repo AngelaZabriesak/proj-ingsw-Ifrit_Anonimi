@@ -2,6 +2,7 @@ package it.polimi.ingsw.View.Scene;
 
 import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.Pgoal;
+import it.polimi.ingsw.Observer.InputObservable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -12,12 +13,16 @@ import javafx.stage.Stage;
 
 import java.util.*;
 
-public class GoalScene {
+public class GoalScene extends InputObservable implements GenericScene {
     private GridPane gridPane;
     private Pane pgoalPane;
     private GridPane cGoalPane;
+    private static Stage stagePInstance;
+    private static Stage stageCInstance;
 
     public /*GridPane*/ void start(Stage primaryStage, ArrayList<Cgoal> cGoal, Pgoal pgoal) {
+        stagePInstance = primaryStage;
+        stageCInstance = primaryStage;
         gridPane = new GridPane();
         if(cGoal==null){
             primaryStage.setWidth(280);
@@ -36,17 +41,16 @@ public class GoalScene {
         pgoalPane = new StackPane();
         cGoalPane = new GridPane();
         if(pgoal!=null){
+            System.out.println("pgoal: "+pgoal.getIndex());
             ImageView iwPgoal = new ImageView(setPGoal(pgoal));
             pgoalPane.setStyle("-fx-background-repeat: no-repeat;"+
                     "-fx-background-size: 200 400;");
             pgoalPane.getChildren().add(iwPgoal);
         }
-        Rotate rotate = new Rotate(90);
         if(cGoal!=null) {
             for (Cgoal cg : cGoal) {
+                System.out.println("cgoal "+cg.getIndex());
                 ImageView lcg = new ImageView(setCgoal(cg));
-                //lcg.getTransforms().add(rotate);
-                System.out.println(cg.getIndex());
                 cGoalPane.setStyle("-fx-background-repeat: no-repeat;"+
                         "-fx-background-size: 400 400;");
                 cGoalPane.add(lcg, cGoal.indexOf(cg),0);
@@ -71,5 +75,18 @@ public class GoalScene {
         String imagePath="file:src/main/resources/images/commongoals/commongoal"+cgoal.getIndex()+".jpg";
         Image image = new Image(imagePath);
         return image;
+    }
+
+    public static Stage getStagePInstance(){
+        if(stagePInstance == null)
+            stagePInstance = new Stage();
+        return stagePInstance;
+    }
+
+
+    public static Stage getStageCInstance(){
+        if(stageCInstance == null)
+            stageCInstance = new Stage();
+        return stageCInstance;
     }
 }
