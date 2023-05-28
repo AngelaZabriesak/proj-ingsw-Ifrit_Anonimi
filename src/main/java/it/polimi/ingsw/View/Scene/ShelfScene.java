@@ -15,98 +15,115 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
-
-
+import javafx.stage.StageStyle;
 
 
 public class ShelfScene extends InputObservable implements GenericScene {
-    private GridPane tableShelf;
-    private StackPane arrows;
-    private GridPane gridPane;
+    private StackPane pickedItemShelf;
+    private GridPane shelfGrid;  //
     private Shelf shelf;
     private Game game;
     private Player player;
     private static Stage stageInstance;
     private AnchorPane immShelf;
+   // private AnchorPane chosenItemShelf;
+
 
     public void start(Stage primaryStage, Shelf shelf) {
         this.stageInstance = primaryStage;
         this.shelf = shelf;
-
-
+        String urlS= "file:src/main/resources/images/ShelfScene.png";
 
 
         immShelf = new AnchorPane();
-        String urlS = "file:src/main/resources/images/shelf.png";
+        AnchorPane.setTopAnchor(immShelf,25.0);
+        AnchorPane.setLeftAnchor(immShelf,25.0);
+
+
+
         immShelf.setStyle("-fx-background-image: url('" + urlS + "'); " +
                 "-fx-background-repeat: no-repeat;" +
-                "-fx-background-size: 500 500;");
-        immShelf.setPrefSize(600, 500);
+                "-fx-background-size: 600 600;");
+        immShelf.setPrefSize(600, 600);
 
-        gridPane = new GridPane();
-        gridPane.setPrefSize(600, 500);
+
+        //grid for shelf's items
+
+        shelfGrid = new GridPane();
         primaryStage.setWidth(600);
-        primaryStage.setHeight(500);
-        gridPane.setHgap(5);
-        gridPane.setVgap(5);
-        gridPane.setPadding(new Insets(10));
+        primaryStage.setHeight(600);
+        shelfGrid.setHgap(5);
+        shelfGrid.setVgap(5);
+        shelfGrid.setPadding(new Insets(10));
 
-        tableShelf = new GridPane();
-        tableShelf.setPrefSize(600, 500);
+
 
         for (int row = -1; row < shelf.getRow(); row++) {
             for (int col = 0; col < shelf.getCol(); col++) {
                 if (row == -1) {
                     Button button = new Button();
-                    button.setPrefSize(20, 20);
+                    button.setPrefSize(50, 50);
                     button.setAccessibleText("" + col);
                     button.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onClickColumn);
                     String url = "file:src/main/resources/images/buttons/arrow_column_button_img.png";
                     button.setStyle("-fx-background-size: 100% 100%;" +
                             "-fx-background-repeat: no-repeat;" +
                             "-fx-background-image: url('" + url + "');");
-                    gridPane.add(button, col, 0);
+                    shelfGrid.add(button, col, 0);
                 } else {
                     ImageView iw = new ImageView(new Image("file:src/main/resources/images/parquet_background.jpg"));
                     iw.setFitWidth(40);
                     iw.setFitHeight(40);
-                    gridPane.add(iw, col, row + 1);
+                    shelfGrid.add(iw, col, row + 1);
                 }
             }
         }
 
-        arrows = new StackPane();
-        arrows.setPrefSize(100, 300);
+        immShelf.getChildren().add(shelfGrid);
+
+
+        pickedItemShelf = new StackPane();
+        pickedItemShelf.setPrefSize(100, 300);
+       /* pickedItemShelf.setStyle("-fx-background-image: url('" + urlI + "'); " +
+                "-fx-background-repeat: stretch; " +
+                "-fx-background-size: cover;");  */
 
         // Aggiunge gli elementi dello StackPane
-        int pos=  3;  //player.getMyItem().size();
+        int pos = 3;  //player.getMyItem().size();
 
         {
-
             for (int i = 0; i < pos; i++) {
 
                 Button button = new Button();
-                arrows.getChildren().add(button);
+                pickedItemShelf.getChildren().add(button);
                 button.setGraphic(createRandomImageView(i));
             }
+
         }
 
+        immShelf.getChildren().add(pickedItemShelf);
 
 
-        AnchorPane.setTopAnchor(gridPane, 25.0);
-        AnchorPane.setLeftAnchor(gridPane, 25.0);
-        AnchorPane.setBottomAnchor(arrows, 25.0);
-        AnchorPane.setRightAnchor(arrows, 25.0);
+        AnchorPane.setTopAnchor(shelfGrid, 25.0);
+        AnchorPane.setLeftAnchor(shelfGrid, 25.0);
+        AnchorPane.setBottomAnchor(pickedItemShelf, 25.0);
+        AnchorPane.setRightAnchor(pickedItemShelf, 25.0);
 
         Scene scene = new Scene(immShelf);
+
         primaryStage.setScene(scene);
         primaryStage.setTitle("shelf");
         primaryStage.setX(600);
         primaryStage.setY(0);
+
+
+       // AnchorPane.setTopAnchor(immShelf, (primaryStage.getHeight() - immShelf.getPrefHeight()) / 2);
+        //AnchorPane.setLeftAnchor(immShelf, (primaryStage.getWidth() - immShelf.getPrefWidth()) / 2);
+
+        primaryStage.show();
         primaryStage.show();
     }
+
 
     private void onClickColumn(MouseEvent event) {
         int col = Integer.parseInt(((Button) event.getSource()).getAccessibleText().split("-")[0]);
@@ -158,10 +175,13 @@ public class ShelfScene extends InputObservable implements GenericScene {
         return imageView;
     }
 
+
     @FXML
     public void initialize() {
+        System.out.println("Size children: "+shelfGrid.getChildren().size());
     }
-}
+    }
+
 
 
 
