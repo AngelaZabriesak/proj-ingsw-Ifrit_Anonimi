@@ -66,8 +66,8 @@ public class ShelfScene extends InputObservable implements GenericScene {
         shelfGrid = new GridPane();
         primaryStage.setWidth(615);
         primaryStage.setHeight(600);
-        shelfGrid.setHgap(19.95);
-        shelfGrid.setVgap(7.9);
+        shelfGrid.setHgap(19.45);
+        shelfGrid.setVgap(8.4);
 
 
 

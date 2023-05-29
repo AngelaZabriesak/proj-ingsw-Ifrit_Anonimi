@@ -206,6 +206,8 @@ public class BoardScene extends InputObservable implements GenericScene {
         primaryStage.setWidth(615);
         primaryStage.setHeight(635);
 
+        okItem = createOkItem();
+
         for (int row = 0; row < board.getRow(); row++) {
             for (int col = 0; col < board.getCol(); col++) {
                 if(board.getMyBoardAdjacency()[row][col]>4) {
@@ -221,15 +223,12 @@ public class BoardScene extends InputObservable implements GenericScene {
 
 
         boardBackground.setPrefSize(600, 600);
-        /*sfondo.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
-                "-fx-background-size: 600 600;");*/
         AnchorPane.setTopAnchor(itemBoardGrid,87.0);
         AnchorPane.setLeftAnchor(itemBoardGrid,83.0);
 
-        okItem = createOkItem();
 
-        double newY = okItem.getLayoutY() - 10; // Sposta il bottone verso l'alto
-        okItem.setLayoutY(newY);
+
+
         boardBackground = new AnchorPane(itemBoardGrid,okItem);
         boardBackground.setPrefSize(600, 600);
 
