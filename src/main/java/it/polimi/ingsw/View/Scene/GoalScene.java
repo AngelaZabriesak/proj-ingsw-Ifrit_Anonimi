@@ -77,7 +77,7 @@ public class GoalScene extends InputObservable implements GenericScene {
             Stage stageP = new Stage();
             stageP.setX(1200);
             stageP.setY(0);
-            stageP.setTitle("Personal Goal " + pgoal.getIndex());
+            stageP.setTitle("Personal Goal " + pgoal.getDescription().split(" ")[2]);
             stageP.setScene(pgoalScene);
             stageP.show();
         }
@@ -102,7 +102,7 @@ public class GoalScene extends InputObservable implements GenericScene {
     }
 
     public Image setPGoal(Pgoal pgoal){
-        String imagePath="file:src/main/resources/images/personalgoals/personalgoal"+pgoal.getIndex()+".jpg";
+        String imagePath="file:src/main/resources/images/personalgoals/personalgoal"+pgoal.getDescription().split(" ")[2]+".jpg";
         Image image = new Image(imagePath);
         return image;
     }

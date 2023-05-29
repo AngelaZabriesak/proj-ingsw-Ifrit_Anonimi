@@ -3,6 +3,7 @@ package it.polimi.ingsw.View.Scene;
 import it.polimi.ingsw.Model.Game.Board;
 import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.Pgoal;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Position;
 import it.polimi.ingsw.Model.Shelf;
 import it.polimi.ingsw.Observer.InputObservable;
@@ -122,8 +123,8 @@ public class ChangeScene extends InputObservable {
         bs.start(BoardScene.getStageInstance(),board,availablePositions,p1,p2);
     }
 
-    public static void showShelf(ShelfScene ss,Shelf shelf){
-        ss.start(ShelfScene.getStageInstance(),shelf);
+    public static void showShelf(ShelfScene ss, Shelf shelf, Player player){
+        ss.start(ShelfScene.getStageInstance(),shelf,player);
     }
 
     public static void showPgoal(GoalScene gs,Pgoal pgoal){
@@ -131,6 +132,9 @@ public class ChangeScene extends InputObservable {
     }
     public static void showCgoal(GoalScene gs,ArrayList<Cgoal> cgoals){
         gs.start(GoalScene.getStageCInstance(),cgoals,null);
+    }
+    public static void updateBoard(BoardScene bs,Board board, Position p1, Position p2,ArrayList<Position> availablePositions){
+        bs.updateBoard(BoardScene.getStageInstance(),board,availablePositions,p1,p2);
     }
 
 }

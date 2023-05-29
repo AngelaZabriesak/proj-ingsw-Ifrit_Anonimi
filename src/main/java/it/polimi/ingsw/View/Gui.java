@@ -39,7 +39,7 @@ public class Gui extends InputObservable implements View {
 
     @Override
     public void askOther(ChoosePositionRequest message) {
-        askItem(message.getBoard(),message.getP1(),message.getP2(),message.getAvailable());
+        Platform.runLater(()->ChangeScene.updateBoard(bs,message.getBoard(),message.getP1(),message.getP2(),message.getAvailable()));
         //Platform.runLater(() -> ChangeScene.changeRootPane(observers, "game_scene.fxml"));
     }
 
@@ -62,9 +62,9 @@ public class Gui extends InputObservable implements View {
     }
 
     @Override
-    public void showShelf(Shelf shelf) {
+    public void showShelf(Shelf shelf,Player player) {
         ss.addAllObservers(observers);
-        Platform.runLater(() -> ChangeScene.showShelf(ss,shelf));
+        Platform.runLater(() -> ChangeScene.showShelf(ss,shelf,player));
         //Platform.runLater(() -> ChangeScene.changeRootPane(observers, "game_scene.fxml"));
     }
 
@@ -130,10 +130,10 @@ public class Gui extends InputObservable implements View {
     }
 
     @Override
-    public void showTable(Board board,ArrayList<Position> availablePositions, Shelf shelf, ArrayList<Cgoal> cgoal,Pgoal pgoal) {
+    public void showTable(Board board,ArrayList<Position> availablePositions, Shelf shelf,ArrayList<Cgoal> cgoal,Pgoal pgoal,Player player) {
         //Platform.runLater(() -> ChangeScene.showTable(board,shelf,availablePositions,cgoal,pgoal));
         showBoard(board);
-        showShelf(shelf);
+       showShelf(shelf,player);
         showCGoal(cgoal);
         showPGoal(pgoal);
     }

@@ -41,7 +41,7 @@ public class AddItemInShelf implements Action{
 
     @Override
     public ActionMessage getMessage() {
-        return new AddItemInShelf_OK(player.getMyShelf());
+        return new AddItemInShelf_OK(player.getMyShelf(),player);
     }
 
     @Override

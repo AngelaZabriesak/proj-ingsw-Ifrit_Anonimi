@@ -21,7 +21,7 @@ public interface View {
     void askColumn();
     void askOrder(ArrayList<Item> itemToOrder);
     void showBoard(Board board);
-    void showShelf(Shelf shelf);
+    void showShelf(Shelf shelf,Player player);
     void showItemToOrder(ArrayList<Item> itemToOrder);
     void showScore(Player player);
     void showCGoal(ArrayList<Cgoal> cgoal);
@@ -32,5 +32,5 @@ public interface View {
     void askEnd();
     void exit();
     void initGame(GameStart message);
-    void showTable(Board board,ArrayList<Position> availablePositions, Shelf shelf, ArrayList<Cgoal> cgoal,Pgoal pgoal);
+    void showTable(Board board,ArrayList<Position> availablePositions, Shelf shelf, ArrayList<Cgoal> cgoal,Pgoal pgoal,Player player);
 }

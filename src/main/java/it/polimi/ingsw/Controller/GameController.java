@@ -52,7 +52,7 @@ public class GameController extends GameControllerObservable implements ServerOb
     }
 
     private void startTurn(){
-        notifyObserver(obs->obs.sendToOnePlayer(new Item1PositionRequest(null,game.getBoard(),turnController.getCurrentPlayer().getMyShelf(),game.getCGoal(),game.getCurrentPlayer().getMyGoal(),game.getPositionAvailable(null,null)),turnController.getCurrentPlayer().getNickname()));
+        notifyObserver(obs->obs.sendToOnePlayer(new Item1PositionRequest(null,game.getBoard(),turnController.getCurrentPlayer().getMyShelf(),game.getCGoal(),game.getCurrentPlayer().getMyGoal(),game.getPositionAvailable(null,null), turnController.getCurrentPlayer()),turnController.getCurrentPlayer().getNickname()));
         //notifyObserver(obs -> obs.sendToOnePlayer(new NItemRequest(game.getBoard(),game.getCGoal(),game.getCurrentPlayer().getMyGoal()),turnController.getCurrentPlayer().getNickname()));
     }
 
@@ -132,7 +132,7 @@ public class GameController extends GameControllerObservable implements ServerOb
 
     @Override
     public void showShelfRequestHandler(ShelfRequest message) {
-        notifyObserver(obs->obs.sendToOnePlayer(new ShelfResponse(Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyShelf()),message.getNickname()));
+        notifyObserver(obs->obs.sendToOnePlayer(new ShelfResponse(Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyShelf(),getPlayerByNickname(message.getNickname())),message.getNickname()));
     }
 
     @Override
@@ -152,7 +152,7 @@ public class GameController extends GameControllerObservable implements ServerOb
         }
         for(Player p : playerMancanti) {
             turnController.setCurrentPlayer(p);
-            notifyObserver(obs -> obs.sendToOnePlayer(new Item1PositionRequest(null, game.getBoard(),p.getMyShelf(), game.getCGoal(), game.getCurrentPlayer().getMyGoal(),game.getPositionAvailable(null,null)), p.getNickname()));
+            notifyObserver(obs -> obs.sendToOnePlayer(new Item1PositionRequest(null, game.getBoard(),p.getMyShelf(), game.getCGoal(), game.getCurrentPlayer().getMyGoal(),game.getPositionAvailable(null,null),p), p.getNickname()));
         }
         for(Player p : players){
             game.calcScore(p);
@@ -177,7 +177,7 @@ public class GameController extends GameControllerObservable implements ServerOb
     public void moveToColumn(ColumnResponse message) {
         int nColumn,score = 0;
         if(isInt(message.getColumn())){
-            notifyObserver(obs->obs.sendToOnePlayer(new ColumnRequest("Invalid number of column, is not integer", Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyItem(), Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyShelf()), message.getNickname()));
+            notifyObserver(obs->obs.sendToOnePlayer(new ColumnRequest("Invalid number of column, is not integer", Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyItem(), Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyShelf(), turnController.getCurrentPlayer()), message.getNickname()));
         }
         else {
             if(checkActivePlayer(message.getNickname())) {
@@ -203,7 +203,7 @@ public class GameController extends GameControllerObservable implements ServerOb
                     }
                 } catch (ActionException e) {
                     //System.out.println(e);
-                    notifyObserver(obs -> obs.sendToOnePlayer(new ColumnRequest(e.getMessage(), Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyItem(), Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyShelf()), message.getNickname()));
+                    notifyObserver(obs -> obs.sendToOnePlayer(new ColumnRequest(e.getMessage(), Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyItem(), Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyShelf(), turnController.getCurrentPlayer()), message.getNickname()));
                 }
             }
             else {
@@ -231,7 +231,7 @@ public class GameController extends GameControllerObservable implements ServerOb
                 itemsToOrder.add(game.getBoard().getItem(message.getP()));
                 checkAvailability(message.getP(),null,message.getNickname());
             } catch (ActionException e) {
-                notifyObserver(obs->obs.sendToOnePlayer(new Item1PositionRequest(e.getMessage(),null,null,null,null,null), message.getNickname()));
+                notifyObserver(obs->obs.sendToOnePlayer(new Item1PositionRequest(e.getMessage(),null,null,null,null,null, turnController.getCurrentPlayer()), message.getNickname()));
             }
         }
         else{
@@ -250,10 +250,10 @@ public class GameController extends GameControllerObservable implements ServerOb
         }
         else{
             if(itemsToOrder.size() != 1){
-                notifyObserver(obs -> obs.sendToOnePlayer(new ItemOrderRequest(null,turnController.getCurrentPlayer().getMyItem(),turnController.getCurrentPlayer().getMyShelf()), nickname));
+                notifyObserver(obs -> obs.sendToOnePlayer(new ItemOrderRequest(null,turnController.getCurrentPlayer().getMyItem(),turnController.getCurrentPlayer().getMyShelf(), turnController.getCurrentPlayer()), nickname));
             }
             else{
-                notifyObserver(obs -> obs.sendToOnePlayer(new ColumnRequest(null,turnController.getCurrentPlayer().getMyItem(),turnController.getCurrentPlayer().getMyShelf()), nickname));
+                notifyObserver(obs -> obs.sendToOnePlayer(new ColumnRequest(null,turnController.getCurrentPlayer().getMyItem(),turnController.getCurrentPlayer().getMyShelf(), turnController.getCurrentPlayer()), nickname));
             }
         }
     }
@@ -268,10 +268,10 @@ public class GameController extends GameControllerObservable implements ServerOb
                     notifyObserver(obs -> obs.sendToOnePlayer(new Item3PositionRequest(game.getBoard(),null,message.getP1(),message.getP2(),game.getPositionAvailable(message.getP1(),message.getP2())), message.getNickname()));
             } else if (message.getResponse().equalsIgnoreCase("no")) {
                 if(itemsToOrder.size() != 1){
-                    notifyObserver(obs -> obs.sendToOnePlayer(new ItemOrderRequest(null,turnController.getCurrentPlayer().getMyItem(),turnController.getCurrentPlayer().getMyShelf()), message.getNickname()));
+                    notifyObserver(obs -> obs.sendToOnePlayer(new ItemOrderRequest(null,turnController.getCurrentPlayer().getMyItem(),turnController.getCurrentPlayer().getMyShelf(), turnController.getCurrentPlayer()), message.getNickname()));
                 }
                 else{
-                    notifyObserver(obs -> obs.sendToOnePlayer(new ColumnRequest(null,turnController.getCurrentPlayer().getMyItem(),turnController.getCurrentPlayer().getMyShelf()), message.getNickname()));
+                    notifyObserver(obs -> obs.sendToOnePlayer(new ColumnRequest(null,turnController.getCurrentPlayer().getMyItem(),turnController.getCurrentPlayer().getMyShelf(), turnController.getCurrentPlayer()), message.getNickname()));
                 }
             } else {
                 notifyObserver(obs -> obs.sendToOnePlayer(new Error("Input error"), message.getNickname()));
@@ -280,10 +280,10 @@ public class GameController extends GameControllerObservable implements ServerOb
         }
         else{
             if(itemsToOrder.size() != 1){
-                notifyObserver(obs -> obs.sendToOnePlayer(new ItemOrderRequest(null,turnController.getCurrentPlayer().getMyItem(),turnController.getCurrentPlayer().getMyShelf()), message.getNickname()));
+                notifyObserver(obs -> obs.sendToOnePlayer(new ItemOrderRequest(null,turnController.getCurrentPlayer().getMyItem(),turnController.getCurrentPlayer().getMyShelf(), turnController.getCurrentPlayer()), message.getNickname()));
             }
             else{
-                notifyObserver(obs -> obs.sendToOnePlayer(new ColumnRequest(null,turnController.getCurrentPlayer().getMyItem(),turnController.getCurrentPlayer().getMyShelf()), message.getNickname()));
+                notifyObserver(obs -> obs.sendToOnePlayer(new ColumnRequest(null,turnController.getCurrentPlayer().getMyItem(),turnController.getCurrentPlayer().getMyShelf(), turnController.getCurrentPlayer()), message.getNickname()));
             }
         }
     }
@@ -332,9 +332,9 @@ public class GameController extends GameControllerObservable implements ServerOb
             game.setAction(new ChooseOrder(game,getPlayerByNickname(message.getNickname()),message.getOrder()));
             try{
                 game.doAction();
-                notifyObserver(obs->obs.sendToOnePlayer(new ColumnRequest(null, Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyItem(), Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyShelf()), message.getNickname()));
+                notifyObserver(obs->obs.sendToOnePlayer(new ColumnRequest(null, Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyItem(), Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyShelf(), turnController.getCurrentPlayer()), message.getNickname()));
             }catch(ActionException e){
-                notifyObserver(obs->obs.sendToOnePlayer(new ItemOrderRequest(e.getMessage() ,itemsToOrder,turnController.getCurrentPlayer().getMyShelf()), message.getNickname()));
+                notifyObserver(obs->obs.sendToOnePlayer(new ItemOrderRequest(e.getMessage() ,itemsToOrder,turnController.getCurrentPlayer().getMyShelf(), turnController.getCurrentPlayer()), message.getNickname()));
             }
         }
         else{

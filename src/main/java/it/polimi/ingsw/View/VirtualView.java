@@ -23,7 +23,7 @@ public class VirtualView implements ViewObserver {
 
     @Override
     public void endTurnHandler(EndTurn message) {
-        view.showShelf(message.getActualPlayer().getMyShelf());
+        view.showShelf(message.getActualPlayer().getMyShelf(), message.getActualPlayer());
         view.showMessage(message.getActualPlayer().getNickname() + ", your turn ended! Now is " + message.getNextPlayer() + "'s turn");
     }
 
@@ -39,7 +39,7 @@ public class VirtualView implements ViewObserver {
 
     @Override
     public void showShelfHandler(ShelfResponse message) {
-        view.showShelf(message.getShelf());
+        view.showShelf(message.getShelf(), message.getPlayer());
     }
 
     @Override
@@ -74,7 +74,7 @@ public class VirtualView implements ViewObserver {
     @Override
     public void chooseItemPosition(Item1PositionRequest message) {
         if(message.getBoard()!=null && message.getCommonGoals()!=null && message.getMyPgoal()!=null) {
-            view.showTable(message.getBoard(),message.getAvailablePosition(),message.getShelf(),message.getCommonGoals(),message.getMyPgoal());
+            view.showTable(message.getBoard(),message.getAvailablePosition(),message.getShelf(),message.getCommonGoals(),message.getMyPgoal(),message.getPlayer());
         }
         if (message.getError()!=null)
             view.showError(message.getError());
@@ -107,7 +107,7 @@ public class VirtualView implements ViewObserver {
 
     @Override
     public void addItemInShelf(AddItemInShelf_OK message) {
-        view.showShelf(message.getShelf());
+        view.showShelf(message.getShelf(),message.getPlayer());
     }
 
     @Override
@@ -117,7 +117,7 @@ public class VirtualView implements ViewObserver {
 
     @Override
     public void chooseOrderItem(ItemOrderRequest message) {
-        view.showShelf(message.getShelf());
+        view.showShelf(message.getShelf(), message.getPlayer());
         view.showItemToOrder(message.getItems());
         view.askOrder(message.getItems());
     }
@@ -126,7 +126,7 @@ public class VirtualView implements ViewObserver {
     public void chooseColumn(ColumnRequest message) {
         view.showMessage("Your item ordered are: ");
         view.showItemToOrder(message.getItemOrdered());
-        view.showShelf(message.getShelf());
+        view.showShelf(message.getShelf(), message.getPlayer());
         view.askColumn();
     }
 

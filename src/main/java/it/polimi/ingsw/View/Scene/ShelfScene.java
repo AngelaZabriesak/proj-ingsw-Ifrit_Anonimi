@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 
 public class ShelfScene extends InputObservable implements GenericScene {
-    private StackPane pickedItemShelf;
+    private GridPane pickedItem;
     private GridPane shelfGrid;  //
     private Shelf shelf;
     private Game game;
@@ -28,9 +28,10 @@ public class ShelfScene extends InputObservable implements GenericScene {
    // private AnchorPane chosenItemShelf;
 
 
-    public void start(Stage primaryStage, Shelf shelf) {
+    public void start(Stage primaryStage, Shelf shelf,Player player) {
         this.stageInstance = primaryStage;
         this.shelf = shelf;
+        this.player=player;
         String urlS= "file:src/main/resources/images/ShelfScene.png";
 
 
@@ -73,10 +74,11 @@ public class ShelfScene extends InputObservable implements GenericScene {
                             "-fx-background-image: url('" + url + "');");
                     shelfGrid.add(button, col, 0);
                 } else {
-                    ImageView iw = new ImageView(new Image("file:src/main/resources/images/parquet_background.jpg"));
-                    iw.setFitWidth(55.5);
-                    iw.setFitHeight(55.5);
-                    shelfGrid.add(iw, col, row + 1);
+                    Button emptyButton = new Button();
+                    emptyButton.setPrefSize(50.9,50.9);
+                    emptyButton.setStyle("-fx-background-color: transparent;");
+
+                    shelfGrid.add(emptyButton, col, row + 1);
                 }
             }
         }
@@ -84,35 +86,26 @@ public class ShelfScene extends InputObservable implements GenericScene {
         immShelf.getChildren().add(shelfGrid);
 
 
-        pickedItemShelf = new StackPane();
-        pickedItemShelf.setPrefSize(100, 300);
-        AnchorPane.setTopAnchor(pickedItemShelf,500.0);
-        AnchorPane.setLeftAnchor(pickedItemShelf,300.0);
+        pickedItem = new GridPane();
+        pickedItem.setPrefSize(100, 300);
+        pickedItem.setVgap(13);
+        AnchorPane.setTopAnchor(pickedItem,151.5);
+        AnchorPane.setLeftAnchor(pickedItem,487.0);
 
        /* pickedItemShelf.setStyle("-fx-background-image: url('" + urlI + "'); " +
                 "-fx-background-repeat: stretch; " +
                 "-fx-background-size: cover;");  */
 
         // Aggiunge gli elementi dello StackPane
-        int pos = 3;  //player.getMyItem().size();
 
-        {
-            for (int i = 0; i < pos; i++) {
 
-                Button button = new Button();
-                pickedItemShelf.getChildren().add(button);
-                button.setGraphic(createRandomImageView(i));
-            }
-
-        }
-
-        immShelf.getChildren().add(pickedItemShelf);
+        immShelf.getChildren().add(pickedItem);
 
 
         AnchorPane.setTopAnchor(shelfGrid, 30.7);
         AnchorPane.setLeftAnchor(shelfGrid, 62.25);
-        AnchorPane.setBottomAnchor(pickedItemShelf, 300.0);
-        AnchorPane.setRightAnchor(pickedItemShelf, 300.0);
+        AnchorPane.setBottomAnchor(pickedItem, 300.0);
+        AnchorPane.setRightAnchor(pickedItem, 300.0);
 
         Scene scene = new Scene(immShelf);
 
@@ -144,12 +137,9 @@ public class ShelfScene extends InputObservable implements GenericScene {
     private ImageView createRandomImageView(int pos) {
         String imagePath=null;
 
-        ImageView imageView = new ImageView("file:src/main/resources/images/items/blueitem1.png");
-        imageView.setFitWidth(50);
-        imageView.setFitHeight(50);
-        imageView.setPreserveRatio(true);
 
-      /*  this.player= game.getCurrentPlayer();
+
+        //this.player= game.getCurrentPlayer();
 
         switch (player.getMyItem().get(pos).getColor()) {
             case BLUE:
@@ -171,11 +161,14 @@ public class ShelfScene extends InputObservable implements GenericScene {
                 imagePath = "file:src/main/resources/images/items/yellowitem1.png";
                 break;
         }
-
+        ImageView imageView = new ImageView(imagePath);
+        imageView.setFitWidth(50);
+        imageView.setFitHeight(50);
+        imageView.setPreserveRatio(true);
         Image image = new Image(imagePath);
         imageView.setImage(image);
 
-       */
+
 
         return imageView;
     }

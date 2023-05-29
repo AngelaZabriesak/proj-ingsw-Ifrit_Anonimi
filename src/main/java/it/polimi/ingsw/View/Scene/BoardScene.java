@@ -24,6 +24,7 @@ public class BoardScene extends InputObservable implements GenericScene {
     private Board board;
 
     private Button okItem;
+    private Button plusItem;
     private Position p1,p2;
     private static Stage stageInstance;
 
@@ -38,6 +39,14 @@ public class BoardScene extends InputObservable implements GenericScene {
                 "-fx-border-color: transparent;" +
                 "fx-background-color: transparent;");
         okItem.setPrefSize(50,50);
+
+        plusItem = new Button();
+        String urlBtnPlus = "file:src/main/resources/images/buttons/add_item_button.png";
+        plusItem.setStyle("-fx-background-image: url('"+urlBtnPlus+"');"+"\n" +
+                "    -fx-background-size: stretch;" +
+                "-fx-border-color: transparent;" +
+                "fx-background-color:transparent;");
+        plusItem.setPrefSize(50,50);
 
 
         this.p1 = p1;
@@ -93,6 +102,8 @@ public class BoardScene extends InputObservable implements GenericScene {
         AnchorPane.setLeftAnchor(gridPane,41.0);
         AnchorPane.setBottomAnchor(okItem,30.0);
         AnchorPane.setLeftAnchor(okItem,45.0);
+        AnchorPane.setBottomAnchor(plusItem,30.0);
+        AnchorPane.setLeftAnchor(plusItem,100.0);
 
 
         Scene scene = new Scene(sfondo);
@@ -158,15 +169,67 @@ public class BoardScene extends InputObservable implements GenericScene {
         else
             notifyInObserver(obs -> obs.onUpdateChooseItem(new Item3PositionResponse(p1,p2,p)));
         okItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickOk);
+        plusItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickPlus);
     }
 
     private void onClickOk(MouseEvent event){
         notifyInObserver(obs->obs.onUpdateChoose(new ChoosePositionResponse("no",p1,p2)));
     }
+
+    private void onClickPlus(MouseEvent event) {
+        notifyInObserver(obs -> obs.onUpdateChoose(new ChoosePositionResponse("yes", p1, p2)));
+        plusItem.setOnAction(e -> {
+            plusItem.setDisable(true); // Disabilita il pulsante
+        });
+    }
+
     @FXML
     public void initialize(){
         System.out.println("Size children: "+gridPane.getChildren().size());
         //for(Node n : gridPane.getChildren())
             //n.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onClickItem);
     }
+
+    public void updateBoard(Stage primaryStage, Board board, ArrayList<Position> availablePositions, Position p1, Position p2){
+
+        this.board=board;
+
+        this.p1 = p1;
+        this.p2 = p2;
+        primaryStage.setWidth(615);
+        primaryStage.setHeight(635);
+
+        for (int row = 0; row < board.getRow(); row++) {
+            for (int col = 0; col < board.getCol(); col++) {
+                if(board.getMyBoardAdjacency()[row][col]>4) {
+                    Button emptyButton = new Button();
+                    emptyButton.setPrefSize(42,55);
+                    emptyButton.setStyle("-fx-background-color: transparent;"+"\n" +
+                            "    -fx-background-size: stretch;");
+                    gridPane.add(emptyButton, col, row);
+                }
+            }
+        }
+
+        //initialize();
+        String url = "file:src/main/resources/images/board.png";
+
+        sfondo = new AnchorPane(gridPane,okItem,plusItem);
+        sfondo.setPrefSize(600, 600);
+        sfondo.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
+                "-fx-background-size: 600 600;");
+        AnchorPane.setTopAnchor(gridPane,87.0);
+        AnchorPane.setLeftAnchor(gridPane,83.0);
+        AnchorPane.setBottomAnchor(okItem,30.0);
+        AnchorPane.setLeftAnchor(okItem,45.0);
+
+
+        Scene scene = new Scene(sfondo);
+        primaryStage.setScene(scene);
+        primaryStage.setX(0);
+        primaryStage.setY(0);
+        primaryStage.setTitle("board");
+        primaryStage.show();
+}
+
 }

@@ -5,6 +5,7 @@ import it.polimi.ingsw.Message.Message;
 import it.polimi.ingsw.Model.Game.Board;
 import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.Pgoal;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Position;
 import it.polimi.ingsw.Model.Shelf;
 
@@ -16,12 +17,14 @@ public class Item1PositionRequest extends Message {
     private final ArrayList<Cgoal> commonGoals;
     private final Pgoal myPgoal;
     private final Shelf shelf;
+    private final Player player;
     private final String error;
     private final ArrayList<Position> availablePosition;
-    public Item1PositionRequest(String error, Board board, Shelf shelf, ArrayList<Cgoal> commonGoals, Pgoal myPgoal, ArrayList<Position> positionAvailable) {
+    public Item1PositionRequest(String error, Board board, Shelf shelf, ArrayList<Cgoal> commonGoals, Pgoal myPgoal, ArrayList<Position> positionAvailable, Player player) {
         super(MessageType.ITEM_1POSITION_REQUEST);
         this.board = board;
         this.shelf = shelf;
+        this.player=player;
         this.commonGoals = commonGoals;
         this.myPgoal = myPgoal;
         this.error = error;
@@ -40,6 +43,9 @@ public class Item1PositionRequest extends Message {
         return shelf;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
 
     public ArrayList<Cgoal> getCommonGoals() {
         return commonGoals;

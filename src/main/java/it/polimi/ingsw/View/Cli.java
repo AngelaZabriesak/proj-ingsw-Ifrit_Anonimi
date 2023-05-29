@@ -237,7 +237,7 @@ public class Cli extends InputObservable implements View {
 
     //method that shows the personal Shelf
     @Override
-    public void showShelf(Shelf shelf) {
+    public void showShelf(Shelf shelf,Player player) {
         out.println("This is your Shelf\n");
         StringBuilder s = new StringBuilder();
         for (int r = 0; r < shelf.getRow(); r++) {
@@ -325,7 +325,7 @@ public class Cli extends InputObservable implements View {
     }
 
     @Override
-    public void showTable(Board board, ArrayList<Position> availablePositions, Shelf shelf, ArrayList<Cgoal> cgoal, Pgoal pgoal) {
+    public void showTable(Board board, ArrayList<Position> availablePositions, Shelf shelf, ArrayList<Cgoal> cgoal, Pgoal pgoal,Player player) {
         showBoard(board);
         showCGoal(cgoal);
         showPGoal(pgoal);
