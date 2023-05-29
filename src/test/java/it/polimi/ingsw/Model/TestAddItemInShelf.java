@@ -16,6 +16,8 @@ public class TestAddItemInShelf {
         ArrayList<Player> players = new ArrayList<>();
         players.add(new Player("0"));
         players.add(new Player("1"));
+        players.add(new Player("2"));
+        players.add(new Player("3"));
 
         game = new Game(players);
         game.setActivePlayer(game.getPlayers().get(0));
@@ -29,9 +31,9 @@ public class TestAddItemInShelf {
         position.add(0);
         position.add(1);
         Player p0 = game.getCurrentPlayer();
-        game.setAction(new ChooseItem(game,p0,null,null,new Position(1,4)));
+        game.setAction(new ChooseItem(game,p0,null,null,new Position(1,3)));
         game.doAction();
-        game.setAction(new ChooseItem(game,p0,new Position(1,4),null,new Position(1,3)));
+        game.setAction(new ChooseItem(game,p0,new Position(1,4),null,new Position(1,5)));
         game.doAction();
         game.setAction(new ChooseOrder(game,p0,position));
         game.doAction();

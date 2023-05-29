@@ -255,12 +255,6 @@ public class Game extends Observable implements Serializable {
         return myBag;
     }
 
-    private int distance(Position p1, Position p2) {
-        int row=(p1.getRow()-p2.getRow())^2;
-        int col=(p1.getCol()-p2.getCol())^2;
-        return (int) Math.sqrt(row+col);
-    }
-
     public ArrayList<Position> getPositionAvailable(Position p1,Position p2){
         int row,col;
         itemAvailable = new ArrayList<>();
@@ -293,29 +287,5 @@ public class Game extends Observable implements Serializable {
         return itemAvailable;
     }
 
-    public ColorItem getAvailable(int row, int col){
-        for(Position p : itemAvailable){
-            if(p.getRow()==row && p.getCol()==col)
-                return myBoard.getMyBoardItem()[row][col].getColor();
-        }
-        return null;
-    }
-
-
-
- /*
-    @FunctionalInterface
-    private interface RandomCGoal{
-        int getRandomCGoal();
-    }
-
-    private RandomCGoal randomCGoal;
-
-    public void setRandomCGoal(RandomCGoal randomCGoal){
-       this.randomCGoal = randomCGoal;
-    }
-
-
-  */
 }
 
