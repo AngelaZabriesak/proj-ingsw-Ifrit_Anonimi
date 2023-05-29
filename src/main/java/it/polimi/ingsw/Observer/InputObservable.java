@@ -31,9 +31,9 @@ public abstract class  InputObservable {
     public void notifyInObserver(Consumer<InputObserver> lambda) {
         int dim = observers.size();
         //System.out.println("DIMENSIONE input-OBSERVABLE "+dim);
-        for (InputObserver observer : observers) {
-            lambda.accept(observer);
-        }
+        //for (InputObserver observer : observers) {
+            lambda.accept(observers.get(0));
+        //}
     }
     public void addAllObservers(List<InputObserver> observerList) {
         observers.addAll(observerList);

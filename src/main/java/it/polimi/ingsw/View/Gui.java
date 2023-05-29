@@ -20,6 +20,7 @@ public class Gui extends InputObservable implements View {
     ShelfScene ss = new ShelfScene();
     GoalScene gsP = new GoalScene();
     GoalScene gsC = new GoalScene();
+    ChatScene cs = new ChatScene();
     @Override
     public void askNickname() {
         Platform.runLater(() -> ChangeScene.changeRootPane(observers, "login_scene.fxml"));
@@ -135,8 +136,15 @@ public class Gui extends InputObservable implements View {
     public void showTable(Board board,ArrayList<Position> availablePositions, Shelf shelf,ArrayList<Cgoal> cgoal,Pgoal pgoal,Player player) {
         //Platform.runLater(() -> ChangeScene.showTable(board,shelf,availablePositions,cgoal,pgoal));
         showBoard(board);
-       showShelf(shelf,player);
+        showShelf(shelf,player);
         showCGoal(cgoal);
         showPGoal(pgoal);
+        cs.addAllObservers(observers);
+        Platform.runLater(()->ChangeScene.showChat(cs,player));
+    }
+
+    @Override
+    public void showChat(String message){
+        ChangeScene.chat(cs,message);
     }
 }

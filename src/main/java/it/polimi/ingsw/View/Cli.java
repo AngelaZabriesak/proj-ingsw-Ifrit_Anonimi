@@ -353,4 +353,9 @@ public class Cli extends InputObservable implements View {
         return false;
     }
 
+    @Override
+    public void showChat(String message){
+        showMessage(message);
+    }
+
 }

@@ -137,7 +137,7 @@ public class VirtualView implements ViewObserver {
 
     @Override
     public void chat(Chat message) {
-        view.showMessage(message.getNickname()+": "+message.getMsg());
+        view.showChat(message.getNickname()+": "+message.getMsg());
     }
 
     @Override

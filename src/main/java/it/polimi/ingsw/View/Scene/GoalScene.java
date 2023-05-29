@@ -28,7 +28,7 @@ public class GoalScene extends InputObservable implements GenericScene {
             primaryPStage.setHeight(440);
             primaryPStage.setX(1200);
             primaryPStage.setY(0);
-            primaryPStage.setTitle("personal goal "+pgoal.getIndex());
+            primaryPStage.setTitle("personal goal "+pgoal.getDescription().split(" ")[2]);
         }
         else{
             primaryCStage.setWidth(825);
@@ -40,7 +40,7 @@ public class GoalScene extends InputObservable implements GenericScene {
         pgoalPane = new StackPane();
         cGoalPane = new GridPane();
         if(pgoal!=null){
-            System.out.println("pgoal: "+pgoal.getIndex());
+            System.out.println("pgoal: "+pgoal.getDescription().split(" ")[2]);
             ImageView iwPgoal = new ImageView(setPGoal(pgoal));
             pgoalPane.setStyle("-fx-background-repeat: no-repeat;"+
                     "-fx-background-size: 200 400;");
@@ -69,7 +69,6 @@ public class GoalScene extends InputObservable implements GenericScene {
             primaryPStage.setScene(scene);
             primaryPStage.show();
         }
-
         /*gridPane = new GridPane();
         String url = "file:src/main/resources/images/parquet_background.jpg";
 

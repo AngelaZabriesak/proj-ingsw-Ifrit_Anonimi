@@ -24,7 +24,6 @@ public class BoardScene extends InputObservable implements GenericScene {
     private Board board;
 
     private Button okItem;
-    private Button plusItem;
     private Position p1,p2;
     private static Stage stageInstance;
 
@@ -49,7 +48,6 @@ public class BoardScene extends InputObservable implements GenericScene {
       //  gridPane.setPadding(new Insets(69,54,13,66));
 
         boolean ok;
-
         for (int row = 0; row < board.getRow(); row++) {
             for (int col = 0; col < board.getCol(); col++) {
                 ok = false;
@@ -168,13 +166,6 @@ public class BoardScene extends InputObservable implements GenericScene {
         notifyInObserver(obs->obs.onUpdateChoose(new ChoosePositionResponse("no",p1,p2)));
     }
 
-    private void onClickPlus(MouseEvent event) {
-        notifyInObserver(obs -> obs.onUpdateChoose(new ChoosePositionResponse("yes", p1, p2)));
-        plusItem.setOnAction(e -> {
-            plusItem.setDisable(true); // Disabilita il pulsante
-        });
-    }
-
     @FXML
     public void initialize(){
         System.out.println("Size children: "+gridPane.getChildren().size());
@@ -204,7 +195,6 @@ public class BoardScene extends InputObservable implements GenericScene {
         //initialize();
         //String url = "file:src/main/resources/images/board.png";
 
-        sfondo = new AnchorPane(gridPane,okItem,plusItem);
         sfondo.setPrefSize(600, 600);
         /*sfondo.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
                 "-fx-background-size: 600 600;");*/
