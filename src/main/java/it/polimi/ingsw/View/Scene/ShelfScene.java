@@ -146,6 +146,8 @@ public class ShelfScene extends InputObservable implements GenericScene {
 
         AnchorPane.setBottomAnchor(pickedItem, 300.0);
         AnchorPane.setRightAnchor(pickedItem, 300.0);
+        AnchorPane.setTopAnchor(okItem,560.0);
+        AnchorPane.setLeftAnchor(okItem,560.0);
 
 
         Scene scene = new Scene(immShelf);

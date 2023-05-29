@@ -94,8 +94,6 @@ public class BoardScene extends InputObservable implements GenericScene {
         AnchorPane.setLeftAnchor(gridPane,41.0);
         AnchorPane.setBottomAnchor(okItem,30.0);
         AnchorPane.setLeftAnchor(okItem,45.0);
-        AnchorPane.setBottomAnchor(plusItem,30.0);
-        AnchorPane.setLeftAnchor(plusItem,100.0);
 
 
         Scene scene = new Scene(sfondo);
@@ -204,12 +202,12 @@ public class BoardScene extends InputObservable implements GenericScene {
         }
 
         //initialize();
-        String url = "file:src/main/resources/images/board.png";
+        //String url = "file:src/main/resources/images/board.png";
 
         sfondo = new AnchorPane(gridPane,okItem,plusItem);
         sfondo.setPrefSize(600, 600);
-        sfondo.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
-                "-fx-background-size: 600 600;");
+        /*sfondo.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
+                "-fx-background-size: 600 600;");*/
         AnchorPane.setTopAnchor(gridPane,87.0);
         AnchorPane.setLeftAnchor(gridPane,83.0);
 
