@@ -185,19 +185,19 @@ public class GameController extends GameControllerObservable implements ServerOb
                     nColumn = Integer.parseInt(message.getColumn());
                     game.setAction(new AddItemInShelf(game, nColumn, getPlayerByNickname(message.getNickname())));
                     game.doAction();
-                    for(Cgoal cg : game.getCGoal()){
+                    /*for(Cgoal cg : game.getCGoal()){
                         if(cg.isTaken(getPlayerByNickname(message.getNickname()).getMyShelf())){
                             score = cg.getToken().getScore();
                             getPlayerByNickname(message.getNickname()).addMyScore(score);
                             int finalScore = score;
                             notifyObserver(obs->obs.sendToOnePlayer(new GoalTake(cg, finalScore),message.getNickname()));
                         }
-                    }
+                    }*/
                     if(!gameEnded) {
                         if (Objects.requireNonNull(getPlayerByNickname(message.getNickname())).getMyShelf().getNEmpty() == 0)
                             endGameDisconnection();
                         else {
-                            notifyObserver(obs -> obs.sendToOnePlayer(new EndTurn(message.getNickname(), turnController.getNextNickname()), message.getNickname()));
+                            notifyObserver(obs -> obs.sendToOnePlayer(new EndTurn(turnController.getCurrentPlayer(), turnController.getNextNickname()), message.getNickname()));
                             nextPlayer();
                         }
                     }

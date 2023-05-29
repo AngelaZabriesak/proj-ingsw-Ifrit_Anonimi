@@ -23,7 +23,8 @@ public class VirtualView implements ViewObserver {
 
     @Override
     public void endTurnHandler(EndTurn message) {
-        view.showMessage(message.getActualPlayer() + ", your turn ended! Now is " + message.getNextPlayer() + "'s turn");
+        view.showShelf(message.getActualPlayer().getMyShelf());
+        view.showMessage(message.getActualPlayer().getNickname() + ", your turn ended! Now is " + message.getNextPlayer() + "'s turn");
     }
 
     @Override
