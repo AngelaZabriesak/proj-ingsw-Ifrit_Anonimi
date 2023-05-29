@@ -27,6 +27,7 @@ public class SelectIpScene extends InputObservable implements GenericScene {
         String defaultAddress = "127.0.0.1";
         if(ipTextField!=null){
             defaultAddress = ipTextField.getText();
+            System.out.println(defaultAddress);
         }
         connectButton.setDisable(true);
 
