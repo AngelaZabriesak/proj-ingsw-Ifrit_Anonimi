@@ -74,7 +74,13 @@ public class ShelfScene extends InputObservable implements GenericScene {
                             "-fx-background-image: url('" + url + "');");
                     button.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickColumn);
                     shelfGrid.add(button, col, 0);
-                } else
+                } else {
+                    Button emptyButton = new Button();
+                    emptyButton.setPrefSize(50.9,50.9);
+                    emptyButton.setStyle("-fx-background-color: transparent;");
+
+                    shelfGrid.add(emptyButton, col, row + 1);
+                /*} else
 
                     {
                         if(shelf.getMyShelf()[row][col]!= null){
@@ -87,7 +93,7 @@ public class ShelfScene extends InputObservable implements GenericScene {
                         emptySpace.setFitWidth(50.9);
                     emptySpace.setStyle("-fx-background-color: transparent;");
 
-                    shelfGrid.add(emptySpace, col, row + 1);
+                    shelfGrid.add(emptySpace, col, row + 1);*/
                 }
             }
         }
