@@ -72,6 +72,7 @@ public class ShelfScene extends InputObservable implements GenericScene {
                             "-fx-background-repeat: no-repeat;" +
                             "-fx-background-color:transparent;"+
                             "-fx-background-image: url('" + url + "');");
+                    button.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickColumn);
                     shelfGrid.add(button, col, 0);
                 } else {
                     Button emptyButton = new Button();
@@ -139,6 +140,7 @@ public class ShelfScene extends InputObservable implements GenericScene {
     private void onClickColumn(MouseEvent event) {
         int col = Integer.parseInt(((Button) event.getSource()).getAccessibleText().split("-")[0]);
         System.out.println("Click on column " + col);
+        notifyInObserver(obs->obs.onUpdateColumn(""+col));
     }
 
     public static Stage getStageInstance() {

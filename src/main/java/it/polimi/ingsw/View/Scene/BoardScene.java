@@ -95,6 +95,7 @@ public class BoardScene extends InputObservable implements GenericScene {
         initialize();
         String url = "file:src/main/resources/images/board.png";
 
+        okItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickOk);
         sfondo = new AnchorPane(gridPane,okItem);
         sfondo.setPrefSize(600, 600);
         sfondo.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
@@ -170,7 +171,6 @@ public class BoardScene extends InputObservable implements GenericScene {
             notifyInObserver(obs -> obs.onUpdateChooseItem(new Item2PositionResponse(p1,p)));
         else
             notifyInObserver(obs -> obs.onUpdateChooseItem(new Item3PositionResponse(p1,p2,p)));
-        okItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickOk);
         //plusItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickPlus);
 
     }
@@ -189,8 +189,6 @@ public class BoardScene extends InputObservable implements GenericScene {
     @FXML
     public void initialize(){
         System.out.println("Size children: "+gridPane.getChildren().size());
-        //for(Node n : gridPane.getChildren())
-            //n.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onClickItem);
     }
 
     public void updateBoard(Stage primaryStage, Board board, ArrayList<Position> availablePositions, Position p1, Position p2){
@@ -226,6 +224,7 @@ public class BoardScene extends InputObservable implements GenericScene {
         AnchorPane.setBottomAnchor(okItem,30.0);
         AnchorPane.setLeftAnchor(okItem,45.0);
 
+        okItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickOk);
 
         Scene scene = new Scene(sfondo);
         primaryStage.setScene(scene);
@@ -233,6 +232,6 @@ public class BoardScene extends InputObservable implements GenericScene {
         primaryStage.setY(0);
         primaryStage.setTitle("board");
         primaryStage.show();
-}
+    }
 
 }
