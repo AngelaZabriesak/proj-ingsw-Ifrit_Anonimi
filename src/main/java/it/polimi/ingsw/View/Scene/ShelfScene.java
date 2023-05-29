@@ -1,6 +1,7 @@
 package it.polimi.ingsw.View.Scene;
 
 
+import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Game.Game;
 import it.polimi.ingsw.Model.Shelf;
 
@@ -88,31 +89,31 @@ public class ShelfScene extends InputObservable implements GenericScene {
                             "-fx-background-image: url('" + url + "');");
                     button.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickColumn);
                     shelfGrid.add(button, col, 0);
-                } else {            //da riga 97 a 110 quella giusta, ma si blocca
+                } /*else {            //da riga 97 a 110 quella giusta, ma si blocca
                     Button emptyButton = new Button();
                     emptyButton.setPrefSize(50.9,50.9);
                     emptyButton.setStyle("-fx-background-color: transparent;");
 
-                    shelfGrid.add(emptyButton, col, row + 1);
-                /*} else
-
-                    {
+                    shelfGrid.add(emptyButton, col, row + 1);*/
+                else {
                         if(shelf.getMyShelf()[row][col]!= null){
-                            ImageView  shelfItem = new ImageView(getImgUrl(row));
+                            ImageView  shelfItem = new ImageView(getImgUrl(shelf.getMyShelf()[row][col]));
                             shelfItem.setFitHeight(50.9);
                             shelfItem.setFitWidth(50.9);
-                    }
-                    ImageView emptySpace = new ImageView();
-                        emptySpace.setFitHeight(50.9);
-                        emptySpace.setFitWidth(50.9);
-                    emptySpace.setStyle("-fx-background-color: transparent;");
-
-                    shelfGrid.add(emptySpace, col, row + 1);*/
+                            shelfGrid.add(shelfItem, col, row + 1);
+                        }
+                        else {
+                            ImageView emptySpace = new ImageView();
+                            emptySpace.setFitHeight(50.9);
+                            emptySpace.setFitWidth(50.9);
+                            emptySpace.setStyle("-fx-background-color: transparent;");
+                            shelfGrid.add(emptySpace, col, row + 1);
+                        }
                 }
             }
         }
 
-        immShelf.getChildren().add(shelfGrid);
+        //immShelf.getChildren().add(shelfGrid);
 
 
         pickedItem = new GridPane();
@@ -122,24 +123,18 @@ public class ShelfScene extends InputObservable implements GenericScene {
         AnchorPane.setLeftAnchor(pickedItem,487.0);
 
 
-
-
-     //add picked items to the gridpane
+        //add picked items to the gridpane
+        //setPickedItem(player.getMyItem());
 
         int nItems = player.getMyItem().size();
-            for (int r = 0; r < nItems; r++) {
+        for (int r = 0; r < nItems; r++) {
+            ImageView image = new ImageView(getImgUrl(player.getMyItem().get(r)));
+            image.setFitHeight(83);
+            image.setFitWidth(81);
+            pickedItem.add(image,0,r);
+        }
 
-                ImageView image = new ImageView(getImgUrl(r));
-                image.setFitHeight(83);
-                image.setFitWidth(81);
-                pickedItem.add(image,0,r);
-            }
-
-
-
-
-        immShelf.getChildren().addAll(pickedItem,orderItem,okItem);
-
+        immShelf.getChildren().addAll(shelfGrid,pickedItem,orderItem,okItem);
 
         AnchorPane.setTopAnchor(shelfGrid, 30.7);
         AnchorPane.setLeftAnchor(shelfGrid, 62.25);
@@ -156,18 +151,27 @@ public class ShelfScene extends InputObservable implements GenericScene {
         primaryStage.setTitle("shelf");
         primaryStage.setX(600);
         primaryStage.setY(0);
-
-        primaryStage.show();
         primaryStage.show();
     }
-
-
-
 
     private void onClickColumn(MouseEvent event) {
         int col = Integer.parseInt(((Button) event.getSource()).getAccessibleText().split("-")[0]);
         System.out.println("Click on column " + col);
         notifyInObserver(obs->obs.onUpdateColumn(""+col));
+        //setPickedItem(player.getMyItem());
+    }
+
+    private void setPickedItem(ArrayList<Item> items){
+        int nItems = items.size();
+        for (int r = 0; r < nItems; r++) {
+
+            /*ImageView image = new ImageView(getImgUrl(r));
+            image.setFitHeight(83);
+            image.setFitWidth(81);
+            pickedItem.add(image,0,r);*/
+        }
+
+        immShelf.getChildren().addAll(pickedItem,orderItem,okItem);
     }
 
     public static Stage getStageInstance() {
@@ -176,10 +180,11 @@ public class ShelfScene extends InputObservable implements GenericScene {
         return stageInstance;
     }
 
-    private String getImgUrl(int r) {
+    private String getImgUrl(Item item) {
         String imagePath = "";
 
-        switch (player.getMyItem().get(r).getColor()) {
+        //switch (player.getMyItem().get(r).getColor()) {
+        switch(item.getColor()){
             case BLUE:
                 imagePath = "file:src/main/resources/images/items/blueitem1.png";
                 break;
@@ -213,10 +218,10 @@ public class ShelfScene extends InputObservable implements GenericScene {
         String order = orderItem.getText();
         ArrayList<Integer> orderedItem = new ArrayList<>();
         String[] splittedOrder = order.split("-");
+        //System.out.println(splittedOrder.toString());
         for(int i = 0;i<splittedOrder.length;i++){
             orderedItem.add(Integer.parseInt(splittedOrder[i]));
         }
-
         notifyInObserver(obs->obs.onUpdateOrder(orderedItem,player.getMyItem()));
     }
 
