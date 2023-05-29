@@ -68,9 +68,7 @@ public class ShelfScene extends InputObservable implements GenericScene {
         primaryStage.setHeight(600);
         shelfGrid.setHgap(21.95);
         shelfGrid.setVgap(10.4);
-       // AnchorPane.setTopAnchor(shelfGrid,90.0);
-        // AnchorPane.setLeftAnchor(shelfGrid,90.0);
-     //   shelfGrid.setPadding(new Insets(10));
+
 
 
 
@@ -175,6 +173,9 @@ public class ShelfScene extends InputObservable implements GenericScene {
             stageInstance = new Stage();
         return stageInstance;
     }
+
+
+    //get the url based on the itemcolor
 
     private String getImgUrl(int r) {
         String imagePath = "";
