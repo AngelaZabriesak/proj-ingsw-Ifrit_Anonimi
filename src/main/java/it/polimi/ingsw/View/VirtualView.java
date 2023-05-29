@@ -84,14 +84,14 @@ public class VirtualView implements ViewObserver {
     public void chooseOtherItemPosition(Item2PositionRequest message) {
         if (message.getError()!=null)
             view.showError(message.getError());
-        view.askItem(null,message.getP1(),null,message.getPositionAvailable());
+        view.askItem(message.getBoard(),message.getP1(),null,message.getPositionAvailable());
     }
 
     @Override
     public void chooseOtherItemPosition(Item3PositionRequest message) {
         if (message.getError()!=null)
             view.showError(message.getError());
-        view.askItem(null,message.getP1(),message.getP2(),message.getPosAvailable());
+        view.askItem(message.getBoard(),message.getP1(),message.getP2(),message.getPosAvailable());
     }
 
     @Override
