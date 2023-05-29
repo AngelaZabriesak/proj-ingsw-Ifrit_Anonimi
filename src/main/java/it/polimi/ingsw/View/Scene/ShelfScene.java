@@ -88,7 +88,7 @@ public class ShelfScene extends InputObservable implements GenericScene {
                             "-fx-background-image: url('" + url + "');");
                     button.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickColumn);
                     shelfGrid.add(button, col, 0);
-                } else {
+                } else {            //da riga 97 a 110 quella giusta, ma si blocca
                     Button emptyButton = new Button();
                     emptyButton.setPrefSize(50.9,50.9);
                     emptyButton.setStyle("-fx-background-color: transparent;");
