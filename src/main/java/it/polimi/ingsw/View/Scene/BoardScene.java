@@ -35,9 +35,9 @@ public class BoardScene extends InputObservable implements GenericScene {
         okItem = new Button();
         String urlBtn = "file:src/main/resources/images/buttons/ok_button.png";
         okItem.setStyle("-fx-background-image: url('"+urlBtn+"');"+"\n" +
-                "    -fx-background-size: stretch;" +
+                "-fx-background-size: stretch;" +
                 "-fx-border-color: transparent;" +
-                "fx-background-color: transparent;");
+                "-fx-background-color: transparent;");
         okItem.setPrefSize(50,50);
 
         plusItem = new Button();
@@ -117,6 +117,7 @@ public class BoardScene extends InputObservable implements GenericScene {
     public static Stage getStageInstance(){
         if(stageInstance == null)
             stageInstance = new Stage();
+            //stageInstance.initStyle(StageStyle.TRANSPARENT);
         return stageInstance;
     }
 

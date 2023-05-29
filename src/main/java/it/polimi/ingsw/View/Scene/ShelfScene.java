@@ -101,8 +101,6 @@ public class ShelfScene extends InputObservable implements GenericScene {
         // AGGIUNGE GLI ITEM SCELTI AL GRID PANE
 
         int nItems = player.getMyItem().size();
-
-        String imagePath = new String();
             for (int r = 0; r < nItems; r++) {
 
                 ImageView image = new ImageView(getImgUrl(r));
