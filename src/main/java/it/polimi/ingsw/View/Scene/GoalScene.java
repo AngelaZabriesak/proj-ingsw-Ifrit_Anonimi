@@ -3,6 +3,7 @@ package it.polimi.ingsw.View.Scene;
 import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.Pgoal;
 import it.polimi.ingsw.Observer.InputObservable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,6 +17,7 @@ public class GoalScene extends InputObservable implements GenericScene {
     private GridPane gridPane;
     private Pane pgoalPane;
     private GridPane cGoalPane;
+    private ImageView[] tokens;
     private static Stage stagePInstance;
     private static Stage stageCInstance;
 
@@ -31,6 +33,12 @@ public class GoalScene extends InputObservable implements GenericScene {
             primaryPStage.setTitle("personal goal "+pgoal.getDescription().split(" ")[2]);
         }
         else{
+            tokens = new ImageView[cGoal.get(0).getMyTokens().size()];
+            for(int i =0;  i< tokens.length;i++){
+                tokens[i] = new ImageView(new Image("file:src/main/resources/images/tokens/scoring_"+cGoal.get(0).getMyTokens().get(i).getScore()+".jpg"));
+                /*tokens[i].setFitWidth(55);
+                tokens[i].setFitHeight(55);*/
+            }
             primaryCStage.setWidth(825);
             primaryCStage.setHeight(300);
             primaryCStage.setX(530);
@@ -50,9 +58,13 @@ public class GoalScene extends InputObservable implements GenericScene {
             for (Cgoal cg : cGoal) {
                 System.out.println("cgoal "+cg.getIndex());
                 ImageView lcg = new ImageView(setCgoal(cg));
+                /*AnchorPane goal = new AnchorPane(lcg,tokens[tokens.length-1]);
+                AnchorPane.setRightAnchor(tokens[tokens.length-1],100.0);
+                AnchorPane.setBottomAnchor(tokens[tokens.length-1],100.0);*/
                 cGoalPane.setStyle("-fx-background-repeat: no-repeat;"+
                         "-fx-background-size: 400 400;");
                 cGoalPane.add(lcg, cGoal.indexOf(cg),0);
+
             }
         }
         gridPane.add(pgoalPane,1,0);

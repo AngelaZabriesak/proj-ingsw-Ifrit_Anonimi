@@ -105,12 +105,12 @@ public class Gui extends InputObservable implements View {
 
     @Override
     public void showError(String error) {
-        //Platform.runLater(() -> ChangeScene.showAlert(error));
+        Platform.runLater(() -> ChangeScene.showAlert(error));
     }
 
     @Override
     public void showMessage(String message) {
-        /*Platform.runLater(() -> ChangeScene.showAlert(message));*/
+        Platform.runLater(() -> ChangeScene.showAlert(message));
     }
 
     @Override
