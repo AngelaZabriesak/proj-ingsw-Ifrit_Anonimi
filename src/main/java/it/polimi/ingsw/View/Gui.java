@@ -39,7 +39,7 @@ public class Gui extends InputObservable implements View {
 
     @Override
     public void askOther(ChoosePositionRequest message) {
-        Platform.runLater(()->ChangeScene.updateBoard(bs,message.getBoard(),message.getP1(),message.getP2(),message.getAvailable()));
+        Platform.runLater(()->ChangeScene.showBoard(bs,message.getBoard(),message.getAvailable(),message.getP1(),message.getP2()));
         //Platform.runLater(() -> ChangeScene.changeRootPane(observers, "game_scene.fxml"));
     }
 
@@ -50,6 +50,7 @@ public class Gui extends InputObservable implements View {
 
     @Override
     public void askOrder(ArrayList<Item> itemToOrder) {
+        System.out.println("Order");
         //Platform.runLater(() -> ChangeScene.changeRootPane(observers, "game_scene.fxml"));
     }
 
