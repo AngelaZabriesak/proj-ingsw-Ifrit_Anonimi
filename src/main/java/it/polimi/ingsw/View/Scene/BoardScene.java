@@ -81,11 +81,12 @@ public class BoardScene extends InputObservable implements GenericScene {
                         }
                         gridPane.add(button, col, row);
                     }
-                    else{    Button emptyButton = new Button();
-                             emptyButton.setPrefSize(42,55);
-                             emptyButton.setStyle("-fx-background-color: transparent;"+"\n" +
-                                    "    -fx-background-size: stretch;");
-                             gridPane.add(emptyButton, col, row);
+                    else{
+                        Button emptyButton = new Button();
+                         emptyButton.setPrefSize(42,55);
+                         emptyButton.setStyle("-fx-background-color: transparent;"+"\n" +
+                                "    -fx-background-size: stretch;");
+                         gridPane.add(emptyButton, col, row);
                     }
 
                 }
@@ -162,6 +163,7 @@ public class BoardScene extends InputObservable implements GenericScene {
         int row = Integer.parseInt(((Button)event.getSource()).getAccessibleText().split("-")[0]);
         int col = Integer.parseInt(((Button)event.getSource()).getAccessibleText().split("-")[1]);
         System.out.println("Click on "+row+"-"+col);
+        //updateBoard(stageInstance,board,null,p1,p2);
         Position p = new Position(row,col);
         if(p1==null)
             notifyInObserver(obs -> obs.onUpdateChooseItem(new Item1PositionResponse(p)));
@@ -170,7 +172,8 @@ public class BoardScene extends InputObservable implements GenericScene {
         else
             notifyInObserver(obs -> obs.onUpdateChooseItem(new Item3PositionResponse(p1,p2,p)));
         okItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickOk);
-        plusItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickPlus);
+        //plusItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickPlus);
+
     }
 
     private void onClickOk(MouseEvent event){
