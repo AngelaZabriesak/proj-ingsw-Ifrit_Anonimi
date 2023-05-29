@@ -12,6 +12,7 @@ import it.polimi.ingsw.Model.Shelf;
 import it.polimi.ingsw.Observer.InputObservable;
 import it.polimi.ingsw.View.Scene.*;
 import javafx.application.Platform;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public class Gui extends InputObservable implements View {
     GoalScene gsP = new GoalScene();
     GoalScene gsC = new GoalScene();
     ChatScene cs = new ChatScene();
+    Stage stageChat = new Stage();
     @Override
     public void askNickname() {
         Platform.runLater(() -> ChangeScene.changeRootPane(observers, "login_scene.fxml"));
@@ -129,7 +131,10 @@ public class Gui extends InputObservable implements View {
 
     @Override
     public void initGame(GameStart message) {
-
+        cs.addAllObservers(observers);
+        Platform.runLater(()->ChangeScene.showChat(cs,stageChat));
+        showCGoal(message.getCgoals());
+        showPGoal(message.getPgoal());
     }
 
     @Override
@@ -137,10 +142,6 @@ public class Gui extends InputObservable implements View {
         //Platform.runLater(() -> ChangeScene.showTable(board,shelf,availablePositions,cgoal,pgoal));
         showBoard(board);
         showShelf(shelf,player);
-        showCGoal(cgoal);
-        showPGoal(pgoal);
-        cs.addAllObservers(observers);
-        Platform.runLater(()->ChangeScene.showChat(cs,player));
     }
 
     @Override

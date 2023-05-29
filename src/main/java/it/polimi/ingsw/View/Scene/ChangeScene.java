@@ -137,8 +137,8 @@ public class ChangeScene extends InputObservable {
         bs.updateBoard(BoardScene.getStageInstance(),board,availablePositions,p1,p2);
     }
 
-    public static void showChat(ChatScene cs,Player player){
-        cs.start(ChatScene.getStageInstance());
+    public static void showChat(ChatScene cs,Stage stageChat){
+        cs.start(stageChat);
     }
 
     public static void chat(ChatScene cs,String message){

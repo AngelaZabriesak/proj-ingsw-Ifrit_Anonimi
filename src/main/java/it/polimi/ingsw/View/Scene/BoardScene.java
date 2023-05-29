@@ -22,7 +22,7 @@ public class BoardScene extends InputObservable implements GenericScene {
     private GridPane gridPane;
     private AnchorPane sfondo;
     private Board board;
-
+    private ArrayList<Position> availablePositions;
     private Button okItem;
     private Position p1,p2;
     private static Stage stageInstance;
@@ -30,7 +30,7 @@ public class BoardScene extends InputObservable implements GenericScene {
     public /*GridPane*/ void start(Stage primaryStage, Board board, ArrayList<Position> availablePositions, Position p1, Position p2) {
         this.stageInstance = primaryStage;
         this.board=board;
-
+        this.availablePositions = availablePositions;
         okItem = new Button();
         String urlBtn = "file:src/main/resources/images/buttons/ok_button.png";
         okItem.setStyle("-fx-background-image: url('"+urlBtn+"');"+"\n" +
@@ -150,7 +150,6 @@ public class BoardScene extends InputObservable implements GenericScene {
         int row = Integer.parseInt(((Button)event.getSource()).getAccessibleText().split("-")[0]);
         int col = Integer.parseInt(((Button)event.getSource()).getAccessibleText().split("-")[1]);
         System.out.println("Click on "+row+"-"+col);
-        //updateBoard(stageInstance,board,null,p1,p2);
         Position p = new Position(row,col);
         if(p1==null)
             notifyInObserver(obs -> obs.onUpdateChooseItem(new Item1PositionResponse(p)));
@@ -158,7 +157,6 @@ public class BoardScene extends InputObservable implements GenericScene {
             notifyInObserver(obs -> obs.onUpdateChooseItem(new Item2PositionResponse(p1,p)));
         else
             notifyInObserver(obs -> obs.onUpdateChooseItem(new Item3PositionResponse(p1,p2,p)));
-        //plusItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickPlus);
 
     }
 

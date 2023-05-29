@@ -64,8 +64,6 @@ public class ChatScene extends InputObservable implements GenericScene {
     }
 
     public static Stage getStageInstance() {
-        if (stageInstance == null)
-            stageInstance = new Stage();
         return stageInstance;
     }
 
