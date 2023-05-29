@@ -128,10 +128,10 @@ public class ChangeScene extends InputObservable {
     }
 
     public static void showPgoal(GoalScene gs,Pgoal pgoal){
-        gs.start(GoalScene.getStagePInstance(),null,pgoal);
+        gs.start(null,GoalScene.getStagePInstance(),null,pgoal);
     }
     public static void showCgoal(GoalScene gs,ArrayList<Cgoal> cgoals){
-        gs.start(GoalScene.getStageCInstance(),cgoals,null);
+        gs.start(GoalScene.getStageCInstance(),null,cgoals,null);
     }
     public static void updateBoard(BoardScene bs,Board board, Position p1, Position p2,ArrayList<Position> availablePositions){
         bs.updateBoard(BoardScene.getStageInstance(),board,availablePositions,p1,p2);

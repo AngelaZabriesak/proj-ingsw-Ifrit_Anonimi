@@ -19,23 +19,23 @@ public class GoalScene extends InputObservable implements GenericScene {
     private static Stage stagePInstance;
     private static Stage stageCInstance;
 
-    public /*GridPane*/ void start(Stage primaryStage, ArrayList<Cgoal> cGoal, Pgoal pgoal) {
-        stagePInstance = primaryStage;
-        stageCInstance = primaryStage;
-        /*gridPane = new GridPane();
+    public /*GridPane*/ void start(Stage primaryCStage,Stage primaryPStage, ArrayList<Cgoal> cGoal, Pgoal pgoal) {
+        stagePInstance = primaryPStage;
+        stageCInstance = primaryCStage;
+        gridPane = new GridPane();
         if(cGoal==null){
-            primaryStage.setWidth(280);
-            primaryStage.setHeight(440);
-            primaryStage.setX(1200);
-            primaryStage.setY(0);
-            primaryStage.setTitle("personal goal "+pgoal.getIndex());
+            primaryPStage.setWidth(280);
+            primaryPStage.setHeight(440);
+            primaryPStage.setX(1200);
+            primaryPStage.setY(0);
+            primaryPStage.setTitle("personal goal "+pgoal.getIndex());
         }
         else{
-            primaryStage.setWidth(825);
-            primaryStage.setHeight(300);
-            primaryStage.setX(530);
-            primaryStage.setY(565);
-            primaryStage.setTitle("common goals "+cGoal.get(0).getIndex()+", "+cGoal.get(1).getIndex());
+            primaryCStage.setWidth(825);
+            primaryCStage.setHeight(300);
+            primaryCStage.setX(530);
+            primaryCStage.setY(565);
+            primaryCStage.setTitle("common goals "+cGoal.get(0).getIndex()+", "+cGoal.get(1).getIndex());
         }
         pgoalPane = new StackPane();
         cGoalPane = new GridPane();
@@ -61,10 +61,16 @@ public class GoalScene extends InputObservable implements GenericScene {
         gridPane.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;");
         //return gridPane;
         Scene scene = new Scene(gridPane);
-        primaryStage.setScene(scene);
-        primaryStage.show();*/
+        if(cGoal!=null) {
+            primaryCStage.setScene(scene);
+            primaryCStage.show();
+        }
+        if(pgoal!=null){
+            primaryPStage.setScene(scene);
+            primaryPStage.show();
+        }
 
-        gridPane = new GridPane();
+        /*gridPane = new GridPane();
         String url = "file:src/main/resources/images/parquet_background.jpg";
 
         if (pgoal != null) {
@@ -99,7 +105,7 @@ public class GoalScene extends InputObservable implements GenericScene {
             stageC.setTitle("Common Goals");
             stageC.setScene(cgoalScene);
             stageC.show();
-        }
+        }*/
     }
 
     public Image setPGoal(Pgoal pgoal){

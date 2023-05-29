@@ -18,7 +18,8 @@ import java.util.ArrayList;
 public class Gui extends InputObservable implements View {
     BoardScene bs = new BoardScene();
     ShelfScene ss = new ShelfScene();
-    GoalScene gs = new GoalScene();
+    GoalScene gsP = new GoalScene();
+    GoalScene gsC = new GoalScene();
     @Override
     public void askNickname() {
         Platform.runLater(() -> ChangeScene.changeRootPane(observers, "login_scene.fxml"));
@@ -81,8 +82,8 @@ public class Gui extends InputObservable implements View {
 
     @Override
     public void showCGoal(ArrayList<Cgoal> cgoal) {
-        gs.addAllObservers(observers);
-        Platform.runLater(() -> ChangeScene.showCgoal(gs,cgoal));
+        gsC.addAllObservers(observers);
+        Platform.runLater(() -> ChangeScene.showCgoal(gsC,cgoal));
        /* GameScene gamescene= new GameScene();
         gamescene.addAllObservers(observers)
 
@@ -94,8 +95,8 @@ public class Gui extends InputObservable implements View {
 
     @Override
     public void showPGoal(Pgoal pgoal) {
-        gs.addAllObservers(observers);
-        Platform.runLater(() -> ChangeScene.showPgoal(gs,pgoal));
+        gsP.addAllObservers(observers);
+        Platform.runLater(() -> ChangeScene.showPgoal(gsP,pgoal));
         //Platform.runLater(() -> ChangeScene.changeRootPane(observers, "game_scene.fxml"));
     }
 
