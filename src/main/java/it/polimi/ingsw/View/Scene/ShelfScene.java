@@ -25,7 +25,6 @@ public class ShelfScene extends InputObservable implements GenericScene {
     private TextField orderItem;
     private GridPane shelfGrid;  //
     private Shelf shelf;
-    private Game game;
     private Player player;
     private static Stage stageInstance;
     private AnchorPane immShelf;
@@ -139,8 +138,10 @@ public class ShelfScene extends InputObservable implements GenericScene {
 
         AnchorPane.setBottomAnchor(pickedItem, 300.0);
         AnchorPane.setRightAnchor(pickedItem, 300.0);
-        AnchorPane.setTopAnchor(okItem,560.0);
-        AnchorPane.setLeftAnchor(okItem,560.0);
+        AnchorPane.setRightAnchor(okItem,10.0);
+        AnchorPane.setBottomAnchor(okItem,10.0);
+        AnchorPane.setRightAnchor(orderItem,70.0);
+        AnchorPane.setBottomAnchor(orderItem,10.0);
 
 
         Scene scene = new Scene(immShelf);
@@ -157,19 +158,6 @@ public class ShelfScene extends InputObservable implements GenericScene {
         System.out.println("Click on column " + col);
         notifyInObserver(obs->obs.onUpdateColumn(""+col));
         //setPickedItem(player.getMyItem());
-    }
-
-    private void setPickedItem(ArrayList<Item> items){
-        int nItems = items.size();
-        for (int r = 0; r < nItems; r++) {
-
-            /*ImageView image = new ImageView(getImgUrl(r));
-            image.setFitHeight(83);
-            image.setFitWidth(81);
-            pickedItem.add(image,0,r);*/
-        }
-
-        immShelf.getChildren().addAll(pickedItem,orderItem,okItem);
     }
 
     public static Stage getStageInstance() {
