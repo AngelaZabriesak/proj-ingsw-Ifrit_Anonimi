@@ -4,13 +4,11 @@ import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
 import it.polimi.ingsw.Model.Goal.PersonalGoal.Pgoal;
 import it.polimi.ingsw.Observer.InputObservable;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+
 
 import java.util.*;
 

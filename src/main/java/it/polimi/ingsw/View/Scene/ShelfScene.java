@@ -7,7 +7,6 @@ import it.polimi.ingsw.Model.Shelf;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observer.InputObservable;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -15,8 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.scene.paint.Color;
-import javafx.stage.StageStyle;
+
 
 
 public class ShelfScene extends InputObservable implements GenericScene {

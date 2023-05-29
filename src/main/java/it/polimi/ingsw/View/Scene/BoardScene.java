@@ -9,7 +9,6 @@ import it.polimi.ingsw.Model.Game.Board;
 import it.polimi.ingsw.Model.Position;
 import it.polimi.ingsw.Observer.InputObservable;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.*;
@@ -73,9 +72,12 @@ public class BoardScene extends InputObservable implements GenericScene {
                         }
                         gridPane.add(button, col, row);
                     }
-                    /*else{
-                        gridPane.add(, col, row);
-                    }*/
+                    else{    Button emptyButton = new Button();
+                             emptyButton.setPrefSize(42,55);
+                             emptyButton.setStyle("-fx-background-color: transparent;"+"\n" +
+                                    "    -fx-background-size: stretch;");
+                             gridPane.add(emptyButton, col, row);
+                    }
 
                 }
             }
@@ -87,8 +89,8 @@ public class BoardScene extends InputObservable implements GenericScene {
         sfondo.setPrefSize(600, 600);
         sfondo.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
                 "-fx-background-size: 600 600;");
-        AnchorPane.setTopAnchor(gridPane,87.0);
-        AnchorPane.setLeftAnchor(gridPane,83.0);
+        AnchorPane.setTopAnchor(gridPane,32.0);
+        AnchorPane.setLeftAnchor(gridPane,41.0);
         AnchorPane.setBottomAnchor(okItem,30.0);
         AnchorPane.setLeftAnchor(okItem,45.0);
 
