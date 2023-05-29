@@ -138,7 +138,7 @@ public class ShelfScene extends InputObservable implements GenericScene {
 
 
 
-        immShelf.getChildren().add(pickedItem);
+        immShelf.getChildren().addAll(pickedItem,orderItem,okItem);
 
 
         AnchorPane.setTopAnchor(shelfGrid, 30.7);
