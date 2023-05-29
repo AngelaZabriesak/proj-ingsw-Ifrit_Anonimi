@@ -20,9 +20,9 @@ public class GoalScene extends InputObservable implements GenericScene {
     private static Stage stageCInstance;
 
     public /*GridPane*/ void start(Stage primaryStage, ArrayList<Cgoal> cGoal, Pgoal pgoal) {
-        /*stagePInstance = primaryStage;
+        stagePInstance = primaryStage;
         stageCInstance = primaryStage;
-        gridPane = new GridPane();
+        /*gridPane = new GridPane();
         if(cGoal==null){
             primaryStage.setWidth(280);
             primaryStage.setHeight(440);
@@ -73,7 +73,7 @@ public class GoalScene extends InputObservable implements GenericScene {
             pgoalPane.setStyle("-fx-background-repeat: no-repeat;" + "-fx-background-size: stretch;" + "-fx-background-image: url('" + url + "'); ");
             pgoalPane.getChildren().add(iwPgoal);
 
-            Scene pgoalScene = new Scene(pgoalPane, 265, 410);
+            Scene pgoalScene = new Scene(pgoalPane, 265, 405);
             Stage stageP = new Stage();
             stageP.setX(1200);
             stageP.setY(0);
@@ -87,11 +87,12 @@ public class GoalScene extends InputObservable implements GenericScene {
 
             for (Cgoal cg : cGoal) {
                 ImageView lcg = new ImageView(setCgoal(cg));
+                cGoalPane.setHgap(15);
                 cGoalPane.setStyle("-fx-background-repeat: no-repeat;" + "-fx-background-size: stretch;" + "-fx-background-image: url('" + url + "'); ");
                 cGoalPane.add(lcg, cGoal.indexOf(cg), 0);
             }
 
-            Scene cgoalScene = new Scene(cGoalPane, 800, 275);
+            Scene cgoalScene = new Scene(cGoalPane, 815, 260);
             Stage stageC = new Stage();
             stageC.setX(600);
             stageC.setY(565);
