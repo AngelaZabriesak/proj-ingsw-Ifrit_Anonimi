@@ -22,6 +22,7 @@ public class BoardScene extends InputObservable implements GenericScene {
     private GridPane itemBoardGrid;
     private AnchorPane boardBackground;
     private Board board;
+    private ArrayList<Position> availablePositions;
     private Button okItem;
     private Position p1,p2;
     private static Stage stageInstance;
@@ -32,9 +33,14 @@ public class BoardScene extends InputObservable implements GenericScene {
 
         this.stageInstance = primaryStage;
         this.board=board;
-
-
-
+        this.availablePositions = availablePositions;
+        okItem = new Button();
+        String urlBtn = "file:src/main/resources/images/buttons/ok_button.png";
+        okItem.setStyle("-fx-background-image: url('"+urlBtn+"');"+"\n" +
+                "-fx-background-size: stretch;" +
+                "-fx-border-color: transparent;" +
+                "-fx-background-color: transparent;");
+        okItem.setPrefSize(50,50);
         this.p1 = p1;
         this.p2 = p2;
 
@@ -171,7 +177,6 @@ public class BoardScene extends InputObservable implements GenericScene {
         int col = Integer.parseInt(((Button)event.getSource()).getAccessibleText().split("-")[1]);
         System.out.println("Click on "+row+"-"+col);
         okItem = createOkItem();
-
         Position p = new Position(row,col);
         if(p1==null)
             notifyInObserver(obs -> obs.onUpdateChooseItem(new Item1PositionResponse(p)));
@@ -179,8 +184,6 @@ public class BoardScene extends InputObservable implements GenericScene {
             notifyInObserver(obs -> obs.onUpdateChooseItem(new Item2PositionResponse(p1,p)));
         else
             notifyInObserver(obs -> obs.onUpdateChooseItem(new Item3PositionResponse(p1,p2,p)));
-
-
 
     }
 
@@ -224,6 +227,7 @@ public class BoardScene extends InputObservable implements GenericScene {
         AnchorPane.setLeftAnchor(itemBoardGrid,83.0);
 
         okItem = createOkItem();
+
         double newY = okItem.getLayoutY() - 10; // Sposta il bottone verso l'alto
         okItem.setLayoutY(newY);
         boardBackground = new AnchorPane(itemBoardGrid,okItem);
@@ -231,10 +235,6 @@ public class BoardScene extends InputObservable implements GenericScene {
 
         AnchorPane.setTopAnchor(itemBoardGrid,87.0);
         AnchorPane.setLeftAnchor(itemBoardGrid,83.0);
-
-
-
-
 
         okItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickOk);
 
