@@ -84,7 +84,7 @@ public class ChatScene extends InputObservable implements GenericScene {
     }
 
     public void update(String message){
-        chatListView.getItems().add(message);
+            chatListView.getItems().add(message);
     }
 
 }

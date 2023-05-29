@@ -26,12 +26,13 @@ public class BoardScene extends InputObservable implements GenericScene {
     private Button okItem;
     private Position p1,p2;
     private static Stage stageInstance;
+    private ImageView first;
 
     public /*GridPane*/ void start(Stage primaryStage, Board board, ArrayList<Position> availablePositions, Position p1, Position p2) {
-
-
-
-        this.stageInstance = primaryStage;
+        this.first = new ImageView(new Image("file:src/main/resources/images/tokens/end game.jpg"));
+        first.setFitWidth(55);
+        first.setFitHeight(55);
+        stageInstance = primaryStage;
         this.board=board;
         this.availablePositions = availablePositions;
         okItem = new Button();
@@ -96,7 +97,7 @@ public class BoardScene extends InputObservable implements GenericScene {
 
         //set the AnchorPane with the image of the board
         
-        boardBackground = new AnchorPane(itemBoardGrid,okItem);
+        boardBackground = new AnchorPane(itemBoardGrid,okItem,first);
         boardBackground.setPrefSize(600, 600);
         boardBackground.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
                 "-fx-background-size: 600 600;");
@@ -104,6 +105,8 @@ public class BoardScene extends InputObservable implements GenericScene {
         AnchorPane.setLeftAnchor(itemBoardGrid,41.0);
         AnchorPane.setBottomAnchor(okItem,35.0);
         AnchorPane.setLeftAnchor(okItem,45.0);
+        AnchorPane.setBottomAnchor(first,120.0);
+        AnchorPane.setRightAnchor(first,55.0);
 
         Scene scene = new Scene(boardBackground);
         primaryStage.setScene(scene);
