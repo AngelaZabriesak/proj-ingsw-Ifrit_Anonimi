@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
 
 
@@ -50,11 +51,13 @@ public class ShelfScene extends InputObservable implements GenericScene {
         //grid for shelf's items
 
         shelfGrid = new GridPane();
-        primaryStage.setWidth(600);
+        primaryStage.setWidth(615);
         primaryStage.setHeight(600);
-        shelfGrid.setHgap(5);
-        shelfGrid.setVgap(5);
-        shelfGrid.setPadding(new Insets(10));
+        shelfGrid.setHgap(21.95);
+        shelfGrid.setVgap(10.4);
+       // AnchorPane.setTopAnchor(shelfGrid,90.0);
+        // AnchorPane.setLeftAnchor(shelfGrid,90.0);
+     //   shelfGrid.setPadding(new Insets(10));
 
 
 
@@ -62,18 +65,19 @@ public class ShelfScene extends InputObservable implements GenericScene {
             for (int col = 0; col < shelf.getCol(); col++) {
                 if (row == -1) {
                     Button button = new Button();
-                    button.setPrefSize(50, 50);
+                    button.setPrefSize(50.9, 50.9);
                     button.setAccessibleText("" + col);
                     button.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onClickColumn);
                     String url = "file:src/main/resources/images/buttons/arrow_column_button_img.png";
-                    button.setStyle("-fx-background-size: 100% 100%;" +
+                    button.setStyle("-fx-background-size: 80% 70%;" +
                             "-fx-background-repeat: no-repeat;" +
+                            "-fx-background-color:transparent;"+
                             "-fx-background-image: url('" + url + "');");
                     shelfGrid.add(button, col, 0);
                 } else {
                     ImageView iw = new ImageView(new Image("file:src/main/resources/images/parquet_background.jpg"));
-                    iw.setFitWidth(40);
-                    iw.setFitHeight(40);
+                    iw.setFitWidth(55.5);
+                    iw.setFitHeight(55.5);
                     shelfGrid.add(iw, col, row + 1);
                 }
             }
@@ -84,6 +88,9 @@ public class ShelfScene extends InputObservable implements GenericScene {
 
         pickedItemShelf = new StackPane();
         pickedItemShelf.setPrefSize(100, 300);
+        AnchorPane.setTopAnchor(pickedItemShelf,500.0);
+        AnchorPane.setLeftAnchor(pickedItemShelf,300.0);
+
        /* pickedItemShelf.setStyle("-fx-background-image: url('" + urlI + "'); " +
                 "-fx-background-repeat: stretch; " +
                 "-fx-background-size: cover;");  */
@@ -104,10 +111,10 @@ public class ShelfScene extends InputObservable implements GenericScene {
         immShelf.getChildren().add(pickedItemShelf);
 
 
-        AnchorPane.setTopAnchor(shelfGrid, 25.0);
-        AnchorPane.setLeftAnchor(shelfGrid, 25.0);
-        AnchorPane.setBottomAnchor(pickedItemShelf, 25.0);
-        AnchorPane.setRightAnchor(pickedItemShelf, 25.0);
+        AnchorPane.setTopAnchor(shelfGrid, 30.7);
+        AnchorPane.setLeftAnchor(shelfGrid, 62.25);
+        AnchorPane.setBottomAnchor(pickedItemShelf, 300.0);
+        AnchorPane.setRightAnchor(pickedItemShelf, 300.0);
 
         Scene scene = new Scene(immShelf);
 
@@ -140,8 +147,8 @@ public class ShelfScene extends InputObservable implements GenericScene {
         String imagePath=null;
 
         ImageView imageView = new ImageView("file:src/main/resources/images/items/blueitem1.png");
-        imageView.setFitWidth(40);
-        imageView.setFitHeight(55);
+        imageView.setFitWidth(50);
+        imageView.setFitHeight(50);
         imageView.setPreserveRatio(true);
 
       /*  this.player= game.getCurrentPlayer();

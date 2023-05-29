@@ -35,13 +35,17 @@ public class BoardScene extends InputObservable implements GenericScene {
         okItem = new Button();
         String urlBtn = "file:src/main/resources/images/buttons/ok_button.png";
         okItem.setStyle("-fx-background-image: url('"+urlBtn+"');"+"\n" +
-                "    -fx-background-size: stretch;");
+                "    -fx-background-size: stretch;" +
+                "-fx-border-color: transparent;" +
+                "fx-background-color: transparent;");
+        okItem.setPrefSize(50,50);
+
 
         this.p1 = p1;
         this.p2 = p2;
         gridPane = new GridPane();
-        primaryStage.setWidth(600);
-        primaryStage.setHeight(600);
+        primaryStage.setWidth(615);
+        primaryStage.setHeight(635);
         gridPane.setHgap(4.5);
         gridPane.setVgap(4.5);
       //  gridPane.setPadding(new Insets(69,54,13,66));
@@ -85,6 +89,9 @@ public class BoardScene extends InputObservable implements GenericScene {
                 "-fx-background-size: 600 600;");
         AnchorPane.setTopAnchor(gridPane,87.0);
         AnchorPane.setLeftAnchor(gridPane,83.0);
+        AnchorPane.setBottomAnchor(okItem,30.0);
+        AnchorPane.setLeftAnchor(okItem,45.0);
+
 
         Scene scene = new Scene(sfondo);
         primaryStage.setScene(scene);
