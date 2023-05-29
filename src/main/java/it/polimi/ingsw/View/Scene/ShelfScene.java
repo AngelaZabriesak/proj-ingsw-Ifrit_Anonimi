@@ -97,45 +97,17 @@ public class ShelfScene extends InputObservable implements GenericScene {
                 "-fx-background-size: cover;");  */
 
 
-        // Aggiunge gli elementi dello StackPane
-
-
 
         // AGGIUNGE GLI ITEM SCELTI AL GRID PANE
 
-        //player.getMyItem().size();
+        int nItems = player.getMyItem().size();
 
         String imagePath = new String();
-            for (int r = 0; r <= 2; r++) {
+            for (int r = 0; r < nItems; r++) {
 
-                /*this.player= game.getCurrentPlayer();
-
-                switch (player.getMyItem().get(r).getColor()) {
-                    case BLUE:
-                        imagePath = "file:src/main/resources/images/items/blueitem1.png";
-                        break;
-                    case PINK:
-                        imagePath = "file:src/main/resources/images/items/pinkitem1.png";
-                        break;
-                    case AZURE:
-                        imagePath = "file:src/main/resources/images/items/azureitem1.png";
-                        break;
-                    case WHITE:
-                        imagePath = "file:src/main/resources/images/items/whiteitem1.png";
-                        break;
-                    case GREEN:
-                        imagePath = "file:src/main/resources/images/items/greenitem1.png";
-                        break;
-                    case YELLOW:
-                        imagePath = "file:src/main/resources/images/items/yellowitem1.png";
-                        break;
-                }*/
-
-
-                ImageView image = new ImageView("file:src/main/resources/images/items/blueitem1.png");
+                ImageView image = new ImageView(getImgUrl(r));
                 image.setFitHeight(83);
                 image.setFitWidth(81);
-                //imagePath = "file:src/main/resources/images/items/blueitem1.png";
                 pickedItem.add(image,0,r);
             }
 
@@ -159,10 +131,6 @@ public class ShelfScene extends InputObservable implements GenericScene {
         primaryStage.setX(600);
         primaryStage.setY(0);
 
-
-       // AnchorPane.setTopAnchor(immShelf, (primaryStage.getHeight() - immShelf.getPrefHeight()) / 2);
-        //AnchorPane.setLeftAnchor(immShelf, (primaryStage.getWidth() - immShelf.getPrefWidth()) / 2);
-
         primaryStage.show();
         primaryStage.show();
     }
@@ -179,14 +147,10 @@ public class ShelfScene extends InputObservable implements GenericScene {
         return stageInstance;
     }
 
-    private ImageView createRandomImageView(int pos) {
-        String imagePath=null;
+    private String getImgUrl(int r) {
+        String imagePath = "";
 
-
-
-        //this.player= game.getCurrentPlayer();
-
-        switch (player.getMyItem().get(pos).getColor()) {
+        switch (player.getMyItem().get(r).getColor()) {
             case BLUE:
                 imagePath = "file:src/main/resources/images/items/blueitem1.png";
                 break;
@@ -206,16 +170,8 @@ public class ShelfScene extends InputObservable implements GenericScene {
                 imagePath = "file:src/main/resources/images/items/yellowitem1.png";
                 break;
         }
-        ImageView imageView = new ImageView(imagePath);
-        imageView.setFitWidth(50);
-        imageView.setFitHeight(50);
-        imageView.setPreserveRatio(true);
-        Image image = new Image(imagePath);
-        imageView.setImage(image);
+        return imagePath;
 
-
-
-        return imageView;
     }
 
 
