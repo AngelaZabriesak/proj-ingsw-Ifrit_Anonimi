@@ -9,37 +9,51 @@ import it.polimi.ingsw.Observer.InputObservable;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 
 
 public class ShelfScene extends InputObservable implements GenericScene {
     private GridPane pickedItem;
+    private TextField orderItem;
     private GridPane shelfGrid;  //
     private Shelf shelf;
     private Game game;
     private Player player;
     private static Stage stageInstance;
     private AnchorPane immShelf;
+    private Button okItem;
    // private AnchorPane chosenItemShelf;
 
 
     public void start(Stage primaryStage, Shelf shelf,Player player) {
         this.stageInstance = primaryStage;
         this.shelf = shelf;
+        orderItem = new TextField();
         this.player=player;
         String urlS= "file:src/main/resources/images/ShelfScene.png";
 
 
+
+        okItem = new Button();
+        String urlBtn = "file:src/main/resources/images/buttons/ok_button.png";
+        okItem.setStyle("-fx-background-image: url('"+urlBtn+"');"+"\n" +
+                "-fx-background-size: stretch;" +
+                "-fx-border-color: transparent;" +
+                "-fx-background-color: transparent;");
+        okItem.setPrefSize(50,50);
         immShelf = new AnchorPane();
         AnchorPane.setTopAnchor(immShelf,25.0);
         AnchorPane.setLeftAnchor(immShelf,25.0);
 
 
+        okItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickOk);
 
         immShelf.setStyle("-fx-background-image: url('" + urlS + "'); " +
                 "-fx-background-repeat: no-repeat;" +
@@ -192,4 +206,16 @@ public class ShelfScene extends InputObservable implements GenericScene {
     public void initialize() {
         System.out.println("Size children: "+shelfGrid.getChildren().size());
     }
+
+    private void onClickOk(MouseEvent event){
+        String order = orderItem.getText();
+        ArrayList<Integer> orderedItem = new ArrayList<>();
+        String[] splittedOrder = order.split("-");
+        for(int i = 0;i<splittedOrder.length;i++){
+            orderedItem.add(Integer.parseInt(splittedOrder[i]));
+        }
+
+        notifyInObserver(obs->obs.onUpdateOrder(orderedItem,player.getMyItem()));
     }
+
+}

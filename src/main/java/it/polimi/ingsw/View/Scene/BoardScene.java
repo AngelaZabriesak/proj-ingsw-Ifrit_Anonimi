@@ -39,16 +39,6 @@ public class BoardScene extends InputObservable implements GenericScene {
                 "-fx-border-color: transparent;" +
                 "-fx-background-color: transparent;");
         okItem.setPrefSize(50,50);
-
-        plusItem = new Button();
-        String urlBtnPlus = "file:src/main/resources/images/buttons/add_item_button.png";
-        plusItem.setStyle("-fx-background-image: url('"+urlBtnPlus+"');"+"\n" +
-                "    -fx-background-size: stretch;" +
-                "-fx-border-color: transparent;" +
-                "fx-background-color:transparent;");
-        plusItem.setPrefSize(50,50);
-
-
         this.p1 = p1;
         this.p2 = p2;
         gridPane = new GridPane();
