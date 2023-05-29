@@ -74,12 +74,20 @@ public class ShelfScene extends InputObservable implements GenericScene {
                             "-fx-background-image: url('" + url + "');");
                     button.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickColumn);
                     shelfGrid.add(button, col, 0);
-                } else {
-                    Button emptyButton = new Button();
-                    emptyButton.setPrefSize(50.9,50.9);
-                    emptyButton.setStyle("-fx-background-color: transparent;");
+                } else
 
-                    shelfGrid.add(emptyButton, col, row + 1);
+                    {
+                        if(shelf.getMyShelf()[row][col]!= null){
+                            ImageView  shelfItem = new ImageView(getImgUrl(row));
+                            shelfItem.setFitHeight(50.9);
+                            shelfItem.setFitWidth(50.9);
+                    }
+                    ImageView emptySpace = new ImageView();
+                        emptySpace.setFitHeight(50.9);
+                        emptySpace.setFitWidth(50.9);
+                    emptySpace.setStyle("-fx-background-color: transparent;");
+
+                    shelfGrid.add(emptySpace, col, row + 1);
                 }
             }
         }
@@ -93,13 +101,10 @@ public class ShelfScene extends InputObservable implements GenericScene {
         AnchorPane.setTopAnchor(pickedItem,151.5);
         AnchorPane.setLeftAnchor(pickedItem,487.0);
 
-       /* pickedItemShelf.setStyle("-fx-background-image: url('" + urlI + "'); " +
-                "-fx-background-repeat: stretch; " +
-                "-fx-background-size: cover;");  */
 
 
 
-        // AGGIUNGE GLI ITEM SCELTI AL GRID PANE
+     //add picked items to the gridpane
 
         int nItems = player.getMyItem().size();
             for (int r = 0; r < nItems; r++) {
@@ -133,6 +138,8 @@ public class ShelfScene extends InputObservable implements GenericScene {
         primaryStage.show();
         primaryStage.show();
     }
+
+
 
 
     private void onClickColumn(MouseEvent event) {
