@@ -66,8 +66,8 @@ public class ShelfScene extends InputObservable implements GenericScene {
         shelfGrid = new GridPane();
         primaryStage.setWidth(615);
         primaryStage.setHeight(600);
-        shelfGrid.setHgap(21.95);
-        shelfGrid.setVgap(10.4);
+        shelfGrid.setHgap(19.95);
+        shelfGrid.setVgap(7.9);
 
 
 
@@ -76,7 +76,7 @@ public class ShelfScene extends InputObservable implements GenericScene {
             for (int col = 0; col < shelf.getCol(); col++) {
                 if (row == -1) {
                     Button button = new Button();
-                    button.setPrefSize(50.9, 50.9);
+                    button.setPrefSize(54, 54);
                     button.setAccessibleText("" + col);
                     button.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onClickColumn);
                     String url = "file:src/main/resources/images/buttons/arrow_column_button_img.png";
@@ -95,14 +95,14 @@ public class ShelfScene extends InputObservable implements GenericScene {
                 else {
                         if(shelf.getMyShelf()[row][col]!= null){
                             ImageView  shelfItem = new ImageView(getImgUrl(shelf.getMyShelf()[row][col]));
-                            shelfItem.setFitHeight(50.9);
-                            shelfItem.setFitWidth(50.9);
+                            shelfItem.setFitHeight(58);
+                            shelfItem.setFitWidth(58);
                             shelfGrid.add(shelfItem, col, row + 1);
                         }
                         else {
                             ImageView emptySpace = new ImageView();
-                            emptySpace.setFitHeight(50.9);
-                            emptySpace.setFitWidth(50.9);
+                            emptySpace.setFitHeight(58);
+                            emptySpace.setFitWidth(58);
                             emptySpace.setStyle("-fx-background-color: transparent;");
                             shelfGrid.add(emptySpace, col, row + 1);
                         }
@@ -133,8 +133,8 @@ public class ShelfScene extends InputObservable implements GenericScene {
 
         immShelf.getChildren().addAll(shelfGrid,pickedItem,orderItem,okItem);
 
-        AnchorPane.setTopAnchor(shelfGrid, 30.7);
-        AnchorPane.setLeftAnchor(shelfGrid, 62.25);
+        AnchorPane.setTopAnchor(shelfGrid, 32.0);
+        AnchorPane.setLeftAnchor(shelfGrid, 62.0);
 
         AnchorPane.setBottomAnchor(pickedItem, 300.0);
         AnchorPane.setRightAnchor(pickedItem, 300.0);
