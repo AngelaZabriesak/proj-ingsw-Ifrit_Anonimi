@@ -19,8 +19,8 @@ import javafx.stage.*;
 import java.util.*;
 
 public class BoardScene extends InputObservable implements GenericScene {
-    private GridPane gridPane;
-    private AnchorPane sfondo;
+    private GridPane itemBoardGrid;
+    private AnchorPane boardBackground;
     private Board board;
     private ArrayList<Position> availablePositions;
     private Button okItem;
@@ -28,6 +28,9 @@ public class BoardScene extends InputObservable implements GenericScene {
     private static Stage stageInstance;
 
     public /*GridPane*/ void start(Stage primaryStage, Board board, ArrayList<Position> availablePositions, Position p1, Position p2) {
+
+
+
         this.stageInstance = primaryStage;
         this.board=board;
         this.availablePositions = availablePositions;
@@ -40,12 +43,18 @@ public class BoardScene extends InputObservable implements GenericScene {
         okItem.setPrefSize(50,50);
         this.p1 = p1;
         this.p2 = p2;
-        gridPane = new GridPane();
+
+        //grid made of buttons representing the items on the board
+
+        itemBoardGrid = new GridPane();
         primaryStage.setWidth(615);
         primaryStage.setHeight(635);
-        gridPane.setHgap(4.5);
-        gridPane.setVgap(4.5);
-      //  gridPane.setPadding(new Insets(69,54,13,66));
+        itemBoardGrid.setHgap(4.5);
+        itemBoardGrid.setVgap(4.5);
+
+        okItem = createOkItem();
+
+        //function that dynamically fills the grid
 
         boolean ok;
         for (int row = 0; row < board.getRow(); row++) {
@@ -67,14 +76,14 @@ public class BoardScene extends InputObservable implements GenericScene {
                                 ok = true;
                             }
                         }
-                        gridPane.add(button, col, row);
+                        itemBoardGrid.add(button, col, row);
                     }
                     else{
                         Button emptyButton = new Button();
                          emptyButton.setPrefSize(42,55);
                          emptyButton.setStyle("-fx-background-color: transparent;"+"\n" +
                                 "    -fx-background-size: stretch;");
-                         gridPane.add(emptyButton, col, row);
+                         itemBoardGrid.add(emptyButton, col, row);
                     }
 
                 }
@@ -84,17 +93,19 @@ public class BoardScene extends InputObservable implements GenericScene {
         String url = "file:src/main/resources/images/board.png";
 
         okItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickOk);
-        sfondo = new AnchorPane(gridPane,okItem);
-        sfondo.setPrefSize(600, 600);
-        sfondo.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
+
+        //set the AnchorPane with the image of the board
+        
+        boardBackground = new AnchorPane(itemBoardGrid,okItem);
+        boardBackground.setPrefSize(600, 600);
+        boardBackground.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
                 "-fx-background-size: 600 600;");
-        AnchorPane.setTopAnchor(gridPane,32.0);
-        AnchorPane.setLeftAnchor(gridPane,41.0);
-        AnchorPane.setBottomAnchor(okItem,30.0);
+        AnchorPane.setTopAnchor(itemBoardGrid,32.0);
+        AnchorPane.setLeftAnchor(itemBoardGrid,41.0);
+        AnchorPane.setBottomAnchor(okItem,35.0);
         AnchorPane.setLeftAnchor(okItem,45.0);
 
-
-        Scene scene = new Scene(sfondo);
+        Scene scene = new Scene(boardBackground);
         primaryStage.setScene(scene);
         primaryStage.setX(0);
         primaryStage.setY(0);
@@ -109,15 +120,28 @@ public class BoardScene extends InputObservable implements GenericScene {
         return stageInstance;
     }
 
+    private Button createOkItem() {
+        Button okItem = new Button();
+        String urlBtn = "file:src/main/resources/images/buttons/ok_button.png";
+        okItem.setStyle("-fx-background-image: url('"+urlBtn+"');"+"\n" +
+                        "-fx-background-size: 100% 100%;"+
+                "-fx-border-color: transparent;" +
+                "-fx-background-color: transparent;");
+        okItem.setPrefSize(50,50);
+       AnchorPane.setBottomAnchor(okItem,20.0);
+       AnchorPane.setLeftAnchor(okItem,45.0);
+
+        return okItem;
+    }
+
+
+    //function that returns the imageview based on the color of the item
+
     private ImageView createRandomImageView(int row, int col) {
         String imagePath=null;
         ImageView imageView = new ImageView();
         imageView.setFitWidth(40);
         imageView.setFitHeight(55);
-       /* AnchorPane.setTopAnchor(imageView,25.0);
-        AnchorPane.setLeftAnchor(imageView,20.0);
-        AnchorPane.setBottomAnchor(imageView,25.0);
-        AnchorPane.setRightAnchor(imageView,20.0); */
         imageView.setPreserveRatio(true);
         switch (board.getMyBoardItem()[row][col].getColor()) {
             case BLUE:
@@ -146,10 +170,13 @@ public class BoardScene extends InputObservable implements GenericScene {
         return imageView;
     }
 
+    //function that implements the click action on the items
+
     private void onClickItem(MouseEvent event){
         int row = Integer.parseInt(((Button)event.getSource()).getAccessibleText().split("-")[0]);
         int col = Integer.parseInt(((Button)event.getSource()).getAccessibleText().split("-")[1]);
         System.out.println("Click on "+row+"-"+col);
+        okItem = createOkItem();
         Position p = new Position(row,col);
         if(p1==null)
             notifyInObserver(obs -> obs.onUpdateChooseItem(new Item1PositionResponse(p)));
@@ -164,9 +191,10 @@ public class BoardScene extends InputObservable implements GenericScene {
         notifyInObserver(obs->obs.onUpdateChoose(new ChoosePositionResponse("no",p1,p2)));
     }
 
+
     @FXML
     public void initialize(){
-        System.out.println("Size children: "+gridPane.getChildren().size());
+        System.out.println("Size children: "+itemBoardGrid.getChildren().size());
     }
 
     public void updateBoard(Stage primaryStage, Board board, ArrayList<Position> availablePositions, Position p1, Position p2){
@@ -185,26 +213,32 @@ public class BoardScene extends InputObservable implements GenericScene {
                     emptyButton.setPrefSize(42,55);
                     emptyButton.setStyle("-fx-background-color: transparent;"+"\n" +
                             "    -fx-background-size: stretch;");
-                    gridPane.add(emptyButton, col, row);
+                    itemBoardGrid.add(emptyButton, col, row);
                 }
             }
         }
 
-        //initialize();
-        //String url = "file:src/main/resources/images/board.png";
 
-        sfondo.setPrefSize(600, 600);
+
+        boardBackground.setPrefSize(600, 600);
         /*sfondo.setStyle("-fx-background-image: url('" + url + "'); " +"-fx-background-repeat: no-repeat;" +
                 "-fx-background-size: 600 600;");*/
-        AnchorPane.setTopAnchor(gridPane,87.0);
-        AnchorPane.setLeftAnchor(gridPane,83.0);
+        AnchorPane.setTopAnchor(itemBoardGrid,87.0);
+        AnchorPane.setLeftAnchor(itemBoardGrid,83.0);
 
-        AnchorPane.setTopAnchor(okItem,560.0);
-        AnchorPane.setLeftAnchor(okItem,45.0);
+        okItem = createOkItem();
+
+        double newY = okItem.getLayoutY() - 10; // Sposta il bottone verso l'alto
+        okItem.setLayoutY(newY);
+        boardBackground = new AnchorPane(itemBoardGrid,okItem);
+        boardBackground.setPrefSize(600, 600);
+
+        AnchorPane.setTopAnchor(itemBoardGrid,87.0);
+        AnchorPane.setLeftAnchor(itemBoardGrid,83.0);
 
         okItem.addEventHandler(MouseEvent.MOUSE_CLICKED,this::onClickOk);
 
-        Scene scene = new Scene(sfondo);
+        Scene scene = new Scene(boardBackground);
         primaryStage.setScene(scene);
         primaryStage.setX(0);
         primaryStage.setY(0);
