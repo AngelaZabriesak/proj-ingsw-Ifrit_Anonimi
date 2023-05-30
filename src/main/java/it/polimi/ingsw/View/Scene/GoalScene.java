@@ -36,7 +36,8 @@ public class GoalScene extends InputObservable implements GenericScene {
             tokens = new ImageView[cGoal.get(0).getMyTokens().size()];
             for(int i =0;  i< tokens.length;i++){
                 tokens[i] = new ImageView(new Image("file:src/main/resources/images/tokens/scoring_"+cGoal.get(0).getMyTokens().get(i).getScore()+".jpg"));
-
+                tokens[i].setFitWidth(100);
+                tokens[i].setFitHeight(100);
             }
             primaryCStage.setWidth(825);
             primaryCStage.setHeight(300);
@@ -54,16 +55,17 @@ public class GoalScene extends InputObservable implements GenericScene {
             pgoalPane.getChildren().add(iwPgoal);
         }
         if(cGoal!=null) {
+            AnchorPane[] goal=new AnchorPane[2];
             for (Cgoal cg : cGoal) {
                 System.out.println("cgoal "+cg.getIndex());
                 ImageView lcg = new ImageView(setCgoal(cg));
-                /*AnchorPane goal = new AnchorPane(lcg,tokens[tokens.length-1]);
-                AnchorPane.setRightAnchor(tokens[tokens.length-1],100.0);
-                AnchorPane.setBottomAnchor(tokens[tokens.length-1],100.0);*/
                 cGoalPane.setStyle("-fx-background-repeat: no-repeat;"+
                         "-fx-background-size: 400 400;");
+                //goal[cGoal.indexOf(cg)] = new AnchorPane(lcg,tokens[tokens.length-1]);
+                System.out.println(""+cg.getMyTokens().get(tokens.length-1).getScore());
                 cGoalPane.add(lcg, cGoal.indexOf(cg),0);
-
+                /*AnchorPane.setRightAnchor(tokens[tokens.length-1],50.0);
+                AnchorPane.setBottomAnchor(tokens[tokens.length-1],100.0);*/
             }
         }
         gridPane.add(pgoalPane,1,0);
@@ -80,7 +82,6 @@ public class GoalScene extends InputObservable implements GenericScene {
             primaryPStage.setScene(scene);
             primaryPStage.show();
         }
-
     }
 
     public Image setPGoal(Pgoal pgoal){
