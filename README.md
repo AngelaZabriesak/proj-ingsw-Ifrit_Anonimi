@@ -1,87 +1,47 @@
-# Corso Ingegneria del Software 2023 - Cremona
+# Prova Finale di Ingegneria del Software - AA 2022-2023
+![alt text](src/main/resources/images/myShelfie.png)
 
-## Project Setup
+Implementazione del gioco da tavolo [MyShelfie](https://www.craniocreations.it/prodotto/my-shelfie/).
 
-In order to set up your project, follow these steps
+Il progetto consiste nell’implementazione di un sistema distribuito composto da un singolo server in grado di gestire più partite alla volta e multipli client (uno per giocatore) che possono partecipare ad una sola partita alla volta utilizzando il pattern MVC (Model-View-Controller).
+La rete è stata gestita con l'utilizzo delle socket.
 
-### Clone and push the template to your repo
+Interazione e gameplay: linea di comando (CLI) e grafica (GUI).
 
-On GitHub user settings, scroll down to `Developer settings`, then `Personal access token`.
+## Documentazione
 
-Create one token to be used in place of password when prompted after git command line operations (remember to store it safely).
+### UML
+I seguenti diagrammi delle classi rappresentano rispettivamente il modello iniziale sviluppato durante la fase di progettazione e i diagrammi del prodotto finale nelle parti critiche riscontrate.
+- [UML Iniziali](https://github.com/AngelaZabriesak/proj-ingsw-Ifrit_Anonimi/blob/main/UML/umlMyShelfie.mdj)
+- [UML Finali](https://github.com/AngelaZabriesak/proj-ingsw-Ifrit_Anonimi/blob/main/UML/final/)
 
-Using the git command line client for your OS, type the following commands:
 
-```bash
- # clone the repo on your current folder, naming the remote as 'template'
- git clone https://github.com/dragonbanana/ingsoft-2023 --origin template
- # move to the cloned repo
- cd ingsoft-2023/
- # add your repository as 'origin' (default) remote
- git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME
- # push the template project to your github repository, setting
- git push --set-upstream origin master
- # alternatively, if you already have some content in your repo (e.g., a README)
- # and YOU WANT TO OVERWRITE IT, force the push
- git push --force --set-upstream origin master
+## Funzionalità
+### Funzionalità Sviluppate
+- Regole Complete
+- CLI
+- GUI
+- Socket
+- 2 FA (Funzionalità Avanzate):
+    - __Partite Multiple: possibilità di eseguire più partite in parallelo.
+    - __Chat
 
-```
+## Esecuzione
+Questo progetto richiede una versione di Java 19 o superiore per essere eseguito correttamente.
 
-then, you can safely remove the 'template' remote by typing `git remote rm template`.
+### MyShelfie Client
+Le seguenti istruzioni descrivono come eseguire il client con interfaccia CLI o GUI.
 
-### Customize your project files
+#### CLI
+Per lanciare MyShelfie Client CLI eseguire la classe ClientAppCLI
 
-- Open the `pom.xml` file in a text editor and substitute the two occurrences of **xxx** with your **team_name**.
-- Substitute the occurence of **xxx** with your **team_name** in `Dockerfile`.
-- Open `.github/workflows/docker.yaml` and replace on line 29 `pentabanana/ingsoft-2023:latest` with `{your_dockerhub_repository}/{team_name}:latest`
-- Import it in IntelliJ
-- Customize the `README.md`
-- In order to check that everything worked fine, try to build with Maven:
-    - from IntelliJ:
-        - right-click on the project
-        - select `Maven->Reload Project`
-        - wait for the build to complete and make sure you have a build success
-        - right-click on class `Main` and select `Main App.main()`
-        - right-click on class `CalculatorTest` and select `Run CalculatorTest`
+#### GUI
+Per lanciare MyShelfie Client GUI eseguire la classe ClientAppGUI
 
-### Commit and push your changes:
+### Santorini Server
+Per lanciare MyShelfie Server eseguire la classe ServerApp
 
-```
-git commit -am "customize project"
-git push origin main
-```
-
-### [OPTIONAL] Configure Github Actions for Continuous Integration and Delivery
-
-- Block your `main` branch:
-    - Go to your Github repository.
-    - Navigate to `Settings`.
-    - On the left select `Branches`.
-    - Add a Branch Protection Rule by pressing `Add rule`.
-    - Insert `main` as branch name pattern.
-    - In section `Protect matching branches`, enable the option `Require a pull request before merging`.
-    - Go to the bottom, and press `Create`.
-- Add Dockerhub secrets is working:
-    - Go to your Github repository.
-    - Navigate to `Settings`.
-    - On the left select `Secrets and Variables -> Actions`.
-    - Press button `New Repository Secrets`.
-    - In the `Name` textfield insert `DOCKERHUB_USERNAME` and in the `Secret` textfield insert your **dockerhub_username** (for example pentabanana).
-    - Retrieve your Dockerhub token from Dockerhub:
-        - Go to your Dockerhub setting page (`My Settings`).
-        - Navigate to `Security`.
-        - Press `New Access Token`.
-        - Insert a name.
-        - It will display an Access Token, copy it. It will be displayed only once.
-    - Go back to the `Secrets and Variables -> Actions` page and press button `New Repository Secrets`.
-    - In the `Name` textfield insert `DOCKERHUB_TOKEN` and in the `Secret` textfield insert your **dockerhub_access_token** you copied before.
-
-### [OPTIONAL] Git Workflow
-
-- Create a branch
-- Add changes to your file
-- Create pull request
-- Assign reviewer to the code
-- Review the code
-- Check pipeline errors
-- Merge pull request
+## Componenti del gruppo
+- [__Mattia Asinari__](https://github.com/mattiaasinari)
+- [__Elena Tortorella__](https://github.com/elenatortorella7)
+- [__Angela Zabriesak__](https://github.com/AngelaZabriesak)

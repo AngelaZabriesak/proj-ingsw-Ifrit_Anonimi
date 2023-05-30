@@ -11,10 +11,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
-import java.awt.*;
 
 public class ChatScene extends InputObservable implements GenericScene {
-
 
     private GridPane gridPane;
     private TextArea chat;
