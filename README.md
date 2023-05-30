@@ -38,7 +38,7 @@ Per lanciare MyShelfie Client CLI eseguire la classe ClientAppCLI
 #### GUI
 Per lanciare MyShelfie Client GUI eseguire la classe ClientAppGUI
 
-### Santorini Server
+### MyShelfie Server
 Per lanciare MyShelfie Server eseguire la classe ServerApp
 
 ## Componenti del gruppo
