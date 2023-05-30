@@ -26,6 +26,10 @@ I seguenti diagrammi delle classi rappresentano rispettivamente il modello inizi
     - __Partite Multiple: possibilità di eseguire più partite in parallelo.
     - __Chat
 
+##javaDoc
+I file javaDoc si possono trovare al seguente link
+- [javaDoc](https://github.com/AngelaZabriesak/proj-ingsw-Ifrit_Anonimi/blob/main/javadoc)
+
 ## Esecuzione
 Questo progetto richiede una versione di Java 19 o superiore per essere eseguito correttamente.
 
