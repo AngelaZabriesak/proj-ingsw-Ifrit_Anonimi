@@ -11,7 +11,7 @@ import it.polimi.ingsw.Model.Game.Game;
 import java.util.*;
 
 /**
- * this class implements choose order of items  
+ * this class implements choose order of items
  */
 
 public class ChooseOrder implements Action{
