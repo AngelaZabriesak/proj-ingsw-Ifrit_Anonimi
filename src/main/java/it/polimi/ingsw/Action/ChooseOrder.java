@@ -10,6 +10,10 @@ import it.polimi.ingsw.Model.Game.Game;
 
 import java.util.*;
 
+/**
+ * this class implements choose order of items  
+ */
+
 public class ChooseOrder implements Action{
     private final Player player;
     private final ArrayList<Integer> orderedPositionItem;

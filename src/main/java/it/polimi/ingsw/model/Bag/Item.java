@@ -3,6 +3,11 @@ package it.polimi.ingsw.Model.Bag;
 
 import java.io.Serializable;
 
+/**
+ *
+ * define the Item element
+ */
+
 public class Item implements Serializable {
     private final ColorItem type;
     private boolean inGroup = false;

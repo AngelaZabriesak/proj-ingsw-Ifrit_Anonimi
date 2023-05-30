@@ -6,6 +6,10 @@ import it.polimi.ingsw.Model.Goal.*;
 
 import java.io.Serializable;
 
+/**
+ * class that define Pgoal
+ */
+
 public abstract class Pgoal extends Goal implements Serializable {
     private Game game;
     private int index;
@@ -15,11 +19,24 @@ public abstract class Pgoal extends Goal implements Serializable {
         this.index = index;
     }
 
+    /**
+     *
+     * @return the Pgoal index
+     *
+     */
+
     public int getIndex() {return this.index;}
+
 
     public void setGame(Game game) {
         this.game = game;
     }
+
+    /**
+     *
+     * @return the game
+     *
+     */
 
     public Game getGame() {
         return game;

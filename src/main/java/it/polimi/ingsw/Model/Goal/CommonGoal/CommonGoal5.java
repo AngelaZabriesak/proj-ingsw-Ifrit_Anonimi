@@ -6,9 +6,12 @@ import it.polimi.ingsw.Model.Token;
 
 import java.util.ArrayList;
 
-/*  common goal 5:
-    eight tiles of the same type
-    There's no restriction about the position of these tiles */
+/**
+ *  common goal 5:
+ *     eight tiles of the same type
+ *     There's no restriction about the position of these tiles
+ *
+ */
 
 public class CommonGoal5 extends Cgoal {
 
@@ -18,6 +21,13 @@ public class CommonGoal5 extends Cgoal {
         setIndex(5);
     }
 
+
+    /**
+     *
+     * @param myShelf player shelf
+     * @return taken or not taken CGoal
+     *
+     */
 
     @Override
     public boolean isTaken(Shelf myShelf) {
@@ -38,6 +48,12 @@ public class CommonGoal5 extends Cgoal {
         assert group != null;
         return group.size() == 8;
     }
+
+    /**
+     *
+     * @return the token if it is taken with its score otherwise a token of score 0
+     *
+     */
 
     @Override
 
@@ -62,60 +78,3 @@ public class CommonGoal5 extends Cgoal {
 
 
 
-/*     another way to do this
-        int b = 0;   //n of elements blue
-
-        int w = 0;   //n of element white
-        int p = 0;  // n of elements pink
-        int g = 0;   //n of elements green
-        int y = 0;   //n of elements yellow
-        int a = 0;   //n of elements azure
-
-        for (int j = ROW-1; j >= 0; j--) {
-            for (int i = 0; i < COL; i++) {
-                if (myshelf[j][i].getColor() == ColorItem.BLUE) {
-                    b++;
-                    if(b==8){
-                        return true;
-                    }
-                }
-                if (myshelf[j][i].getColor() == ColorItem.WHITE) {
-                    w++;
-                    if(w==8){
-                        return true;
-                    }
-                }
-                if (myshelf[j][i].getColor() == ColorItem.PINK){
-                    p++;
-                    if(p==8){
-                        return true;
-                    }
-                }
-                if (myshelf[j][i].getColor() == ColorItem.GREEN){
-                    g++;
-                    if(g==8){
-                        return true;
-                    }
-                }
-                if (myshelf[j][i].getColor() == ColorItem.YELLOW){
-                    y++;
-                    if(y==8){
-                        return true;
-                    }
-
-                }
-                if (myshelf[j][i].getColor() == ColorItem.AZURE){
-                    a++;
-                    if(a==8){
-                        return true;
-                    }
-                }
-
-            }
-
-        }
-        return false;
-
-        }
-
-        */

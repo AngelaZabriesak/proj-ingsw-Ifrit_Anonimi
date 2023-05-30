@@ -5,11 +5,13 @@ import it.polimi.ingsw.Model.Shelf;
 import it.polimi.ingsw.Model.Token;
 
 
-/* common goal 11:
-                 five columns of increasing on decreasing height
-                 starting from the first column on the left or the right
-                 each next column must be made of exactly one more tile
-                 tiles can be of any type  */
+/**
+ *  common goal 11:
+ *                  five columns of increasing on decreasing height
+ *                  starting from the first column on the left or the right
+ *                  each next column must be made of exactly one more tile
+ *                  tiles can be of any type
+ */
 
 public class CommonGoal11 extends Cgoal{
 
@@ -20,6 +22,13 @@ public class CommonGoal11 extends Cgoal{
         setIndex(11);
 
     }
+
+    /**
+     *
+     * @param myShelf player shelf
+     * @return taken or not taken CGoal
+     *
+     */
 
 
     @Override
@@ -52,6 +61,13 @@ public class CommonGoal11 extends Cgoal{
 
         } return false;
     }
+
+
+    /**
+     *
+     * @return the token if it is taken with its score otherwise a token of score 0
+     *
+     */
     @Override
 
     public Token getToken() {

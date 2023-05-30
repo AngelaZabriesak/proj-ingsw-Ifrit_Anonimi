@@ -5,9 +5,11 @@ import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Shelf;
 import it.polimi.ingsw.Model.Token;
 
-/* common goal 4:
-                 three columns each formed by 6 tiles maximum three different types.
-                 one column can show the same or a different combination of another column */
+/**
+ * common goal 4:
+ *                  three columns each formed by 6 tiles maximum three different types.
+ *                  one column can show the same or a different combination of another column
+ */
 
 public class CommonGoal4 extends Cgoal {
 
@@ -19,6 +21,13 @@ public class CommonGoal4 extends Cgoal {
         setDescription("common goal 4:three columns each formed by 6 tiles of maximum three different types. One column can show the same or a different combination of another column\n");
         setIndex(4);
     }
+
+    /**
+     *
+     * @param myShelf player shelf
+     * @return taken or not taken CGoal
+     *
+     */
 
     @Override
     public boolean isTaken(Shelf myShelf) {
@@ -70,6 +79,12 @@ public class CommonGoal4 extends Cgoal {
         }
         return numOfCond > 2;
     }
+
+    /**
+     *
+     * @return the token if it is taken with its score otherwise a token of score 0
+     *
+     */
 
     @Override
 

@@ -4,9 +4,11 @@ import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Shelf;
 import it.polimi.ingsw.Model.Token;
 
-/* common goal 9:
-                  two lines each formed by 5 different types of tiles
-                  one line can show the same or a different combination of other line  */
+/**
+ *  common goal 9:
+ *                   two lines each formed by 5 different types of tiles
+ *                   one line can show the same or a different combination of other line
+ */
 
 public class CommonGoal9 extends Cgoal{
 
@@ -19,6 +21,13 @@ public class CommonGoal9 extends Cgoal{
         setIndex(9);
 
     }
+
+    /**
+     *
+     * @param myShelf player shelf
+     * @return taken or not taken CGoal
+     *
+     */
 
     @Override
     public boolean isTaken(Shelf myShelf) {
@@ -38,6 +47,13 @@ public class CommonGoal9 extends Cgoal{
         }
         return numOfCond > 1;
     }
+
+
+    /**
+     *
+     * @return the token if it is taken with its score otherwise a token of score 0
+     *
+     */
 
     @Override
 

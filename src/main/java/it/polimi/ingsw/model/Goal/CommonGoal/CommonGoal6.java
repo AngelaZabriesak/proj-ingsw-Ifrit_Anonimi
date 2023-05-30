@@ -5,8 +5,10 @@ import it.polimi.ingsw.Model.Shelf;
 import it.polimi.ingsw.Model.Token;
 
 
-/*  common goal 6:
-                     five tiles of the same type forming a diagonal   */
+/**
+ * common goal 6:
+ *                      five tiles of the same type forming a diagonal
+ */
 
 public class CommonGoal6 extends Cgoal {
 
@@ -17,6 +19,13 @@ public class CommonGoal6 extends Cgoal {
 
 
     }
+
+    /**
+     *
+     * @param myShelf player shelf
+     * @return taken or not taken CGoal
+     *
+     */
 
     @Override
     public boolean isTaken(Shelf myShelf) {
@@ -29,7 +38,11 @@ public class CommonGoal6 extends Cgoal {
     }
 
 
-
+    /**
+     *
+     * @return the token if it is taken with its score otherwise a token of score 0
+     *
+     */
 
     @Override
     public Token getToken() {

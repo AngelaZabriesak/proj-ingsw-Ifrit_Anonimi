@@ -116,7 +116,7 @@ public class ChangeScene extends InputObservable {
     }
 
     public static void showTable(Board board, Shelf shelf, ArrayList<Position> availablePositions, ArrayList<Cgoal> cgoal, Pgoal pgoal){
-        new TableScene(new Stage(),board,shelf,availablePositions,cgoal,pgoal);
+
     }
 
     public static void showBoard(BoardScene bs,Board board, ArrayList<Position> availablePositions,Position p1, Position p2){

@@ -5,15 +5,25 @@ import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Shelf;
 import it.polimi.ingsw.Model.Token;
 
-/* common goal 1:
- four tiles of the same type in the four corners of the bookshelf */
-
+/**
+ * common goal 0 :
+ *                     six groups each containing at least 2 tiles of the same type,
+ *                     the tiles pf one group can be different from those of another group
+ *
+ */
 public class CommonGoal1 extends Cgoal {
 
     public CommonGoal1() {
         setDescription("common goal 1: Four tiles of the same type in the four corners of the bookshelf\n");
         setIndex(1);
     }
+
+    /**
+     *
+     * @param myShelf player shelf
+     * @return taken or not taken CGoal
+     *
+     */
 
     @Override
     public boolean isTaken(Shelf myShelf) {
@@ -24,6 +34,12 @@ public class CommonGoal1 extends Cgoal {
                                            ( myshelf[5][0]!= null && myshelf[0][0].getColor() == myshelf[5][0].getColor() ) );
 
     }
+
+    /**
+     *
+     * @return the token if it is taken with its score otherwise a token of score 0
+     *
+     */
 
     @Override
 

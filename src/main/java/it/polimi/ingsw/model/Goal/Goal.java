@@ -4,6 +4,11 @@ import it.polimi.ingsw.Model.Bag.Item;
 
 import java.io.Serializable;
 
+
+/**
+ * class that define Goal
+ */
+
 public abstract class Goal implements Serializable {
 
     private String description;

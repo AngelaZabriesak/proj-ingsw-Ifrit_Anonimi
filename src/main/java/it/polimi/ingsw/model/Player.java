@@ -7,6 +7,14 @@ import it.polimi.ingsw.Model.Goal.PersonalGoal.Pgoal;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ *
+ * class that define Player
+ *
+ *
+ */
+
+
 public class Player implements Serializable {
     private final Shelf myShelf;
     private final String nickname;
@@ -22,17 +30,27 @@ public class Player implements Serializable {
         myShelf = new Shelf();
     }
 
-    // return the player nickname
+    /**
+     * @return the player nickname
+     */
+
     public String getNickname() {
         return this.nickname;
     }
 
-    //return the player Shelf
+    /**
+     * @return the player Shelf
+     */
+
     public Shelf getMyShelf() {
         return myShelf;
     }
 
-    // return the player pGoal
+    /**
+     * @return the player pGoal
+     */
+
+
     public Pgoal getMyGoal() {
         return (Pgoal) myGoal;
     }
@@ -41,13 +59,21 @@ public class Player implements Serializable {
         this.myGoal = myGoal;
     }
 
-    // return the cGoal cards : every turn check the cGoals and take the card if is completed
-    // the player can have maximum two card at least
+    /**
+     * @return the cGoal cards : every turn check the cGoals and take the card if is completed
+     *
+     * the player can have maximum two card at least
+     */
+
+
     public Goal getcGoal() {
         return cGoal;
     }
 
-    // return the player score
+    /**
+     * @return the player score
+     */
+
     public int getMyScore() {
         return myScore;
     }

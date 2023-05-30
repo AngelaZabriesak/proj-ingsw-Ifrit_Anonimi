@@ -8,6 +8,12 @@ import it.polimi.ingsw.Model.*;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ *
+ * class that define the CGoal
+ *
+ */
+
 public abstract class Cgoal extends Goal implements Serializable {
     private int index;
     private Game game;
@@ -20,11 +26,23 @@ public abstract class Cgoal extends Goal implements Serializable {
         this.index = index;
     }
 
+    /**
+     *
+     * @return the cGoal index
+     *
+     */
+
     public int getIndex() {return this.index;}
 
     public void setGame(Game game) {
         this.game = game;
     }
+
+    /**
+     *
+     * @return the game
+     *
+     */
 
     public Game getGame() {
         return game;
@@ -33,6 +51,12 @@ public abstract class Cgoal extends Goal implements Serializable {
     public void setToken(ArrayList<Token> tokens){
         this.tokens = tokens;
     }
+
+    /**
+     *
+     * @return the player tokens
+     *
+     */
 
     public ArrayList<Token> getMyTokens(){
         return tokens;

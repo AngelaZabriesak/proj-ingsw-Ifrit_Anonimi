@@ -6,6 +6,10 @@ import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.Goal.CommonGoal.Cgoal;
 
+/**
+ * this class implements add Item in Shelf
+ */
+
 public class AddItemInShelf implements Action{
     private final Game game;
     private final int chosenColumn;

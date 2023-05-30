@@ -7,6 +7,10 @@ public class PersonalGoal4 extends Pgoal{
     private static final int COL = 5;
     private Item[][] myItemGoal = new Item[ROW][COL];
 
+    /**
+     * PGoal 4 setting
+     */
+
     public PersonalGoal4(){
         setDescription("personal goal 4");
         myItemGoal[4][4] = new Item(ColorItem.PINK);
@@ -17,6 +21,11 @@ public class PersonalGoal4 extends Pgoal{
         myItemGoal[1][1] = new Item(ColorItem.AZURE);
     }
 
+    /**
+     *
+     * @return the player pGoal
+     *
+     */
 
     @Override
     public Item[][] getGoal() {

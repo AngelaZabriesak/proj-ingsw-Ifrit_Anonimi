@@ -2,10 +2,17 @@ package it.polimi.ingsw.Model.Goal.PersonalGoal;
 
 import it.polimi.ingsw.Model.Bag.*;
 
+
+
+
 public class PersonalGoal1 extends Pgoal{
     private static final int ROW = 6;
     private static final int COL = 5;
     private Item[][] myItemGoal = new Item[ROW][COL];
+
+    /**
+     * PGoal 1 setting
+     */
 
     public PersonalGoal1(){
         setDescription("personal goal 1");
@@ -17,6 +24,11 @@ public class PersonalGoal1 extends Pgoal{
         myItemGoal[4][3] = new Item(ColorItem.AZURE);
     }
 
+    /**
+     *
+     * @return the player pGoal
+     *
+     */
 
     @Override
     public Item[][] getGoal() {

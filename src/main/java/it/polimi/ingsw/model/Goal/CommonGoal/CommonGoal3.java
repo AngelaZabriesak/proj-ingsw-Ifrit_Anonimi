@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-/* common goal 3:
-                   two groups each containing 4 tiles of the same type in a 2x2 square.
-                   the tiles of one square can be different from those of the other square. */
+/**
+ * common goal 2:
+ *                     four groups each containing at least 4 tiles of the same type,
+ *                     the tiles of one group can be different from those of another group
+ */
 
 
 public class CommonGoal3 extends Cgoal {
@@ -24,6 +26,13 @@ public class CommonGoal3 extends Cgoal {
         setDescription("common goal 3:two groups each containing 4 tiles of the same type in a 2x2 square. the tiles of one square can be different from those of the other square\n");
         setIndex(3);
     }
+
+    /**
+     *
+     * @param myShelf player shelf
+     * @return taken or not taken CGoal
+     *
+     */
 
     @Override
     public boolean isTaken(Shelf myShelf) {
@@ -69,6 +78,12 @@ public class CommonGoal3 extends Cgoal {
 
         } return false;
     }
+
+    /**
+     *
+     * @return the token if it is taken with its score otherwise a token of score 0
+     *
+     */
 
     @Override
     public Token getToken() {

@@ -5,8 +5,10 @@ import it.polimi.ingsw.Model.Shelf;
 import it.polimi.ingsw.Model.Token;
 
 
-/*   common goal 10:
-                     five tiles of the same type forming an X   */
+/**
+ *  common goal 10:
+ *                      five tiles of the same type forming an X
+ */
 
 public class CommonGoal10 extends Cgoal{
 
@@ -17,6 +19,13 @@ public class CommonGoal10 extends Cgoal{
         setDescription("common goal 10:five tiles of the same type forming an X\n");
         setIndex(10);
     }
+
+    /**
+     *
+     * @param myShelf player shelf
+     * @return taken or not taken CGoal
+     *
+     */
 
 
     @Override
@@ -37,6 +46,12 @@ public class CommonGoal10 extends Cgoal{
         }
         return false;
     }
+
+    /**
+     *
+     * @return the token if it is taken with its score otherwise a token of score 0
+     *
+     */
 
     @Override
 

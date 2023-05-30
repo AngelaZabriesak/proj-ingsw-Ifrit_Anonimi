@@ -7,9 +7,12 @@ import it.polimi.ingsw.Model.Token;
 
 import java.util.ArrayList;
 
-/* common goal 0 :
-                    six groups each containing at least 2 tiles of the same type,
-                    the tiles pf one group can be different from those of another group */
+/**
+ * common goal 0 :
+ *                     six groups each containing at least 2 tiles of the same type,
+ *                     the tiles pf one group can be different from those of another group
+ *
+ */
 
 public class CommonGoal0 extends Cgoal {
 
@@ -17,6 +20,13 @@ public class CommonGoal0 extends Cgoal {
         setDescription("common goal 0: six groups each containing at least 2 tiles of the same type,the tiles pf one group can be different from those of another group\n");
         setIndex(0);
     }
+
+    /**
+     *
+     * @param myShelf player shelf
+     * @return taken or not taken CGoal
+     *
+     */
 
     @Override
     public boolean isTaken(Shelf myShelf) {
@@ -35,7 +45,11 @@ public class CommonGoal0 extends Cgoal {
         return numOfCond >= 6;
     }
 
-
+    /**
+     *
+     * @return the token if it is taken with its score otherwise a token of score 0
+     *
+     */
     @Override
 
     public Token getToken() {

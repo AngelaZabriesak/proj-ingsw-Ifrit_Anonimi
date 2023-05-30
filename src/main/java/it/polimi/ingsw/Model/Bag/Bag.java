@@ -14,8 +14,10 @@ public class Bag implements Serializable {
     }
 
     /**
+     *
      * @return the item created by randomly extracting the color
      */
+
     public Item getItem() {
         double posDouble = Math.random() * SIZE;
         int pos = (int) posDouble;
@@ -26,6 +28,7 @@ public class Bag implements Serializable {
     /**
      * @return the sum of the amount of each color
      */
+
     public int getSize(){
         int tot=0;
         for(int i = 0; i < SIZE; i++)

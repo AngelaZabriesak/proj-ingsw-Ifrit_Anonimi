@@ -2,6 +2,11 @@ package it.polimi.ingsw.Model.Goal.CommonGoal;
 
 import it.polimi.ingsw.Model.Game.*;
 
+
+/**
+ * that class implements the factory pattern for CGoal
+ */
+
 public class CgoalFactory {
     private static CgoalFactory instance;
 

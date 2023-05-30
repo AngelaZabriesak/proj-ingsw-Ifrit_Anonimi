@@ -5,8 +5,10 @@ import it.polimi.ingsw.Model.Shelf;
 import it.polimi.ingsw.Model.Token;
 
 
-/* common goal 8:
-                   two columns each formed by 6 different types of tiles  */
+/**
+ *  common goal 8:
+ *                    two columns each formed by 6 different types of tiles
+ */
 
 public class CommonGoal8 extends Cgoal {
 
@@ -20,6 +22,13 @@ public class CommonGoal8 extends Cgoal {
 
 
     }
+
+    /**
+     *
+     * @param myShelf player shelf
+     * @return taken or not taken CGoal
+     *
+     */
 
     @Override
     public boolean isTaken(Shelf myShelf) {
@@ -43,6 +52,12 @@ public class CommonGoal8 extends Cgoal {
         }
         return numOfCond > 1;
     }
+
+    /**
+     *
+     * @return the token if it is taken with its score otherwise a token of score 0
+     *
+     */
 
     @Override
 

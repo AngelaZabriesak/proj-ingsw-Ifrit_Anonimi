@@ -6,15 +6,18 @@ import it.polimi.ingsw.Model.Shelf;
 
 import java.util.ArrayList;
 
+
+
+
 public class CreateItemGroup {
     private final ArrayList<Position>[] gruppo = new ArrayList[30];
     private ArrayList<Position> nuovoGruppo;
     public CreateItemGroup(){}
 
     /**
-     * metodo che raggruppa gli item inseriti nella shelf in base al colore
-     * @param myShelf libreria che è da controllare
-     * @return un array in cui vengono memorizzate le liste di posizioni
+     * metodo which groups the items inserted in the shelf by color
+     * @param myShelf library to be checked
+     * @return an array in which lists of positions are stored
      */
     public ArrayList<Position>[] creaGruppi(Shelf myShelf){
         Position primo;
@@ -41,10 +44,10 @@ public class CreateItemGroup {
         return this.gruppo;
     }
     /**
-     * metodo che controlla i vicini di un item nella libreria
-     * @param myShelf  la libreria che è da controllare
-     * @param primo il primo item che si trova scorrendo la shelf
-     * @return un intero che serve per controllare il numero di vicini che ha un item
+     * A method that checks the neighbors of an item in the library
+     * @param myShelf  library to be checked
+     * @param primo The first item you find by scrolling the shelf
+     * @return an int that is used to control the number of neighbors who have an item
      */
     private int controllaVicini(Shelf myShelf,Position primo){
         ArrayList<Position> gruppo = new ArrayList<>();

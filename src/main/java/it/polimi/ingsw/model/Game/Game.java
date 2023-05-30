@@ -30,9 +30,12 @@ public class Game extends Observable implements Serializable {
     private final ArrayList<Cgoal> myGoal;
     private ArrayList<Position> itemAvailable;
 
+    /**
+     * order the token scores from lower to higher
+     */
+
     public Game(ArrayList<Player> players){
         this.players = players;
-        // order the token scores from lower to higher
         int[] scores = new int[players.size()];
         System.arraycopy(VALUE_TOKEN, 0, scores, 0, players.size());
         Arrays.sort(scores);
@@ -231,10 +234,21 @@ public class Game extends Observable implements Serializable {
 
     }
 
+    /**
+     *
+     * @return the current player
+     *
+     */
+
     public Player getCurrentPlayer(){
         return currentPlayer;
     }
 
+    /**
+     *
+     * @return the Board
+     *
+     */
     public Board getBoard(){
         return myBoard;
     }
@@ -243,17 +257,43 @@ public class Game extends Observable implements Serializable {
         currentPlayer = player;
     }
 
+    /**
+     *
+     * @return the players
+     *
+     */
+
     public ArrayList<Player> getPlayers(){
         return players;
     }
+
+    /**
+     *
+     * @return  cGoals of the match
+     *
+     */
 
     public ArrayList<Cgoal> getCGoal(){
         return myGoal;
     }
 
+    /**
+     *
+     * @return the bag
+     *
+     */
+
     public Bag getBag(){
         return myBag;
     }
+
+    /**
+     *
+     * @param p1  first position  checked
+     * @param p2 second position checked
+     * @return the boolean item available
+     *
+     */
 
     public ArrayList<Position> getPositionAvailable(Position p1,Position p2){
         int row,col;

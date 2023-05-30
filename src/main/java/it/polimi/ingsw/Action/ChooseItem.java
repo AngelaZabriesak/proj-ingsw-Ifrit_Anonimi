@@ -7,6 +7,10 @@ import it.polimi.ingsw.Model.Bag.*;
 import it.polimi.ingsw.Model.Game.*;
 import it.polimi.ingsw.Model.*;
 
+/**
+ * this class implements choose Item from Board
+ */
+
 public class ChooseItem implements Action {
     private final Game game;
     private final Position p1,p2, newPosition;

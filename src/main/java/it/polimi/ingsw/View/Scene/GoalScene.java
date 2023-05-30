@@ -36,8 +36,7 @@ public class GoalScene extends InputObservable implements GenericScene {
             tokens = new ImageView[cGoal.get(0).getMyTokens().size()];
             for(int i =0;  i< tokens.length;i++){
                 tokens[i] = new ImageView(new Image("file:src/main/resources/images/tokens/scoring_"+cGoal.get(0).getMyTokens().get(i).getScore()+".jpg"));
-                /*tokens[i].setFitWidth(55);
-                tokens[i].setFitHeight(55);*/
+
             }
             primaryCStage.setWidth(825);
             primaryCStage.setHeight(300);
@@ -81,42 +80,7 @@ public class GoalScene extends InputObservable implements GenericScene {
             primaryPStage.setScene(scene);
             primaryPStage.show();
         }
-        /*gridPane = new GridPane();
-        String url = "file:src/main/resources/images/parquet_background.jpg";
 
-        if (pgoal != null) {
-            pgoalPane = new StackPane();
-            ImageView iwPgoal = new ImageView(setPGoal(pgoal));
-            pgoalPane.setStyle("-fx-background-repeat: no-repeat;" + "-fx-background-size: stretch;" + "-fx-background-image: url('" + url + "'); ");
-            pgoalPane.getChildren().add(iwPgoal);
-
-            Scene pgoalScene = new Scene(pgoalPane, 265, 405);
-            Stage stageP = new Stage();
-            stageP.setX(1200);
-            stageP.setY(0);
-            stageP.setTitle("Personal Goal " + pgoal.getDescription().split(" ")[2]);
-            stageP.setScene(pgoalScene);
-            stageP.show();
-        }
-
-        if (cGoal != null) {
-            cGoalPane = new GridPane();
-
-            for (Cgoal cg : cGoal) {
-                ImageView lcg = new ImageView(setCgoal(cg));
-                cGoalPane.setHgap(15);
-                cGoalPane.setStyle("-fx-background-repeat: no-repeat;" + "-fx-background-size: stretch;" + "-fx-background-image: url('" + url + "'); ");
-                cGoalPane.add(lcg, cGoal.indexOf(cg), 0);
-            }
-
-            Scene cgoalScene = new Scene(cGoalPane, 815, 260);
-            Stage stageC = new Stage();
-            stageC.setX(600);
-            stageC.setY(565);
-            stageC.setTitle("Common Goals");
-            stageC.setScene(cgoalScene);
-            stageC.show();
-        }*/
     }
 
     public Image setPGoal(Pgoal pgoal){

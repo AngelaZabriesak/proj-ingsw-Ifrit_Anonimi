@@ -6,6 +6,11 @@ import it.polimi.ingsw.Model.Position;
 import java.io.Serializable;
 
 /**
+ *
+ * define the Board as  Item[][]
+ *
+ *
+ *
  * 0 = 0 side of the cell are free
  * 1 = 1 side of the cell is free
  * 2 = 2 sides of the cell is free

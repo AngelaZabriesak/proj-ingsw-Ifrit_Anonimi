@@ -5,9 +5,11 @@ import it.polimi.ingsw.Model.Bag.Item;
 import it.polimi.ingsw.Model.Token;
 
 
-/* common goal 2:
-                    four groups each containing at least 4 tiles of the same type,
-                    the tiles of one group can be different from those of another group  */
+/**
+ * common goal 2:
+ *                     four groups each containing at least 4 tiles of the same type,
+ *                     the tiles of one group can be different from those of another group
+ */
 
 public class CommonGoal2 extends Cgoal {
     private static final int ROW = 6;
@@ -17,6 +19,13 @@ public class CommonGoal2 extends Cgoal {
         setDescription("common goal 2: four groups each containing at least 4 tiles of the same type,the tiles of one group can be different from those of another group\n");
         setIndex(2);
     }
+
+    /**
+     *
+     * @param myShelf player shelf
+     * @return taken or not taken CGoal
+     *
+     */
 
     @Override
     public boolean isTaken(Shelf myShelf) {
@@ -48,6 +57,12 @@ public class CommonGoal2 extends Cgoal {
         }
         return numOfCond >= 3;
     }
+
+    /**
+     *
+     * @return the token if it is taken with its score otherwise a token of score 0
+     *
+     */
 
     @Override
 
