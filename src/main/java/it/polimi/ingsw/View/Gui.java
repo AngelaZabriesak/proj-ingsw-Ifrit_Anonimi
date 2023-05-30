@@ -22,7 +22,11 @@ public class Gui extends InputObservable implements View {
     GoalScene gsP = new GoalScene();
     GoalScene gsC = new GoalScene();
     ChatScene cs = new ChatScene();
-    Stage stageChat = new Stage();
+    private Stage stageChat;
+
+    public Gui(Stage stage){
+        this.stageChat = stage;
+    }
     @Override
     public void askNickname() {
         Platform.runLater(() -> ChangeScene.changeRootPane(observers, "login_scene.fxml"));

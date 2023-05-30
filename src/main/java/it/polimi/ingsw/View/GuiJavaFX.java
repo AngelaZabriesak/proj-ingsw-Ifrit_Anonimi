@@ -20,7 +20,7 @@ public class GuiJavaFX extends Application {
     public void start(Stage stage) {
         ViewMessageManager viewMessageManager=new ViewMessageManager();
         ClientController clientcontroller = new ClientController(viewMessageManager,new ObsClient(viewMessageManager));
-        Gui view = new Gui();
+        Gui view = new Gui(stage);
         VirtualView vView = new VirtualView(view);
         view.addObserver(clientcontroller);
         viewMessageManager.addObserver(vView);
